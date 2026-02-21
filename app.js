@@ -421,11 +421,7 @@ function setupParticles() {
     },
     interactivity: {
       detect_on: "canvas",
-      events: { onhover: { enable: true, mode: "grab" }, onclick: { enable: true, mode: "push" }, resize: true },
-      modes: {
-        grab: { distance: 180, line_linked: { opacity: 0.55 } },
-        push: { particles_nb: 3 },
-      },
+      events: { onhover: { enable: false }, onclick: { enable: false }, resize: true },
     },
     retina_detect: true,
   });
