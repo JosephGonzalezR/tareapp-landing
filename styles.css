@@ -1740,3 +1740,9 @@ html[data-theme="dark"] body {
   background-color: #0E1A38;
   color: #F0EEE8;
 }
+
+/* ── Hero título: más espacio bajo para evitar que la 'g' tape el subtítulo ── */
+.hero__title {
+  margin-bottom: 26px !important;
+  line-height: 1.14 !important;
+}
