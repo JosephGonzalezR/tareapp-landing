@@ -391,18 +391,23 @@ function setupTyped() {
 
 function setupSwiper() {
   if (typeof Swiper === "undefined") return;
-  if (!document.querySelector(".testimonials-swiper")) return;
-  new Swiper(".testimonials-swiper", {
-    slidesPerView: 1,
-    spaceBetween: 24,
+  if (!document.querySelector(".reviews-swiper")) return;
+  new Swiper(".reviews-swiper", {
+    effect: "coverflow",
+    grabCursor: true,
+    centeredSlides: true,
+    slidesPerView: "auto",
     loop: true,
-    autoplay: { delay: 4500, disableOnInteraction: false, pauseOnMouseEnter: true },
-    pagination: { el: ".swiper-pagination", clickable: true },
-    navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
-    breakpoints: {
-      640: { slidesPerView: 2 },
-      1024: { slidesPerView: 3 },
+    coverflowEffect: {
+      rotate: 18,
+      stretch: 0,
+      depth: 120,
+      modifier: 1.2,
+      slideShadows: false,
     },
+    autoplay: { delay: 3200, disableOnInteraction: false, pauseOnMouseEnter: true },
+    pagination: { el: ".reviews-pagination", clickable: true },
+    speed: 700,
   });
 }
 

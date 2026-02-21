@@ -1738,6 +1738,92 @@ html[data-theme="dark"] .hero__bg {
   color: #F0EEE8;
 }
 
+/* ── Review cards — coverflow carousel ───────────────────── */
+.reviews-swiper {
+  padding: 30px 10px 56px !important;
+  overflow: visible;
+}
+.reviews-swiper .swiper-slide {
+  width: 300px;
+  height: auto;
+}
+@media (max-width: 480px) {
+  .reviews-swiper .swiper-slide { width: 270px; }
+}
+
+.review-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--gold);
+  border-radius: var(--radius);
+  padding: 22px 20px 18px;
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: var(--shadow);
+  transition: box-shadow .3s ease, transform .3s ease;
+}
+.review-card::after {
+  content: '\201C';
+  font-family: 'Playfair Display', serif;
+  font-size: 110px;
+  line-height: 1;
+  color: var(--gold);
+  opacity: .07;
+  position: absolute;
+  bottom: -14px;
+  right: 12px;
+  pointer-events: none;
+  user-select: none;
+}
+.review-card__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+.review-card__who {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.review-card__who strong { display: block; font-size: 14px; font-weight: 700; }
+.review-card__who .muted { font-size: 12px; }
+
+.review-stars {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+.rs-filled { color: var(--gold); font-size: 13px; letter-spacing: 1px; }
+.rs-empty  { color: rgba(201,168,76,.28); font-size: 13px; }
+.review-score {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+  margin-left: 2px;
+}
+
+.review-card p {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--muted);
+  margin: 0;
+  flex: 1;
+}
+
+/* variante B del avatar */
+.avatar--mono-b {
+  background: linear-gradient(135deg, #0F1E3A, #2B5299);
+}
+
+/* paginación de reviews */
+.reviews-pagination { bottom: 14px !important; }
+
 /* ── Avatar monograma (sin foto) ─────────────────────────── */
 .avatar--mono {
   font-family: 'Playfair Display', serif;
