@@ -482,6 +482,19 @@ function setupParticles() {
   });
 }
 
+function setupTilt() {
+  if (typeof VanillaTilt === "undefined") return;
+  const cards = document.querySelectorAll(".card");
+  VanillaTilt.init(cards, {
+    max: 6,
+    speed: 500,
+    glare: true,
+    "max-glare": 0.12,
+    gyroscope: false,
+    scale: 1.02,
+  });
+}
+
 function setupNavScroll() {
   const nav = document.querySelector(".nav");
   if (!nav) return;
@@ -512,4 +525,5 @@ document.addEventListener("DOMContentLoaded", () => {
   setupTyped();
   setupSwiper();
   setupParticles();
+  setupTilt();
 });

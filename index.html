@@ -188,22 +188,28 @@
     <section class="hero" aria-label="Presentación">
       <div class="hero__bg" aria-hidden="true"></div>
       <div id="hero-particles" aria-hidden="true"></div>
+      <div class="hero-decor" aria-hidden="true">
+        <span class="hero-decor__circle hero-decor__circle--1"></span>
+        <span class="hero-decor__circle hero-decor__circle--2"></span>
+        <span class="hero-decor__line hero-decor__line--1"></span>
+        <span class="hero-decor__line hero-decor__line--2"></span>
+      </div>
 
       <div class="container hero__inner">
         <div class="hero__copy">
           <div class="hero__pill" data-reveal>
             <span class="pill">
-              <svg class="i" aria-hidden="true"><use href="#i-compass"></use></svg>
-              Acompañamiento académico por entregables
+              <svg class="i" aria-hidden="true"><use href="#i-doc"></use></svg>
+              Elaboración integral de tesis
             </span>
             <span class="pill pill--soft">
               <svg class="i" aria-hidden="true"><use href="#i-shield"></use></svg>
-              Integridad y confidencialidad
+              Confidencialidad garantizada
             </span>
           </div>
 
           <h1 class="hero__title" data-reveal>
-            Asesorías integrales para avanzar con claridad, evidencia y orden
+            Elaboramos tu tesis con calidad, rigor y entrega a tiempo
           </h1>
           <p class="hero__subtitle" data-reveal>
             Elaboramos tu tesis o investigación de inicio a fin: metodología, redacción, análisis de resultados y preparación para sustentación.
@@ -1008,6 +1014,13 @@
     </section>
   </main>
 
+  <!-- Onda de transición al footer -->
+  <div class="footer-wave" aria-hidden="true">
+    <svg viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,30 C360,90 720,0 1080,50 C1260,75 1380,20 1440,30 L1440,90 L0,90 Z" fill="#1A3A6B"/>
+    </svg>
+  </div>
+
   <footer class="footer">
     <div class="container footer__inner">
       <div class="footer__brand">
@@ -1102,6 +1115,8 @@
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <!-- Particles.js -->
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <!-- Vanilla Tilt -->
+  <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

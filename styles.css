@@ -1584,3 +1584,81 @@ html[data-theme="dark"] .footer { background: #060C18; }
 
 /* ── Social hover colors mantienen identidad de marca ────── */
 .social-link:hover { color: var(--gold-d); background: rgba(201,168,76,.10); }
+
+/* ── Formas decorativas flotantes en el hero ─────────────── */
+.hero-decor {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+.hero-decor__circle {
+  position: absolute;
+  border-radius: 50%;
+  border: 1.5px solid rgba(201,168,76,.22);
+}
+.hero-decor__circle--1 {
+  width: 340px; height: 340px;
+  top: -80px; right: -60px;
+  animation: float-slow 9s ease-in-out infinite;
+}
+.hero-decor__circle--2 {
+  width: 180px; height: 180px;
+  bottom: 10%; left: 2%;
+  border-color: rgba(26,58,107,.14);
+  animation: float-slow 12s ease-in-out infinite reverse;
+}
+.hero-decor__line {
+  position: absolute;
+  background: linear-gradient(90deg, transparent, rgba(201,168,76,.28), transparent);
+  height: 1px;
+  width: 260px;
+}
+.hero-decor__line--1 {
+  top: 28%; right: 5%;
+  transform: rotate(-18deg);
+  animation: float-slow 7s ease-in-out infinite;
+}
+.hero-decor__line--2 {
+  bottom: 22%; left: 3%;
+  width: 180px;
+  transform: rotate(12deg);
+  animation: float-slow 10s ease-in-out infinite reverse;
+}
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); }
+  50%       { transform: translateY(-14px) rotate(var(--r, 0deg)); }
+}
+@media (max-width: 780px) { .hero-decor { display: none; } }
+@media (prefers-reduced-motion: reduce) { .hero-decor { display: none; } }
+
+/* ── Onda de transición hacia el footer ──────────────────── */
+.footer-wave {
+  line-height: 0;
+  margin-bottom: -2px;
+}
+.footer-wave svg {
+  display: block;
+  width: 100%;
+  height: 90px;
+}
+html[data-theme="dark"] .footer-wave path { fill: #060C18; }
+
+/* ── Final CTA — navy+dorado ──────────────────────────────── */
+.final-cta__inner {
+  background: linear-gradient(135deg, var(--brand) 0%, #1E3F7A 60%, #243F85 100%) !important;
+  border-color: rgba(201,168,76,.25) !important;
+  box-shadow: 0 32px 90px rgba(26,58,107,.30) !important;
+}
+.final-cta__inner h2 { color: #fff; -webkit-text-fill-color: #fff; background: none; }
+.final-cta__inner p   { color: rgba(255,255,255,.75); }
+.final-cta__inner .btn--primary {
+  background: var(--gold) !important;
+  color: #fff !important;
+  box-shadow: 0 8px 24px rgba(201,168,76,.40) !important;
+  animation: none !important;
+}
+.final-cta__inner .btn--primary:hover { background: var(--gold-d) !important; }
+.final-cta__inner .btn--ghost { border-color: rgba(255,255,255,.35); color: rgba(255,255,255,.80); }
+.final-cta__inner .btn--ghost:hover { border-color: var(--gold); color: var(--gold); }
