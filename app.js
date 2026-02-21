@@ -335,6 +335,147 @@ function setupPointerGlow() {
 }
 
 
+function setupGSAP() {
+  if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") {
+    setupReveal();
+    return;
+  }
+  gsap.registerPlugin(ScrollTrigger);
+
+  const handled = new Set();
+
+  // Cards en grids → stagger en cascada
+  document.querySelectorAll(".cards--3").forEach((grid) => {
+    const cards = Array.from(grid.querySelectorAll(".card"));
+    cards.forEach((c) => handled.add(c));
+    gsap.fromTo(cards,
+      { opacity: 0, y: 50 },
+      { opacity: 1, y: 0, duration: 0.65, stagger: 0.12, ease: "power2.out",
+        scrollTrigger: { trigger: grid, start: "top 85%" } }
+    );
+  });
+
+  // Pasos del timeline → slide desde la izquierda
+  const steps = Array.from(document.querySelectorAll(".step"));
+  if (steps.length) {
+    steps.forEach((s) => handled.add(s));
+    gsap.fromTo(steps,
+      { opacity: 0, x: -40 },
+      { opacity: 1, x: 0, duration: 0.6, stagger: 0.15, ease: "back.out(1.2)",
+        scrollTrigger: { trigger: steps[0].parentElement, start: "top 80%" } }
+    );
+  }
+
+  // Entregables → stagger
+  const delivs = Array.from(document.querySelectorAll(".deliverable"));
+  if (delivs.length) {
+    delivs.forEach((d) => handled.add(d));
+    gsap.fromTo(delivs,
+      { opacity: 0, y: 30 },
+      { opacity: 1, y: 0, duration: 0.55, stagger: 0.1, ease: "power2.out",
+        scrollTrigger: { trigger: delivs[0].parentElement, start: "top 80%" } }
+    );
+  }
+
+  // Team cards → stagger con scale
+  const teamCards = Array.from(document.querySelectorAll(".team-card"));
+  if (teamCards.length) {
+    teamCards.forEach((t) => handled.add(t));
+    gsap.fromTo(teamCards,
+      { opacity: 0, y: 40, scale: 0.96 },
+      { opacity: 1, y: 0, scale: 1, duration: 0.6, stagger: 0.12, ease: "power2.out",
+        scrollTrigger: { trigger: teamCards[0].parentElement, start: "top 82%" } }
+    );
+  }
+
+  // Resto de [data-reveal]
+  document.querySelectorAll("[data-reveal]").forEach((el) => {
+    if (handled.has(el)) return;
+    gsap.fromTo(el,
+      { opacity: 0, y: 40 },
+      { opacity: 1, y: 0, duration: 0.8, ease: "power2.out",
+        scrollTrigger: { trigger: el, start: "top 88%", toggleActions: "play none none none" } }
+    );
+  });
+
+  // Parallax del hero background
+  const heroBg = document.querySelector(".hero__bg");
+  if (heroBg) {
+    gsap.to(heroBg, {
+      yPercent: 28, ease: "none",
+      scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 1.2 },
+    });
+  }
+}
+
+function setupTyped() {
+  if (typeof Typed === "undefined") return;
+  const el = document.getElementById("typedTarget");
+  if (!el) return;
+  new Typed("#typedTarget", {
+    strings: ["tesis", "proyectos de investigación", "trabajos de grado", "artículos científicos", "informes académicos", "tesinas"],
+    typeSpeed: 60,
+    backSpeed: 35,
+    backDelay: 1600,
+    startDelay: 900,
+    loop: true,
+    showCursor: true,
+    cursorChar: "|",
+  });
+}
+
+function setupSwiper() {
+  if (typeof Swiper === "undefined") return;
+  if (!document.querySelector(".testimonials-swiper")) return;
+  new Swiper(".testimonials-swiper", {
+    slidesPerView: 1,
+    spaceBetween: 24,
+    loop: true,
+    autoplay: { delay: 4500, disableOnInteraction: false, pauseOnMouseEnter: true },
+    pagination: { el: ".swiper-pagination", clickable: true },
+    navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+    breakpoints: {
+      640: { slidesPerView: 2 },
+      1024: { slidesPerView: 3 },
+    },
+  });
+}
+
+function setupParticles() {
+  if (typeof particlesJS === "undefined") return;
+  if (!document.getElementById("hero-particles")) return;
+  const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+  const color = isDark ? "#6B9AFF" : "#4D7EDD";
+  particlesJS("hero-particles", {
+    particles: {
+      number: { value: 55, density: { enable: true, value_area: 900 } },
+      color: { value: color },
+      shape: { type: "circle" },
+      opacity: { value: 0.28, random: true, anim: { enable: true, speed: 0.8, opacity_min: 0.08, sync: false } },
+      size: { value: 2.5, random: true },
+      line_linked: { enable: true, distance: 140, color: color, opacity: 0.12, width: 1 },
+      move: { enable: true, speed: 1.2, direction: "none", random: true, straight: false, out_mode: "out" },
+    },
+    interactivity: {
+      detect_on: "canvas",
+      events: { onhover: { enable: true, mode: "grab" }, onclick: { enable: false }, resize: true },
+      modes: { grab: { distance: 160, line_linked: { opacity: 0.4 } } },
+    },
+    retina_detect: true,
+  });
+}
+
+function setupNavScroll() {
+  const nav = document.querySelector(".nav");
+  if (!nav) return;
+  const onScroll = () => {
+    if (window.scrollY > 60) nav.classList.add("nav--scrolled");
+    else nav.classList.remove("nav--scrolled");
+  };
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   bindConfig();
   bindWhatsAppLinks();
@@ -343,11 +484,15 @@ document.addEventListener("DOMContentLoaded", () => {
   setupScrollProgress();
   setupScrollSpy();
   setupPointerGlow();
-  setupReveal();
+  setupNavScroll();
+  setupGSAP();
   setupAccordions();
   setupFaqSearch();
   setupForm();
   setupCopyWhatsApp();
   setupToTop();
   setupYear();
+  setupTyped();
+  setupSwiper();
+  setupParticles();
 });

@@ -1056,3 +1056,125 @@ html[data-theme="dark"] .nav.nav--scrolled{
 }
 .nav.nav--scrolled .nav__inner{ padding: 10px 0; }
 .nav.nav--scrolled .nav__logo img{ width: 34px; height: 34px; }
+
+/* ==============================
+   PARTICLES.JS — Hero
+   ============================== */
+#hero-particles {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+#hero-particles canvas {
+  position: absolute;
+  inset: 0;
+}
+/* Asegurar que el contenido del hero quede sobre las partículas */
+.hero__inner { position: relative; z-index: 2; }
+
+/* ==============================
+   TYPED.JS — Hero typewriter
+   ============================== */
+.hero__typed {
+  font-size: clamp(14px, 1.3vw, 16px);
+  color: var(--muted);
+  margin-top: 6px;
+  margin-bottom: 0;
+  min-height: 1.7em;
+}
+.hero__typed .typed-cursor {
+  color: var(--brand2);
+  font-weight: 700;
+  animation: typed-blink 0.75s step-end infinite;
+}
+#typedTarget {
+  color: var(--brand2);
+  font-weight: 700;
+}
+@keyframes typed-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* ==============================
+   SWIPER — Testimonios
+   ============================== */
+.testimonials-swiper {
+  padding-bottom: 52px !important;
+  overflow: visible;
+}
+.testimonials-swiper .testimonial {
+  height: 100%;
+  margin: 0;
+}
+.swiper-slide {
+  height: auto;
+}
+.swiper-pagination-bullet {
+  background: var(--brand) !important;
+  opacity: 0.35;
+  transition: opacity .2s, transform .2s;
+}
+.swiper-pagination-bullet-active {
+  opacity: 1 !important;
+  transform: scale(1.25);
+}
+.swiper-button-next,
+.swiper-button-prev {
+  color: var(--brand) !important;
+  background: var(--card);
+  border-radius: 50%;
+  width: 40px !important;
+  height: 40px !important;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--line);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  transform: scale(1.1);
+  box-shadow: var(--shadow);
+}
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 13px !important;
+  font-weight: 700;
+}
+
+/* ==============================
+   CARD HOVER — Glow elevado
+   ============================== */
+@media (hover: hover) and (pointer: fine) {
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 28px 70px rgba(77, 126, 221, .20), var(--shadow);
+    border-color: rgba(77, 126, 221, .30);
+  }
+  .card--highlight:hover {
+    box-shadow: 0 32px 80px rgba(77, 126, 221, .32), var(--shadow-lg);
+  }
+}
+
+/* ==============================
+   BUTTON PULSE — CTA principal
+   ============================== */
+@keyframes ep-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(77, 126, 221, .45), 0 16px 40px rgba(77,126,221,.22), 0 1px 0 rgba(255,255,255,.22) inset; }
+  65%  { box-shadow: 0 0 0 12px rgba(77, 126, 221, 0), 0 16px 40px rgba(77,126,221,.22), 0 1px 0 rgba(255,255,255,.22) inset; }
+  100% { box-shadow: 0 0 0 0 rgba(77, 126, 221, 0), 0 16px 40px rgba(77,126,221,.22), 0 1px 0 rgba(255,255,255,.22) inset; }
+}
+.hero__actions .btn--primary {
+  animation: ep-pulse 2.6s ease-out infinite;
+}
+.hero__actions .btn--primary:hover,
+.hero__actions .btn--primary:focus {
+  animation: none;
+}
+
+/* ==============================
+   GSAP — evitar flash de contenido
+   ============================== */
+/* Los elementos con data-reveal ya arrancan con opacity:0 por CSS.
+   GSAP los anima vía inline styles (mayor especificidad). Sin conflicto. */

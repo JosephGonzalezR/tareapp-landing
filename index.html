@@ -37,6 +37,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 
@@ -165,6 +166,7 @@
     <!-- HERO -->
     <section class="hero" aria-label="Presentación">
       <div class="hero__bg" aria-hidden="true"></div>
+      <div id="hero-particles" aria-hidden="true"></div>
 
       <div class="container hero__inner">
         <div class="hero__copy">
@@ -185,6 +187,10 @@
           <p class="hero__subtitle" data-reveal>
             Te acompañamos en metodología, redacción académica, análisis e interpretación de resultados, y preparación para sustentación.
             Trabajamos según el formato que te exija tu institución (p. ej., APA/Vancouver/IEEE).
+          </p>
+
+          <p class="hero__typed" data-reveal>
+            Elaboramos y asesoramos en: <span id="typedTarget"></span>
           </p>
 
           <div class="hero__actions" data-reveal>
@@ -610,42 +616,53 @@
           </p>
         </div>
 
-        <div class="testimonials" data-reveal>
-          <div class="testimonial">
-            <div class="stars" aria-label="Calificación: 5 de 5">★★★★★</div>
-            <p>“(Pega aquí una reseña real). Qué parte se trabajó, qué cambió y en cuánto tiempo.”</p>
-            <div class="who">
-              <span class="avatar" aria-hidden="true">A</span>
-              <div>
-                <strong>Estudiante (inicial)</strong>
-                <span class="muted">Carrera / Universidad</span>
+        <div class=”swiper testimonials-swiper” data-reveal>
+          <div class=”swiper-wrapper”>
+            <div class=”swiper-slide”>
+              <div class=”testimonial”>
+                <div class=”stars” aria-label=”Calificación: 5 de 5”>★★★★★</div>
+                <p>”(Pega aquí una reseña real). Qué parte se trabajó, qué cambió y en cuánto tiempo.”</p>
+                <div class=”who”>
+                  <span class=”avatar” aria-hidden=”true”>A</span>
+                  <div>
+                    <strong>Estudiante (inicial)</strong>
+                    <span class=”muted”>Carrera / Universidad</span>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="testimonial">
-            <div class="stars" aria-label="Calificación: 5 de 5">★★★★★</div>
-            <p>“(Pega aquí una reseña real). Describe el acompañamiento y la claridad del plan de trabajo.”</p>
-            <div class="who">
-              <span class="avatar" aria-hidden="true">M</span>
-              <div>
-                <strong>Estudiante (inicial)</strong>
-                <span class="muted">Carrera / Instituto</span>
+            <div class=”swiper-slide”>
+              <div class=”testimonial”>
+                <div class=”stars” aria-label=”Calificación: 5 de 5”>★★★★★</div>
+                <p>”(Pega aquí una reseña real). Describe el acompañamiento y la claridad del plan de trabajo.”</p>
+                <div class=”who”>
+                  <span class=”avatar” aria-hidden=”true”>M</span>
+                  <div>
+                    <strong>Estudiante (inicial)</strong>
+                    <span class=”muted”>Carrera / Instituto</span>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="testimonial">
-            <div class="stars" aria-label="Calificación: 5 de 5">★★★★★</div>
-            <p>“(Pega aquí una reseña real). Enfócate en entregables concretos: matriz, método, resultados, etc.”</p>
-            <div class="who">
-              <span class="avatar" aria-hidden="true">J</span>
-              <div>
-                <strong>Estudiante (inicial)</strong>
-                <span class="muted">Posgrado / Facultad</span>
+            <div class=”swiper-slide”>
+              <div class=”testimonial”>
+                <div class=”stars” aria-label=”Calificación: 5 de 5”>★★★★★</div>
+                <p>”(Pega aquí una reseña real). Enfócate en entregables concretos: matriz, método, resultados, etc.”</p>
+                <div class=”who”>
+                  <span class=”avatar” aria-hidden=”true”>J</span>
+                  <div>
+                    <strong>Estudiante (inicial)</strong>
+                    <span class=”muted”>Posgrado / Facultad</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
+          <div class=”swiper-pagination”></div>
+          <div class=”swiper-button-prev”></div>
+          <div class=”swiper-button-next”></div>
         </div>
 
         <div class="pricing" id="planes">
@@ -1050,6 +1067,15 @@
   }
   </script>
 
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <!-- Typed.js -->
+  <script src="https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.js"></script>
+  <!-- Swiper -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <!-- Particles.js -->
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
