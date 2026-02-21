@@ -1058,6 +1058,37 @@ html[data-theme="dark"] .nav.nav--scrolled{
 .nav.nav--scrolled .nav__logo img{ width: 34px; height: 34px; }
 
 /* ==============================
+   STATS — Icono animado
+   ============================== */
+.stat__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, rgba(77,126,221,.15), rgba(120,90,255,.12));
+  border: 1px solid rgba(77,126,221,.20);
+  color: var(--brand2);
+  margin-bottom: 10px;
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.stat:hover .stat__icon {
+  transform: translateY(-3px) scale(1.08);
+  box-shadow: 0 8px 24px rgba(77,126,221,.22);
+}
+.stat__val {
+  display: block;
+  font-size: clamp(28px, 3vw, 38px);
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--brand2), var(--brand));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+
+/* ==============================
    PARTICLES.JS — Hero
    ============================== */
 #hero-particles {

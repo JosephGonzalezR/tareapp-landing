@@ -10,12 +10,12 @@ const CONFIG = {
   facebookUrl: "https://www.facebook.com/profile.php?id=61550076753079",
 
   // Indicadores (opcional). Si no deseas números, deja en "—".
-  stat1Value: "—",
-  stat1Label: "Sesiones 1:1 (configurable)",
-  stat2Value: "—",
-  stat2Label: "Formatos atendidos (configurable)",
-  stat3Value: "—",
-  stat3Label: "Entregables por etapa (configurable)",
+  stat1Value: "300+",
+  stat1Label: "Proyectos acompañados",
+  stat2Value: "5+",
+  stat2Label: "Formatos de citación",
+  stat3Value: "4",
+  stat3Label: "Etapas de acompañamiento",
 };
 
 function buildWhatsAppUrl(message) {
@@ -396,6 +396,21 @@ function setupGSAP() {
       { opacity: 1, y: 0, duration: 0.8, ease: "power2.out",
         scrollTrigger: { trigger: el, start: "top 88%", toggleActions: "play none none none" } }
     );
+  });
+
+  // CountUp animado en stats
+  const statVals = document.querySelectorAll(".stat__val[data-countup]");
+  statVals.forEach((el) => {
+    const end = parseFloat(el.getAttribute("data-countup")) || 0;
+    const suffix = el.getAttribute("data-suffix") || "";
+    const obj = { val: 0 };
+    gsap.to(obj, {
+      val: end,
+      duration: 1.8,
+      ease: "power2.out",
+      onUpdate() { el.textContent = Math.round(obj.val) + suffix; },
+      scrollTrigger: { trigger: el.closest(".stats"), start: "top 82%", once: true },
+    });
   });
 
   // Parallax del hero background

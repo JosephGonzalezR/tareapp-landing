@@ -303,18 +303,21 @@
             </div>
           </div>
 
-          <div class="stats" data-reveal aria-label="Indicadores configurables">
+          <div class="stats" data-reveal aria-label="Indicadores">
             <div class="stat">
-              <strong data-bind="stat1Value">—</strong>
-              <span class="muted" data-bind="stat1Label">Sesiones 1:1 (configurable)</span>
+              <div class="stat__icon" aria-hidden="true"><svg class="i"><use href="#i-doc"></use></svg></div>
+              <strong class="stat__val" data-countup="300" data-suffix="+" data-bind="stat1Value">300+</strong>
+              <span class="muted" data-bind="stat1Label">Proyectos acompañados</span>
             </div>
             <div class="stat">
-              <strong data-bind="stat2Value">—</strong>
-              <span class="muted" data-bind="stat2Label">Formatos atendidos (configurable)</span>
+              <div class="stat__icon" aria-hidden="true"><svg class="i"><use href="#i-compass"></use></svg></div>
+              <strong class="stat__val" data-countup="5" data-suffix="+" data-bind="stat2Value">5+</strong>
+              <span class="muted" data-bind="stat2Label">Formatos de citación</span>
             </div>
             <div class="stat">
-              <strong data-bind="stat3Value">—</strong>
-              <span class="muted" data-bind="stat3Label">Entregables por etapa (configurable)</span>
+              <div class="stat__icon" aria-hidden="true"><svg class="i"><use href="#i-check"></use></svg></div>
+              <strong class="stat__val" data-countup="4" data-bind="stat3Value">4</strong>
+              <span class="muted" data-bind="stat3Label">Etapas de acompañamiento</span>
             </div>
           </div>
         </div>
@@ -424,13 +427,6 @@
             </ul>
           </div>
 
-          <div class=”panel panel--danger”>
-            <h3>No es para…</h3>
-            <ul class=”list”>
-              <li>Promesas de aprobación/nota (nadie serio puede garantizar eso).</li>
-              <li>Entregas sin información mínima o sin respetar la guía institucional.</li>
-            </ul>
-          </div>
         </div>
 
         <div class="cta-mini" data-reveal>
