@@ -462,7 +462,7 @@ function setupParticles() {
   if (typeof particlesJS === "undefined") return;
   if (!document.getElementById("hero-particles")) return;
   const isDark = document.documentElement.getAttribute("data-theme") === "dark";
-  const color = isDark ? "#6B9AFF" : "#4D7EDD";
+  const color = isDark ? "#C9A84C" : "#1A3A6B";
   particlesJS("hero-particles", {
     particles: {
       number: { value: 55, density: { enable: true, value_area: 900 } },

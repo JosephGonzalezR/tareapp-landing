@@ -1341,3 +1341,246 @@ html[data-theme="dark"] .social-btn--tt:hover { border-color: #fff; color: #fff;
    ============================== */
 /* Los elementos con data-reveal ya arrancan con opacity:0 por CSS.
    GSAP los anima vía inline styles (mayor especificidad). Sin conflicto. */
+
+
+/* ══════════════════════════════════════════════════════════════
+   PREMIUM ELEGANTE — EducaProject 2026
+   Azul marino · Dorado · Playfair Display · Blanco cálido
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── Paleta Premium ───────────────────────────────────────── */
+:root {
+  --brand:  #1A3A6B;
+  --brand2: #2B5299;
+  --brand3: #C9A84C;
+  --gold:   #C9A84C;
+  --gold-d: #A8883A;
+
+  --bg:      #FAFAF8;
+  --bg2:     #F2EFE8;
+  --surface: rgba(255,255,255,.82);
+  --card:    rgba(255,255,255,.97);
+
+  --text:  #0F1F3D;
+  --muted: rgba(15,31,61,.60);
+  --line:  rgba(15,31,61,.09);
+
+  --shadow-sm: 0 4px 18px rgba(26,58,107,.08);
+  --shadow:    0 14px 44px rgba(26,58,107,.11);
+  --shadow-lg: 0 36px 100px rgba(26,58,107,.15);
+
+  --grad:
+    radial-gradient(900px 500px at 8% 4%,  rgba(26,58,107,.07), transparent 55%),
+    radial-gradient(800px 500px at 88% 8%, rgba(201,168,76,.09), transparent 55%),
+    radial-gradient(900px 600px at 50% 115%, rgba(26,58,107,.05), transparent 60%);
+
+  --bg-grad:
+    radial-gradient(800px 480px at var(--mx) var(--my), rgba(26,58,107,.09), transparent 60%),
+    radial-gradient(600px 380px at 92% 12%, rgba(201,168,76,.08), transparent 55%);
+}
+
+html[data-theme="dark"] {
+  --brand:  #2B5299;
+  --brand2: #4A7BC8;
+  --brand3: #D4AE5A;
+  --gold:   #D4AE5A;
+  --gold-d: #B8922E;
+
+  --bg:      #080E1C;
+  --bg2:     #0D1525;
+  --surface: rgba(13,21,37,.68);
+  --card:    rgba(15,24,45,.88);
+
+  --text:  #F0EEE8;
+  --muted: rgba(240,238,232,.62);
+  --line:  rgba(255,255,255,.09);
+
+  --shadow-sm: 0 4px 20px rgba(0,0,0,.28);
+  --shadow:    0 14px 44px rgba(0,0,0,.38);
+  --shadow-lg: 0 36px 100px rgba(0,0,0,.48);
+
+  --bg-grad:
+    radial-gradient(800px 480px at var(--mx) var(--my), rgba(43,82,153,.22), transparent 62%),
+    radial-gradient(600px 380px at 92% 12%, rgba(212,174,90,.10), transparent 55%);
+}
+
+/* ── Tipografía serif en títulos ──────────────────────────── */
+h1, h2, h3,
+.hero__title,
+.section__head h2,
+.card h3,
+.panel h3,
+.step h3,
+.deliverable h3,
+.team-card h3,
+.pricing h2,
+.faq h3,
+.sidecard h3,
+.cta-band h3,
+.cta-mini h3,
+.final-cta h2,
+.urgente-band__copy h2 {
+  font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  letter-spacing: -0.01em;
+}
+
+/* ── Hero ─────────────────────────────────────────────────── */
+.hero__title {
+  background: linear-gradient(135deg, var(--text) 0%, var(--brand) 55%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+html[data-theme="dark"] .hero__title {
+  background: linear-gradient(135deg, #fff 0%, var(--brand2) 50%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+#typedTarget, .hero__typed .typed-cursor { color: var(--gold); }
+
+.pill { border-color: rgba(201,168,76,.30); color: var(--brand); }
+.pill--soft { background: rgba(201,168,76,.10); border-color: rgba(201,168,76,.25); color: var(--gold-d); }
+html[data-theme="dark"] .pill { color: var(--brand2); }
+html[data-theme="dark"] .pill--soft { color: var(--gold); }
+
+/* ── Sección heads con línea dorada ─────────────────────── */
+.section__head { text-align: center; }
+.section__head h2 {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 18px;
+}
+.section__head h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 52px;
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--gold), rgba(201,168,76,.3));
+}
+
+/* ── Cards ────────────────────────────────────────────────── */
+.card {
+  border: 1px solid var(--line);
+  border-top: 3px solid transparent;
+  transition: border-top-color .25s ease, transform .25s ease, box-shadow .25s ease;
+}
+@media (hover:hover) and (pointer:fine) {
+  .card:hover { border-top-color: var(--gold); }
+}
+.card--highlight {
+  border-top: 3px solid var(--gold) !important;
+  background: linear-gradient(160deg, rgba(201,168,76,.05), rgba(26,58,107,.04));
+}
+.card__icon { color: var(--gold); background: linear-gradient(135deg, rgba(201,168,76,.12), rgba(26,58,107,.08)); border-color: rgba(201,168,76,.20); }
+.card__tag { background: var(--gold); color: #fff; }
+
+/* ── Stats ────────────────────────────────────────────────── */
+.stat__icon { background: linear-gradient(135deg, rgba(201,168,76,.14), rgba(26,58,107,.10)); border-color: rgba(201,168,76,.25); color: var(--gold); }
+.stat__val   { background: linear-gradient(135deg, var(--brand), var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+/* ── Botones ──────────────────────────────────────────────── */
+.btn--primary {
+  background: linear-gradient(135deg, var(--brand) 0%, var(--brand2) 100%);
+  box-shadow: 0 10px 32px rgba(26,58,107,.28), 0 1px 0 rgba(255,255,255,.14) inset;
+}
+.btn--primary:hover {
+  background: linear-gradient(135deg, var(--brand2) 0%, var(--brand) 100%);
+  box-shadow: 0 16px 48px rgba(26,58,107,.34);
+}
+.hero__actions .btn--primary { animation: ep-pulse-navy 2.8s ease-out infinite; }
+@keyframes ep-pulse-navy {
+  0%   { box-shadow: 0 0 0 0 rgba(26,58,107,.50), 0 10px 32px rgba(26,58,107,.28); }
+  65%  { box-shadow: 0 0 0 13px rgba(26,58,107,0), 0 10px 32px rgba(26,58,107,.28); }
+  100% { box-shadow: 0 0 0 0 rgba(26,58,107,0), 0 10px 32px rgba(26,58,107,.28); }
+}
+.hero__actions .btn--primary:hover,
+.hero__actions .btn--primary:focus { animation: none; }
+
+/* ── Scroll progress dorado ───────────────────────────────── */
+.scroll-progress__bar { background: linear-gradient(90deg, var(--brand), var(--gold)); }
+
+/* ── Pasos del timeline ───────────────────────────────────── */
+.step__num { background: linear-gradient(135deg, var(--brand), var(--gold-d)); color: #fff; box-shadow: 0 6px 18px rgba(26,58,107,.22); }
+
+/* ── Testimonios con comilla grande ──────────────────────── */
+.testimonial { position: relative; overflow: visible; }
+.testimonial::before {
+  content: '\201C';
+  font-family: 'Playfair Display', serif;
+  font-size: 90px;
+  line-height: 1;
+  color: var(--gold);
+  opacity: 0.18;
+  position: absolute;
+  top: -8px;
+  left: 12px;
+  pointer-events: none;
+  user-select: none;
+}
+.stars { color: var(--gold); }
+.avatar { border-color: rgba(201,168,76,.40); }
+
+/* ── Team avatars ─────────────────────────────────────────── */
+.team-avatar { background: linear-gradient(135deg, var(--brand), var(--gold-d)); }
+
+/* ── Banner ayuda rápida ──────────────────────────────────── */
+.urgente-band {
+  background: linear-gradient(120deg, var(--brand) 0%, #1E3F7A 55%, #243F85 100%);
+  box-shadow: 0 28px 80px rgba(26,58,107,.32);
+}
+.urgente-band__icon { background: rgba(201,168,76,.22); color: var(--gold); }
+
+/* ── Nav premium ──────────────────────────────────────────── */
+.nav { border-bottom: 1px solid var(--line); }
+.nav__links a.active, .nav__links a:hover { color: var(--gold-d); }
+.nav__links a.active::after, .nav__links a:hover::after { background: var(--gold); }
+.nav__cta { background: var(--brand) !important; border-color: var(--brand) !important; }
+
+/* ── Sección alt (fondo crema) ───────────────────────────── */
+.section--alt { background: rgba(242,239,232,.55); }
+html[data-theme="dark"] .section--alt { background: rgba(13,21,37,.45); }
+
+/* ── Footer oscuro elegante ───────────────────────────────── */
+.footer {
+  background: var(--brand);
+  color: #fff;
+  border-top: none;
+}
+.footer strong, .footer h4 { color: #fff; }
+.footer .muted, .footer span.muted { color: rgba(255,255,255,.58); }
+.footer a { color: rgba(255,255,255,.78); }
+.footer a:hover { color: var(--gold); }
+.footer__bottom { border-top-color: rgba(255,255,255,.12); }
+.footer__bottom .muted { color: rgba(255,255,255,.50); }
+html[data-theme="dark"] .footer { background: #060C18; }
+
+/* ── Divider dorado ───────────────────────────────────────── */
+.divider { background: linear-gradient(90deg, transparent, rgba(201,168,76,.30), transparent); height: 1px; }
+
+/* ── Scroll-to-top ────────────────────────────────────────── */
+.to-top { background: var(--brand); color: #fff; box-shadow: 0 6px 20px rgba(26,58,107,.30); }
+.to-top:hover { background: var(--gold-d); }
+
+/* ── Swiper bullets ───────────────────────────────────────── */
+.swiper-pagination-bullet { background: var(--gold) !important; }
+.swiper-button-next, .swiper-button-prev { color: var(--gold) !important; border-color: rgba(201,168,76,.25); }
+
+/* ── Dot del topbar ───────────────────────────────────────── */
+.dot { background: var(--gold); }
+
+/* ── FAQ accordion ────────────────────────────────────────── */
+.accordion__btn:hover { color: var(--gold-d); }
+.accordion__icon { color: var(--brand); }
+
+/* ── Mockup (panel hero derecho) ──────────────────────────── */
+.mockup { border-color: rgba(201,168,76,.18); }
+.mockup__top { background: linear-gradient(90deg, var(--brand), var(--brand2)); }
+.mockup__dot { background: rgba(201,168,76,.60); }
+.progress__fill { background: linear-gradient(90deg, var(--brand2), var(--gold)); }
+
+/* ── Social hover colors mantienen identidad de marca ────── */
+.social-link:hover { color: var(--gold-d); background: rgba(201,168,76,.10); }
