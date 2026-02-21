@@ -1729,3 +1729,14 @@ html[data-theme="dark"] body {
 
 /* Eliminar estilos del toggle de tema ya que no existe */
 .theme-toggle { display: none !important; }
+
+/* ── Select / dropdown legible en modo oscuro ────────────── */
+.form select {
+  background: #0E1A38 !important;
+  color: #F0EEE8 !important;
+  border-color: rgba(255,255,255,.16) !important;
+}
+.form select option {
+  background-color: #0E1A38;
+  color: #F0EEE8;
+}
