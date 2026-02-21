@@ -1386,10 +1386,10 @@ html[data-theme="dark"] {
   --gold:   #D4AE5A;
   --gold-d: #B8922E;
 
-  --bg:      #080E1C;
-  --bg2:     #0D1525;
-  --surface: rgba(13,21,37,.68);
-  --card:    rgba(15,24,45,.88);
+  --bg:      #050A15;
+  --bg2:     #091028;
+  --surface: rgba(10,17,38,.72);
+  --card:    rgba(12,20,48,.90);
 
   --text:  #F0EEE8;
   --muted: rgba(240,238,232,.62);
@@ -1399,10 +1399,17 @@ html[data-theme="dark"] {
   --shadow:    0 14px 44px rgba(0,0,0,.38);
   --shadow-lg: 0 36px 100px rgba(0,0,0,.48);
 
+  --grad:
+    radial-gradient(1000px 620px at 8% 4%,  rgba(43,82,153,.48), transparent 60%),
+    radial-gradient(780px 500px at 88% 8%,  rgba(201,168,76,.32), transparent 56%),
+    radial-gradient(900px 620px at 50% 115%, rgba(26,58,107,.40), transparent 62%);
+
   --bg-grad:
-    radial-gradient(800px 480px at var(--mx) var(--my), rgba(43,82,153,.22), transparent 62%),
-    radial-gradient(600px 380px at 92% 12%, rgba(212,174,90,.10), transparent 55%);
+    radial-gradient(1100px 680px at var(--mx) var(--my), rgba(43,82,153,.55), transparent 62%),
+    radial-gradient(750px 500px at 90% 6%,  rgba(201,168,76,.30), transparent 56%),
+    radial-gradient(700px 520px at 8% 88%,  rgba(26,58,107,.45), transparent 62%);
 }
+
 
 /* ── Tipografía serif en títulos ──────────────────────────── */
 h1, h2, h3,
@@ -1704,3 +1711,21 @@ html[data-theme="dark"] .hero__title {
   border-color: rgba(255,255,255,.15);
   color: rgba(255,255,255,.76);
 }
+
+/* ── Modo único oscuro: potenciar aurora y grilla ─────────── */
+
+/* Grid más visible en modo oscuro */
+html[data-theme="dark"] body::before { opacity: .22; }
+
+/* Aurora del hero más saturada y brillante */
+html[data-theme="dark"] .hero__bg {
+  filter: saturate(1.5) brightness(1.2);
+}
+
+/* Aurora del body más saturada (sigue al cursor) */
+html[data-theme="dark"] body {
+  background-attachment: fixed;
+}
+
+/* Eliminar estilos del toggle de tema ya que no existe */
+.theme-toggle { display: none !important; }

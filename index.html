@@ -3,18 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="color-scheme" content="light dark" />
-
-  <script>
-    (() => {
-      try {
-        const stored = localStorage.getItem("ep_theme");
-        const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-        const theme = (stored === "light" || stored === "dark") ? stored : (prefersDark ? "dark" : "light");
-        document.documentElement.setAttribute("data-theme", theme);
-      } catch (e) {}
-    })();
-  </script>
+  <meta name="color-scheme" content="dark" />
 
   <title>EducaProject | Elaboración de tesis e investigaciones académicas</title>
   <meta name="description" content="Elaboramos tu tesis, proyecto de grado o investigación académica: metodología, redacción, análisis de resultados, formato (APA/Vancouver/IEEE) y preparación para sustentación. Atención por WhatsApp." />
@@ -131,10 +120,6 @@
             <svg class="i i--sm" aria-hidden="true"><use href="#i-instagram"></use></svg>
           </a>
         </div>
-        <button class="theme-toggle" type="button" id="themeToggle" aria-label="Cambiar tema">
-          <span class="theme-toggle__icon" aria-hidden="true"></span>
-          <span class="theme-toggle__text">Tema</span>
-        </button>
       </div>
     </div>
   </div>

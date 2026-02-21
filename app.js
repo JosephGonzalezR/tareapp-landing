@@ -206,26 +206,6 @@ function setupToTop() {
   btn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
 }
 
-function setupTheme() {
-  const toggle = document.getElementById("themeToggle");
-  if (!toggle) return;
-
-  const root = document.documentElement;
-  const stored = localStorage.getItem("ep_theme");
-  if (stored === "light" || stored === "dark") {
-    root.setAttribute("data-theme", stored);
-  } else {
-    const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
-    root.setAttribute("data-theme", prefersDark ? "dark" : "light");
-  }
-
-  toggle.addEventListener("click", () => {
-    const current = root.getAttribute("data-theme") || "light";
-    const next = current === "dark" ? "light" : "dark";
-    root.setAttribute("data-theme", next);
-    localStorage.setItem("ep_theme", next);
-  });
-}
 
 function setupYear() {
   const y = document.getElementById("year");
@@ -461,22 +441,23 @@ function setupSwiper() {
 function setupParticles() {
   if (typeof particlesJS === "undefined") return;
   if (!document.getElementById("hero-particles")) return;
-  const isDark = document.documentElement.getAttribute("data-theme") === "dark";
-  const color = isDark ? "#C9A84C" : "#1A3A6B";
   particlesJS("hero-particles", {
     particles: {
-      number: { value: 55, density: { enable: true, value_area: 900 } },
-      color: { value: color },
+      number: { value: 110, density: { enable: true, value_area: 800 } },
+      color: { value: ["#C9A84C", "#4A7BC8", "#ffffff"] },
       shape: { type: "circle" },
-      opacity: { value: 0.28, random: true, anim: { enable: true, speed: 0.8, opacity_min: 0.08, sync: false } },
-      size: { value: 2.5, random: true },
-      line_linked: { enable: true, distance: 140, color: color, opacity: 0.12, width: 1 },
-      move: { enable: true, speed: 1.2, direction: "none", random: true, straight: false, out_mode: "out" },
+      opacity: { value: 0.55, random: true, anim: { enable: true, speed: 1.2, opacity_min: 0.15, sync: false } },
+      size: { value: 3.2, random: true, anim: { enable: true, speed: 2, size_min: 0.8, sync: false } },
+      line_linked: { enable: true, distance: 150, color: "#4A7BC8", opacity: 0.22, width: 1 },
+      move: { enable: true, speed: 1.8, direction: "none", random: true, straight: false, out_mode: "out", bounce: false },
     },
     interactivity: {
       detect_on: "canvas",
-      events: { onhover: { enable: true, mode: "grab" }, onclick: { enable: false }, resize: true },
-      modes: { grab: { distance: 160, line_linked: { opacity: 0.4 } } },
+      events: { onhover: { enable: true, mode: "grab" }, onclick: { enable: true, mode: "push" }, resize: true },
+      modes: {
+        grab: { distance: 180, line_linked: { opacity: 0.55 } },
+        push: { particles_nb: 3 },
+      },
     },
     retina_detect: true,
   });
@@ -510,7 +491,6 @@ document.addEventListener("DOMContentLoaded", () => {
   bindConfig();
   bindWhatsAppLinks();
   setupMobileMenu();
-  setupTheme();
   setupScrollProgress();
   setupScrollSpy();
   setupPointerGlow();
