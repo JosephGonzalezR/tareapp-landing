@@ -1738,91 +1738,76 @@ html[data-theme="dark"] .hero__bg {
   color: #F0EEE8;
 }
 
-/* ── Review cards — coverflow carousel ───────────────────── */
-.reviews-swiper {
-  padding: 30px 10px 56px !important;
-  overflow: visible;
+/* ── Marquee infinita de reviews ─────────────────────────── */
+.mq-wrap {
+  overflow: hidden;
+  width: 100%;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
 }
-.reviews-swiper .swiper-slide {
-  width: 300px;
-  height: auto;
+.mq-inner {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  animation: mqScroll 38s linear infinite;
 }
-@media (max-width: 480px) {
-  .reviews-swiper .swiper-slide { width: 270px; }
+@keyframes mqScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mq-inner { animation: none; }
 }
 
-.review-card {
+/* Tarjeta individual */
+.rc {
+  width: 272px;
+  flex-shrink: 0;
   background: var(--card);
   border: 1px solid var(--line);
   border-top: 3px solid var(--gold);
   border-radius: var(--radius);
-  padding: 22px 20px 18px;
-  position: relative;
-  overflow: hidden;
-  height: 100%;
+  padding: 18px;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  box-shadow: var(--shadow);
-  transition: box-shadow .3s ease, transform .3s ease;
+  gap: 12px;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
 }
-.review-card::after {
+.rc::after {
   content: '\201C';
   font-family: 'Playfair Display', serif;
-  font-size: 110px;
+  font-size: 96px;
   line-height: 1;
   color: var(--gold);
-  opacity: .07;
+  opacity: .08;
   position: absolute;
-  bottom: -14px;
-  right: 12px;
+  bottom: -8px; right: 10px;
   pointer-events: none;
   user-select: none;
 }
-.review-card__top {
+.rc__head {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
-  gap: 10px;
 }
-.review-card__who {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.review-card__who strong { display: block; font-size: 14px; font-weight: 700; }
-.review-card__who .muted { font-size: 12px; }
-
-.review-stars {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  flex-shrink: 0;
-}
-.rs-filled { color: var(--gold); font-size: 13px; letter-spacing: 1px; }
-.rs-empty  { color: rgba(201,168,76,.28); font-size: 13px; }
-.review-score {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--muted);
-  margin-left: 2px;
-}
-
-.review-card p {
-  font-size: 14px;
+.rc__stars { color: var(--gold); font-size: 13px; letter-spacing: 1px; }
+.rc__star-off { color: rgba(201,168,76,.25); }
+.rc__score { font-size: 11px; font-weight: 700; color: var(--muted); }
+.rc p {
+  font-size: 13.5px;
   line-height: 1.65;
   color: var(--muted);
   margin: 0;
   flex: 1;
 }
-
-/* variante B del avatar */
-.avatar--mono-b {
-  background: linear-gradient(135deg, #0F1E3A, #2B5299);
+.rc__author {
+  border-top: 1px solid var(--line);
+  padding-top: 10px;
 }
-
-/* paginación de reviews */
-.reviews-pagination { bottom: 14px !important; }
+.rc__author strong { display: block; font-size: 13px; font-weight: 700; color: var(--text); }
+.rc__author span { font-size: 12px; color: var(--muted); }
 
 /* ── Avatar monograma (sin foto) ─────────────────────────── */
 .avatar--mono {
