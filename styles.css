@@ -1747,13 +1747,16 @@ html[data-theme="dark"] .hero__bg {
 }
 .mq-inner {
   display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
   gap: 16px;
-  width: max-content;
-  animation: mqScroll 38s linear infinite;
+  will-change: transform;
+  animation: mqScroll 40s linear infinite;
 }
+/* 6 cards × 272px + 6 gaps × 16px = 1728px por set */
 @keyframes mqScroll {
   from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  to   { transform: translateX(-1728px); }
 }
 @media (prefers-reduced-motion: reduce) {
   .mq-inner { animation: none; }
