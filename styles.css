@@ -675,11 +675,6 @@ html[data-theme="dark"] .progress__bar{background: rgba(255,255,255,.12)}
 .who{display:flex; align-items:center; gap: 10px}
 .avatar{width: 42px; height: 42px; border-radius: 999px; display:block; background: linear-gradient(135deg, rgba(77,126,221,.18), rgba(60,94,179,.16)); border: 2px solid rgba(77,126,221,.22); color: var(--brand); font-weight: 900; object-fit: cover; flex-shrink: 0}
 
-/* PRICING */
-.pricing{margin-top: 20px}
-.pricing__head{text-align:center; margin-bottom: 18px}
-.pricing__head h2{margin:0 0 8px; font-size: var(--h2)}
-.pricing__head p{margin:0}
 
 /* TEAM */
 .team{display:grid; grid-template-columns: repeat(3, 1fr); gap: 14px}
@@ -1421,7 +1416,6 @@ h1, h2, h3,
 .step h3,
 .deliverable h3,
 .team-card h3,
-.pricing h2,
 .faq h3,
 .sidecard h3,
 .cta-band h3,
@@ -1738,91 +1732,6 @@ html[data-theme="dark"] .hero__bg {
   color: #F0EEE8;
 }
 
-/* ── Marquee infinita de reviews ─────────────────────────── */
-.mq-wrap {
-  overflow: hidden;
-  width: 100%;
-  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
-  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
-}
-.mq-inner {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  gap: 16px;
-  will-change: transform;
-  animation: mqScroll 40s linear infinite;
-}
-/* 6 cards × 272px + 6 gaps × 16px = 1728px por set */
-@keyframes mqScroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-1728px); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .mq-inner { animation: none; }
-}
-
-/* Tarjeta individual */
-.rc {
-  width: 272px;
-  flex-shrink: 0;
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-top: 3px solid var(--gold);
-  border-radius: var(--radius);
-  padding: 18px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  box-shadow: var(--shadow-sm);
-  position: relative;
-  overflow: hidden;
-}
-.rc::after {
-  content: '\201C';
-  font-family: 'Playfair Display', serif;
-  font-size: 96px;
-  line-height: 1;
-  color: var(--gold);
-  opacity: .08;
-  position: absolute;
-  bottom: -8px; right: 10px;
-  pointer-events: none;
-  user-select: none;
-}
-.rc__head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.rc__stars { color: var(--gold); font-size: 13px; letter-spacing: 1px; }
-.rc__star-off { color: rgba(201,168,76,.25); }
-.rc__score { font-size: 11px; font-weight: 700; color: var(--muted); }
-.rc p {
-  font-size: 13.5px;
-  line-height: 1.65;
-  color: var(--muted);
-  margin: 0;
-  flex: 1;
-}
-.rc__author {
-  border-top: 1px solid var(--line);
-  padding-top: 10px;
-}
-.rc__author strong { display: block; font-size: 13px; font-weight: 700; color: var(--text); }
-.rc__author span { font-size: 12px; color: var(--muted); }
-
-/* ── Avatar monograma (sin foto) ─────────────────────────── */
-.avatar--mono {
-  font-family: 'Playfair Display', serif;
-  font-weight: 700;
-  font-size: 14px;
-  letter-spacing: 0.04em;
-  color: var(--gold);
-  background: linear-gradient(135deg, #0A1428, #1A3A6B);
-  border: 1.5px solid rgba(201,168,76,.50);
-  box-shadow: 0 0 0 3px rgba(201,168,76,.12), 0 4px 12px rgba(26,58,107,.35);
-}
 
 /* ── Hero título: más espacio bajo para evitar que la 'g' tape el subtítulo ── */
 .hero__title {
