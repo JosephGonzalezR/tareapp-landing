@@ -1,15 +1,15 @@
 /**
- * EducaProject Landing v6 (2026 Futurista)
+ * Tareapp Landing v6 (2026 Futurista)
  * Edita CONFIG para personalizar: WhatsApp, ubicación, enlaces, etc.
  */
 const CONFIG = {
-  brand: "EducaProject",
-  whatsappNumber: "51965148374",      // Formato internacional sin + ni espacios
-  whatsappDisplay: "+51 965 148 374",
-  location: "Punta Hermosa, Perú",
-  facebookUrl: "https://www.facebook.com/profile.php?id=61550076753079",
-  tiktokUrl: "https://www.tiktok.com/@educaproject_",
-  instagramUrl: "https://www.instagram.com/educaproject_peru/",
+  brand: "Tareapp",
+  whatsappNumber: "56953078288",
+  whatsappDisplay: "+56 9 5307 8288",
+  location: "Santiago, Chile",
+  facebookUrl: "https://www.facebook.com/profile.php?id=61558060587570",
+  tiktokUrl: "https://www.tiktok.com/@tareapp_",
+  instagramUrl: "https://www.instagram.com/tareappchile/",
 
   // Indicadores (opcional). Si no deseas números, deja en "—".
   stat1Value: "300+",
@@ -20,6 +20,30 @@ const CONFIG = {
   stat3Label: "Etapas de desarrollo",
 };
 
+/** Configuración por página */
+const PAGE_CONFIG = {
+  trabajos: {
+    stat1Value: "500+",
+    stat1Label: "Trabajos entregados",
+    stat2Value: "10+",
+    stat2Label: "Tipos de trabajo",
+    stat3Value: "15+",
+    stat3Label: "Instituciones cubiertas",
+  },
+  tesis: {
+    stat1Value: "300+",
+    stat1Label: "Proyectos elaborados",
+    stat2Value: "5+",
+    stat2Label: "Formatos de citación",
+    stat3Value: "4",
+    stat3Label: "Etapas de desarrollo",
+  },
+};
+
+function getPage() {
+  return document.body.getAttribute("data-page") || "tesis";
+}
+
 function buildWhatsAppUrl(message) {
   const base = `https://wa.me/${CONFIG.whatsappNumber}`;
   const text = encodeURIComponent(message || "");
@@ -27,6 +51,13 @@ function buildWhatsAppUrl(message) {
 }
 
 function bindConfig() {
+  // Aplicar configuración de página
+  const page = getPage();
+  const pageConf = PAGE_CONFIG[page];
+  if (pageConf) {
+    Object.assign(CONFIG, pageConf);
+  }
+
   document.querySelectorAll("[data-bind]").forEach((el) => {
     const key = el.getAttribute("data-bind");
     if (CONFIG[key] !== undefined) el.textContent = CONFIG[key];
@@ -150,25 +181,47 @@ function setupForm() {
   const form = document.getElementById("leadForm");
   if (!form) return;
 
+  const page = getPage();
+
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
     const data = new FormData(form);
     const name = (data.get("name") || "").toString().trim();
-    const program = (data.get("program") || "").toString().trim();
-    const stage = (data.get("stage") || "").toString().trim();
-    const date = (data.get("date") || "").toString().trim();
-    const message = (data.get("message") || "").toString().trim();
 
-    const lines = [
-      `Hola, soy ${name}.`,
-      program ? `Programa/Carrera: ${program}` : null,
-      stage ? `Etapa: ${stage}` : null,
-      date ? `Fecha tentativa: ${date}` : null,
-      message ? `Situación: ${message}` : null,
-      "",
-      "¿Podemos coordinar el desarrollo de mi investigación? Gracias.",
-    ].filter(Boolean);
+    let lines;
+
+    if (page === "trabajos") {
+      const institution = (data.get("institution") || "").toString().trim();
+      const workType = (data.get("workType") || "").toString().trim();
+      const date = (data.get("date") || "").toString().trim();
+      const message = (data.get("message") || "").toString().trim();
+
+      lines = [
+        `Hola, soy ${name}.`,
+        institution ? `Institución: ${institution}` : null,
+        workType ? `Tipo de trabajo: ${workType}` : null,
+        date ? `Fecha de entrega: ${date}` : null,
+        message ? `Detalle: ${message}` : null,
+        "",
+        "¿Me pueden cotizar este trabajo? Gracias.",
+      ].filter(Boolean);
+    } else {
+      const program = (data.get("program") || "").toString().trim();
+      const stage = (data.get("stage") || "").toString().trim();
+      const date = (data.get("date") || "").toString().trim();
+      const message = (data.get("message") || "").toString().trim();
+
+      lines = [
+        `Hola, soy ${name}.`,
+        program ? `Programa/Carrera: ${program}` : null,
+        stage ? `Etapa: ${stage}` : null,
+        date ? `Fecha tentativa: ${date}` : null,
+        message ? `Situación: ${message}` : null,
+        "",
+        "¿Podemos coordinar el desarrollo de mi investigación? Gracias.",
+      ].filter(Boolean);
+    }
 
     const url = buildWhatsAppUrl(lines.join("\n"));
     window.open(url, "_blank", "noopener");
@@ -338,6 +391,17 @@ function setupGSAP() {
     );
   }
 
+  // Instituciones grid → stagger
+  const instCards = Array.from(document.querySelectorAll(".inst-card"));
+  if (instCards.length) {
+    instCards.forEach((c) => handled.add(c));
+    gsap.fromTo(instCards,
+      { opacity: 0, y: 30, scale: 0.96 },
+      { opacity: 1, y: 0, scale: 1, duration: 0.5, stagger: 0.08, ease: "power2.out",
+        scrollTrigger: { trigger: instCards[0].parentElement, start: "top 82%" } }
+    );
+  }
+
   // Resto de [data-reveal]
   document.querySelectorAll("[data-reveal]").forEach((el) => {
     if (handled.has(el)) return;
@@ -377,8 +441,14 @@ function setupTyped() {
   if (typeof Typed === "undefined") return;
   const el = document.getElementById("typedTarget");
   if (!el) return;
+
+  const page = getPage();
+  const strings = page === "trabajos"
+    ? ["dashboard en Power BI", "base de datos SQL", "Excel avanzado", "programación Python", "informe académico", "caso de estudio"]
+    : ["tesis", "memorias de título", "seminarios de título", "artículos científicos", "informes académicos", "trabajos de grado"];
+
   new Typed("#typedTarget", {
-    strings: ["tesis", "proyectos de investigación", "trabajos de grado", "artículos científicos", "informes académicos", "tesinas"],
+    strings: strings,
     typeSpeed: 60,
     backSpeed: 35,
     backDelay: 1600,
@@ -417,11 +487,11 @@ function setupParticles() {
   particlesJS("hero-particles", {
     particles: {
       number: { value: 110, density: { enable: true, value_area: 800 } },
-      color: { value: ["#C9A84C", "#4A7BC8", "#ffffff"] },
+      color: { value: ["#F7C948", "#FFD54F", "#E5B52E"] },
       shape: { type: "circle" },
       opacity: { value: 0.55, random: true, anim: { enable: true, speed: 1.2, opacity_min: 0.15, sync: false } },
       size: { value: 3.2, random: true, anim: { enable: true, speed: 2, size_min: 0.8, sync: false } },
-      line_linked: { enable: true, distance: 150, color: "#4A7BC8", opacity: 0.22, width: 1 },
+      line_linked: { enable: true, distance: 150, color: "#F7C948", opacity: 0.15, width: 1 },
       move: { enable: true, speed: 1.8, direction: "none", random: true, straight: false, out_mode: "out", bounce: false },
     },
     interactivity: {

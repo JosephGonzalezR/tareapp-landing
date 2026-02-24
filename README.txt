@@ -1,10 +1,10 @@
-EducaProject Landing (v5)
+Tareapp Landing (v6)
 
 Cómo ver la página
 1) Descomprime el ZIP.
-2) Abre 'educaproject-landing/index.html' con tu navegador.
+2) Abre 'index.html' con tu navegador.
    Recomendado: usar servidor local (evita bloqueos de iframes / rutas).
-   - Python: en la carpeta 'educaproject-landing', ejecuta: python -m http.server 8000
+   - Python: en la carpeta del proyecto, ejecuta: python -m http.server 8000
    - Luego abre: http://localhost:8000
 
 Cómo personalizar rápido

@@ -1,14 +1,14 @@
 <!doctype html>
-<html lang="es" data-theme="dark">
+<html lang="es">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="color-scheme" content="dark" />
+  <meta name="color-scheme" content="light" />
 
-  <title>EducaProject | Elaboración de tesis e investigaciones académicas</title>
-  <meta name="description" content="Elaboramos tu tesis, proyecto de grado o investigación académica: metodología, redacción, análisis de resultados, formato (APA/Vancouver/IEEE) y preparación para sustentación. Atención por WhatsApp." />
-  <meta name="author" content="EducaProject" />
-  <meta name="theme-color" content="#3C5EB3" />
+  <title>Tareapp | Trabajos academicos para IACC, IPLACEX, DUOC UC, INACAP y mas</title>
+  <meta name="description" content="Hacemos tus trabajos academicos: Power BI, bases de datos, Excel, programacion, informes y mas. Todas las instituciones: IACC, IPLACEX, DUOC UC, INACAP. Atencion por WhatsApp." />
+  <meta name="author" content="Tareapp" />
+  <meta name="theme-color" content="#F7C948" />
 
   <!-- Favicons -->
   <link rel="icon" href="assets/favicon-32.png" sizes="32x32" />
@@ -16,12 +16,12 @@
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
 
   <!-- Open Graph -->
-  <meta property="og:title" content="EducaProject | Elaboración de Tesis e Investigaciones" />
-  <meta property="og:description" content="Elaboramos tu tesis o investigación académica: metodología, redacción, análisis y sustentación. Escríbenos por WhatsApp." />
+  <meta property="og:title" content="Tareapp | Trabajos Academicos — IACC, IPLACEX, DUOC UC, INACAP" />
+  <meta property="og:description" content="Hacemos tus trabajos academicos con calidad y a tiempo: Power BI, bases de datos, Excel, programacion, informes. Escribenos por WhatsApp." />
   <meta property="og:image" content="assets/og-image.png" />
   <meta property="og:type" content="website" />
 
-  <!-- Fonts (si abres el archivo sin internet, el navegador usará la tipografía del sistema) -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -30,7 +30,7 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 
-<body>
+<body data-page="trabajos">
   <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
   <!-- Scroll progress -->
@@ -38,7 +38,7 @@
     <div class="scroll-progress__bar" id="scrollProgress"></div>
   </div>
 
-  <!-- Iconos SVG (inline para que funcionen incluso abriendo por file://) -->
+  <!-- Iconos SVG -->
   <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" focusable="false">
     <symbol id="i-check" viewBox="0 0 24 24">
       <path d="M20 6L9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -100,13 +100,29 @@
       <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/>
       <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
     </symbol>
+    <!-- Iconos extra para trabajos -->
+    <symbol id="i-code" viewBox="0 0 24 24">
+      <path d="M16 18l6-6-6-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M8 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="i-database" viewBox="0 0 24 24">
+      <ellipse cx="12" cy="5" rx="9" ry="3" fill="none" stroke="currentColor" stroke-width="2"/>
+      <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" fill="none" stroke="currentColor" stroke-width="2"/>
+      <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" fill="none" stroke="currentColor" stroke-width="2"/>
+    </symbol>
+    <symbol id="i-table" viewBox="0 0 24 24">
+      <rect x="3" y="3" width="18" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+      <path d="M3 9h18" fill="none" stroke="currentColor" stroke-width="2"/>
+      <path d="M3 15h18" fill="none" stroke="currentColor" stroke-width="2"/>
+      <path d="M9 3v18" fill="none" stroke="currentColor" stroke-width="2"/>
+    </symbol>
   </svg>
 
   <div class="topbar">
     <div class="container topbar__inner">
       <div class="topbar__left">
         <span class="dot" aria-hidden="true"></span>
-        <span class="topbar__text">Atención por WhatsApp • <span data-bind="location">Punta Hermosa, Perú</span></span>
+        <span class="topbar__text">Atencion por WhatsApp • <span data-bind="location">Santiago, Chile</span></span>
       </div>
       <div class="topbar__right">
         <div class="social-links">
@@ -126,31 +142,34 @@
 
   <header class="nav" id="top">
     <div class="container nav__inner">
-      <a class="brand" href="#top" aria-label="Ir al inicio">
-        <img src="assets/logo-mark.webp" width="40" height="40" alt="Logo de EducaProject" decoding="async" />
+      <a class="brand" href="index.html" aria-label="Ir al inicio">
+        <img src="NUEVO LOGO TAREAPP.png" width="40" height="40" alt="Logo de Tareapp" decoding="async" style="border-radius:10px" />
         <span class="brand__text">
-          <strong data-bind="brand">EducaProject</strong>
-          <small>Elaboración de Tesis</small>
+          <strong data-bind="brand">Tareapp</strong>
+          <small>Soluciones Academicas</small>
         </span>
       </a>
 
-      <nav class="nav__links" aria-label="Navegación principal" id="navLinks">
-        <a href="#servicios">Servicios</a>
-        <a href="#paraquien">Para ti</a>
-        <a href="#proceso">Proceso</a>
-        <a href="#entregables">Entregables</a>
-        <a href="#opiniones">Opiniones</a>
-        <a href="#preguntas">FAQ</a>
-        <a href="#contacto" class="nav__cta">Agendar</a>
+      <div class="page-switcher" aria-label="Tipo de servicio">
+        <a class="page-switcher__tab page-switcher__tab--active" href="index.html">Trabajos</a>
+        <a class="page-switcher__tab" href="tesis.html">Tesis</a>
+      </div>
+
+      <nav class="nav__links" aria-label="Navegacion principal" id="navLinks">
+        <a href="#servicios-trabajos">Servicios</a>
+        <a href="#instituciones">Instituciones</a>
+        <a href="#proceso-trabajos">Proceso</a>
+        <a href="#preguntas-trabajos">FAQ</a>
+        <a href="#contacto-trabajos" class="nav__cta">Cotizar</a>
       </nav>
 
       <div class="nav__actions">
-        <a class="btn btn--ghost btn--sm hide-sm" data-wa-message="Hola, quiero agendar una asesoría. ¿Me orientan por favor?" href="#" rel="noopener">
+        <a class="btn btn--ghost btn--sm hide-sm" data-wa-message="Hola, necesito cotizar un trabajo academico. ¿Me orientan por favor?" href="#" rel="noopener">
           <svg class="i" aria-hidden="true"><use href="#i-whatsapp"></use></svg>
-          <span class="btn__hint" data-bind="whatsappDisplay">+51 965 148 374</span>
+          <span class="btn__hint" data-bind="whatsappDisplay">+56 9 5307 8288</span>
         </a>
 
-        <button class="nav__burger" type="button" id="menuBtn" aria-label="Abrir menú" aria-controls="mobileMenu" aria-expanded="false">
+        <button class="nav__burger" type="button" id="menuBtn" aria-label="Abrir menu" aria-controls="mobileMenu" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
       </div>
@@ -158,15 +177,17 @@
 
     <div class="mobile-menu" id="mobileMenu" hidden>
       <div class="mobile-menu__inner container">
-        <a href="#servicios">Servicios</a>
-        <a href="#paraquien">Para ti</a>
-        <a href="#proceso">Proceso</a>
-        <a href="#entregables">Entregables</a>
-        <a href="#opiniones">Opiniones</a>
-        <a href="#preguntas">Preguntas</a>
-        <a href="#contacto" class="btn btn--primary btn--block">Agendar por WhatsApp</a>
+        <div class="page-switcher page-switcher--mobile" aria-label="Tipo de servicio">
+          <a class="page-switcher__tab page-switcher__tab--active" href="index.html">Trabajos</a>
+          <a class="page-switcher__tab" href="tesis.html">Tesis</a>
+        </div>
+        <a href="#servicios-trabajos">Servicios</a>
+        <a href="#instituciones">Instituciones</a>
+        <a href="#proceso-trabajos">Proceso</a>
+        <a href="#preguntas-trabajos">Preguntas</a>
+        <a href="#contacto-trabajos" class="btn btn--primary btn--block">Cotizar por WhatsApp</a>
         <div class="mobile-menu__meta">
-          <span class="muted"><svg class="i i--sm" aria-hidden="true"><use href="#i-pin"></use></svg> <span data-bind="location">Punta Hermosa, Perú</span></span>
+          <span class="muted"><svg class="i i--sm" aria-hidden="true"><use href="#i-pin"></use></svg> <span data-bind="location">Santiago, Chile</span></span>
         </div>
       </div>
     </div>
@@ -174,7 +195,7 @@
 
   <main id="contenido">
     <!-- HERO -->
-    <section class="hero" aria-label="Presentación">
+    <section class="hero" aria-label="Presentacion">
       <div class="hero__bg" aria-hidden="true"></div>
       <div id="hero-particles" aria-hidden="true"></div>
       <div class="hero-decor" aria-hidden="true">
@@ -189,40 +210,44 @@
           <div class="hero__pill" data-reveal>
             <span class="pill">
               <svg class="i" aria-hidden="true"><use href="#i-doc"></use></svg>
-              Elaboración de tesis
+              Trabajos academicos
             </span>
             <span class="pill pill--soft">
               <svg class="i" aria-hidden="true"><use href="#i-shield"></use></svg>
-              Confidencialidad
+              Todas las instituciones
             </span>
           </div>
 
           <h1 class="hero__title" data-reveal>
-            Elaboramos tu tesis con calidad, rigor y entrega a tiempo
+            Hacemos tus trabajos academicos con calidad y a tiempo
           </h1>
           <p class="hero__subtitle" data-reveal>
-            Elaboramos tu tesis o investigación: metodología, redacción, análisis de resultados y preparación para sustentación.
-            Adaptamos el trabajo al formato que exige tu institución (APA, Vancouver, IEEE y normas internas).
+            Realizamos tus trabajos para IACC, IPLACEX, DUOC UC, INACAP y mas:
+            Power BI, bases de datos, Excel avanzado, programacion, informes y casos de estudio.
           </p>
 
           <p class="hero__typed" data-reveal>
-            Elaboramos y asesoramos en: <span id="typedTarget"></span>
+            Hacemos tu: <span id="typedTarget"></span>
           </p>
 
           <div class="hero__actions" data-reveal>
-            <a class="btn btn--primary" data-wa-message="Hola, quiero agendar una asesoría. ¿Podemos coordinar?" href="#" rel="noopener">
-              Agendar por WhatsApp
+            <a class="btn btn--primary" data-wa-message="Hola, necesito cotizar un trabajo academico. ¿Me orientan?" href="#" rel="noopener">
+              Cotizar por WhatsApp
               <svg class="i i--sm" aria-hidden="true"><use href="#i-arrow"></use></svg>
             </a>
-            <a class="btn btn--soft" href="#servicios">Ver servicios</a>
+            <a class="btn btn--soft" href="#servicios-trabajos">Ver servicios</a>
           </div>
+
+          <p class="hero__crosslink" data-reveal>
+            Si necesitas ayuda con tu tesis, <a href="tesis.html">presiona aqui</a>
+          </p>
 
           <div class="hero__trust" data-reveal>
             <div class="trust-badges" aria-label="Compromisos">
-              <div class="badge"><svg class="i i--sm" aria-hidden="true"><use href="#i-check"></use></svg> Entregables</div>
-              <div class="badge"><svg class="i i--sm" aria-hidden="true"><use href="#i-check"></use></svg> Sesiones 1:1</div>
-              <div class="badge"><svg class="i i--sm" aria-hidden="true"><use href="#i-check"></use></svg> Revisión por etapas</div>
+              <div class="badge"><svg class="i i--sm" aria-hidden="true"><use href="#i-check"></use></svg> Entrega puntual</div>
+              <div class="badge"><svg class="i i--sm" aria-hidden="true"><use href="#i-check"></use></svg> Todas las instituciones</div>
               <div class="badge"><svg class="i i--sm" aria-hidden="true"><use href="#i-check"></use></svg> Confidencialidad</div>
+              <div class="badge"><svg class="i i--sm" aria-hidden="true"><use href="#i-check"></use></svg> Revision incluida</div>
             </div>
           </div>
         </div>
@@ -233,106 +258,96 @@
               <div class="mockup__dot"></div>
               <div class="mockup__dot"></div>
               <div class="mockup__dot"></div>
-              <span class="mockup__label">Panel de avance</span>
+              <span class="mockup__label">Tipos de trabajo</span>
             </div>
 
             <div class="mockup__body">
               <div class="mini-grid">
                 <div class="mini-card">
-                  <div class="mini-card__icon" aria-hidden="true"><svg class="i"><use href="#i-doc"></use></svg></div>
-                  <div class="mini-card__txt">
-                    <strong>Matriz de consistencia</strong>
-                    <span class="muted">Objetivos • Variables • Instrumentos</span>
-                  </div>
-                </div>
-
-                <div class="mini-card">
-                  <div class="mini-card__icon" aria-hidden="true"><svg class="i"><use href="#i-pen"></use></svg></div>
-                  <div class="mini-card__txt">
-                    <strong>Redacción académica</strong>
-                    <span class="muted">Estructura + citas correctas</span>
-                  </div>
-                </div>
-
-                <div class="mini-card">
                   <div class="mini-card__icon" aria-hidden="true"><svg class="i"><use href="#i-chart"></use></svg></div>
                   <div class="mini-card__txt">
-                    <strong>Resultados</strong>
-                    <span class="muted">Tablas • Interpretación • Discusión</span>
+                    <strong>Power BI</strong>
+                    <span class="muted">Dashboards y visualizacion</span>
                   </div>
                 </div>
 
                 <div class="mini-card">
-                  <div class="mini-card__icon" aria-hidden="true"><svg class="i"><use href="#i-mic"></use></svg></div>
+                  <div class="mini-card__icon" aria-hidden="true"><svg class="i"><use href="#i-database"></use></svg></div>
                   <div class="mini-card__txt">
-                    <strong>Sustentación</strong>
-                    <span class="muted">Guion • Slides • Ensayo</span>
+                    <strong>Base de Datos</strong>
+                    <span class="muted">SQL, modelado ER, normalizacion</span>
                   </div>
                 </div>
-              </div>
 
-              <div class="progress">
-                <div class="progress__row">
-                  <span class="muted">Tu avance</span>
-                  <span class="progress__pct">72%</span>
+                <div class="mini-card">
+                  <div class="mini-card__icon" aria-hidden="true"><svg class="i"><use href="#i-table"></use></svg></div>
+                  <div class="mini-card__txt">
+                    <strong>Excel Avanzado</strong>
+                    <span class="muted">Tablas dinamicas, macros VBA</span>
+                  </div>
                 </div>
-                <div class="progress__bar" role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100">
-                  <div class="progress__fill" style="width:72%"></div>
+
+                <div class="mini-card">
+                  <div class="mini-card__icon" aria-hidden="true"><svg class="i"><use href="#i-code"></use></svg></div>
+                  <div class="mini-card__txt">
+                    <strong>Programacion</strong>
+                    <span class="muted">Python, Java, web, algoritmos</span>
+                  </div>
                 </div>
-                <p class="fineprint" style="margin-top:10px">Indicador referencial. Se define un plan real tras el diagnóstico.</p>
               </div>
 
               <div class="mockup__cta">
-                <a class="btn btn--primary btn--block" data-wa-message="Hola, quiero una orientación sobre mi avance y entregables. ¿Cómo empezamos?" href="#" rel="noopener">
-                  Empezar mi proyecto
+                <a class="btn btn--primary btn--block" data-wa-message="Hola, necesito cotizar un trabajo. ¿Como empezamos?" href="#" rel="noopener">
+                  Cotizar mi trabajo
                   <svg class="i i--sm" aria-hidden="true"><use href="#i-arrow"></use></svg>
                 </a>
               </div>
             </div>
           </div>
 
-          <div class="chips" aria-label="Formatos habituales">
-            <span class="chip">APA 7</span>
-            <span class="chip">Vancouver</span>
-            <span class="chip">IEEE</span>
-            <span class="chip">Normas internas</span>
+          <div class="chips" aria-label="Instituciones">
+            <span class="chip">IACC</span>
+            <span class="chip">IPLACEX</span>
+            <span class="chip">DUOC UC</span>
+            <span class="chip">INACAP</span>
+            <span class="chip">Universidades</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- VALUE / KPI -->
+    <!-- STATS -->
     <section class="section section--tight">
       <div class="container">
         <div class="value-grid">
           <div class="value" data-reveal>
-              <p class="muted">
-              Te ayudamos a delimitar el tema, ordenar objetivos, definir el método, redactar y presentar resultados.
+            <p class="muted">
+              Realizamos todo tipo de trabajos academicos: desde dashboards en Power BI hasta informes tecnicos, pasando por Excel avanzado, bases de datos y programacion.
             </p>
 
             <div class="mini-features" aria-label="Puntos clave">
-              <div class="mini-feature"><svg class="i" aria-hidden="true"><use href="#i-check"></use></svg> Plan por entregables</div>
-              <div class="mini-feature"><svg class="i" aria-hidden="true"><use href="#i-check"></use></svg> Revisión de coherencia</div>
-              <div class="mini-feature"><svg class="i" aria-hidden="true"><use href="#i-check"></use></svg> Formato según guía</div>
-              <div class="mini-feature"><svg class="i" aria-hidden="true"><use href="#i-check"></use></svg> Preparación para sustentación</div>
+              <div class="mini-feature"><svg class="i" aria-hidden="true"><use href="#i-check"></use></svg> Entrega puntual</div>
+              <div class="mini-feature"><svg class="i" aria-hidden="true"><use href="#i-check"></use></svg> Formato institucional</div>
+              <div class="mini-feature"><svg class="i" aria-hidden="true"><use href="#i-check"></use></svg> Revision incluida</div>
+              <div class="mini-feature"><svg class="i" aria-hidden="true"><use href="#i-check"></use></svg> Confidencialidad total</div>
             </div>
           </div>
 
           <div class="stats" data-reveal aria-label="Indicadores">
             <div class="stat">
               <div class="stat__icon" aria-hidden="true"><svg class="i"><use href="#i-doc"></use></svg></div>
-              <strong class="stat__val" data-countup="300" data-suffix="+" data-bind="stat1Value">300+</strong>
-              <span class="muted" data-bind="stat1Label">Proyectos elaborados</span>
+              <strong class="stat__val" data-countup="500" data-suffix="+" data-bind="stat1Value">500+</strong>
+              <span class="muted" data-bind="stat1Label">Trabajos entregados</span>
             </div>
             <div class="stat">
               <div class="stat__icon" aria-hidden="true"><svg class="i"><use href="#i-compass"></use></svg></div>
-              <strong class="stat__val" data-countup="5" data-suffix="+" data-bind="stat2Value">5+</strong>
-              <span class="muted" data-bind="stat2Label">Formatos de citación</span>
+              <strong class="stat__val" data-countup="10" data-suffix="+" data-bind="stat2Value">10+</strong>
+              <span class="muted" data-bind="stat2Label">Tipos de trabajo</span>
             </div>
             <div class="stat">
               <div class="stat__icon" aria-hidden="true"><svg class="i"><use href="#i-check"></use></svg></div>
-              <strong class="stat__val" data-countup="4" data-bind="stat3Value">4</strong>
-              <span class="muted" data-bind="stat3Label">Etapas de desarrollo</span>
+              <strong class="stat__val" data-countup="15" data-suffix="+" data-bind="stat3Value">15+</strong>
+              <span class="muted" data-bind="stat3Label">Instituciones cubiertas</span>
             </div>
           </div>
         </div>
@@ -341,79 +356,79 @@
       </div>
     </section>
 
-    <!-- SERVICES -->
-    <section class="section" id="servicios">
+    <!-- SERVICIOS -->
+    <section class="section" id="servicios-trabajos">
       <div class="container">
         <div class="section__head">
-          <h2 data-reveal>Servicios de apoyo académico</h2>
+          <h2 data-reveal>Servicios para tus trabajos</h2>
           <p class="muted" data-reveal>
-            Selecciona lo que necesitas y coordinamos el plan. Si no sabes por dónde empezar, te guiamos con una evaluación inicial.
+            Selecciona lo que necesitas y te enviamos una cotizacion. Si no sabes por donde empezar, escribenos y te orientamos.
           </p>
         </div>
 
         <div class="cards cards--3">
           <article class="card" data-reveal>
-            <div class="card__icon" aria-hidden="true"><svg class="i"><use href="#i-compass"></use></svg></div>
-            <h3>Planteamiento y metodología</h3>
-            <ul class="list">
-              <li>Delimitación del problema</li>
-              <li>Objetivos e hipótesis (si aplica)</li>
-              <li>Diseño metodológico y muestreo</li>
-              <li>Instrumentos y operacionalización</li>
-            </ul>
-          </article>
-
-          <article class="card" data-reveal>
-            <div class="card__icon" aria-hidden="true"><svg class="i"><use href="#i-pen"></use></svg></div>
-            <h3>Redacción académica</h3>
-            <ul class="list">
-              <li>Estructura por capítulos</li>
-              <li>Coherencia y argumentación</li>
-              <li>Normas de citación (según guía)</li>
-              <li>Revisión de estilo y claridad</li>
-            </ul>
-          </article>
-
-          <article class="card" data-reveal>
             <div class="card__icon" aria-hidden="true"><svg class="i"><use href="#i-chart"></use></svg></div>
-            <h3>Análisis e interpretación</h3>
+            <h3>Power BI</h3>
             <ul class="list">
-              <li>Plan de análisis</li>
-              <li>Tablas/figuras y lectura correcta</li>
-              <li>Discusión de resultados</li>
-              <li>Conclusiones y recomendaciones</li>
+              <li>Dashboards interactivos</li>
+              <li>Visualizacion de datos</li>
+              <li>Conexion a fuentes de datos</li>
+              <li>Medidas DAX y KPIs</li>
+            </ul>
+          </article>
+
+          <article class="card" data-reveal>
+            <div class="card__icon" aria-hidden="true"><svg class="i"><use href="#i-database"></use></svg></div>
+            <h3>Bases de Datos</h3>
+            <ul class="list">
+              <li>Diseno y modelado ER</li>
+              <li>Consultas SQL</li>
+              <li>Normalizacion</li>
+              <li>Procedimientos almacenados</li>
+            </ul>
+          </article>
+
+          <article class="card" data-reveal>
+            <div class="card__icon" aria-hidden="true"><svg class="i"><use href="#i-table"></use></svg></div>
+            <h3>Excel Avanzado</h3>
+            <ul class="list">
+              <li>Tablas dinamicas</li>
+              <li>Macros VBA</li>
+              <li>Formulas avanzadas</li>
+              <li>Graficos y reportes</li>
+            </ul>
+          </article>
+
+          <article class="card" data-reveal>
+            <div class="card__icon" aria-hidden="true"><svg class="i"><use href="#i-code"></use></svg></div>
+            <h3>Programacion</h3>
+            <ul class="list">
+              <li>Python, Java, C++</li>
+              <li>Desarrollo web</li>
+              <li>Algoritmos y estructuras</li>
+              <li>Scripts y automatizacion</li>
             </ul>
           </article>
 
           <article class="card" data-reveal>
             <div class="card__icon" aria-hidden="true"><svg class="i"><use href="#i-doc"></use></svg></div>
-            <h3>Formato y entregables</h3>
+            <h3>Informes y Reportes</h3>
             <ul class="list">
-              <li>Plantillas y márgenes</li>
-              <li>Índices, tablas, figuras</li>
-              <li>Citas y referencias</li>
-              <li>Checklist de pre-entrega</li>
-            </ul>
-          </article>
-
-          <article class="card" data-reveal>
-            <div class="card__icon" aria-hidden="true"><svg class="i"><use href="#i-mic"></use></svg></div>
-            <h3>Sustentación</h3>
-            <ul class="list">
-              <li>Guion y narrativa</li>
-              <li>Diapositivas</li>
-              <li>Preguntas frecuentes del jurado</li>
-              <li>Ensayo y retroalimentación</li>
+              <li>Informes tecnicos</li>
+              <li>Reportes de gestion</li>
+              <li>Casos de estudio</li>
+              <li>Ensayos academicos</li>
             </ul>
           </article>
 
           <article class="card card--highlight" data-reveal>
-            <div class="card__tag">Inicio recomendado</div>
+            <div class="card__tag">Gratis</div>
             <div class="card__icon" aria-hidden="true"><svg class="i"><use href="#i-shield"></use></svg></div>
-            <h3>Diagnóstico de avance</h3>
-            <p class="muted">Revisamos tu estado actual y definimos próximos pasos con un plan de entregables.</p>
-            <a class="btn btn--primary btn--block" data-wa-message="Hola, quisiera un diagnóstico de mi avance. ¿Qué información debo enviar?" href="#" rel="noopener">
-              Solicitar diagnóstico
+            <h3>Cotizacion gratuita</h3>
+            <p class="muted">Envianos los requisitos de tu trabajo y te cotizamos sin compromiso en menos de 1 hora.</p>
+            <a class="btn btn--primary btn--block" data-wa-message="Hola, quiero cotizar un trabajo academico. Los requisitos son: _____." href="#" rel="noopener">
+              Cotizar gratis
               <svg class="i i--sm" aria-hidden="true"><use href="#i-arrow"></use></svg>
             </a>
           </article>
@@ -421,41 +436,55 @@
       </div>
     </section>
 
-    <!-- FOR YOU -->
-    <section class="section section--alt" id="paraquien">
+    <!-- INSTITUCIONES -->
+    <section class="section section--alt" id="instituciones">
       <div class="container">
         <div class="section__head">
-          <h2 data-reveal>¿Es para ti?</h2>
+          <h2 data-reveal>Instituciones que cubrimos</h2>
           <p class="muted" data-reveal>
-            Si estás en alguna de estas situaciones, podemos ayudarte.
+            Conocemos los formatos, plataformas y requisitos de cada institucion. Trabajo adaptado a lo que pide tu casa de estudios.
           </p>
         </div>
 
-        <div class="panel panel--full" data-reveal>
-          <h3>Te sirve si…</h3>
-          <ul class="list list--cols">
-            <li>Estás bloqueado/a con el tema, objetivos o metodología.</li>
-            <li>Necesitas coherencia entre problema, objetivos, método y resultados.</li>
-            <li>Quieres mejorar redacción, estructura y citas según tu guía.</li>
-            <li>Necesitas que elaboremos tu investigación por entregables en plazos definidos.</li>
-          </ul>
-        </div>
-
-        <div class="cta-mini" data-reveal>
-          <div class="cta-mini__copy">
-            <h3>Si tienes dudas, lo resolvemos en 1 mensaje</h3>
-            <p class="muted">Dinos tu etapa y te decimos cómo seguir.</p>
+        <div class="inst-grid" data-reveal>
+          <div class="inst-card inst-card--highlight">
+            <strong>IACC</strong>
+            <span class="muted">Instituto profesional</span>
           </div>
-          <a class="btn btn--soft" data-wa-message="Hola, no sé si mi caso aplica. Estoy en la etapa: _____. ¿Me orientan?" href="#" rel="noopener">
-            Consultar por WhatsApp
-            <svg class="i i--sm" aria-hidden="true"><use href="#i-arrow"></use></svg>
-          </a>
+          <div class="inst-card">
+            <strong>IPLACEX</strong>
+            <span class="muted">Instituto profesional</span>
+          </div>
+          <div class="inst-card">
+            <strong>DUOC UC</strong>
+            <span class="muted">Centro de formacion tecnica</span>
+          </div>
+          <div class="inst-card">
+            <strong>INACAP</strong>
+            <span class="muted">Universidad tecnologica</span>
+          </div>
+          <div class="inst-card">
+            <strong>UChile</strong>
+            <span class="muted">Universidad de Chile</span>
+          </div>
+          <div class="inst-card">
+            <strong>PUC</strong>
+            <span class="muted">Pontificia Universidad Catolica</span>
+          </div>
+          <div class="inst-card">
+            <strong>UNAB</strong>
+            <span class="muted">Universidad Andres Bello</span>
+          </div>
+          <div class="inst-card">
+            <strong>+ Otras</strong>
+            <span class="muted">Consultanos tu institucion</span>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- AYUDA RAPIDA -->
-    <section class="section section--urgente" aria-label="Ayuda rápida">
+    <section class="section section--urgente" aria-label="Ayuda rapida">
       <div class="container">
         <div class="urgente-band" data-reveal>
           <div class="urgente-band__icon" aria-hidden="true">
@@ -464,267 +493,149 @@
             </svg>
           </div>
           <div class="urgente-band__copy">
-            <h2>¿Necesitas ayuda rápida para redactar tu investigación?</h2>
-            <p>Escríbenos hoy y empezamos esta semana. Diagnóstico inicial sin costo.</p>
+            <h2>¿Necesitas que tu trabajo este listo esta semana?</h2>
+            <p>Escribenos hoy y te lo entregamos a tiempo. Cotizacion en menos de 1 hora.</p>
           </div>
-          <a class="btn btn--primary urgente-band__cta" data-wa-message="Hola, necesito ayuda rápida para redactar mi investigación. ¿Podemos empezar esta semana?" href="#" rel="noopener">
-            Empezar ahora
+          <a class="btn btn--primary urgente-band__cta" data-wa-message="Hola, necesito un trabajo urgente para esta semana. ¿Pueden ayudarme?" href="#" rel="noopener">
+            Cotizar ahora
             <svg class="i i--sm" aria-hidden="true"><use href="#i-arrow"></use></svg>
           </a>
         </div>
       </div>
     </section>
 
-    <!-- PROCESS -->
-    <section class="section" id="proceso">
+    <!-- PROCESO -->
+    <section class="section" id="proceso-trabajos">
       <div class="container">
         <div class="section__head">
           <h2 data-reveal>Proceso simple</h2>
           <p class="muted" data-reveal>
-            Menos ansiedad, más claridad. Trabajamos por etapas con entregables definidos y revisiones.
+            En 3 pasos tienes tu trabajo listo. Rapido, claro y sin complicaciones.
           </p>
         </div>
 
-        <div class="timeline">
+        <div class="timeline timeline--3">
           <div class="step" data-reveal>
             <div class="step__num">1</div>
             <div class="step__body">
-              <h3>Evaluación inicial</h3>
-              <p class="muted">Nos envías tu avance y guía institucional. Vemos qué falta y por dónde seguir.</p>
+              <h3>Envia tus requisitos</h3>
+              <p class="muted">Mandanos las instrucciones, rubrica o guia de tu trabajo por WhatsApp.</p>
             </div>
           </div>
 
           <div class="step" data-reveal>
             <div class="step__num">2</div>
             <div class="step__body">
-              <h3>Plan de trabajo</h3>
-              <p class="muted">Definimos objetivos, entregables y calendario.</p>
+              <h3>Cotizacion y acuerdo</h3>
+              <p class="muted">Te enviamos el precio, plazo y forma de pago. Sin sorpresas.</p>
             </div>
           </div>
 
           <div class="step" data-reveal>
             <div class="step__num">3</div>
             <div class="step__body">
-              <h3>Sesiones + revisión</h3>
-              <p class="muted">Trabajo 1:1, correcciones y mejora de estructura.</p>
-            </div>
-          </div>
-
-          <div class="step" data-reveal>
-            <div class="step__num">4</div>
-            <div class="step__body">
-              <h3>Entrega y preparación</h3>
-              <p class="muted">Checklist final + preparación para sustentación (si aplica).</p>
+              <h3>Entrega y revision</h3>
+              <p class="muted">Recibes tu trabajo listo. Si necesitas ajustes, los hacemos sin costo adicional.</p>
             </div>
           </div>
         </div>
 
         <div class="cta-band" data-reveal>
           <div class="cta-band__copy">
-            <h3>¿Necesitas avanzar con tu investigación esta semana?</h3>
-            <p class="muted">Coordina por WhatsApp y te indicamos qué enviar para iniciar.</p>
+            <h3>¿Tienes un trabajo pendiente?</h3>
+            <p class="muted">Escribenos con los requisitos y te cotizamos al instante.</p>
           </div>
           <div class="cta-band__actions">
-            <a class="btn btn--primary" data-wa-message="Hola, quiero coordinar una asesoría. ¿Qué debo enviar para iniciar?" href="#" rel="noopener">
+            <a class="btn btn--primary" data-wa-message="Hola, tengo un trabajo pendiente y necesito cotizar. Los requisitos son: _____." href="#" rel="noopener">
               Escribir por WhatsApp
               <svg class="i i--sm" aria-hidden="true"><use href="#i-arrow"></use></svg>
             </a>
-            <a class="btn btn--soft" href="#contacto">Formulario</a>
-          </div>
-        </div>
-
-        <div class="modality" data-reveal aria-label="Modalidad">
-          <div class="modality__item">
-            <div class="modality__icon"><svg class="i" aria-hidden="true"><use href="#i-clock"></use></svg></div>
-            <div>
-              <strong>Modalidad</strong>
-              <p class="muted">Principalmente online. Presencial sujeto a disponibilidad.</p>
-            </div>
-          </div>
-          <div class="modality__item">
-            <div class="modality__icon"><svg class="i" aria-hidden="true"><use href="#i-doc"></use></svg></div>
-            <div>
-              <strong>Entregables</strong>
-              <p class="muted">Checklist, matriz, estructura y retroalimentación documentada.</p>
-            </div>
-          </div>
-          <div class="modality__item">
-            <div class="modality__icon"><svg class="i" aria-hidden="true"><use href="#i-shield"></use></svg></div>
-            <div>
-              <strong>Confidencialidad</strong>
-              <p class="muted">Todo queda entre nosotros.</p>
-            </div>
+            <a class="btn btn--soft" href="#contacto-trabajos">Formulario</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- DELIVERABLES -->
-    <section class="section section--alt" id="entregables">
+    <!-- PARA TI -->
+    <section class="section section--alt" id="paraquien-trabajos">
       <div class="container">
         <div class="section__head">
-          <h2 data-reveal>Entregables típicos por etapa</h2>
+          <h2 data-reveal>¿Es para ti?</h2>
           <p class="muted" data-reveal>
-            Guía general. Ajustamos el detalle a tu carrera y a la guía de tu institución.
+            Si estas en alguna de estas situaciones, podemos ayudarte.
           </p>
         </div>
 
-        <div class="deliverables">
-          <div class="deliverable" data-reveal>
-            <h3>Inicio</h3>
-            <ul class="list">
-              <li>Tema delimitado + problema formulado</li>
-              <li>Objetivos coherentes (y variables si aplica)</li>
-              <li>Matriz de consistencia base</li>
-              <li>Esquema de capítulos</li>
-            </ul>
-          </div>
-
-          <div class="deliverable" data-reveal>
-            <h3>Desarrollo</h3>
-            <ul class="list">
-              <li>Marco teórico estructurado</li>
-              <li>Método definido (tipo, diseño, muestra)</li>
-              <li>Instrumentos y validación (si aplica)</li>
-              <li>Plan de análisis</li>
-            </ul>
-          </div>
-
-          <div class="deliverable" data-reveal>
-            <h3>Cierre</h3>
-            <ul class="list">
-              <li>Resultados + interpretación</li>
-              <li>Discusión alineada a objetivos</li>
-              <li>Conclusiones, recomendaciones y limitaciones</li>
-              <li>Formato final + checklist</li>
-            </ul>
-          </div>
+        <div class="panel panel--full" data-reveal>
+          <h3>Te sirve si…</h3>
+          <ul class="list list--cols">
+            <li>No tienes tiempo para hacer tu trabajo y la fecha de entrega se acerca.</li>
+            <li>No entiendes la materia o la herramienta que te piden usar (Power BI, SQL, etc.).</li>
+            <li>Necesitas una nota alta y quieres asegurar la calidad del trabajo.</li>
+            <li>Tienes varios trabajos acumulados y necesitas ayuda con algunos.</li>
+          </ul>
         </div>
 
-        <div class="divider"></div>
+        <div class="cta-mini" data-reveal>
+          <div class="cta-mini__copy">
+            <h3>¿No sabes si podemos ayudarte?</h3>
+            <p class="muted">Dinos que necesitas y te confirmamos en minutos.</p>
+          </div>
+          <a class="btn btn--soft" data-wa-message="Hola, quiero saber si pueden ayudarme con mi trabajo. Se trata de: _____." href="#" rel="noopener">
+            Consultar por WhatsApp
+            <svg class="i i--sm" aria-hidden="true"><use href="#i-arrow"></use></svg>
+          </a>
+        </div>
       </div>
     </section>
 
     <!-- OPINIONES -->
-    <section class="section" id="opiniones">
+    <section class="section" id="opiniones-trabajos">
       <div class="container">
         <div class="section__head">
           <h2 data-reveal>Opiniones</h2>
-          <p class="muted" data-reveal>Lo que dicen quienes ya terminaron su tesis con nosotros.</p>
+          <p class="muted" data-reveal>Lo que dicen estudiantes que ya recibieron sus trabajos.</p>
         </div>
       </div>
 
       <div class="mq-wrap">
         <div class="mq-inner">
 
-          <div class="rc"><div class="rc__head"><span class="rc__stars">★★★★★</span><span class="rc__score">5.0</span></div><p>"Me ayudaron a plantear el problema y armar la matriz de consistencia. Aprobé sin ninguna observación."</p><div class="rc__author"><strong>Alejandra Torres</strong><span>Psicología · UPC</span></div></div>
+          <div class="rc"><div class="rc__head"><span class="rc__stars">★★★★★</span><span class="rc__score">5.0</span></div><p>"Les pedi un dashboard en Power BI para IACC y quedo impecable. Nota 7.0 directo."</p><div class="rc__author"><strong>Camila Rojas</strong><span>Ing. en Informatica · IACC</span></div></div>
 
-          <div class="rc"><div class="rc__head"><span class="rc__stars">★★★★★</span><span class="rc__score">5.0</span></div><p>"Tenía los datos pero no sabía interpretarlos. Me guiaron en el análisis y sustenté con total seguridad."</p><div class="rc__author"><strong>Manuel Alvarado</strong><span>MBA · ESAN</span></div></div>
+          <div class="rc"><div class="rc__head"><span class="rc__stars">★★★★★</span><span class="rc__score">5.0</span></div><p>"Necesitaba una base de datos normalizada con SQL y me la entregaron antes de tiempo. Excelente."</p><div class="rc__author"><strong>Felipe Gonzalez</strong><span>Analista Programador · DUOC UC</span></div></div>
 
-          <div class="rc"><div class="rc__head"><span class="rc__stars">★★★★<span class="rc__star-off">★</span></span><span class="rc__score">4.0</span></div><p>"El manejo de citas y referencias fue impecable. Mi asesor destacó que el formato estaba perfecto."</p><div class="rc__author"><strong>Carlos Mendoza</strong><span>Derecho · USMP</span></div></div>
+          <div class="rc"><div class="rc__head"><span class="rc__stars">★★★★<span class="rc__star-off">★</span></span><span class="rc__score">4.0</span></div><p>"Me hicieron un trabajo de Excel con macros VBA que cumplio todos los requisitos de IPLACEX."</p><div class="rc__author"><strong>Andrea Muñoz</strong><span>Administracion · IPLACEX</span></div></div>
 
-          <div class="rc"><div class="rc__head"><span class="rc__stars">★★★★★</span><span class="rc__score">5.0</span></div><p>"Empecé sin tema definido y en pocos días ya tenía título, objetivos e hipótesis bien estructuradas."</p><div class="rc__author"><strong>Valeria Ríos</strong><span>Administración · ULima</span></div></div>
+          <div class="rc"><div class="rc__head"><span class="rc__stars">★★★★★</span><span class="rc__score">5.0</span></div><p>"Trabajo de programacion en Python para INACAP. Codigo limpio y bien documentado. 100% recomendado."</p><div class="rc__author"><strong>Martin Soto</strong><span>Ing. en Informatica · INACAP</span></div></div>
 
-          <div class="rc"><div class="rc__head"><span class="rc__stars">★★★★<span class="rc__star-off">★</span></span><span class="rc__score">4.0</span></div><p>"El apoyo estadístico fue clave. Las tablas y la interpretación quedaron muy claras. Volveré para la siguiente etapa."</p><div class="rc__author"><strong>Diego Paredes</strong><span>Ing. Industrial · PUCP</span></div></div>
+          <div class="rc"><div class="rc__head"><span class="rc__stars">★★★★★</span><span class="rc__score">5.0</span></div><p>"Les envie los requisitos un domingo y el lunes ya tenia la cotizacion. Entregaron el miercoles sin falta."</p><div class="rc__author"><strong>Javiera Perez</strong><span>Contabilidad · IACC</span></div></div>
 
-          <div class="rc"><div class="rc__head"><span class="rc__stars">★★★★★</span><span class="rc__score">5.0</span></div><p>"Elaboraron mi marco teórico en tiempo récord. El formato APA quedó impecable. Muy recomendados."</p><div class="rc__author"><strong>Sofía Guerrero</strong><span>Enfermería · UPCH</span></div></div>
+          <div class="rc"><div class="rc__head"><span class="rc__stars">★★★★<span class="rc__star-off">★</span></span><span class="rc__score">4.0</span></div><p>"Informe tecnico para DUOC UC, bien estructurado y con todas las referencias que pedian."</p><div class="rc__author"><strong>Diego Herrera</strong><span>Ing. Industrial · DUOC UC</span></div></div>
 
-          <!-- duplicado para loop infinito -->
-          <div class="rc" aria-hidden="true"><div class="rc__head"><span class="rc__stars">★★★★★</span><span class="rc__score">5.0</span></div><p>"Me ayudaron a plantear el problema y armar la matriz de consistencia. Aprobé sin ninguna observación."</p><div class="rc__author"><strong>Alejandra Torres</strong><span>Psicología · UPC</span></div></div>
+          <!-- duplicados para loop infinito -->
+          <div class="rc" aria-hidden="true"><div class="rc__head"><span class="rc__stars">★★★★★</span><span class="rc__score">5.0</span></div><p>"Les pedi un dashboard en Power BI para IACC y quedo impecable. Nota 7.0 directo."</p><div class="rc__author"><strong>Camila Rojas</strong><span>Ing. en Informatica · IACC</span></div></div>
 
-          <div class="rc" aria-hidden="true"><div class="rc__head"><span class="rc__stars">★★★★★</span><span class="rc__score">5.0</span></div><p>"Tenía los datos pero no sabía interpretarlos. Me guiaron en el análisis y sustenté con total seguridad."</p><div class="rc__author"><strong>Manuel Alvarado</strong><span>MBA · ESAN</span></div></div>
+          <div class="rc" aria-hidden="true"><div class="rc__head"><span class="rc__stars">★★★★★</span><span class="rc__score">5.0</span></div><p>"Necesitaba una base de datos normalizada con SQL y me la entregaron antes de tiempo. Excelente."</p><div class="rc__author"><strong>Felipe Gonzalez</strong><span>Analista Programador · DUOC UC</span></div></div>
 
-          <div class="rc" aria-hidden="true"><div class="rc__head"><span class="rc__stars">★★★★<span class="rc__star-off">★</span></span><span class="rc__score">4.0</span></div><p>"El manejo de citas y referencias fue impecable. Mi asesor destacó que el formato estaba perfecto."</p><div class="rc__author"><strong>Carlos Mendoza</strong><span>Derecho · USMP</span></div></div>
+          <div class="rc" aria-hidden="true"><div class="rc__head"><span class="rc__stars">★★★★<span class="rc__star-off">★</span></span><span class="rc__score">4.0</span></div><p>"Me hicieron un trabajo de Excel con macros VBA que cumplio todos los requisitos de IPLACEX."</p><div class="rc__author"><strong>Andrea Muñoz</strong><span>Administracion · IPLACEX</span></div></div>
 
-          <div class="rc" aria-hidden="true"><div class="rc__head"><span class="rc__stars">★★★★★</span><span class="rc__score">5.0</span></div><p>"Empecé sin tema definido y en pocos días ya tenía título, objetivos e hipótesis bien estructuradas."</p><div class="rc__author"><strong>Valeria Ríos</strong><span>Administración · ULima</span></div></div>
+          <div class="rc" aria-hidden="true"><div class="rc__head"><span class="rc__stars">★★★★★</span><span class="rc__score">5.0</span></div><p>"Trabajo de programacion en Python para INACAP. Codigo limpio y bien documentado. 100% recomendado."</p><div class="rc__author"><strong>Martin Soto</strong><span>Ing. en Informatica · INACAP</span></div></div>
 
-          <div class="rc" aria-hidden="true"><div class="rc__head"><span class="rc__stars">★★★★<span class="rc__star-off">★</span></span><span class="rc__score">4.0</span></div><p>"El apoyo estadístico fue clave. Las tablas y la interpretación quedaron muy claras. Volveré para la siguiente etapa."</p><div class="rc__author"><strong>Diego Paredes</strong><span>Ing. Industrial · PUCP</span></div></div>
+          <div class="rc" aria-hidden="true"><div class="rc__head"><span class="rc__stars">★★★★★</span><span class="rc__score">5.0</span></div><p>"Les envie los requisitos un domingo y el lunes ya tenia la cotizacion. Entregaron el miercoles sin falta."</p><div class="rc__author"><strong>Javiera Perez</strong><span>Contabilidad · IACC</span></div></div>
 
-          <div class="rc" aria-hidden="true"><div class="rc__head"><span class="rc__stars">★★★★★</span><span class="rc__score">5.0</span></div><p>"Elaboraron mi marco teórico en tiempo récord. El formato APA quedó impecable. Muy recomendados."</p><div class="rc__author"><strong>Sofía Guerrero</strong><span>Enfermería · UPCH</span></div></div>
+          <div class="rc" aria-hidden="true"><div class="rc__head"><span class="rc__stars">★★★★<span class="rc__star-off">★</span></span><span class="rc__score">4.0</span></div><p>"Informe tecnico para DUOC UC, bien estructurado y con todas las referencias que pedian."</p><div class="rc__author"><strong>Diego Herrera</strong><span>Ing. Industrial · DUOC UC</span></div></div>
 
-        </div>
-      </div>
-    </section>
-
-    <!-- TEAM -->
-    <section class="section section--alt" id="equipo">
-      <div class="container">
-        <div class="section__head">
-          <h2 data-reveal>Equipo de apoyo</h2>
-          <p class="muted" data-reveal>
-            Especialistas en elaboración de tesis e investigaciones académicas.
-          </p>
-        </div>
-
-        <div class="team" data-reveal>
-          <article class="team-card">
-            <div class="team-card__top">
-              <span class="team-avatar" aria-hidden="true">M</span>
-              <div>
-                <h3>Metodología</h3>
-                <p class="muted">Diseño y coherencia del trabajo.</p>
-              </div>
-            </div>
-            <ul class="list">
-              <li>Objetivos e hipótesis (si aplica)</li>
-              <li>Diseño, muestra y técnica</li>
-              <li>Matriz y operacionalización</li>
-            </ul>
-          </article>
-
-          <article class="team-card">
-            <div class="team-card__top">
-              <span class="team-avatar" aria-hidden="true">R</span>
-              <div>
-                <h3>Redacción y estilo</h3>
-                <p class="muted">Claridad, estructura y citación.</p>
-              </div>
-            </div>
-            <ul class="list">
-              <li>Coherencia por capítulos</li>
-              <li>Normas de citación</li>
-              <li>Formato según guía</li>
-            </ul>
-          </article>
-
-          <article class="team-card">
-            <div class="team-card__top">
-              <span class="team-avatar" aria-hidden="true">A</span>
-              <div>
-                <h3>Análisis</h3>
-                <p class="muted">Resultados, interpretación y discusión.</p>
-              </div>
-            </div>
-            <ul class="list">
-              <li>Plan de análisis</li>
-              <li>Tablas/figuras</li>
-              <li>Discusión y conclusiones</li>
-            </ul>
-          </article>
-        </div>
-
-        <div class="cta-band" data-reveal>
-          <div class="cta-band__copy">
-            <h3>¿Prefieres que lo revisemos por entregable?</h3>
-            <p class="muted">Envía tu avance y tu guía institucional. Te decimos cómo seguir.</p>
-          </div>
-          <div class="cta-band__actions">
-            <a class="btn btn--primary" data-wa-message="Hola, quiero que revisen mi avance por entregables. Mi etapa es: _____." href="#" rel="noopener">
-              Enviar por WhatsApp
-              <svg class="i i--sm" aria-hidden="true"><use href="#i-arrow"></use></svg>
-            </a>
-            <a class="btn btn--soft" href="#contacto">Contacto</a>
-          </div>
         </div>
       </div>
     </section>
 
     <!-- FAQ -->
-    <section class="section" id="preguntas">
+    <section class="section" id="preguntas-trabajos">
       <div class="container">
         <div class="section__head">
           <h2 data-reveal>Preguntas frecuentes</h2>
-          <p class="muted" data-reveal>Respuestas a las dudas más comunes.</p>
+          <p class="muted" data-reveal>Respuestas a las dudas mas comunes sobre trabajos academicos.</p>
         </div>
 
         <div class="faq" data-reveal>
@@ -733,57 +644,70 @@
           <div class="accordion" id="faqAccordion">
             <div class="accordion__item" data-faq-item>
               <h4 class="accordion__h">
-                <button class="accordion__btn" type="button" aria-expanded="false" aria-controls="faq1" id="faqBtn1">
-                  ¿Qué debo enviar para empezar?
+                <button class="accordion__btn" type="button" aria-expanded="false" aria-controls="faqt1" id="faqBtnT1">
+                  ¿Que tipos de trabajos hacen?
                   <span class="accordion__icon" aria-hidden="true"></span>
                 </button>
               </h4>
-              <div class="accordion__panel" id="faq1" role="region" aria-labelledby="faqBtn1" hidden>
+              <div class="accordion__panel" id="faqt1" role="region" aria-labelledby="faqBtnT1" hidden>
                 <p class="muted">
-                  Idealmente: los requisitos de tu institución (guía de formato) y una nota con tu objetivo y fecha de entrega. Si aún no tienes nada redactado, nosotros empezamos desde cero.
+                  Hacemos dashboards en Power BI, bases de datos (SQL, modelado ER), Excel avanzado (tablas dinamicas, macros VBA), programacion (Python, Java, web), informes tecnicos, casos de estudio, ensayos y mas.
                 </p>
               </div>
             </div>
 
             <div class="accordion__item" data-faq-item>
               <h4 class="accordion__h">
-                <button class="accordion__btn" type="button" aria-expanded="false" aria-controls="faq2" id="faqBtn2">
-                  ¿Trabajan por sesión o por paquete?
+                <button class="accordion__btn" type="button" aria-expanded="false" aria-controls="faqt2" id="faqBtnT2">
+                  ¿Trabajan con mi institucion?
                   <span class="accordion__icon" aria-hidden="true"></span>
                 </button>
               </h4>
-              <div class="accordion__panel" id="faq2" role="region" aria-labelledby="faqBtn2" hidden>
+              <div class="accordion__panel" id="faqt2" role="region" aria-labelledby="faqBtnT2" hidden>
                 <p class="muted">
-                  Depende de tu preferencia. Podemos trabajar por sesiones o por un plan con entregables. Lo definimos tras el diagnóstico.
+                  Si. Trabajamos con IACC, IPLACEX, DUOC UC, INACAP, universidades y otras instituciones. Conocemos los formatos y plataformas de cada una.
                 </p>
               </div>
             </div>
 
             <div class="accordion__item" data-faq-item>
               <h4 class="accordion__h">
-                <button class="accordion__btn" type="button" aria-expanded="false" aria-controls="faq3" id="faqBtn3">
-                  ¿Cómo manejan la confidencialidad?
+                <button class="accordion__btn" type="button" aria-expanded="false" aria-controls="faqt3" id="faqBtnT3">
+                  ¿Cuanto se demoran en entregar?
                   <span class="accordion__icon" aria-hidden="true"></span>
                 </button>
               </h4>
-              <div class="accordion__panel" id="faq3" role="region" aria-labelledby="faqBtn3" hidden>
+              <div class="accordion__panel" id="faqt3" role="region" aria-labelledby="faqBtnT3" hidden>
                 <p class="muted">
-                  Trabajamos con confidencialidad y usamos canales acordados. Si requieres un acuerdo adicional (NDA), indícalo al inicio.
+                  Depende de la complejidad. Trabajos simples pueden estar listos en 24-48 horas. Para proyectos mas grandes, definimos un plazo al cotizar.
                 </p>
               </div>
             </div>
 
-
             <div class="accordion__item" data-faq-item>
               <h4 class="accordion__h">
-                <button class="accordion__btn" type="button" aria-expanded="false" aria-controls="faq5" id="faqBtn5">
-                  ¿El servicio es online o presencial?
+                <button class="accordion__btn" type="button" aria-expanded="false" aria-controls="faqt4" id="faqBtnT4">
+                  ¿Hacen trabajos urgentes?
                   <span class="accordion__icon" aria-hidden="true"></span>
                 </button>
               </h4>
-              <div class="accordion__panel" id="faq5" role="region" aria-labelledby="faqBtn5" hidden>
+              <div class="accordion__panel" id="faqt4" role="region" aria-labelledby="faqBtnT4" hidden>
                 <p class="muted">
-                  Principalmente online. Si necesitas presencial, depende de la disponibilidad y ubicación. Confírmanos tu caso por WhatsApp.
+                  Si, aceptamos trabajos urgentes. Escribenos con los requisitos y te confirmamos si podemos cumplir con tu fecha de entrega.
+                </p>
+              </div>
+            </div>
+
+            <div class="accordion__item" data-faq-item>
+              <h4 class="accordion__h">
+                <button class="accordion__btn" type="button" aria-expanded="false" aria-controls="faqt5" id="faqBtnT5">
+                  ¿Como es el pago?
+                  <span class="accordion__icon" aria-hidden="true"></span>
+                </button>
+              </h4>
+              <div class="accordion__panel" id="faqt5" role="region" aria-labelledby="faqBtnT5" hidden>
+                <p class="muted">
+                  Trabajamos con un anticipo del 50% al confirmar y el resto al entregar. Aceptamos transferencia bancaria y otros medios. Los detalles se coordinan por WhatsApp.
                 </p>
               </div>
             </div>
@@ -791,10 +715,10 @@
 
           <div class="faq__cta">
             <div class="faq__box">
-              <h3>¿Tu pregunta no está aquí?</h3>
-              <p class="muted">Escríbenos y te respondemos.</p>
+              <h3>¿Tu pregunta no esta aqui?</h3>
+              <p class="muted">Escribenos y te respondemos.</p>
             </div>
-            <a class="btn btn--primary" data-wa-message="Hola, tengo una consulta: _____. ¿Me ayudan por favor?" href="#" rel="noopener">
+            <a class="btn btn--primary" data-wa-message="Hola, tengo una consulta sobre trabajos academicos: _____." href="#" rel="noopener">
               Consultar por WhatsApp
               <svg class="i i--sm" aria-hidden="true"><use href="#i-arrow"></use></svg>
             </a>
@@ -803,13 +727,13 @@
       </div>
     </section>
 
-    <!-- CONTACT -->
-    <section class="section section--alt" id="contacto">
+    <!-- CONTACTO -->
+    <section class="section section--alt" id="contacto-trabajos">
       <div class="container">
         <div class="section__head">
-          <h2 data-reveal>Empieza tu proyecto</h2>
+          <h2 data-reveal>Cotiza tu trabajo</h2>
           <p class="muted" data-reveal>
-            Completa el formulario y se abrirá WhatsApp con un mensaje prellenado. También puedes escribir directo.
+            Completa el formulario y se abrira WhatsApp con un mensaje prellenado. Tambien puedes escribir directo.
           </p>
         </div>
 
@@ -821,31 +745,44 @@
                 <input name="name" type="text" autocomplete="name" placeholder="Tu nombre" required />
               </label>
               <label>
-                Carrera / programa
-                <input name="program" type="text" placeholder="Ej.: Administración / Psicología" />
+                Institucion
+                <select name="institution">
+                  <option value="">Selecciona tu institucion</option>
+                  <option value="IACC">IACC</option>
+                  <option value="IPLACEX">IPLACEX</option>
+                  <option value="DUOC UC">DUOC UC</option>
+                  <option value="INACAP">INACAP</option>
+                  <option value="Universidad de Chile">Universidad de Chile</option>
+                  <option value="PUC">PUC</option>
+                  <option value="UNAB">UNAB</option>
+                  <option value="Otra">Otra</option>
+                </select>
               </label>
             </div>
 
             <div class="form__row">
               <label>
-                Etapa
-                <select name="stage">
-                  <option value="No estoy seguro/a">No estoy seguro/a</option>
-                  <option value="Inicio (tema/objetivos)">Inicio (tema/objetivos)</option>
-                  <option value="Desarrollo (capítulos/metodología)">Desarrollo (capítulos/metodología)</option>
-                  <option value="Resultados y discusión">Resultados y discusión</option>
-                  <option value="Cierre (formato/sustentación)">Cierre (formato/sustentación)</option>
+                Tipo de trabajo
+                <select name="workType">
+                  <option value="">Selecciona el tipo</option>
+                  <option value="Power BI">Power BI / Dashboard</option>
+                  <option value="Base de datos">Base de datos / SQL</option>
+                  <option value="Excel">Excel avanzado / VBA</option>
+                  <option value="Programacion">Programacion</option>
+                  <option value="Informe">Informe / Reporte</option>
+                  <option value="Caso de estudio">Caso de estudio</option>
+                  <option value="Otro">Otro</option>
                 </select>
               </label>
               <label>
-                Fecha tentativa
-                <input name="date" type="text" placeholder="Ej.: 15/03 o 'en 3 semanas'" />
+                Fecha de entrega
+                <input name="date" type="text" placeholder="Ej.: 15/03 o 'en 3 dias'" />
               </label>
             </div>
 
             <label>
-              Cuéntanos tu situación
-              <textarea name="message" rows="5" placeholder="Ej.: tengo el marco teórico, pero mi metodología no está alineada y necesito ordenar objetivos/variables."></textarea>
+              Detalle del trabajo
+              <textarea name="message" rows="5" placeholder="Ej.: Necesito un dashboard en Power BI con datos de ventas. La rubrica pide graficos interactivos y filtros por region."></textarea>
             </label>
 
             <div class="form__actions">
@@ -853,22 +790,22 @@
                 Enviar por WhatsApp
                 <svg class="i i--sm" aria-hidden="true"><use href="#i-arrow"></use></svg>
               </button>
-              <button class="btn btn--ghost" type="button" id="copyWhatsAppBtn">Copiar número</button>
+              <button class="btn btn--ghost" type="button" id="copyWhatsAppBtn">Copiar numero</button>
             </div>
 
             <p class="fineprint">
-              Al enviar, aceptas nuestra <a href="privacy.html">Política de privacidad</a> y <a href="terms.html">Términos</a>.
+              Al enviar, aceptas nuestra <a href="privacy.html">Politica de privacidad</a> y <a href="terms.html">Terminos</a>.
             </p>
           </form>
 
           <aside class="contact__side" data-reveal>
             <div class="sidecard">
               <h3>Contacto directo</h3>
-              <p class="muted">WhatsApp: <strong data-bind="whatsappDisplay">+51 965 148 374</strong></p>
-              <p class="muted">Ubicación: <strong data-bind="location">Punta Hermosa, Perú</strong></p>
+              <p class="muted">WhatsApp: <strong data-bind="whatsappDisplay">+56 9 5307 8288</strong></p>
+              <p class="muted">Ubicacion: <strong data-bind="location">Santiago, Chile</strong></p>
 
               <div class="sidecard__actions">
-                <a class="btn btn--soft btn--block" data-wa-message="Hola, quiero información sobre asesorías. ¿Me orientan?" href="#" rel="noopener">
+                <a class="btn btn--soft btn--block" data-wa-message="Hola, quiero cotizar un trabajo academico. ¿Me orientan?" href="#" rel="noopener">
                   Escribir ahora
                   <svg class="i i--sm" aria-hidden="true"><use href="#i-arrow"></use></svg>
                 </a>
@@ -891,7 +828,7 @@
               <div class="map">
                 <iframe
                   title="Mapa referencial"
-                  src="https://www.google.com/maps?q=Frente+al+mall+km+40+Punta+Hermosa+Lima+Peru&output=embed"
+                  src="https://www.google.com/maps?q=Santiago+Centro+Santiago+Chile&output=embed"
                   loading="lazy"
                   referrerpolicy="no-referrer-when-downgrade"
                 ></iframe>
@@ -910,55 +847,55 @@
     <section class="final-cta" aria-label="Cierre">
       <div class="container final-cta__inner" data-reveal>
         <div>
-          <h2>¿Listo/a para que elaboremos tu investigación?</h2>
-          <p class="muted">Coordina una revisión inicial por WhatsApp y te decimos cómo empezar.</p>
+          <h2>¿Listo para que hagamos tu trabajo?</h2>
+          <p class="muted">Escribenos con los requisitos y te cotizamos al instante.</p>
         </div>
         <div class="final-cta__actions">
-          <a class="btn btn--primary" data-wa-message="Hola, quiero una evaluación inicial. Mi etapa es: _____." href="#" rel="noopener">
-            Empezar ahora
+          <a class="btn btn--primary" data-wa-message="Hola, quiero cotizar un trabajo academico. Mi institucion es: _____." href="#" rel="noopener">
+            Cotizar ahora
             <svg class="i i--sm" aria-hidden="true"><use href="#i-arrow"></use></svg>
           </a>
-          <a class="btn btn--ghost" href="#servicios">Ver servicios</a>
+          <a class="btn btn--ghost" href="#servicios-trabajos">Ver servicios</a>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- Onda de transición al footer -->
+  <!-- Onda de transicion al footer -->
   <div class="footer-wave" aria-hidden="true">
     <svg viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,30 C360,90 720,0 1080,50 C1260,75 1380,20 1440,30 L1440,90 L0,90 Z" fill="#1A3A6B"/>
+      <path d="M0,30 C360,90 720,0 1080,50 C1260,75 1380,20 1440,30 L1440,90 L0,90 Z" fill="#FAFAFA"/>
     </svg>
   </div>
 
   <footer class="footer">
     <div class="container footer__inner">
       <div class="footer__brand">
-        <img src="assets/logo.webp" width="56" height="56" alt="Logo de EducaProject" loading="lazy" decoding="async" />
+        <img src="NUEVO LOGO TAREAPP.png" width="56" height="56" alt="Logo de Tareapp" loading="lazy" decoding="async" style="border-radius:12px" />
         <div>
-          <strong data-bind="brand">EducaProject</strong>
-          <p class="muted">Elaboración de Tesis</p>
+          <strong data-bind="brand">Tareapp</strong>
+          <p class="muted">Soluciones Academicas</p>
         </div>
       </div>
 
       <div class="footer__cols">
         <div>
           <h4>Secciones</h4>
-          <a href="#servicios">Servicios</a>
-          <a href="#paraquien">Para ti</a>
-          <a href="#proceso">Proceso</a>
-          <a href="#entregables">Entregables</a>
-          <a href="#opiniones">Opiniones</a>
-          <a href="#contacto">Contacto</a>
+          <a href="#servicios-trabajos">Servicios</a>
+          <a href="#instituciones">Instituciones</a>
+          <a href="#proceso-trabajos">Proceso</a>
+          <a href="#preguntas-trabajos">FAQ</a>
+          <a href="tesis.html">Tesis</a>
+          <a href="#contacto-trabajos">Contacto</a>
         </div>
         <div>
           <h4>Legal</h4>
           <a href="privacy.html">Privacidad</a>
-          <a href="terms.html">Términos</a>
+          <a href="terms.html">Terminos</a>
         </div>
         <div>
           <h4>Contacto</h4>
-          <a data-wa-message="Hola, quiero información. ¿Me orientan?" href="#" rel="noopener">
+          <a data-wa-message="Hola, quiero informacion sobre trabajos academicos. ¿Me orientan?" href="#" rel="noopener">
             <svg class="i i--sm" aria-hidden="true"><use href="#i-whatsapp"></use></svg> WhatsApp
           </a>
           <a data-href="facebookUrl" href="#" target="_blank" rel="noopener">
@@ -970,28 +907,28 @@
           <a data-href="instagramUrl" href="#" target="_blank" rel="noopener">
             <svg class="i i--sm" aria-hidden="true"><use href="#i-instagram"></use></svg> Instagram
           </a>
-          <span class="muted"><svg class="i i--sm" aria-hidden="true"><use href="#i-pin"></use></svg> <span data-bind="location">Punta Hermosa, Perú</span></span>
+          <span class="muted"><svg class="i i--sm" aria-hidden="true"><use href="#i-pin"></use></svg> <span data-bind="location">Santiago, Chile</span></span>
         </div>
       </div>
     </div>
 
     <div class="container footer__bottom">
-      <span class="muted">© <span id="year"></span> <span data-bind="brand">EducaProject</span>. Todos los derechos reservados.</span>
+      <span class="muted">© <span id="year"></span> <span data-bind="brand">Tareapp</span>. Todos los derechos reservados.</span>
     </div>
   </footer>
 
   <!-- Floating buttons -->
   <button class="to-top" id="toTop" type="button" aria-label="Volver arriba">↑</button>
 
-  <div class="bottom-bar" id="bottomBar" aria-label="Acciones rápidas">
-    <a class="btn btn--primary btn--block" data-wa-message="Hola, quiero agendar una asesoría. ¿Podemos coordinar?" href="#" rel="noopener">
+  <div class="bottom-bar" id="bottomBar" aria-label="Acciones rapidas">
+    <a class="btn btn--primary btn--block" data-wa-message="Hola, necesito cotizar un trabajo academico. ¿Me orientan?" href="#" rel="noopener">
       <svg class="i i--sm" aria-hidden="true"><use href="#i-whatsapp"></use></svg>
       WhatsApp
     </a>
-    <a class="btn btn--soft btn--block" href="#contacto">Formulario</a>
+    <a class="btn btn--soft btn--block" href="#contacto-trabajos">Formulario</a>
   </div>
 
-  <!-- FAQ Structured Data (edita si cambias preguntas) -->
+  <!-- FAQ Structured Data -->
   <script type="application/ld+json" id="faqSchema">
   {
     "@context": "https://schema.org",
@@ -999,23 +936,28 @@
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "¿Qué debo enviar para empezar?",
-        "acceptedAnswer": {"@type":"Answer","text":"Idealmente: los requisitos de tu institución y tu fecha de entrega. Si no tienes nada redactado aún, nosotros empezamos desde cero."}
+        "name": "¿Que tipos de trabajos hacen?",
+        "acceptedAnswer": {"@type":"Answer","text":"Hacemos dashboards en Power BI, bases de datos SQL, Excel avanzado con macros VBA, programacion en Python/Java/web, informes tecnicos, casos de estudio y mas."}
       },
       {
         "@type": "Question",
-        "name": "¿Trabajan por sesión o por paquete?",
-        "acceptedAnswer": {"@type":"Answer","text":"Podemos trabajar por sesiones o por un plan con entregables. Lo definimos tras el diagnóstico."}
+        "name": "¿Trabajan con mi institucion?",
+        "acceptedAnswer": {"@type":"Answer","text":"Si. Trabajamos con IACC, IPLACEX, DUOC UC, INACAP, universidades y otras instituciones. Conocemos los formatos y plataformas de cada una."}
       },
       {
         "@type": "Question",
-        "name": "¿Cómo manejan la confidencialidad?",
-        "acceptedAnswer": {"@type":"Answer","text":"Trabajamos con confidencialidad y usamos canales acordados. Si requieres un acuerdo adicional (NDA), indícalo al inicio."}
+        "name": "¿Cuanto se demoran en entregar?",
+        "acceptedAnswer": {"@type":"Answer","text":"Depende de la complejidad. Trabajos simples pueden estar en 24-48 horas. Para proyectos mas grandes, definimos un plazo al cotizar."}
       },
       {
         "@type": "Question",
-        "name": "¿El servicio es online o presencial?",
-        "acceptedAnswer": {"@type":"Answer","text":"Principalmente online. Si necesitas presencial, depende de la disponibilidad y ubicación. Confírmanos tu caso por WhatsApp."}
+        "name": "¿Hacen trabajos urgentes?",
+        "acceptedAnswer": {"@type":"Answer","text":"Si, aceptamos trabajos urgentes. Escribenos con los requisitos y te confirmamos si podemos cumplir con tu fecha de entrega."}
+      },
+      {
+        "@type": "Question",
+        "name": "¿Como es el pago?",
+        "acceptedAnswer": {"@type":"Answer","text":"Trabajamos con un anticipo del 50% al confirmar y el resto al entregar. Aceptamos transferencia bancaria y otros medios."}
       }
     ]
   }
