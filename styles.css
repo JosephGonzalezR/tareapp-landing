@@ -223,6 +223,7 @@ img{max-width:100%; height:auto; display:block}
   align-items:center;
   gap: 12px;
   text-decoration:none;
+  flex-shrink:0;
 }
 .brand__text{display:flex;flex-direction:column; line-height: 1.05}
 .brand__text strong{font-size: 15px}
@@ -1725,6 +1726,7 @@ h1, h2, h3,
   border-radius: 999px;
   padding: 3px;
   gap: 2px;
+  flex-shrink: 0;
 }
 .page-switcher__tab {
   padding: 7px 16px;
@@ -1766,10 +1768,10 @@ h1, h2, h3,
 .mq-inner--inst {
   animation: mqScrollInst 40s linear infinite;
 }
-/* 18 chips × 200px + 18 gaps × 16px ≈ 3888px por set */
+/* 17 chips × 200px + 17 gaps × 16px ≈ 3672px por set */
 @keyframes mqScrollInst {
   from { transform: translateX(0); }
-  to   { transform: translateX(-3888px); }
+  to   { transform: translateX(-3672px); }
 }
 @media (prefers-reduced-motion: reduce) {
   .mq-inner--inst { animation: none; }
