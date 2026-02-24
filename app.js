@@ -444,7 +444,7 @@ function setupTyped() {
 
   const page = getPage();
   const strings = page === "trabajos"
-    ? ["dashboard en Power BI", "base de datos SQL", "Excel avanzado", "programación Python", "informe académico", "caso de estudio"]
+    ? ["informe académico", "ensayo", "monografía", "caso de estudio", "presentación", "Excel y reportes", "dashboard en Power BI", "programación"]
     : ["tesis", "memorias de título", "seminarios de título", "artículos científicos", "informes académicos", "trabajos de grado"];
 
   new Typed("#typedTarget", {
