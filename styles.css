@@ -1764,19 +1764,19 @@ h1, h2, h3,
    INSTITUCIONES — Marquee de chips
    ══════════════════════════════════════════════════════════════ */
 .mq-inner--inst {
-  animation: mqScrollInst 35s linear infinite;
+  animation: mqScrollInst 40s linear infinite;
 }
-/* 18 chips × 156px + 18 gaps × 16px ≈ 3096px por set */
+/* 18 chips × 200px + 18 gaps × 16px ≈ 3888px por set */
 @keyframes mqScrollInst {
   from { transform: translateX(0); }
-  to   { transform: translateX(-3096px); }
+  to   { transform: translateX(-3888px); }
 }
 @media (prefers-reduced-motion: reduce) {
   .mq-inner--inst { animation: none; }
 }
 .inst-chip {
   flex-shrink: 0;
-  padding: 12px 20px;
+  padding: 14px 24px;
   border-radius: 16px;
   background: var(--card);
   border: 1px solid var(--line);
@@ -1784,18 +1784,18 @@ h1, h2, h3,
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 64px;
-  min-width: 120px;
+  height: 90px;
+  min-width: 150px;
 }
 .inst-chip img {
-  height: 38px;
+  height: 55px;
   width: auto;
-  max-width: 140px;
+  max-width: 200px;
   object-fit: contain;
   display: block;
 }
 .inst-chip--more {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 800;
   color: var(--gold-d);
   white-space: nowrap;
