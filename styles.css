@@ -1923,6 +1923,35 @@ html[data-theme="dark"] .hero__bg {
   z-index: 1;
 }
 
+/* ── 7b. Opiniones background tesis (imagen 8) ───────────── */
+#opiniones {
+  position: relative;
+  background-image: url('Imagenes/imagen 8.webp');
+  background-size: cover;
+  background-position: center;
+}
+#opiniones::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(7, 11, 22, 0.93);
+  z-index: 0;
+}
+#opiniones > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ── 7c. Team avatar photos ──────────────────────────────── */
+.team-avatar-img {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 2px solid var(--brand);
+}
+
 /* ── 8. Sección urgente background (imagen 2) ────────────── */
 .section--urgente {
   position: relative;
