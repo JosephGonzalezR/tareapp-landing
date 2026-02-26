@@ -544,4 +544,40 @@ document.addEventListener("DOMContentLoaded", () => {
   setupSwiper();
   setupParticles();
   setupTilt();
+  setupTabTitle();
 });
+
+function setupTabTitle() {
+  const titles = [
+    "Tareapp | Hacemos tus tareas y trabajos",
+    "¿Tenés una tarea difícil? 📚",
+    "No dudes en escribirnos 💬",
+    "Cotizá gratis por WhatsApp",
+    "Entrega rápida garantizada ⚡",
+    "¡Te ayudamos hoy mismo!",
+    "Trabajos, informes, tareas y más",
+    "Respuesta inmediata por WhatsApp",
+  ];
+
+  const awayTitle = "¡Volvé! Te esperamos 👋 — Tareapp";
+
+  let index = 0;
+  let interval;
+
+  function rotate() {
+    document.title = titles[index];
+    index = (index + 1) % titles.length;
+  }
+
+  interval = setInterval(rotate, 3500);
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      clearInterval(interval);
+      document.title = awayTitle;
+    } else {
+      rotate();
+      interval = setInterval(rotate, 3500);
+    }
+  });
+}
