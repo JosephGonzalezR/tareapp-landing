@@ -544,22 +544,71 @@ document.addEventListener("DOMContentLoaded", () => {
   setupSwiper();
   setupParticles();
   setupTilt();
+  setupPromoToasts();
   setupTabTitle();
 });
+
+function setupPromoToasts() {
+  const messages = [
+    { title: "¿Tienes un trabajo difícil?", text: "Acá te ayudamos. Escríbenos por WhatsApp." },
+    { title: "¿Llegas justo?", text: "Hacemos trabajos urgentes. Cotiza en 1 hora." },
+    { title: "Alguien acaba de cotizar", text: "Tú también puedes. Es gratis y sin compromiso." },
+    { title: "¿Tarea para mañana?", text: "Tranquilo, lo resolvemos. Mándanos la consigna." },
+    { title: "+500 trabajos entregados", text: "Estudiantes de UChile, PUC, USACH y más confían en nosotros." },
+    { title: "¿Parcial o final?", text: "Te ayudamos a prepararlo. Escríbenos por WhatsApp." },
+    { title: "Cotización gratuita", text: "Mándanos los requisitos y te respondemos al toque." },
+    { title: "Excel, Power BI, SQL...", text: "Lo que necesites, lo hacemos. Consulta sin cargo." },
+  ];
+
+  const toast = document.getElementById("promoToast");
+  if (!toast) return;
+
+  const titleEl = toast.querySelector(".promo-toast__text strong");
+  const textEl = toast.querySelector(".promo-toast__text span");
+  const closeBtn = toast.querySelector(".promo-toast__close");
+
+  if (!titleEl || !textEl) return;
+
+  let index = Math.floor(Math.random() * messages.length);
+  let timeout;
+
+  function showToast() {
+    const msg = messages[index];
+    titleEl.textContent = msg.title;
+    textEl.textContent = msg.text;
+    toast.classList.add("show");
+
+    timeout = setTimeout(() => {
+      toast.classList.remove("show");
+      index = (index + 1) % messages.length;
+      timeout = setTimeout(showToast, 12000 + Math.random() * 8000);
+    }, 6000);
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener("click", () => {
+      toast.classList.remove("show");
+      clearTimeout(timeout);
+      timeout = setTimeout(showToast, 20000);
+    });
+  }
+
+  setTimeout(showToast, 8000);
+}
 
 function setupTabTitle() {
   const titles = [
     "Tareapp | Hacemos tus tareas y trabajos",
-    "¿Tenés una tarea difícil? 📚",
+    "¿Tienes una tarea difícil? 📚",
     "No dudes en escribirnos 💬",
-    "Cotizá gratis por WhatsApp",
+    "Cotiza gratis por WhatsApp",
     "Entrega rápida garantizada ⚡",
     "¡Te ayudamos hoy mismo!",
     "Trabajos, informes, tareas y más",
     "Respuesta inmediata por WhatsApp",
   ];
 
-  const awayTitle = "¡Volvé! Te esperamos 👋 — Tareapp";
+  const awayTitle = "¡Vuelve! Te esperamos 👋 — Tareapp";
 
   let index = 0;
   let interval;

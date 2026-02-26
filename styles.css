@@ -2246,3 +2246,68 @@ html[data-theme="dark"] .hero__bg {
   line-height: 1.6;
 }
 
+/* ── Toasts promocionales animados ── */
+.promo-toast{
+  position:fixed;
+  bottom:90px;
+  left:24px;
+  max-width:320px;
+  background:var(--card);
+  border:1px solid var(--line);
+  border-left:4px solid var(--brand);
+  border-radius:var(--radius-sm);
+  padding:14px 18px 14px 16px;
+  box-shadow:var(--shadow);
+  z-index:900;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  transform:translateX(-120%);
+  opacity:0;
+  transition:transform .5s cubic-bezier(.22,1,.36,1), opacity .4s ease;
+  pointer-events:none;
+}
+.promo-toast.show{
+  transform:translateX(0);
+  opacity:1;
+  pointer-events:auto;
+}
+.promo-toast__icon{
+  width:36px;
+  height:36px;
+  border-radius:10px;
+  background:var(--brand);
+  color:#fff;
+  display:grid;
+  place-items:center;
+  flex-shrink:0;
+}
+.promo-toast__icon svg{width:18px;height:18px}
+.promo-toast__text{
+  font-size:13.5px;
+  line-height:1.45;
+  color:var(--text);
+}
+.promo-toast__text strong{
+  display:block;
+  font-size:14px;
+  font-weight:700;
+  margin-bottom:2px;
+}
+.promo-toast__close{
+  position:absolute;
+  top:6px;right:8px;
+  background:none;border:none;
+  font-size:16px;color:var(--muted);
+  cursor:pointer;
+  padding:2px 4px;
+  line-height:1;
+}
+@media(max-width:600px){
+  .promo-toast{
+    left:12px;right:12px;
+    max-width:none;
+    bottom:80px;
+  }
+}
+
