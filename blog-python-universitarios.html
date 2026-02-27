@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light" />
+  <title>Python para universitarios: Tu primer programa paso a paso | Tareapp Blog</title>
+  <meta name="description" content="Aprende Python desde cero con esta guia para universitarios. Variables, funciones, bucles, listas y tu primer proyecto: una calculadora de notas." />
+  <meta name="author" content="Tareapp" />
+  <meta name="theme-color" content="#F7C948" />
+  <link rel="icon" href="NUEVO LOGO TAREAPP.png" />
+  <link rel="apple-touch-icon" href="NUEVO LOGO TAREAPP.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body data-page="blog">
+
+  <!-- Simple header -->
+  <header class="nav" id="top">
+    <div class="container nav__inner">
+      <a class="brand" href="index.html" aria-label="Ir al inicio">
+        <img src="NUEVO LOGO TAREAPP.png" width="40" height="40" alt="Logo de Tareapp" decoding="async" style="border-radius:10px" />
+        <span class="brand__text">
+          <strong>Tareapp</strong>
+          <small>Soluciones Academicas</small>
+        </span>
+      </a>
+      <nav class="nav__links" aria-label="Navegacion principal">
+        <a href="index.html">Inicio</a>
+        <a href="blog.html" class="active">Blog</a>
+        <a href="nosotros.html">Nosotros</a>
+      </nav>
+      <div class="nav__actions">
+        <a class="btn btn--ghost btn--sm hide-sm" href="blog.html">
+          &larr; Volver al Blog
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido">
+
+    <!-- ARTICLE HERO -->
+    <section class="article-hero">
+      <div class="article-hero__img">
+        <img src="Imagenes/imagen 15.webp" alt="Laptop con codigo Python en pantalla" width="1400" height="480" decoding="async" />
+      </div>
+      <div class="article-hero__overlay"></div>
+      <div class="article-hero__content container">
+        <nav class="article-breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Inicio</a>
+          <span>/</span>
+          <a href="blog.html">Blog</a>
+          <span>/</span>
+          <span>Programacion</span>
+        </nav>
+        <h1>Python para universitarios: Tu primer programa paso a paso</h1>
+        <div class="article-meta">
+          <span class="article-meta__badge" style="background:#3776AB;color:#fff">Programacion</span>
+          <span class="article-meta__sep"></span>
+          <time datetime="2026-02">Febrero 2026</time>
+          <span class="article-meta__sep"></span>
+          <span>13 min de lectura</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ARTICLE LAYOUT -->
+    <div class="container article-layout">
+
+      <!-- MAIN CONTENT -->
+      <article class="article-content">
+
+        <h2 id="por-que-python">Por que Python es ideal para empezar</h2>
+
+        <p>Si estas en la universidad y te toca aprender a programar, Python es probablemente la mejor opcion para empezar. No es casualidad que sea el lenguaje mas ensenado en universidades alrededor del mundo, incluyendo MIT, Stanford y varias universidades chilenas.</p>
+
+        <p>Las razones por las que Python es tan popular entre estudiantes:</p>
+
+        <ul>
+          <li><strong>Sintaxis simple y legible:</strong> Python se lee casi como ingles. No necesitas punto y coma, llaves ni declaraciones de tipo. Esto te permite enfocarte en la logica del programa en vez de pelear con la sintaxis.</li>
+          <li><strong>Versatil:</strong> se usa en ciencia de datos, inteligencia artificial, desarrollo web, automatizacion, finanzas y mucho mas.</li>
+          <li><strong>Gran comunidad:</strong> si tienes un error, es muy probable que alguien ya lo resolvio en Stack Overflow.</li>
+          <li><strong>Librerias poderosas:</strong> pandas, numpy, matplotlib, scikit-learn... hay librerias para practicamente todo lo que necesites en la universidad.</li>
+          <li><strong>Gratuito y multiplataforma:</strong> funciona en Windows, Mac y Linux sin costo alguno.</li>
+        </ul>
+
+        <h2 id="instalar-python">Instalar Python y configurar VS Code</h2>
+
+        <p>Vamos a instalar Python y configurar un entorno de desarrollo profesional. Sigue estos pasos:</p>
+
+        <div class="article-steps">
+          <div class="article-step">
+            <div class="article-step__body">
+              <h4>Descargar Python</h4>
+              <p>Ve a <strong>python.org/downloads</strong> y descarga la version mas reciente (3.12 o superior). En Windows, ASEGURATE de marcar la casilla <strong>"Add Python to PATH"</strong> durante la instalacion. Esto es critico.</p>
+            </div>
+          </div>
+          <div class="article-step">
+            <div class="article-step__body">
+              <h4>Instalar Visual Studio Code</h4>
+              <p>Descarga VS Code desde <strong>code.visualstudio.com</strong>. Es el editor mas popular para Python: es gratuito, liviano y tiene excelente soporte para el lenguaje.</p>
+            </div>
+          </div>
+          <div class="article-step">
+            <div class="article-step__body">
+              <h4>Instalar la extension de Python</h4>
+              <p>Abre VS Code, ve a <strong>Extensiones</strong> (icono de cuadrados en la barra lateral) y busca "Python". Instala la extension oficial de Microsoft. Esto te dara autocompletado, deteccion de errores y boton de ejecutar.</p>
+            </div>
+          </div>
+          <div class="article-step">
+            <div class="article-step__body">
+              <h4>Verificar la instalacion</h4>
+              <p>Abre la terminal integrada de VS Code (<code>Ctrl + `</code>) y escribe <code>python --version</code>. Deberia mostrar algo como <code>Python 3.12.x</code>.</p>
+            </div>
+          </div>
+        </div>
+
+        <p>Crea un archivo llamado <code>hola.py</code> y escribe tu primer programa:</p>
+
+        <pre><code># Mi primer programa en Python
+print("Hola, mundo!")
+print("Estoy aprendiendo Python en la universidad")</code></pre>
+
+        <p>Presiona <code>Ctrl + F5</code> o el boton de play para ejecutarlo. Si ves el mensaje en la terminal, felicitaciones: ya eres programador.</p>
+
+        <h2 id="variables-tipos">Variables y tipos de datos</h2>
+
+        <p>Las variables son contenedores que almacenan datos. En Python no necesitas declarar el tipo de dato; Python lo detecta automaticamente:</p>
+
+        <pre><code># Variables de texto (strings)
+nombre = "Maria"
+universidad = "Universidad de Chile"
+carrera = 'Ingenieria Comercial'  # Comillas simples o dobles, ambas funcionan
+
+# Variables numericas
+edad = 21                  # int (numero entero)
+promedio = 6.2             # float (numero decimal)
+semestre = 5               # int
+
+# Variables booleanas (verdadero o falso)
+esta_matriculado = True
+debe_ramos = False
+
+# Imprimir variables
+print(f"Hola, soy {nombre}")
+print(f"Estudio {carrera} en {universidad}")
+print(f"Voy en semestre {semestre} con promedio {promedio}")
+
+# Verificar el tipo de una variable
+print(type(nombre))      # &lt;class 'str'&gt;
+print(type(promedio))    # &lt;class 'float'&gt;
+print(type(esta_matriculado))  # &lt;class 'bool'&gt;</code></pre>
+
+        <div class="article-tip article-tip--info">
+          <div class="article-tip__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          </div>
+          <div class="article-tip__text">
+            <strong>f-strings: tu mejor amigo</strong>
+            Las <code>f-strings</code> (con la <code>f</code> antes de las comillas) te permiten insertar variables directamente dentro del texto usando llaves <code>{variable}</code>. Son la forma mas limpia y moderna de formatear texto en Python. Usalas siempre.
+          </div>
+        </div>
+
+        <p>Las operaciones basicas con numeros funcionan como esperarias:</p>
+
+        <pre><code># Operaciones aritmeticas
+a = 10
+b = 3
+
+print(a + b)    # 13  (suma)
+print(a - b)    # 7   (resta)
+print(a * b)    # 30  (multiplicacion)
+print(a / b)    # 3.333... (division decimal)
+print(a // b)   # 3   (division entera)
+print(a % b)    # 1   (modulo / resto)
+print(a ** b)   # 1000 (potencia: 10^3)
+
+# Operaciones con strings
+nombre_completo = "Maria" + " " + "Gonzalez"  # Concatenacion
+print("Hola " * 3)  # "Hola Hola Hola " (repeticion)
+
+# Conversion de tipos
+nota_texto = "6.5"
+nota_numero = float(nota_texto)  # Convertir string a float
+edad_texto = str(21)             # Convertir int a string
+
+# Input: pedir datos al usuario
+nombre = input("¿Como te llamas? ")
+edad = int(input("¿Cuantos anos tienes? "))
+print(f"Hola {nombre}, tienes {edad} anos")</code></pre>
+
+        <h2 id="condicionales">Condicionales: if, elif, else</h2>
+
+        <p>Los condicionales te permiten que tu programa tome decisiones basadas en condiciones. La estructura basica es:</p>
+
+        <pre><code># Condicional simple
+nota = 5.5
+
+if nota >= 4.0:
+    print("Aprobaste!")
+else:
+    print("Reprobaste :(")
+
+# Condicional con multiples opciones
+nota = float(input("Ingresa tu nota: "))
+
+if nota >= 6.5:
+    print("Excelente! Nota sobresaliente")
+elif nota >= 5.5:
+    print("Muy bien! Nota sobre el promedio")
+elif nota >= 4.0:
+    print("Aprobaste, pero puedes mejorar")
+elif nota >= 1.0:
+    print("Reprobaste. Necesitas estudiar mas")
+else:
+    print("Nota no valida")
+
+# Condiciones combinadas con and, or, not
+edad = 20
+promedio = 6.0
+
+if edad >= 18 and promedio >= 5.0:
+    print("Puedes postular a la beca")
+
+if edad < 18 or promedio < 4.0:
+    print("No cumples los requisitos")
+
+if not esta_matriculado:
+    print("Necesitas matricularte primero")</code></pre>
+
+        <div class="article-tip article-tip--info">
+          <div class="article-tip__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          </div>
+          <div class="article-tip__text">
+            <strong>La indentacion importa</strong>
+            En Python, la indentacion (los espacios al inicio de la linea) no es decorativa: es parte de la sintaxis. Todo el codigo dentro de un <code>if</code>, <code>for</code>, <code>while</code> o funcion debe tener la misma indentacion (4 espacios es el estandar). Si la indentacion esta mal, Python te dara un <code>IndentationError</code>.
+          </div>
+        </div>
+
+        <h2 id="bucles">Bucles: for y while</h2>
+
+        <p>Los bucles te permiten repetir acciones multiples veces sin copiar y pegar codigo:</p>
+
+        <pre><code># Bucle for: recorrer una secuencia
+ramos = ["Calculo", "Fisica", "Programacion", "Estadistica"]
+
+for ramo in ramos:
+    print(f"Estoy cursando {ramo}")
+
+# for con range: repetir N veces
+for i in range(5):
+    print(f"Iteracion {i}")  # Imprime 0, 1, 2, 3, 4
+
+# range con inicio y fin
+for i in range(1, 8):
+    print(f"Semestre {i}")  # Imprime 1 a 7
+
+# for con enumerate: indice + valor
+for i, ramo in enumerate(ramos, start=1):
+    print(f"{i}. {ramo}")
+
+# Bucle while: repetir mientras se cumpla una condicion
+intentos = 0
+password_correcta = "python123"
+
+while intentos < 3:
+    password = input("Ingresa la contrasena: ")
+    if password == password_correcta:
+        print("Acceso concedido!")
+        break  # Salir del bucle
+    intentos += 1
+    print(f"Incorrecto. Te quedan {3 - intentos} intentos")
+else:
+    print("Demasiados intentos. Cuenta bloqueada.")</code></pre>
+
+        <figure class="article-img">
+          <img src="Imagenes/imagen 22.webp" alt="Codigo Python en Visual Studio Code" loading="lazy" width="800" height="450" decoding="async" />
+          <figcaption>Escribiendo codigo Python en Visual Studio Code con la extension oficial de Python</figcaption>
+        </figure>
+
+        <h2 id="funciones">Funciones: organizar tu codigo</h2>
+
+        <p>Las funciones son bloques de codigo reutilizables que realizan una tarea especifica. Te ayudan a organizar tu programa y evitar repetir codigo:</p>
+
+        <pre><code># Funcion basica
+def saludar(nombre):
+    print(f"Hola, {nombre}! Bienvenido a la universidad")
+
+saludar("Maria")
+saludar("Juan")
+
+# Funcion con valor de retorno
+def calcular_promedio(notas):
+    """Calcula el promedio de una lista de notas."""
+    if len(notas) == 0:
+        return 0
+    return sum(notas) / len(notas)
+
+mis_notas = [5.5, 6.0, 4.8, 6.3, 5.9]
+promedio = calcular_promedio(mis_notas)
+print(f"Tu promedio es: {promedio:.1f}")
+
+# Funcion con parametros por defecto
+def calcular_nota_final(certamen1, certamen2, examen, pond_cert=0.3, pond_exam=0.4):
+    """Calcula la nota final con ponderaciones."""
+    nota = certamen1 * pond_cert + certamen2 * pond_cert + examen * pond_exam
+    return round(nota, 1)
+
+nota_final = calcular_nota_final(5.5, 6.0, 5.8)
+print(f"Nota final: {nota_final}")
+
+# Funcion que retorna multiples valores
+def analizar_notas(notas):
+    """Retorna el promedio, la nota maxima y la minima."""
+    return sum(notas)/len(notas), max(notas), min(notas)
+
+promedio, mejor, peor = analizar_notas(mis_notas)
+print(f"Promedio: {promedio:.1f}, Mejor: {mejor}, Peor: {peor}")</code></pre>
+
+        <div class="article-tip article-tip--info">
+          <div class="article-tip__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          </div>
+          <div class="article-tip__text">
+            <strong>Docstrings</strong>
+            El texto entre comillas triples (<code>"""..."""</code>) despues de la definicion de la funcion se llama docstring. Documenta que hace la funcion. Es una buena practica incluirlos siempre, especialmente en trabajos que entregues. Tu profesor lo agradecera.
+          </div>
+        </div>
+
+        <h2 id="listas-diccionarios">Listas y diccionarios</h2>
+
+        <p>Las listas y diccionarios son las estructuras de datos mas usadas en Python. Entenderlas bien es fundamental:</p>
+
+        <h3>Listas</h3>
+
+        <pre><code># Crear listas
+notas = [5.5, 6.0, 4.8, 6.3, 5.9]
+ramos = ["Calculo", "Fisica", "Programacion"]
+mixta = ["Maria", 21, 6.2, True]  # Puede mezclar tipos
+
+# Acceder a elementos (indice empieza en 0)
+print(notas[0])    # 5.5 (primer elemento)
+print(notas[-1])   # 5.9 (ultimo elemento)
+print(notas[1:3])  # [6.0, 4.8] (sublista)
+
+# Modificar elementos
+notas[0] = 5.8
+ramos.append("Estadistica")      # Agregar al final
+ramos.insert(0, "Algebra")       # Insertar en posicion 0
+ramos.remove("Fisica")           # Eliminar por valor
+ultimo = notas.pop()              # Eliminar y retornar el ultimo
+
+# Operaciones utiles
+print(len(notas))        # 4 (cantidad de elementos)
+print(sum(notas))        # 22.9 (suma total)
+print(sorted(notas))     # Lista ordenada (no modifica la original)
+notas.sort()             # Ordena la lista original
+print(4.8 in notas)      # True (verificar si existe)
+
+# List comprehension (forma elegante de crear listas)
+notas_aprobadas = [n for n in notas if n >= 4.0]
+notas_redondeadas = [round(n) for n in notas]
+cuadrados = [x**2 for x in range(1, 11)]</code></pre>
+
+        <h3>Diccionarios</h3>
+
+        <pre><code># Crear diccionarios (pares clave: valor)
+estudiante = {
+    "nombre": "Maria Gonzalez",
+    "carrera": "Ingenieria Comercial",
+    "semestre": 5,
+    "promedio": 6.2,
+    "becado": True
+}
+
+# Acceder a valores
+print(estudiante["nombre"])           # "Maria Gonzalez"
+print(estudiante.get("email", "No registrado"))  # Valor por defecto
+
+# Modificar y agregar
+estudiante["promedio"] = 6.3
+estudiante["email"] = "maria@uchile.cl"
+
+# Recorrer un diccionario
+for clave, valor in estudiante.items():
+    print(f"{clave}: {valor}")
+
+# Diccionario de notas por ramo
+notas_por_ramo = {
+    "Calculo": [5.5, 6.0, 5.8],
+    "Fisica": [4.8, 5.2, 5.0],
+    "Programacion": [6.5, 6.8, 7.0]
+}
+
+for ramo, notas in notas_por_ramo.items():
+    promedio = sum(notas) / len(notas)
+    print(f"{ramo}: promedio {promedio:.1f}")</code></pre>
+
+        <h2 id="proyecto-calculadora">Tu primer proyecto: calculadora de notas</h2>
+
+        <p>Vamos a juntar todo lo que aprendiste en un proyecto practico: una calculadora de notas universitarias. Este programa calcula tu promedio ponderado y te dice si apruebas el ramo:</p>
+
+        <pre><code>def calculadora_notas():
+    """Calculadora de notas universitarias con ponderaciones."""
+
+    print("=" * 50)
+    print("  CALCULADORA DE NOTAS UNIVERSITARIAS")
+    print("=" * 50)
+
+    ramo = input("\nNombre del ramo: ")
+
+    # Pedir evaluaciones y ponderaciones
+    evaluaciones = []
+    ponderacion_total = 0
+
+    while ponderacion_total < 100:
+        print(f"\nPonderacion acumulada: {ponderacion_total}%")
+        nombre_eval = input("Nombre de la evaluacion (o 'listo' para terminar): ")
+
+        if nombre_eval.lower() == "listo":
+            if ponderacion_total != 100:
+                print(f"Las ponderaciones suman {ponderacion_total}%, deben sumar 100%.")
+                continue
+            break
+
+        nota = float(input(f"Nota de {nombre_eval} (1.0 - 7.0): "))
+        while nota < 1.0 or nota > 7.0:
+            print("Nota no valida. Debe estar entre 1.0 y 7.0")
+            nota = float(input(f"Nota de {nombre_eval} (1.0 - 7.0): "))
+
+        ponderacion = int(input(f"Ponderacion de {nombre_eval} (%): "))
+        while ponderacion_total + ponderacion > 100:
+            print(f"La ponderacion excede el 100%. Te quedan {100 - ponderacion_total}%")
+            ponderacion = int(input(f"Ponderacion de {nombre_eval} (%): "))
+
+        evaluaciones.append({
+            "nombre": nombre_eval,
+            "nota": nota,
+            "ponderacion": ponderacion
+        })
+        ponderacion_total += ponderacion
+
+    # Calcular nota final
+    nota_final = sum(e["nota"] * e["ponderacion"] / 100 for e in evaluaciones)
+
+    # Mostrar resultados
+    print("\n" + "=" * 50)
+    print(f"  RESULTADOS - {ramo.upper()}")
+    print("=" * 50)
+
+    for e in evaluaciones:
+        aporte = e["nota"] * e["ponderacion"] / 100
+        print(f"  {e['nombre']}: {e['nota']} x {e['ponderacion']}% = {aporte:.2f}")
+
+    print("-" * 50)
+    print(f"  NOTA FINAL: {nota_final:.1f}")
+    print("-" * 50)
+
+    if nota_final >= 4.0:
+        print("  APROBADO!")
+        if nota_final >= 6.0:
+            print("  Excelente rendimiento!")
+    else:
+        print("  REPROBADO")
+        nota_necesaria = (4.0 * 100 - sum(
+            e["nota"] * e["ponderacion"] for e in evaluaciones[:-1]
+        )) / evaluaciones[-1]["ponderacion"]
+        if 1.0 <= nota_necesaria <= 7.0:
+            print(f"  Necesitabas un {nota_necesaria:.1f} en {evaluaciones[-1]['nombre']}")
+
+# Ejecutar la calculadora
+calculadora_notas()</code></pre>
+
+        <h2 id="librerias-utiles">Librerias utiles para la universidad</h2>
+
+        <p>Una de las grandes fortalezas de Python son sus librerias. Estas son las que mas vas a usar en la universidad:</p>
+
+        <h3>pandas - Analisis de datos</h3>
+
+        <pre><code>import pandas as pd
+
+# Leer un archivo Excel
+datos = pd.read_excel("encuesta.xlsx")
+
+# Leer un CSV
+datos = pd.read_csv("ventas.csv")
+
+# Ver las primeras filas
+print(datos.head())
+
+# Estadisticas descriptivas
+print(datos.describe())
+
+# Filtrar datos
+aprobados = datos[datos["nota"] >= 4.0]
+
+# Agrupar y calcular
+promedio_por_carrera = datos.groupby("carrera")["nota"].mean()
+print(promedio_por_carrera)</code></pre>
+
+        <h3>matplotlib - Graficos</h3>
+
+        <pre><code>import matplotlib.pyplot as plt
+
+# Grafico de barras
+carreras = ["Ingenieria", "Psicologia", "Derecho", "Medicina"]
+estudiantes = [150, 120, 90, 80]
+
+plt.figure(figsize=(10, 6))
+plt.bar(carreras, estudiantes, color=["#3776AB", "#F7C948", "#E34C26", "#22C55E"])
+plt.title("Estudiantes por Carrera")
+plt.xlabel("Carrera")
+plt.ylabel("Cantidad de Estudiantes")
+plt.savefig("grafico.png", dpi=150)
+plt.show()</code></pre>
+
+        <p>Para instalar estas librerias, abre la terminal y ejecuta:</p>
+
+        <pre><code>pip install pandas matplotlib openpyxl</code></pre>
+
+        <div class="article-tip article-tip--info">
+          <div class="article-tip__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          </div>
+          <div class="article-tip__text">
+            <strong>Jupyter Notebook</strong>
+            Para analisis de datos, te recomiendo usar <strong>Jupyter Notebook</strong>. Es un entorno interactivo donde puedes ejecutar codigo por bloques y ver los resultados inmediatamente (incluyendo graficos). Instalalo con <code>pip install notebook</code> y ejecturalo con <code>jupyter notebook</code>. Muchos profesores piden los trabajos en formato .ipynb (Jupyter).
+          </div>
+        </div>
+
+        <h2 id="donde-seguir">Donde seguir aprendiendo</h2>
+
+        <p>Ya tienes las bases de Python. Para seguir avanzando, estos son los mejores recursos gratuitos:</p>
+
+        <ul>
+          <li><strong>Python.org Tutorial:</strong> la documentacion oficial. Es densa pero completa y siempre actualizada.</li>
+          <li><strong>freeCodeCamp (YouTube):</strong> cursos gratuitos de Python en espanol e ingles, con proyectos practicos.</li>
+          <li><strong>Automate the Boring Stuff:</strong> libro gratuito online que ensena Python a traves de proyectos de automatizacion.</li>
+          <li><strong>HackerRank / LeetCode:</strong> plataformas con ejercicios de programacion ordenados por dificultad. Ideales para preparar entrevistas de trabajo.</li>
+          <li><strong>Real Python:</strong> tutoriales bien escritos sobre temas especificos de Python.</li>
+          <li><strong>Kaggle:</strong> si te interesa la ciencia de datos, Kaggle tiene datasets, competencias y cursos gratuitos de Python + pandas + machine learning.</li>
+        </ul>
+
+        <p>Recuerda que la programacion se aprende programando. Lee codigo, escribe codigo, rompe cosas y arreglalas. No te frustres si al principio todo parece dificil; es normal. Con practica constante, en un par de meses vas a estar escribiendo programas que hoy te parecen imposibles.</p>
+
+        <p>Si necesitas ayuda con un trabajo de programacion en Python, ya sea un script, un analisis de datos con pandas, una aplicacion web con Flask o Django, o un proyecto de machine learning, en Tareapp tenemos desarrolladores con experiencia que te pueden ayudar. Escribenos por WhatsApp.</p>
+
+        <!-- Share -->
+        <div class="article-share">
+          <span>Compartir:</span>
+          <a href="#" aria-label="Compartir en WhatsApp" data-wa-message="Mira esta guia de Python para universitarios">
+            <svg class="i i--sm" aria-hidden="true" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="currentColor"/></svg>
+          </a>
+        </div>
+
+      </article>
+
+      <!-- SIDEBAR -->
+      <aside class="article-sidebar">
+        <nav class="article-toc">
+          <p class="article-toc__title">En este articulo</p>
+          <ol class="article-toc__list">
+            <li><a href="#por-que-python">Por que Python es ideal</a></li>
+            <li><a href="#instalar-python">Instalar Python y VS Code</a></li>
+            <li><a href="#variables-tipos">Variables y tipos de datos</a></li>
+            <li><a href="#condicionales">Condicionales: if, elif, else</a></li>
+            <li><a href="#bucles">Bucles: for y while</a></li>
+            <li><a href="#funciones">Funciones</a></li>
+            <li><a href="#listas-diccionarios">Listas y diccionarios</a></li>
+            <li><a href="#proyecto-calculadora">Proyecto: calculadora de notas</a></li>
+            <li><a href="#librerias-utiles">Librerias utiles</a></li>
+            <li><a href="#donde-seguir">Donde seguir aprendiendo</a></li>
+          </ol>
+        </nav>
+
+        <div class="article-sidebar__cta">
+          <h4>¿Necesitas ayuda con tu trabajo de programacion?</h4>
+          <p>Nuestro equipo puede ayudarte con scripts, analisis de datos, aplicaciones y proyectos en Python.</p>
+          <a class="btn btn--primary btn--block" data-wa-message="Hola, necesito ayuda con un trabajo academico." href="#" rel="noopener">
+            Cotizar ahora
+          </a>
+        </div>
+      </aside>
+
+    </div>
+
+    <!-- RELATED ARTICLES -->
+    <section class="article-related">
+      <div class="container">
+        <h2>Articulos relacionados</h2>
+        <div class="blog-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))">
+          <article class="blog-card">
+            <div class="blog-card__img">
+              <img src="Imagenes/imagen 14.webp" alt="SQL para principiantes" loading="lazy" width="400" height="250" decoding="async">
+            </div>
+            <div class="blog-card__body">
+              <span class="blog-card__badge" style="--badge-color: #E34C26">SQL</span>
+              <h3><a href="blog-sql-principiantes.html">SQL para principiantes: Consultas basicas para Bases de Datos</a></h3>
+              <p class="muted">Aprende SQL desde cero con ejemplos practicos.</p>
+            </div>
+          </article>
+          <article class="blog-card">
+            <div class="blog-card__img">
+              <img src="Imagenes/imagen 12.webp" alt="Excel tablas dinamicas" loading="lazy" width="400" height="250" decoding="async">
+            </div>
+            <div class="blog-card__body">
+              <span class="blog-card__badge" style="--badge-color: #217346">Excel</span>
+              <h3><a href="blog-excel-tablas-dinamicas.html">Tablas Dinamicas en Excel: Tutorial completo</a></h3>
+              <p class="muted">Domina las tablas dinamicas de Excel desde lo basico hasta formulas avanzadas.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="final-cta" aria-label="CTA">
+      <div class="container final-cta__inner">
+        <div>
+          <h2>¿Necesitas que hagamos tu trabajo?</h2>
+          <p class="muted">Escribenos con los requisitos y te cotizamos al instante.</p>
+        </div>
+        <div class="final-cta__actions">
+          <a class="btn btn--primary" data-wa-message="Hola, necesito cotizar un trabajo academico." href="#" rel="noopener">
+            Cotizar ahora
+          </a>
+          <a class="btn btn--ghost" href="index.html">Ver servicios</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <img src="NUEVO LOGO TAREAPP.png" width="56" height="56" alt="Logo de Tareapp" loading="lazy" decoding="async" style="border-radius:12px" />
+        <div>
+          <strong>Tareapp</strong>
+          <p class="muted">Soluciones Academicas</p>
+        </div>
+      </div>
+      <div class="footer__cols">
+        <div>
+          <h4>Secciones</h4>
+          <a href="index.html">Inicio</a>
+          <a href="tesis.html">Tesis</a>
+          <a href="blog.html">Blog</a>
+          <a href="nosotros.html">Nosotros</a>
+        </div>
+      </div>
+    </div>
+    <div class="container footer__bottom">
+      <span class="muted">&copy; 2026 Tareapp. Todos los derechos reservados.</span>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

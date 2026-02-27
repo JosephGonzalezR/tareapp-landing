@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light" />
+  <title>Como hacer un Dashboard en Power BI: Guia paso a paso | Tareapp Blog</title>
+  <meta name="description" content="Aprende a crear dashboards interactivos en Power BI desde cero. Conecta datos, crea visualizaciones profesionales y comparte tu trabajo paso a paso." />
+  <meta name="author" content="Tareapp" />
+  <meta name="theme-color" content="#F7C948" />
+  <link rel="icon" href="NUEVO LOGO TAREAPP.png" />
+  <link rel="apple-touch-icon" href="NUEVO LOGO TAREAPP.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body data-page="blog">
+
+  <!-- Simple header -->
+  <header class="nav" id="top">
+    <div class="container nav__inner">
+      <a class="brand" href="index.html" aria-label="Ir al inicio">
+        <img src="NUEVO LOGO TAREAPP.png" width="40" height="40" alt="Logo de Tareapp" decoding="async" style="border-radius:10px" />
+        <span class="brand__text">
+          <strong>Tareapp</strong>
+          <small>Soluciones Academicas</small>
+        </span>
+      </a>
+      <nav class="nav__links" aria-label="Navegacion principal">
+        <a href="index.html">Inicio</a>
+        <a href="blog.html" class="active">Blog</a>
+        <a href="nosotros.html">Nosotros</a>
+      </nav>
+      <div class="nav__actions">
+        <a class="btn btn--ghost btn--sm hide-sm" href="blog.html">
+          &larr; Volver al Blog
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido">
+
+    <!-- ARTICLE HERO -->
+    <section class="article-hero">
+      <div class="article-hero__img">
+        <img src="Imagenes/imagen 11.webp" alt="Dashboard de Power BI con graficos interactivos" width="1400" height="480" decoding="async" />
+      </div>
+      <div class="article-hero__overlay"></div>
+      <div class="article-hero__content container">
+        <nav class="article-breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Inicio</a>
+          <span>/</span>
+          <a href="blog.html">Blog</a>
+          <span>/</span>
+          <span>Power BI</span>
+        </nav>
+        <h1>Como hacer un Dashboard en Power BI: Guia paso a paso</h1>
+        <div class="article-meta">
+          <span class="article-meta__badge" style="background:#F7C948;color:#000">Power BI</span>
+          <span class="article-meta__sep"></span>
+          <time datetime="2026-02">Febrero 2026</time>
+          <span class="article-meta__sep"></span>
+          <span>12 min de lectura</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ARTICLE LAYOUT -->
+    <div class="container article-layout">
+
+      <!-- MAIN CONTENT -->
+      <article class="article-content">
+
+        <h2 id="que-es-power-bi">Que es Power BI y por que aprenderlo</h2>
+
+        <p>Power BI es la herramienta de inteligencia de negocios (Business Intelligence) de Microsoft que te permite transformar datos crudos en visualizaciones interactivas y reportes profesionales. Si estas estudiando ingenieria comercial, administracion, ingenieria civil industrial o cualquier carrera que involucre analisis de datos, aprender Power BI es una de las mejores inversiones que puedes hacer en tu formacion.</p>
+
+        <p>A diferencia de Excel, que trabaja bien con tablas estaticas, Power BI esta disenado especificamente para crear dashboards dinamicos que se actualizan en tiempo real. Esto significa que puedes conectar tus fuentes de datos una sola vez y el dashboard se actualizara automaticamente cada vez que los datos cambien.</p>
+
+        <p>Entre las principales ventajas de Power BI se encuentran:</p>
+
+        <ul>
+          <li><strong>Es gratuito:</strong> Power BI Desktop se descarga sin costo desde el sitio oficial de Microsoft.</li>
+          <li><strong>Interfaz intuitiva:</strong> si ya manejas Excel, la curva de aprendizaje es mucho mas suave.</li>
+          <li><strong>Conectividad:</strong> se conecta a cientos de fuentes de datos (Excel, CSV, bases de datos SQL, APIs, Google Sheets, etc.).</li>
+          <li><strong>Demanda laboral:</strong> segun LinkedIn, Power BI es una de las habilidades mas demandadas en el area de datos en Latinoamerica.</li>
+          <li><strong>DAX:</strong> su lenguaje de formulas te permite crear calculos complejos de forma eficiente.</li>
+        </ul>
+
+        <div class="article-tip article-tip--info">
+          <div class="article-tip__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          </div>
+          <div class="article-tip__text">
+            <strong>Pro tip</strong>
+            Si eres estudiante, puedes acceder a Power BI Pro gratis a traves del programa Microsoft Imagine Academy o con tu correo institucional .edu. Consulta con tu universidad si tienen convenio.
+          </div>
+        </div>
+
+        <h2 id="requisitos-instalacion">Requisitos previos e instalacion</h2>
+
+        <p>Antes de empezar, necesitas tener lo siguiente preparado:</p>
+
+        <ul>
+          <li>Un computador con Windows 10 o superior (Power BI Desktop no esta disponible nativamente para Mac, pero puedes usar una maquina virtual o la version web).</li>
+          <li>Al menos 4 GB de RAM (8 GB recomendados para datasets grandes).</li>
+          <li>Una cuenta de Microsoft (puede ser tu correo institucional).</li>
+          <li>Un archivo de datos de practica (Excel o CSV) con al menos 100 filas.</li>
+        </ul>
+
+        <div class="article-steps">
+          <div class="article-step">
+            <div class="article-step__body">
+              <h4>Descargar Power BI Desktop</h4>
+              <p>Ve a <strong>powerbi.microsoft.com</strong> y haz clic en "Descargar gratis". Tambien puedes buscarlo directamente en la Microsoft Store de Windows.</p>
+            </div>
+          </div>
+          <div class="article-step">
+            <div class="article-step__body">
+              <h4>Instalar el programa</h4>
+              <p>Ejecuta el instalador y sigue las instrucciones. El proceso tarda entre 3 y 5 minutos dependiendo de tu conexion. No necesitas configuracion especial.</p>
+            </div>
+          </div>
+          <div class="article-step">
+            <div class="article-step__body">
+              <h4>Iniciar sesion</h4>
+              <p>Al abrir Power BI por primera vez, te pedira iniciar sesion con tu cuenta Microsoft. Usa tu correo institucional si tienes acceso a Power BI Pro.</p>
+            </div>
+          </div>
+          <div class="article-step">
+            <div class="article-step__body">
+              <h4>Familiarizarte con la interfaz</h4>
+              <p>Explora las tres vistas principales: <strong>Vista de informe</strong> (donde creas visualizaciones), <strong>Vista de datos</strong> (para inspeccionar tablas) y <strong>Vista de modelo</strong> (para relaciones entre tablas).</p>
+            </div>
+          </div>
+        </div>
+
+        <h2 id="conectar-datos">Conectar tus datos (Excel, CSV, bases de datos)</h2>
+
+        <p>El primer paso real en Power BI es importar tus datos. Power BI soporta una enorme cantidad de fuentes, pero las mas comunes para trabajos universitarios son archivos de Excel y CSV.</p>
+
+        <p>Para conectar un archivo de Excel, sigue estos pasos:</p>
+
+        <ol>
+          <li>En la pantalla de inicio, haz clic en <strong>"Obtener datos"</strong> en la cinta de opciones.</li>
+          <li>Selecciona <strong>"Libro de Excel"</strong> de la lista de conectores.</li>
+          <li>Navega hasta tu archivo y seleccionalo.</li>
+          <li>En el <strong>Navigator</strong>, marca las tablas u hojas que quieres importar.</li>
+          <li>Haz clic en <strong>"Transformar datos"</strong> si necesitas limpiar los datos, o en <strong>"Cargar"</strong> si ya estan listos.</li>
+        </ol>
+
+        <div class="article-tip article-tip--info">
+          <div class="article-tip__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          </div>
+          <div class="article-tip__text">
+            <strong>Buena practica</strong>
+            Siempre usa "Transformar datos" antes de cargar. Ahi puedes revisar los tipos de datos (numeros, fechas, texto), eliminar filas vacias y renombrar columnas. Esto te ahorrara problemas mas adelante.
+          </div>
+        </div>
+
+        <p>Si tus datos vienen de una base SQL, el proceso es similar: selecciona el conector de SQL Server, ingresa la direccion del servidor y el nombre de la base de datos, y Power BI se conectara directamente. Esto es especialmente util cuando trabajas con datasets grandes que no caben comodamente en un archivo de Excel.</p>
+
+        <figure class="article-img">
+          <img src="Imagenes/imagen 24.webp" alt="Interfaz de Power BI mostrando la conexion de datos" loading="lazy" width="800" height="450" decoding="async" />
+          <figcaption>Interfaz de Power BI al conectar una fuente de datos de Excel</figcaption>
+        </figure>
+
+        <h2 id="visualizaciones-basicas">Crear visualizaciones basicas</h2>
+
+        <p>Una vez que tienes tus datos cargados, es hora de crear las visualizaciones que formaran tu dashboard. Power BI ofrece mas de 30 tipos de visualizaciones nativas, pero las mas usadas son:</p>
+
+        <h3>Grafico de barras y columnas</h3>
+
+        <p>Ideal para comparar valores entre categorias. Por ejemplo, si tienes datos de ventas por region, un grafico de barras es perfecto. Solo arrastra el campo de "Region" al eje y "Ventas" a los valores.</p>
+
+        <h3>Grafico de torta o dona</h3>
+
+        <p>Util para mostrar proporciones de un todo. Usalo cuando tienes entre 3 y 7 categorias. Con mas categorias, el grafico se vuelve dificil de leer y es mejor usar barras.</p>
+
+        <h3>Grafico de lineas</h3>
+
+        <p>Perfecto para mostrar tendencias a lo largo del tiempo. Si tienes datos mensuales o anuales, este es tu grafico. Arrastra la fecha al eje X y la metrica al eje Y.</p>
+
+        <h3>Tarjetas (Cards)</h3>
+
+        <p>Muestran un unico valor destacado, como el total de ventas, el promedio de calificaciones o el numero de registros. Son excelentes para KPIs en la parte superior del dashboard.</p>
+
+        <p>Para crear cualquier visualizacion, el proceso basico es:</p>
+
+        <ol>
+          <li>Haz clic en un area vacia del lienzo.</li>
+          <li>En el panel de <strong>Visualizaciones</strong> (derecha), selecciona el tipo de grafico.</li>
+          <li>Desde el panel de <strong>Campos</strong>, arrastra las columnas a las areas correspondientes (Eje, Valores, Leyenda).</li>
+          <li>Ajusta los colores y formato desde la pestana de <strong>Formato</strong> del visual.</li>
+        </ol>
+
+        <p>Un ejemplo practico: si tienes una tabla de ventas con columnas <code>Producto</code>, <code>Region</code>, <code>Monto</code> y <code>Fecha</code>, puedes crear una medida DAX para calcular el total de ventas:</p>
+
+        <pre><code>Total Ventas = SUM('Ventas'[Monto])</code></pre>
+
+        <p>Y para calcular el crecimiento porcentual mes a mes:</p>
+
+        <pre><code>Crecimiento MoM =
+VAR VentasMesActual = [Total Ventas]
+VAR VentasMesAnterior =
+    CALCULATE(
+        [Total Ventas],
+        DATEADD('Calendario'[Fecha], -1, MONTH)
+    )
+RETURN
+    DIVIDE(
+        VentasMesActual - VentasMesAnterior,
+        VentasMesAnterior,
+        0
+    )</code></pre>
+
+        <div class="article-tip article-tip--info">
+          <div class="article-tip__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          </div>
+          <div class="article-tip__text">
+            <strong>Tip DAX</strong>
+            La funcion <code>DIVIDE</code> es mejor que usar el operador <code>/</code> directamente porque maneja automaticamente la division por cero, retornando el valor alternativo que le indiques (en este caso, 0).
+          </div>
+        </div>
+
+        <h2 id="disenar-layout">Disenar el layout del dashboard</h2>
+
+        <p>Un buen dashboard no es solo tener graficos bonitos, sino que la disposicion tenga logica y sea facil de leer. Aqui van algunos principios de diseno que puedes aplicar:</p>
+
+        <ul>
+          <li><strong>Jerarquia visual:</strong> los KPIs mas importantes van arriba (tarjetas con numeros grandes). Los graficos de tendencia en el medio. Los detalles y tablas abajo.</li>
+          <li><strong>Regla del "Z":</strong> los usuarios leen en forma de Z. Coloca la informacion mas critica en la esquina superior izquierda.</li>
+          <li><strong>Colores consistentes:</strong> usa una paleta de 3 a 5 colores maximo. Evita usar colores aleatorios para cada grafico.</li>
+          <li><strong>Espacio en blanco:</strong> no llenes cada pixel del lienzo. El espacio en blanco ayuda a la lectura.</li>
+          <li><strong>Titulo claro:</strong> agrega un titulo descriptivo y la fecha de actualizacion en la parte superior.</li>
+        </ul>
+
+        <figure class="article-img">
+          <img src="Imagenes/imagen 25.webp" alt="Ejemplo de layout de dashboard bien disenado" loading="lazy" width="800" height="450" decoding="async" />
+          <figcaption>Ejemplo de un dashboard con buena distribucion visual y jerarquia clara</figcaption>
+        </figure>
+
+        <p>Para cambiar el fondo del lienzo y darle un look mas profesional, ve a <strong>Formato &gt; Lienzo &gt; Fondo</strong> y selecciona un color claro como <code>#F5F5F5</code>. Esto ayuda a que las tarjetas y graficos con fondo blanco resalten.</p>
+
+        <p>Tambien puedes agregar cuadros de texto, imagenes (como el logo de tu universidad) y formas rectangulares para crear secciones visuales dentro del dashboard. Usa <strong>Insertar &gt; Cuadro de texto</strong> o <strong>Insertar &gt; Imagen</strong>.</p>
+
+        <h2 id="filtros-interactividad">Agregar filtros e interactividad</h2>
+
+        <p>Una de las grandes fortalezas de Power BI es la interactividad. Cuando haces clic en un segmento de un grafico, todos los demas graficos se filtran automaticamente. Esto se llama <strong>cross-filtering</strong> y funciona por defecto.</p>
+
+        <p>Ademas de esto, puedes agregar controles de filtro explicitos:</p>
+
+        <h3>Slicers (segmentadores)</h3>
+
+        <p>Son los filtros visuales que el usuario puede manipular. Para agregar uno, selecciona la visualizacion <strong>"Segmentacion de datos"</strong> y arrastra el campo que quieres usar como filtro (por ejemplo, "Region" o "Ano").</p>
+
+        <p>Los slicers pueden ser de tipo lista, desplegable, rango de fechas o deslizador numerico. Para un dashboard limpio, te recomiendo usar el estilo <strong>desplegable</strong> que ocupa menos espacio.</p>
+
+        <h3>Filtros de pagina y de informe</h3>
+
+        <p>En el panel de <strong>Filtros</strong> puedes agregar filtros que aplican a toda la pagina o a todo el informe. Estos son utiles cuando quieres que ciertos datos no aparezcan nunca (por ejemplo, excluir registros de prueba).</p>
+
+        <h3>Bookmarks (marcadores)</h3>
+
+        <p>Los bookmarks te permiten guardar el estado actual de los filtros y la visibilidad de los elementos. Puedes crear botones que al hacer clic cambien la vista del dashboard. Por ejemplo, un boton que muestre "Vista Resumen" y otro que muestre "Vista Detallada".</p>
+
+        <p>Para configurar el cross-filtering entre graficos, selecciona un visual, ve a <strong>Formato &gt; Editar interacciones</strong> y elige si los demas graficos deben filtrarse, resaltarse o no verse afectados.</p>
+
+        <pre><code>-- Ejemplo de medida DAX con filtro contextual
+Ventas Filtradas =
+CALCULATE(
+    SUM('Ventas'[Monto]),
+    FILTER(
+        'Productos',
+        'Productos'[Categoria] = "Electronica"
+    )
+)
+
+-- Medida con ALL para ignorar filtros
+Porcentaje del Total =
+DIVIDE(
+    [Total Ventas],
+    CALCULATE([Total Ventas], ALL('Ventas')),
+    0
+)</code></pre>
+
+        <h2 id="publicar-compartir">Publicar y compartir tu dashboard</h2>
+
+        <p>Una vez que tu dashboard esta listo, tienes varias opciones para compartirlo:</p>
+
+        <div class="article-steps">
+          <div class="article-step">
+            <div class="article-step__body">
+              <h4>Publicar en el servicio de Power BI</h4>
+              <p>Haz clic en <strong>"Publicar"</strong> en la cinta de opciones. Selecciona un espacio de trabajo y tu informe estara disponible en la nube. Desde ahi puedes generar un enlace para compartir.</p>
+            </div>
+          </div>
+          <div class="article-step">
+            <div class="article-step__body">
+              <h4>Exportar a PDF</h4>
+              <p>Si tu profesor necesita un archivo estatico, ve a <strong>Archivo &gt; Exportar &gt; PDF</strong>. Cada pagina del informe se convertira en una pagina del PDF.</p>
+            </div>
+          </div>
+          <div class="article-step">
+            <div class="article-step__body">
+              <h4>Exportar a PowerPoint</h4>
+              <p>Tambien puedes exportar a PPTX para incluir las visualizaciones en una presentacion. Cada visual se exporta como imagen con un enlace al informe interactivo.</p>
+            </div>
+          </div>
+          <div class="article-step">
+            <div class="article-step__body">
+              <h4>Compartir el archivo .pbix</h4>
+              <p>Si tu profesor usa Power BI, simplemente envia el archivo <code>.pbix</code> por correo o plataforma del curso. Es la opcion mas sencilla para trabajos universitarios.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="article-tip article-tip--info">
+          <div class="article-tip__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          </div>
+          <div class="article-tip__text">
+            <strong>Ojo con el peso del archivo</strong>
+            Los archivos .pbix pueden pesar bastante si tienen muchos datos importados. Si tu archivo pesa mas de 25 MB, considera usar DirectQuery en vez de Import para la conexion de datos, o reduce las filas que importas.
+          </div>
+        </div>
+
+        <h2 id="conclusion">Conclusion y proximos pasos</h2>
+
+        <p>Ya tienes las bases para crear un dashboard profesional en Power BI. Recapitulando lo que aprendiste:</p>
+
+        <ol>
+          <li>Que es Power BI y por que es una herramienta clave para el analisis de datos.</li>
+          <li>Como instalar y configurar el entorno de trabajo.</li>
+          <li>Como conectar distintas fuentes de datos.</li>
+          <li>Como crear visualizaciones basicas y escribir formulas DAX.</li>
+          <li>Principios de diseno para un dashboard efectivo.</li>
+          <li>Como agregar interactividad con filtros, slicers y bookmarks.</li>
+          <li>Como publicar y compartir tu trabajo final.</li>
+        </ol>
+
+        <p>Para seguir avanzando, te recomiendo explorar estos temas:</p>
+
+        <ul>
+          <li><strong>Power Query avanzado:</strong> transformaciones complejas de datos antes de visualizarlos.</li>
+          <li><strong>DAX intermedio:</strong> funciones de inteligencia de tiempo como <code>TOTALYTD</code>, <code>SAMEPERIODLASTYEAR</code>.</li>
+          <li><strong>Row-Level Security (RLS):</strong> para controlar que datos puede ver cada usuario.</li>
+          <li><strong>Power BI con R o Python:</strong> para crear visualizaciones personalizadas con codigo.</li>
+        </ul>
+
+        <p>Si necesitas ayuda con tu dashboard para un trabajo universitario o quieres que un experto lo revise, no dudes en contactarnos. En Tareapp tenemos experiencia creando dashboards profesionales para todo tipo de proyectos academicos.</p>
+
+        <!-- Share -->
+        <div class="article-share">
+          <span>Compartir:</span>
+          <a href="#" aria-label="Compartir en WhatsApp" data-wa-message="Mira esta guia de Power BI">
+            <svg class="i i--sm" aria-hidden="true" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="currentColor"/></svg>
+          </a>
+        </div>
+
+      </article>
+
+      <!-- SIDEBAR -->
+      <aside class="article-sidebar">
+        <nav class="article-toc">
+          <p class="article-toc__title">En este articulo</p>
+          <ol class="article-toc__list">
+            <li><a href="#que-es-power-bi">Que es Power BI y por que aprenderlo</a></li>
+            <li><a href="#requisitos-instalacion">Requisitos previos e instalacion</a></li>
+            <li><a href="#conectar-datos">Conectar tus datos</a></li>
+            <li><a href="#visualizaciones-basicas">Crear visualizaciones basicas</a></li>
+            <li><a href="#disenar-layout">Disenar el layout del dashboard</a></li>
+            <li><a href="#filtros-interactividad">Agregar filtros e interactividad</a></li>
+            <li><a href="#publicar-compartir">Publicar y compartir</a></li>
+            <li><a href="#conclusion">Conclusion y proximos pasos</a></li>
+          </ol>
+        </nav>
+
+        <div class="article-sidebar__cta">
+          <h4>¿Necesitas ayuda con tu dashboard?</h4>
+          <p>Nuestro equipo puede ayudarte a crear un dashboard profesional para tu trabajo universitario.</p>
+          <a class="btn btn--primary btn--block" data-wa-message="Hola, necesito ayuda con un trabajo academico." href="#" rel="noopener">
+            Cotizar ahora
+          </a>
+        </div>
+      </aside>
+
+    </div>
+
+    <!-- RELATED ARTICLES -->
+    <section class="article-related">
+      <div class="container">
+        <h2>Articulos relacionados</h2>
+        <div class="blog-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))">
+          <article class="blog-card">
+            <div class="blog-card__img">
+              <img src="Imagenes/imagen 12.webp" alt="Excel tablas dinamicas" loading="lazy" width="400" height="250" decoding="async">
+            </div>
+            <div class="blog-card__body">
+              <span class="blog-card__badge" style="--badge-color: #217346">Excel</span>
+              <h3><a href="blog-excel-tablas-dinamicas.html">Tablas Dinamicas en Excel: Tutorial completo</a></h3>
+              <p class="muted">Domina las tablas dinamicas de Excel desde lo basico hasta formulas avanzadas.</p>
+            </div>
+          </article>
+          <article class="blog-card">
+            <div class="blog-card__img">
+              <img src="Imagenes/imagen 14.webp" alt="SQL para principiantes" loading="lazy" width="400" height="250" decoding="async">
+            </div>
+            <div class="blog-card__body">
+              <span class="blog-card__badge" style="--badge-color: #E34C26">SQL</span>
+              <h3><a href="blog-sql-principiantes.html">SQL para principiantes: Consultas basicas para Bases de Datos</a></h3>
+              <p class="muted">Aprende SQL desde cero con ejemplos practicos para tus trabajos de bases de datos.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="final-cta" aria-label="CTA">
+      <div class="container final-cta__inner">
+        <div>
+          <h2>¿Necesitas que hagamos tu trabajo?</h2>
+          <p class="muted">Escribenos con los requisitos y te cotizamos al instante.</p>
+        </div>
+        <div class="final-cta__actions">
+          <a class="btn btn--primary" data-wa-message="Hola, necesito cotizar un trabajo academico." href="#" rel="noopener">
+            Cotizar ahora
+          </a>
+          <a class="btn btn--ghost" href="index.html">Ver servicios</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <img src="NUEVO LOGO TAREAPP.png" width="56" height="56" alt="Logo de Tareapp" loading="lazy" decoding="async" style="border-radius:12px" />
+        <div>
+          <strong>Tareapp</strong>
+          <p class="muted">Soluciones Academicas</p>
+        </div>
+      </div>
+      <div class="footer__cols">
+        <div>
+          <h4>Secciones</h4>
+          <a href="index.html">Inicio</a>
+          <a href="tesis.html">Tesis</a>
+          <a href="blog.html">Blog</a>
+          <a href="nosotros.html">Nosotros</a>
+        </div>
+      </div>
+    </div>
+    <div class="container footer__bottom">
+      <span class="muted">&copy; 2026 Tareapp. Todos los derechos reservados.</span>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

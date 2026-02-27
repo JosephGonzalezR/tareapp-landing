@@ -1,0 +1,617 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light" />
+  <title>SQL para principiantes: Consultas basicas para Bases de Datos | Tareapp Blog</title>
+  <meta name="description" content="Aprende SQL desde cero con este tutorial completo. SELECT, WHERE, JOIN, funciones de agregacion y mas. Ideal para trabajos universitarios de bases de datos." />
+  <meta name="author" content="Tareapp" />
+  <meta name="theme-color" content="#F7C948" />
+  <link rel="icon" href="NUEVO LOGO TAREAPP.png" />
+  <link rel="apple-touch-icon" href="NUEVO LOGO TAREAPP.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body data-page="blog">
+
+  <!-- Simple header -->
+  <header class="nav" id="top">
+    <div class="container nav__inner">
+      <a class="brand" href="index.html" aria-label="Ir al inicio">
+        <img src="NUEVO LOGO TAREAPP.png" width="40" height="40" alt="Logo de Tareapp" decoding="async" style="border-radius:10px" />
+        <span class="brand__text">
+          <strong>Tareapp</strong>
+          <small>Soluciones Academicas</small>
+        </span>
+      </a>
+      <nav class="nav__links" aria-label="Navegacion principal">
+        <a href="index.html">Inicio</a>
+        <a href="blog.html" class="active">Blog</a>
+        <a href="nosotros.html">Nosotros</a>
+      </nav>
+      <div class="nav__actions">
+        <a class="btn btn--ghost btn--sm hide-sm" href="blog.html">
+          &larr; Volver al Blog
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido">
+
+    <!-- ARTICLE HERO -->
+    <section class="article-hero">
+      <div class="article-hero__img">
+        <img src="Imagenes/imagen 14.webp" alt="Monitor con codigo SQL en pantalla" width="1400" height="480" decoding="async" />
+      </div>
+      <div class="article-hero__overlay"></div>
+      <div class="article-hero__content container">
+        <nav class="article-breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Inicio</a>
+          <span>/</span>
+          <a href="blog.html">Blog</a>
+          <span>/</span>
+          <span>SQL</span>
+        </nav>
+        <h1>SQL para principiantes: Consultas basicas para Bases de Datos</h1>
+        <div class="article-meta">
+          <span class="article-meta__badge" style="background:#E34C26;color:#fff">SQL</span>
+          <span class="article-meta__sep"></span>
+          <time datetime="2026-02">Febrero 2026</time>
+          <span class="article-meta__sep"></span>
+          <span>14 min de lectura</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ARTICLE LAYOUT -->
+    <div class="container article-layout">
+
+      <!-- MAIN CONTENT -->
+      <article class="article-content">
+
+        <h2 id="que-es-sql">Que es SQL y para que se usa</h2>
+
+        <p>SQL (Structured Query Language, o Lenguaje de Consulta Estructurado) es el lenguaje estandar para interactuar con bases de datos relacionales. Si estas cursando Ingenieria en Informatica, Ingenieria Civil Industrial, Administracion o cualquier carrera que tenga un ramo de bases de datos, SQL es una de las herramientas mas importantes que vas a aprender.</p>
+
+        <p>Con SQL puedes hacer cuatro operaciones fundamentales sobre los datos, conocidas como <strong>CRUD</strong>:</p>
+
+        <ul>
+          <li><strong>Create (Crear):</strong> insertar nuevos registros en una tabla.</li>
+          <li><strong>Read (Leer):</strong> consultar y extraer datos de una o mas tablas.</li>
+          <li><strong>Update (Actualizar):</strong> modificar registros existentes.</li>
+          <li><strong>Delete (Eliminar):</strong> borrar registros de una tabla.</li>
+        </ul>
+
+        <p>SQL se usa en practicamente todas las aplicaciones que manejan datos: sistemas bancarios, tiendas online, redes sociales, sistemas de salud, ERP empresariales, y por supuesto, en los trabajos y proyectos de la universidad. Saber SQL te abre puertas tanto en el mundo academico como profesional.</p>
+
+        <div class="article-tip article-tip--info">
+          <div class="article-tip__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          </div>
+          <div class="article-tip__text">
+            <strong>Dato importante</strong>
+            SQL es un lenguaje declarativo: tu le dices a la base de datos <em>que</em> quieres obtener, no <em>como</em> obtenerlo. Esto lo hace diferente a lenguajes como Python o Java, donde escribes instrucciones paso a paso. Por eso SQL es relativamente facil de aprender.
+          </div>
+        </div>
+
+        <h2 id="configurar-entorno">Configurar tu entorno (MySQL, PostgreSQL o SQLite)</h2>
+
+        <p>Para practicar SQL necesitas un motor de base de datos. Estas son las tres opciones mas populares para estudiantes:</p>
+
+        <ul>
+          <li><strong>MySQL:</strong> el mas usado en el mundo. Descarga MySQL Community Server y MySQL Workbench (interfaz grafica). Es gratuito y es lo que la mayoria de profesores piden.</li>
+          <li><strong>PostgreSQL:</strong> mas robusto y con mejor soporte para funciones avanzadas. Descargalo con pgAdmin como interfaz grafica. Tambien gratuito.</li>
+          <li><strong>SQLite:</strong> el mas simple. No necesita instalacion de servidor; funciona como un archivo. Ideal para practicar rapido. Puedes usar DB Browser for SQLite como interfaz.</li>
+        </ul>
+
+        <div class="article-steps">
+          <div class="article-step">
+            <div class="article-step__body">
+              <h4>Opcion rapida: SQL online</h4>
+              <p>Si no quieres instalar nada, puedes practicar en <strong>SQLiteOnline.com</strong> o <strong>db-fiddle.com</strong>. Solo abre el navegador y empieza a escribir consultas. Perfecto para empezar.</p>
+            </div>
+          </div>
+          <div class="article-step">
+            <div class="article-step__body">
+              <h4>Crear una base de datos de practica</h4>
+              <p>Vamos a crear una base de datos sencilla para los ejemplos de esta guia. Copia y ejecuta el siguiente codigo:</p>
+            </div>
+          </div>
+        </div>
+
+        <pre><code>-- Crear la base de datos
+CREATE DATABASE universidad;
+USE universidad;
+
+-- Crear tabla de estudiantes
+CREATE TABLE estudiantes (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(100) NOT NULL,
+    apellido VARCHAR(100) NOT NULL,
+    carrera VARCHAR(100),
+    semestre INT,
+    promedio DECIMAL(3,1),
+    fecha_ingreso DATE
+);
+
+-- Crear tabla de cursos
+CREATE TABLE cursos (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(150) NOT NULL,
+    creditos INT,
+    profesor VARCHAR(100)
+);
+
+-- Crear tabla de inscripciones
+CREATE TABLE inscripciones (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    estudiante_id INT,
+    curso_id INT,
+    nota DECIMAL(3,1),
+    semestre VARCHAR(10),
+    FOREIGN KEY (estudiante_id) REFERENCES estudiantes(id),
+    FOREIGN KEY (curso_id) REFERENCES cursos(id)
+);
+
+-- Insertar datos de ejemplo
+INSERT INTO estudiantes (nombre, apellido, carrera, semestre, promedio, fecha_ingreso) VALUES
+('Maria', 'Gonzalez', 'Ingenieria Comercial', 5, 5.8, '2024-03-01'),
+('Juan', 'Rodriguez', 'Ingenieria Civil', 3, 6.2, '2025-03-01'),
+('Camila', 'Lopez', 'Psicologia', 7, 6.5, '2023-03-01'),
+('Diego', 'Martinez', 'Ingenieria Comercial', 4, 4.9, '2024-08-01'),
+('Valentina', 'Silva', 'Derecho', 6, 5.5, '2023-08-01'),
+('Sebastian', 'Torres', 'Ingenieria Civil', 2, 6.0, '2025-08-01'),
+('Francisca', 'Muñoz', 'Psicologia', 4, 5.3, '2024-08-01'),
+('Matias', 'Diaz', 'Administracion', 8, 6.1, '2022-03-01');
+
+INSERT INTO cursos (nombre, creditos, profesor) VALUES
+('Bases de Datos', 5, 'Prof. Soto'),
+('Estadistica I', 4, 'Prof. Reyes'),
+('Calculo II', 5, 'Prof. Fernandez'),
+('Marketing Digital', 3, 'Prof. Vera');
+
+INSERT INTO inscripciones (estudiante_id, curso_id, nota, semestre) VALUES
+(1, 1, 5.5, '2026-1'), (1, 2, 6.0, '2026-1'),
+(2, 1, 6.8, '2026-1'), (2, 3, 5.9, '2026-1'),
+(3, 2, 6.3, '2026-1'), (4, 1, 4.2, '2026-1'),
+(4, 4, 5.1, '2026-1'), (5, 2, 5.7, '2026-1'),
+(6, 3, 6.4, '2026-1'), (7, 2, 4.8, '2026-1'),
+(8, 4, 6.0, '2026-1'), (8, 1, 5.9, '2026-1');</code></pre>
+
+        <h2 id="select-consulta">SELECT: tu primera consulta</h2>
+
+        <p>La sentencia <code>SELECT</code> es la base de todo en SQL. Con ella puedes obtener datos de una tabla. La sintaxis basica es:</p>
+
+        <pre><code>SELECT columna1, columna2, columna3
+FROM nombre_tabla;</code></pre>
+
+        <p>Veamos ejemplos con nuestra base de datos de practica:</p>
+
+        <pre><code>-- Obtener todos los datos de todos los estudiantes
+SELECT * FROM estudiantes;
+
+-- Obtener solo nombre y carrera
+SELECT nombre, apellido, carrera
+FROM estudiantes;
+
+-- Usar alias para renombrar columnas en el resultado
+SELECT nombre AS "Nombre del Estudiante",
+       carrera AS "Carrera Universitaria",
+       promedio AS "Promedio Acumulado"
+FROM estudiantes;</code></pre>
+
+        <p>El asterisco <code>*</code> significa "todas las columnas". Es util para explorar datos, pero en consultas de produccion es mejor especificar las columnas que necesitas para mejorar el rendimiento.</p>
+
+        <figure class="article-img">
+          <img src="Imagenes/imagen 23.webp" alt="Ejemplo de consulta SQL mostrando resultados" loading="lazy" width="800" height="450" decoding="async" />
+          <figcaption>Resultado de una consulta SELECT mostrando datos de la tabla de estudiantes</figcaption>
+        </figure>
+
+        <h2 id="where-filtrar">WHERE: filtrar resultados</h2>
+
+        <p>La clausula <code>WHERE</code> te permite filtrar las filas que cumplan una condicion. Es como decir "dame solo los registros que cumplan con esto".</p>
+
+        <pre><code>-- Estudiantes de Ingenieria Comercial
+SELECT nombre, apellido, promedio
+FROM estudiantes
+WHERE carrera = 'Ingenieria Comercial';
+
+-- Estudiantes con promedio mayor a 6.0
+SELECT nombre, apellido, promedio
+FROM estudiantes
+WHERE promedio > 6.0;
+
+-- Combinar condiciones con AND y OR
+SELECT nombre, apellido, carrera, promedio
+FROM estudiantes
+WHERE carrera = 'Ingenieria Civil'
+  AND promedio >= 6.0;
+
+-- Estudiantes que NO son de Psicologia
+SELECT nombre, apellido, carrera
+FROM estudiantes
+WHERE carrera != 'Psicologia';
+
+-- Buscar con patrones usando LIKE
+SELECT nombre, apellido
+FROM estudiantes
+WHERE apellido LIKE 'M%';    -- Apellidos que empiezan con M
+
+-- Buscar en una lista de valores con IN
+SELECT nombre, apellido, carrera
+FROM estudiantes
+WHERE carrera IN ('Derecho', 'Psicologia', 'Administracion');
+
+-- Buscar en un rango con BETWEEN
+SELECT nombre, apellido, promedio
+FROM estudiantes
+WHERE promedio BETWEEN 5.0 AND 6.0;</code></pre>
+
+        <div class="article-tip article-tip--warn">
+          <div class="article-tip__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <div class="article-tip__text">
+            <strong>Cuidado con NULL</strong>
+            En SQL, <code>NULL</code> no es igual a nada, ni siquiera a si mismo. No puedes usar <code>WHERE columna = NULL</code>. Debes usar <code>WHERE columna IS NULL</code> o <code>WHERE columna IS NOT NULL</code>. Este es uno de los errores mas comunes en pruebas de bases de datos.
+          </div>
+        </div>
+
+        <h2 id="order-limit">ORDER BY y LIMIT</h2>
+
+        <p><code>ORDER BY</code> ordena los resultados y <code>LIMIT</code> restringe cuantas filas se devuelven. Son muy utiles para rankings y top-N:</p>
+
+        <pre><code>-- Ordenar por promedio de mayor a menor
+SELECT nombre, apellido, promedio
+FROM estudiantes
+ORDER BY promedio DESC;
+
+-- Ordenar por carrera (A-Z) y luego por promedio (mayor a menor)
+SELECT nombre, apellido, carrera, promedio
+FROM estudiantes
+ORDER BY carrera ASC, promedio DESC;
+
+-- Top 3 estudiantes con mejor promedio
+SELECT nombre, apellido, promedio
+FROM estudiantes
+ORDER BY promedio DESC
+LIMIT 3;
+
+-- Estudiantes del semestre 4 en adelante, ordenados por nombre
+SELECT nombre, apellido, semestre
+FROM estudiantes
+WHERE semestre >= 4
+ORDER BY nombre ASC;</code></pre>
+
+        <div class="article-tip article-tip--info">
+          <div class="article-tip__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          </div>
+          <div class="article-tip__text">
+            <strong>Nota sobre LIMIT</strong>
+            <code>LIMIT</code> es la sintaxis de MySQL y PostgreSQL. En SQL Server se usa <code>TOP</code>: <code>SELECT TOP 3 * FROM estudiantes</code>. En Oracle se usa <code>FETCH FIRST 3 ROWS ONLY</code>. Consulta cual usa tu profesor.
+          </div>
+        </div>
+
+        <h2 id="funciones-agregacion">Funciones de agregacion (COUNT, SUM, AVG)</h2>
+
+        <p>Las funciones de agregacion calculan un unico valor a partir de un conjunto de filas. Son fundamentales para reportes y analisis:</p>
+
+        <pre><code>-- Contar cuantos estudiantes hay
+SELECT COUNT(*) AS total_estudiantes
+FROM estudiantes;
+
+-- Promedio general de todos los estudiantes
+SELECT AVG(promedio) AS promedio_general
+FROM estudiantes;
+
+-- Promedio mas alto y mas bajo
+SELECT MAX(promedio) AS mejor_promedio,
+       MIN(promedio) AS peor_promedio
+FROM estudiantes;
+
+-- Contar estudiantes por carrera (GROUP BY)
+SELECT carrera,
+       COUNT(*) AS cantidad,
+       AVG(promedio) AS promedio_carrera
+FROM estudiantes
+GROUP BY carrera
+ORDER BY promedio_carrera DESC;
+
+-- Filtrar grupos con HAVING
+-- (carreras con promedio superior a 5.5)
+SELECT carrera,
+       COUNT(*) AS cantidad,
+       AVG(promedio) AS promedio_carrera
+FROM estudiantes
+GROUP BY carrera
+HAVING AVG(promedio) > 5.5
+ORDER BY promedio_carrera DESC;</code></pre>
+
+        <div class="article-tip article-tip--warn">
+          <div class="article-tip__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <div class="article-tip__text">
+            <strong>WHERE vs HAVING</strong>
+            <code>WHERE</code> filtra filas individuales ANTES de agrupar. <code>HAVING</code> filtra grupos DESPUES de agrupar. Si quieres filtrar por una columna normal, usa WHERE. Si quieres filtrar por el resultado de una funcion de agregacion (COUNT, AVG, SUM), usa HAVING.
+          </div>
+        </div>
+
+        <h2 id="join-combinar">JOIN: combinar tablas</h2>
+
+        <p>En una base de datos relacional, los datos estan distribuidos en multiples tablas. <code>JOIN</code> te permite combinar filas de dos o mas tablas basandose en una columna comun (generalmente una clave foranea).</p>
+
+        <pre><code>-- INNER JOIN: obtener estudiantes con sus cursos e inscripciones
+SELECT e.nombre,
+       e.apellido,
+       c.nombre AS curso,
+       i.nota
+FROM estudiantes e
+INNER JOIN inscripciones i ON e.id = i.estudiante_id
+INNER JOIN cursos c ON c.id = i.curso_id
+ORDER BY e.apellido, c.nombre;
+
+-- LEFT JOIN: TODOS los estudiantes, incluso los sin inscripciones
+SELECT e.nombre,
+       e.apellido,
+       c.nombre AS curso,
+       i.nota
+FROM estudiantes e
+LEFT JOIN inscripciones i ON e.id = i.estudiante_id
+LEFT JOIN cursos c ON c.id = i.curso_id
+ORDER BY e.apellido;
+
+-- Promedio de notas por curso
+SELECT c.nombre AS curso,
+       c.profesor,
+       COUNT(i.id) AS inscritos,
+       AVG(i.nota) AS promedio_notas
+FROM cursos c
+LEFT JOIN inscripciones i ON c.id = i.curso_id
+GROUP BY c.id, c.nombre, c.profesor
+ORDER BY promedio_notas DESC;</code></pre>
+
+        <p>Los tipos de JOIN que debes conocer son:</p>
+
+        <ul>
+          <li><strong>INNER JOIN:</strong> solo devuelve filas que tienen coincidencia en AMBAS tablas.</li>
+          <li><strong>LEFT JOIN:</strong> devuelve TODAS las filas de la tabla izquierda, y las coincidencias de la derecha (NULL si no hay).</li>
+          <li><strong>RIGHT JOIN:</strong> lo opuesto al LEFT JOIN. Devuelve todas las filas de la tabla derecha.</li>
+          <li><strong>FULL OUTER JOIN:</strong> devuelve todas las filas de ambas tablas (no disponible en MySQL).</li>
+        </ul>
+
+        <h2 id="insert-update-delete">INSERT, UPDATE y DELETE</h2>
+
+        <p>Ademas de leer datos, necesitas saber como modificarlos:</p>
+
+        <pre><code>-- INSERT: agregar un nuevo estudiante
+INSERT INTO estudiantes (nombre, apellido, carrera, semestre, promedio, fecha_ingreso)
+VALUES ('Antonia', 'Rojas', 'Ingenieria Comercial', 1, 0.0, '2026-03-01');
+
+-- INSERT multiple: agregar varios registros a la vez
+INSERT INTO estudiantes (nombre, apellido, carrera, semestre, promedio, fecha_ingreso)
+VALUES
+    ('Felipe', 'Castro', 'Derecho', 2, 5.4, '2025-08-01'),
+    ('Isidora', 'Vargas', 'Psicologia', 1, 0.0, '2026-03-01');
+
+-- UPDATE: modificar el promedio de un estudiante
+UPDATE estudiantes
+SET promedio = 5.2, semestre = 2
+WHERE id = 9;
+
+-- DELETE: eliminar un estudiante
+DELETE FROM estudiantes
+WHERE id = 10;</code></pre>
+
+        <div class="article-tip article-tip--warn">
+          <div class="article-tip__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <div class="article-tip__text">
+            <strong>NUNCA hagas UPDATE o DELETE sin WHERE</strong>
+            Si ejecutas <code>DELETE FROM estudiantes;</code> sin clausula WHERE, borraras TODOS los registros de la tabla. Lo mismo con UPDATE: si no especificas WHERE, actualizaras todas las filas. Siempre verifica tu WHERE con un SELECT antes de ejecutar UPDATE o DELETE.
+          </div>
+        </div>
+
+        <h2 id="subconsultas">Subconsultas basicas</h2>
+
+        <p>Una subconsulta es un SELECT dentro de otro SELECT. Son muy utiles para consultas complejas:</p>
+
+        <pre><code>-- Estudiantes con promedio superior al promedio general
+SELECT nombre, apellido, promedio
+FROM estudiantes
+WHERE promedio > (SELECT AVG(promedio) FROM estudiantes);
+
+-- Cursos en los que esta inscrita Maria Gonzalez
+SELECT nombre AS curso
+FROM cursos
+WHERE id IN (
+    SELECT curso_id
+    FROM inscripciones
+    WHERE estudiante_id = (
+        SELECT id FROM estudiantes
+        WHERE nombre = 'Maria' AND apellido = 'Gonzalez'
+    )
+);
+
+-- Estudiante con la nota mas alta en Bases de Datos
+SELECT e.nombre, e.apellido, i.nota
+FROM estudiantes e
+JOIN inscripciones i ON e.id = i.estudiante_id
+WHERE i.curso_id = (SELECT id FROM cursos WHERE nombre = 'Bases de Datos')
+ORDER BY i.nota DESC
+LIMIT 1;</code></pre>
+
+        <h2 id="ejercicios">Ejercicios practicos</h2>
+
+        <p>Practica con estos ejercicios usando la base de datos que creamos al principio. Intenta resolverlos antes de ver las respuestas:</p>
+
+        <ol>
+          <li><strong>Facil:</strong> Lista todos los estudiantes de Psicologia ordenados por promedio de mayor a menor.</li>
+          <li><strong>Facil:</strong> Cuenta cuantos cursos tiene cada profesor.</li>
+          <li><strong>Medio:</strong> Muestra el nombre de cada estudiante junto con la cantidad de cursos en los que esta inscrito.</li>
+          <li><strong>Medio:</strong> Encuentra los estudiantes que tienen al menos una nota inferior a 5.0.</li>
+          <li><strong>Avanzado:</strong> Para cada carrera, muestra el estudiante con mejor promedio.</li>
+        </ol>
+
+        <pre><code>-- Respuesta 1:
+SELECT nombre, apellido, promedio
+FROM estudiantes
+WHERE carrera = 'Psicologia'
+ORDER BY promedio DESC;
+
+-- Respuesta 2:
+SELECT profesor, COUNT(*) AS cantidad_cursos
+FROM cursos
+GROUP BY profesor;
+
+-- Respuesta 3:
+SELECT e.nombre, e.apellido,
+       COUNT(i.id) AS cursos_inscritos
+FROM estudiantes e
+LEFT JOIN inscripciones i ON e.id = i.estudiante_id
+GROUP BY e.id, e.nombre, e.apellido
+ORDER BY cursos_inscritos DESC;
+
+-- Respuesta 4:
+SELECT DISTINCT e.nombre, e.apellido
+FROM estudiantes e
+JOIN inscripciones i ON e.id = i.estudiante_id
+WHERE i.nota < 5.0;
+
+-- Respuesta 5:
+SELECT e.nombre, e.apellido, e.carrera, e.promedio
+FROM estudiantes e
+WHERE e.promedio = (
+    SELECT MAX(e2.promedio)
+    FROM estudiantes e2
+    WHERE e2.carrera = e.carrera
+)
+ORDER BY e.carrera;</code></pre>
+
+        <p>Si pudiste resolver la mayoria de estos ejercicios, ya tienes una base solida de SQL. Para seguir avanzando, te recomiendo practicar en plataformas como <strong>HackerRank</strong>, <strong>LeetCode</strong> o <strong>SQLZoo</strong>, que tienen cientos de ejercicios ordenados por dificultad.</p>
+
+        <p>Si necesitas ayuda con un trabajo de bases de datos, ya sea crear un modelo entidad-relacion, escribir consultas SQL complejas o desarrollar un sistema completo, en Tareapp tenemos experiencia con MySQL, PostgreSQL, SQL Server y Oracle. Escribenos y te ayudamos.</p>
+
+        <!-- Share -->
+        <div class="article-share">
+          <span>Compartir:</span>
+          <a href="#" aria-label="Compartir en WhatsApp" data-wa-message="Mira este tutorial de SQL para principiantes">
+            <svg class="i i--sm" aria-hidden="true" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="currentColor"/></svg>
+          </a>
+        </div>
+
+      </article>
+
+      <!-- SIDEBAR -->
+      <aside class="article-sidebar">
+        <nav class="article-toc">
+          <p class="article-toc__title">En este articulo</p>
+          <ol class="article-toc__list">
+            <li><a href="#que-es-sql">Que es SQL y para que se usa</a></li>
+            <li><a href="#configurar-entorno">Configurar tu entorno</a></li>
+            <li><a href="#select-consulta">SELECT: tu primera consulta</a></li>
+            <li><a href="#where-filtrar">WHERE: filtrar resultados</a></li>
+            <li><a href="#order-limit">ORDER BY y LIMIT</a></li>
+            <li><a href="#funciones-agregacion">Funciones de agregacion</a></li>
+            <li><a href="#join-combinar">JOIN: combinar tablas</a></li>
+            <li><a href="#insert-update-delete">INSERT, UPDATE y DELETE</a></li>
+            <li><a href="#subconsultas">Subconsultas basicas</a></li>
+            <li><a href="#ejercicios">Ejercicios practicos</a></li>
+          </ol>
+        </nav>
+
+        <div class="article-sidebar__cta">
+          <h4>¿Necesitas ayuda con tu trabajo de bases de datos?</h4>
+          <p>Nuestro equipo puede ayudarte con modelos ER, consultas SQL y proyectos completos.</p>
+          <a class="btn btn--primary btn--block" data-wa-message="Hola, necesito ayuda con un trabajo academico." href="#" rel="noopener">
+            Cotizar ahora
+          </a>
+        </div>
+      </aside>
+
+    </div>
+
+    <!-- RELATED ARTICLES -->
+    <section class="article-related">
+      <div class="container">
+        <h2>Articulos relacionados</h2>
+        <div class="blog-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))">
+          <article class="blog-card">
+            <div class="blog-card__img">
+              <img src="Imagenes/imagen 15.webp" alt="Python para universitarios" loading="lazy" width="400" height="250" decoding="async">
+            </div>
+            <div class="blog-card__body">
+              <span class="blog-card__badge" style="--badge-color: #3776AB">Programacion</span>
+              <h3><a href="blog-python-universitarios.html">Python para universitarios: Tu primer programa paso a paso</a></h3>
+              <p class="muted">Guia de inicio en Python para estudiantes universitarios.</p>
+            </div>
+          </article>
+          <article class="blog-card">
+            <div class="blog-card__img">
+              <img src="Imagenes/imagen 11.webp" alt="Dashboard de Power BI" loading="lazy" width="400" height="250" decoding="async">
+            </div>
+            <div class="blog-card__body">
+              <span class="blog-card__badge" style="--badge-color: #F7C948">Power BI</span>
+              <h3><a href="blog-power-bi-dashboard.html">Como hacer un Dashboard en Power BI: Guia paso a paso</a></h3>
+              <p class="muted">Aprende a crear dashboards interactivos en Power BI desde cero.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="final-cta" aria-label="CTA">
+      <div class="container final-cta__inner">
+        <div>
+          <h2>¿Necesitas que hagamos tu trabajo?</h2>
+          <p class="muted">Escribenos con los requisitos y te cotizamos al instante.</p>
+        </div>
+        <div class="final-cta__actions">
+          <a class="btn btn--primary" data-wa-message="Hola, necesito cotizar un trabajo academico." href="#" rel="noopener">
+            Cotizar ahora
+          </a>
+          <a class="btn btn--ghost" href="index.html">Ver servicios</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <img src="NUEVO LOGO TAREAPP.png" width="56" height="56" alt="Logo de Tareapp" loading="lazy" decoding="async" style="border-radius:12px" />
+        <div>
+          <strong>Tareapp</strong>
+          <p class="muted">Soluciones Academicas</p>
+        </div>
+      </div>
+      <div class="footer__cols">
+        <div>
+          <h4>Secciones</h4>
+          <a href="index.html">Inicio</a>
+          <a href="tesis.html">Tesis</a>
+          <a href="blog.html">Blog</a>
+          <a href="nosotros.html">Nosotros</a>
+        </div>
+      </div>
+    </div>
+    <div class="container footer__bottom">
+      <span class="muted">&copy; 2026 Tareapp. Todos los derechos reservados.</span>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

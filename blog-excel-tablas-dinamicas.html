@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light" />
+  <title>Tablas Dinamicas en Excel: Tutorial completo | Tareapp Blog</title>
+  <meta name="description" content="Domina las tablas dinamicas de Excel con este tutorial completo. Desde crear tu primera tabla hasta campos calculados y graficos dinamicos." />
+  <meta name="author" content="Tareapp" />
+  <meta name="theme-color" content="#F7C948" />
+  <link rel="icon" href="NUEVO LOGO TAREAPP.png" />
+  <link rel="apple-touch-icon" href="NUEVO LOGO TAREAPP.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body data-page="blog">
+
+  <!-- Simple header -->
+  <header class="nav" id="top">
+    <div class="container nav__inner">
+      <a class="brand" href="index.html" aria-label="Ir al inicio">
+        <img src="NUEVO LOGO TAREAPP.png" width="40" height="40" alt="Logo de Tareapp" decoding="async" style="border-radius:10px" />
+        <span class="brand__text">
+          <strong>Tareapp</strong>
+          <small>Soluciones Academicas</small>
+        </span>
+      </a>
+      <nav class="nav__links" aria-label="Navegacion principal">
+        <a href="index.html">Inicio</a>
+        <a href="blog.html" class="active">Blog</a>
+        <a href="nosotros.html">Nosotros</a>
+      </nav>
+      <div class="nav__actions">
+        <a class="btn btn--ghost btn--sm hide-sm" href="blog.html">
+          &larr; Volver al Blog
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido">
+
+    <!-- ARTICLE HERO -->
+    <section class="article-hero">
+      <div class="article-hero__img">
+        <img src="Imagenes/imagen 12.webp" alt="Laptop con Excel mostrando tablas dinamicas" width="1400" height="480" decoding="async" />
+      </div>
+      <div class="article-hero__overlay"></div>
+      <div class="article-hero__content container">
+        <nav class="article-breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html">Inicio</a>
+          <span>/</span>
+          <a href="blog.html">Blog</a>
+          <span>/</span>
+          <span>Excel</span>
+        </nav>
+        <h1>Tablas Dinamicas en Excel: Tutorial completo</h1>
+        <div class="article-meta">
+          <span class="article-meta__badge" style="background:#217346;color:#fff">Excel</span>
+          <span class="article-meta__sep"></span>
+          <time datetime="2026-02">Febrero 2026</time>
+          <span class="article-meta__sep"></span>
+          <span>10 min de lectura</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ARTICLE LAYOUT -->
+    <div class="container article-layout">
+
+      <!-- MAIN CONTENT -->
+      <article class="article-content">
+
+        <h2 id="que-son-tablas-dinamicas">Que son las tablas dinamicas</h2>
+
+        <p>Las tablas dinamicas son una de las herramientas mas poderosas de Excel, y sin embargo, muchos estudiantes nunca las aprenden durante la carrera. En pocas palabras, una tabla dinamica te permite resumir, analizar, explorar y presentar grandes cantidades de datos en segundos, sin necesidad de escribir formulas complejas.</p>
+
+        <p>Imagina que tienes una planilla con 10.000 filas de ventas de una empresa, con columnas como fecha, vendedor, producto, region y monto. Si quieres saber cuanto vendio cada vendedor por region durante el ultimo trimestre, sin tablas dinamicas tendrias que usar combinaciones de <code>SUMAR.SI.CONJUNTO</code>, <code>BUSCARV</code> y otras funciones. Con una tabla dinamica, lo haces en 30 segundos arrastrando campos.</p>
+
+        <p>Las tablas dinamicas son especialmente utiles para:</p>
+
+        <ul>
+          <li><strong>Resumir datos:</strong> sumar, promediar, contar o encontrar maximos y minimos por categorias.</li>
+          <li><strong>Analisis exploratorio:</strong> reorganizar los datos rapidamente para encontrar patrones.</li>
+          <li><strong>Reportes:</strong> crear informes que se actualizan automaticamente cuando cambian los datos fuente.</li>
+          <li><strong>Segmentacion:</strong> filtrar datos por multiples criterios de forma visual.</li>
+          <li><strong>Trabajos universitarios:</strong> analizar encuestas, datos financieros, estadisticas y cualquier dataset tabular.</li>
+        </ul>
+
+        <h2 id="preparar-datos">Preparar tus datos correctamente</h2>
+
+        <p>Antes de crear una tabla dinamica, tus datos deben cumplir ciertos requisitos. Si no los preparas bien, vas a tener problemas que son dificiles de diagnosticar. Sigue estas reglas:</p>
+
+        <div class="article-steps">
+          <div class="article-step">
+            <div class="article-step__body">
+              <h4>Cada columna debe tener un encabezado unico</h4>
+              <p>La primera fila debe contener nombres de columna claros y sin repetir. Evita nombres como "Columna1" o dejar celdas vacias en el encabezado.</p>
+            </div>
+          </div>
+          <div class="article-step">
+            <div class="article-step__body">
+              <h4>No dejes filas ni columnas vacias en medio de los datos</h4>
+              <p>Excel usa las celdas vacias para determinar donde terminan los datos. Si hay una fila vacia en la fila 500, solo tomara las primeras 499 filas.</p>
+            </div>
+          </div>
+          <div class="article-step">
+            <div class="article-step__body">
+              <h4>Cada fila debe ser un registro unico</h4>
+              <p>No combines celdas ni pongas subtotales en medio de los datos. Cada fila debe representar una unica transaccion, respuesta de encuesta u observacion.</p>
+            </div>
+          </div>
+          <div class="article-step">
+            <div class="article-step__body">
+              <h4>Usa formatos consistentes</h4>
+              <p>Si una columna es de fechas, todas las celdas deben ser fechas (no texto que parece fecha). Si es numerica, no mezcles numeros con texto como "N/A".</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="article-tip article-tip--warn">
+          <div class="article-tip__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <div class="article-tip__text">
+            <strong>Error comun</strong>
+            Si tus numeros tienen formato de texto (alineados a la izquierda en vez de la derecha), la tabla dinamica no podra sumarlos. Selecciona la columna, ve a <strong>Datos &gt; Texto en columnas &gt; Finalizar</strong> para forzar la conversion a numero.
+          </div>
+        </div>
+
+        <p>Un consejo extra: convierte tu rango de datos en una <strong>Tabla de Excel</strong> antes de crear la tabla dinamica. Selecciona tus datos y presiona <code>Ctrl + T</code>. Esto tiene dos ventajas: la tabla dinamica se actualizara automaticamente cuando agregues nuevas filas, y podras referenciar las columnas por nombre.</p>
+
+        <h2 id="crear-primera-tabla">Crear tu primera tabla dinamica paso a paso</h2>
+
+        <p>Ahora si, manos a la obra. Vamos a crear tu primera tabla dinamica:</p>
+
+        <ol>
+          <li>Selecciona cualquier celda dentro de tus datos (no necesitas seleccionar todo el rango).</li>
+          <li>Ve a la pestana <strong>Insertar</strong> y haz clic en <strong>"Tabla dinamica"</strong>.</li>
+          <li>En el cuadro de dialogo, verifica que el rango sea correcto y elige donde quieres la tabla (nueva hoja o hoja existente). Te recomiendo nueva hoja para empezar.</li>
+          <li>Haz clic en <strong>Aceptar</strong>.</li>
+        </ol>
+
+        <p>Aparecera una hoja nueva con un area vacia y el panel de <strong>Campos de tabla dinamica</strong> a la derecha. Este panel tiene dos partes: arriba estan todos los campos (columnas) de tus datos, y abajo estan las cuatro areas donde puedes arrastrarlos.</p>
+
+        <figure class="article-img">
+          <img src="Imagenes/imagen 21.webp" alt="Panel de campos de tabla dinamica en Excel" loading="lazy" width="800" height="450" decoding="async" />
+          <figcaption>El panel de campos de tabla dinamica te permite arrastrar columnas a las areas de filas, columnas, valores y filtros</figcaption>
+        </figure>
+
+        <h2 id="campos-areas">Campos: filas, columnas, valores y filtros</h2>
+
+        <p>Las cuatro areas de una tabla dinamica son el corazon de su funcionamiento. Entender como funciona cada una es clave:</p>
+
+        <ul>
+          <li><strong>Filas:</strong> los campos que arrastras aqui se convierten en las filas de tu tabla. Tipicamente pones aqui las categorias que quieres analizar (vendedor, producto, region, etc.).</li>
+          <li><strong>Columnas:</strong> similar a filas, pero los valores se distribuyen horizontalmente. Util para comparaciones lado a lado (por ejemplo, meses como columnas).</li>
+          <li><strong>Valores:</strong> aqui van los numeros que quieres calcular. Por defecto, Excel usa SUMA para numeros y CUENTA para texto. Puedes cambiarlo a promedio, maximo, minimo, etc.</li>
+          <li><strong>Filtros:</strong> los campos aqui crean un filtro general arriba de la tabla dinamica, permitiendo al usuario seleccionar que subconjunto de datos ver.</li>
+        </ul>
+
+        <p>Veamos un ejemplo practico. Supongamos que tienes datos de ventas con las columnas <code>Vendedor</code>, <code>Region</code>, <code>Producto</code>, <code>Monto</code> y <code>Fecha</code>:</p>
+
+        <ul>
+          <li>Arrastra <strong>Vendedor</strong> al area de Filas.</li>
+          <li>Arrastra <strong>Monto</strong> al area de Valores (automaticamente se convierte en "Suma de Monto").</li>
+          <li>Arrastra <strong>Region</strong> al area de Columnas.</li>
+          <li>Arrastra <strong>Producto</strong> al area de Filtros.</li>
+        </ul>
+
+        <p>Con esto obtendras una tabla que muestra cuanto vendio cada vendedor en cada region, con la opcion de filtrar por producto. Todo esto sin escribir una sola formula.</p>
+
+        <div class="article-tip article-tip--info">
+          <div class="article-tip__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          </div>
+          <div class="article-tip__text">
+            <strong>Tip rapido</strong>
+            Puedes cambiar la funcion de resumen haciendo clic derecho sobre cualquier valor en la tabla dinamica y seleccionando <strong>"Configuracion de campo de valor"</strong>. Ahi puedes cambiar de Suma a Promedio, Cuenta, Max, Min, etc.
+          </div>
+        </div>
+
+        <h2 id="formatos-estilos">Formatos y estilos de tabla dinamica</h2>
+
+        <p>Las tablas dinamicas por defecto no se ven muy bien en un informe. Afortunadamente, Excel ofrece opciones de formato que pueden hacer que se vean profesionales:</p>
+
+        <p><strong>Estilos predefinidos:</strong> selecciona tu tabla dinamica, ve a la pestana <strong>Diseno</strong> y elige uno de los estilos predefinidos. Los estilos "medianos" suelen funcionar bien para informes academicos.</p>
+
+        <p><strong>Formato de numeros:</strong> haz clic derecho sobre los valores, selecciona <strong>"Formato de numero"</strong> y elige el formato apropiado (moneda, porcentaje, numero con separadores de miles).</p>
+
+        <p><strong>Diseño de la tabla:</strong> en la pestana Diseno puedes elegir entre tres layouts:</p>
+
+        <ul>
+          <li><strong>Compacto:</strong> el predeterminado. Todo en una columna, con sangria para subcategorias.</li>
+          <li><strong>Esquema:</strong> cada nivel de fila tiene su propia columna. Mejor para informes formales.</li>
+          <li><strong>Tabular:</strong> similar a una tabla normal. Ideal si vas a copiar los datos a otro lugar.</li>
+        </ul>
+
+        <pre><code>' Para dar formato condicional a una tabla dinamica via VBA:
+Sub FormatoPivot()
+    Dim pt As PivotTable
+    Set pt = ActiveSheet.PivotTables(1)
+
+    ' Aplicar formato de moneda chilena
+    pt.DataBodyRange.NumberFormat = "$#,##0"
+
+    ' Aplicar estilo
+    pt.TableStyle2 = "PivotStyleMedium9"
+End Sub</code></pre>
+
+        <h2 id="graficos-dinamicos">Graficos dinamicos (Pivot Charts)</h2>
+
+        <p>Los graficos dinamicos son la version visual de las tablas dinamicas, y se crean directamente desde ellas. La gran ventaja es que cuando filtras la tabla dinamica, el grafico se actualiza automaticamente.</p>
+
+        <p>Para crear un grafico dinamico:</p>
+
+        <ol>
+          <li>Selecciona tu tabla dinamica.</li>
+          <li>Ve a <strong>Insertar &gt; Grafico dinamico</strong>.</li>
+          <li>Elige el tipo de grafico (barras, lineas, torta, etc.).</li>
+          <li>Personaliza colores, titulos y etiquetas desde las opciones de formato del grafico.</li>
+        </ol>
+
+        <p>Los tipos de grafico mas utiles para tablas dinamicas son:</p>
+
+        <ul>
+          <li><strong>Barras agrupadas:</strong> para comparar categorias con multiples series.</li>
+          <li><strong>Lineas:</strong> para tendencias temporales.</li>
+          <li><strong>Combinado (barras + linea):</strong> para mostrar valores absolutos y porcentajes al mismo tiempo.</li>
+        </ul>
+
+        <div class="article-tip article-tip--info">
+          <div class="article-tip__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          </div>
+          <div class="article-tip__text">
+            <strong>Pro tip</strong>
+            Si necesitas un grafico independiente que no cambie cuando filtras la tabla dinamica, copia el grafico dinamico y pegalo como imagen (<code>Ctrl + Alt + V</code> &gt; Imagen). Asi queda congelado.
+          </div>
+        </div>
+
+        <h2 id="campos-calculados">Funciones avanzadas: campos calculados</h2>
+
+        <p>Los campos calculados te permiten crear nuevas metricas directamente dentro de la tabla dinamica, sin modificar los datos originales. Son extremadamente utiles cuando necesitas ratios, margenes o indicadores derivados.</p>
+
+        <p>Para crear un campo calculado:</p>
+
+        <ol>
+          <li>Selecciona tu tabla dinamica.</li>
+          <li>Ve a <strong>Analizar &gt; Campos, elementos y conjuntos &gt; Campo calculado</strong>.</li>
+          <li>Dale un nombre al campo y escribe la formula.</li>
+        </ol>
+
+        <p>Ejemplos de campos calculados utiles:</p>
+
+        <pre><code>= Ingresos - Costos                    ' Margen bruto
+= Ingresos / Unidades                  ' Precio promedio por unidad
+= (Ventas_Actual - Ventas_Anterior) / Ventas_Anterior  ' Crecimiento %
+= Aprobados / Total_Estudiantes        ' Tasa de aprobacion</code></pre>
+
+        <div class="article-tip article-tip--warn">
+          <div class="article-tip__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <div class="article-tip__text">
+            <strong>Cuidado con los campos calculados</strong>
+            Los campos calculados trabajan a nivel de resumen, no a nivel de fila. Si creas un campo <code>= Precio * Cantidad</code>, Excel primero sumara todos los precios y todas las cantidades por separado, y luego multiplicara los totales. Para calculos a nivel de fila, es mejor agregar la columna en los datos originales.
+          </div>
+        </div>
+
+        <h2 id="errores-comunes">Errores comunes y como evitarlos</h2>
+
+        <p>Despues de trabajar con cientos de estudiantes, estos son los errores mas frecuentes que vemos con tablas dinamicas:</p>
+
+        <ul>
+          <li><strong>"Mi tabla dinamica no muestra todos los datos":</strong> probablemente hay una fila vacia en medio de tus datos. Excel corta el rango ahi. Solucion: elimina la fila vacia y actualiza la tabla dinamica (<code>Alt + F5</code>).</li>
+          <li><strong>"Los numeros aparecen como cuenta en vez de suma":</strong> esto pasa cuando hay celdas con texto o vacias en la columna numerica. Excel asume que la columna es de texto y usa CUENTA. Solucion: limpia los datos y asegurate de que toda la columna sea numerica.</li>
+          <li><strong>"Las fechas se agrupan por mes/trimestre automaticamente":</strong> Excel 2016+ agrupa fechas automaticamente. Si no quieres esto, haz clic derecho sobre las fechas en la tabla dinamica y selecciona <strong>"Desagrupar"</strong>.</li>
+          <li><strong>"No puedo actualizar la tabla dinamica":</strong> si borraste o moviste los datos originales, la tabla pierde la referencia. Ve a <strong>Analizar &gt; Cambiar origen de datos</strong> para reconectarla.</li>
+          <li><strong>"Los totales generales no cuadran":</strong> si usas campos calculados con porcentajes o promedios, los totales pueden no tener sentido matematico. Puedes desactivar los totales generales desde <strong>Diseno &gt; Totales generales</strong>.</li>
+        </ul>
+
+        <div class="article-tip article-tip--warn">
+          <div class="article-tip__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <div class="article-tip__text">
+            <strong>Nunca olvides actualizar</strong>
+            Las tablas dinamicas NO se actualizan automaticamente cuando cambias los datos originales. Siempre presiona <code>Alt + F5</code> o haz clic derecho &gt; Actualizar despues de modificar tus datos fuente.
+          </div>
+        </div>
+
+        <p>Las tablas dinamicas son una habilidad que te va a servir en toda tu carrera profesional. Practica con datos reales, experimenta arrastrando campos entre las diferentes areas, y pronto vas a encontrarle el gusto. Si necesitas ayuda con un trabajo que requiere analisis de datos en Excel, en Tareapp estamos para ayudarte.</p>
+
+        <!-- Share -->
+        <div class="article-share">
+          <span>Compartir:</span>
+          <a href="#" aria-label="Compartir en WhatsApp" data-wa-message="Mira este tutorial de tablas dinamicas en Excel">
+            <svg class="i i--sm" aria-hidden="true" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="currentColor"/></svg>
+          </a>
+        </div>
+
+      </article>
+
+      <!-- SIDEBAR -->
+      <aside class="article-sidebar">
+        <nav class="article-toc">
+          <p class="article-toc__title">En este articulo</p>
+          <ol class="article-toc__list">
+            <li><a href="#que-son-tablas-dinamicas">Que son las tablas dinamicas</a></li>
+            <li><a href="#preparar-datos">Preparar tus datos correctamente</a></li>
+            <li><a href="#crear-primera-tabla">Crear tu primera tabla dinamica</a></li>
+            <li><a href="#campos-areas">Campos: filas, columnas, valores y filtros</a></li>
+            <li><a href="#formatos-estilos">Formatos y estilos</a></li>
+            <li><a href="#graficos-dinamicos">Graficos dinamicos</a></li>
+            <li><a href="#campos-calculados">Campos calculados</a></li>
+            <li><a href="#errores-comunes">Errores comunes</a></li>
+          </ol>
+        </nav>
+
+        <div class="article-sidebar__cta">
+          <h4>¿Necesitas ayuda con tu trabajo en Excel?</h4>
+          <p>Nuestro equipo puede ayudarte con analisis de datos, tablas dinamicas y graficos profesionales.</p>
+          <a class="btn btn--primary btn--block" data-wa-message="Hola, necesito ayuda con un trabajo academico." href="#" rel="noopener">
+            Cotizar ahora
+          </a>
+        </div>
+      </aside>
+
+    </div>
+
+    <!-- RELATED ARTICLES -->
+    <section class="article-related">
+      <div class="container">
+        <h2>Articulos relacionados</h2>
+        <div class="blog-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))">
+          <article class="blog-card">
+            <div class="blog-card__img">
+              <img src="Imagenes/imagen 11.webp" alt="Dashboard de Power BI" loading="lazy" width="400" height="250" decoding="async">
+            </div>
+            <div class="blog-card__body">
+              <span class="blog-card__badge" style="--badge-color: #F7C948">Power BI</span>
+              <h3><a href="blog-power-bi-dashboard.html">Como hacer un Dashboard en Power BI: Guia paso a paso</a></h3>
+              <p class="muted">Aprende a crear dashboards interactivos en Power BI desde cero.</p>
+            </div>
+          </article>
+          <article class="blog-card">
+            <div class="blog-card__img">
+              <img src="Imagenes/imagen 14.webp" alt="SQL para principiantes" loading="lazy" width="400" height="250" decoding="async">
+            </div>
+            <div class="blog-card__body">
+              <span class="blog-card__badge" style="--badge-color: #E34C26">SQL</span>
+              <h3><a href="blog-sql-principiantes.html">SQL para principiantes: Consultas basicas para Bases de Datos</a></h3>
+              <p class="muted">Aprende SQL desde cero con ejemplos practicos.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="final-cta" aria-label="CTA">
+      <div class="container final-cta__inner">
+        <div>
+          <h2>¿Necesitas que hagamos tu trabajo?</h2>
+          <p class="muted">Escribenos con los requisitos y te cotizamos al instante.</p>
+        </div>
+        <div class="final-cta__actions">
+          <a class="btn btn--primary" data-wa-message="Hola, necesito cotizar un trabajo academico." href="#" rel="noopener">
+            Cotizar ahora
+          </a>
+          <a class="btn btn--ghost" href="index.html">Ver servicios</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <img src="NUEVO LOGO TAREAPP.png" width="56" height="56" alt="Logo de Tareapp" loading="lazy" decoding="async" style="border-radius:12px" />
+        <div>
+          <strong>Tareapp</strong>
+          <p class="muted">Soluciones Academicas</p>
+        </div>
+      </div>
+      <div class="footer__cols">
+        <div>
+          <h4>Secciones</h4>
+          <a href="index.html">Inicio</a>
+          <a href="tesis.html">Tesis</a>
+          <a href="blog.html">Blog</a>
+          <a href="nosotros.html">Nosotros</a>
+        </div>
+      </div>
+    </div>
+    <div class="container footer__bottom">
+      <span class="muted">&copy; 2026 Tareapp. Todos los derechos reservados.</span>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
