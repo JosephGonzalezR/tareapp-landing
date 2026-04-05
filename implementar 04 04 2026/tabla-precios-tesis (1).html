@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Planes & Precios - Servicios Académicos 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c0f14;
+    --surface: #14181f;
+    --surface-hover: #1a1f29;
+    --border: #252b37;
+    --text: #e8eaf0;
+    --text-muted: #8890a0;
+    --accent-gold: #d4a853;
+    --accent-gold-dim: rgba(212, 168, 83, 0.12);
+    --accent-blue: #5b8def;
+    --accent-blue-dim: rgba(91, 141, 239, 0.10);
+    --accent-purple: #a78bfa;
+    --accent-purple-dim: rgba(167, 139, 250, 0.10);
+    --accent-emerald: #34d399;
+    --accent-emerald-dim: rgba(52, 211, 153, 0.10);
+    --accent-orange: #fb923c;
+    --wa-green: #25d366;
+    --radius: 16px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; }
+  .grain { position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; }
+  .glow-orb { position: fixed; width: 600px; height: 600px; border-radius: 50%; filter: blur(120px); opacity: 0.07; pointer-events: none; z-index: 0; }
+  .glow-orb.gold { background: var(--accent-gold); top: -200px; right: -100px; }
+  .glow-orb.blue { background: var(--accent-blue); bottom: -200px; left: -100px; }
+  .container { position: relative; z-index: 1; max-width: 1320px; margin: 0 auto; padding: 60px 24px 80px; }
+
+  header { text-align: center; margin-bottom: 48px; }
+  header .badge { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent-gold); background: var(--accent-gold-dim); border: 1px solid rgba(212, 168, 83, 0.2); padding: 8px 20px; border-radius: 100px; margin-bottom: 24px; }
+  header h1 { font-family: 'Playfair Display', serif; font-size: clamp(32px, 5vw, 56px); font-weight: 800; line-height: 1.1; margin-bottom: 16px; background: linear-gradient(135deg, #fff 30%, var(--accent-gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  header p { color: var(--text-muted); font-size: 17px; max-width: 620px; margin: 0 auto; line-height: 1.6; }
+
+  .tabs { display: flex; justify-content: center; gap: 6px; margin-bottom: 48px; flex-wrap: wrap; }
+  .tab { padding: 12px 24px; border-radius: 100px; border: 1px solid var(--border); background: transparent; color: var(--text-muted); font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.3s ease; }
+  .tab:hover { border-color: var(--accent-gold); color: var(--text); }
+  .tab.active { background: var(--accent-gold); color: var(--bg); border-color: var(--accent-gold); font-weight: 600; }
+
+  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 60px; }
+  @media (max-width: 960px) { .pricing-grid { grid-template-columns: 1fr; max-width: 440px; margin-left: auto; margin-right: auto; } }
+
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 36px 28px; position: relative; transition: transform 0.3s ease; display: flex; flex-direction: column; }
+  .card:hover { transform: translateY(-4px); }
+  .card.featured { border-color: var(--accent-gold); background: linear-gradient(180deg, rgba(212,168,83,0.06) 0%, var(--surface) 40%); }
+  .card.featured::before { content: 'MÁS ELEGIDO'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--accent-gold); color: var(--bg); font-size: 10px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 16px; border-radius: 100px; }
+  .card.elite { border-color: var(--accent-purple); background: linear-gradient(180deg, rgba(167,139,250,0.08) 0%, var(--surface) 50%); }
+  .card.elite::before { content: 'MÁXIMO NIVEL'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, var(--accent-purple), #8b5cf6); color: #fff; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; padding: 5px 16px; border-radius: 100px; }
+
+  .card-tier { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+  .tier-estandar { color: var(--accent-blue); }
+  .tier-preferente { color: var(--accent-gold); }
+  .tier-elite { color: var(--accent-purple); }
+
+  .card-name { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; margin-bottom: 6px; }
+  .card-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; margin-bottom: 24px; min-height: 40px; }
+  .price-block { margin-bottom: 28px; }
+  .price { font-family: 'Playfair Display', serif; font-size: 42px; font-weight: 800; line-height: 1; }
+  .price-sub { font-size: 13px; color: var(--text-muted); margin-top: 6px; }
+  .divider { height: 1px; background: var(--border); margin-bottom: 20px; }
+
+  .section-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+  .section-label.included { color: var(--accent-emerald); }
+  .section-label.extras { color: var(--accent-gold); }
+  .section-label.vip { color: var(--accent-purple); }
+
+  .features { list-style: none; margin-bottom: 20px; }
+  .features li { font-size: 13.5px; color: var(--text-muted); padding: 6px 0; display: flex; align-items: flex-start; gap: 10px; line-height: 1.45; }
+  .features li .icon { flex-shrink: 0; width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; margin-top: 1px; }
+  .icon-green { background: var(--accent-emerald-dim); color: var(--accent-emerald); }
+  .icon-gold { background: var(--accent-gold-dim); color: var(--accent-gold); }
+  .icon-purple { background: var(--accent-purple-dim); color: var(--accent-purple); }
+  .features li strong { color: var(--text); font-weight: 600; }
+  .spacer { flex: 1; }
+
+  .card-btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 14px; border-radius: 12px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; text-align: center; cursor: pointer; transition: all 0.25s ease; border: none; margin-top: 8px; text-decoration: none; }
+  .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text); }
+  .btn-outline:hover { border-color: var(--wa-green); background: rgba(37,211,102,0.08); color: var(--wa-green); }
+  .btn-gold { background: var(--accent-gold); color: var(--bg); }
+  .btn-gold:hover { background: #e0b45f; }
+  .btn-purple { background: linear-gradient(135deg, var(--accent-purple), #8b5cf6); color: #fff; }
+  .btn-purple:hover { background: linear-gradient(135deg, #b99dff, #a78bfa); }
+
+  .wa-icon { width: 18px; height: 18px; }
+
+  .partial-cta { margin-top: 8px; margin-bottom: 60px; background: linear-gradient(135deg, rgba(251,146,60,0.08), rgba(212,168,83,0.06)); border: 1px solid rgba(251, 146, 60, 0.25); border-radius: var(--radius); padding: 36px 40px; display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
+  @media (max-width: 700px) { .partial-cta { flex-direction: column; text-align: center; padding: 28px 24px; } }
+  .partial-cta .icon-big { font-size: 48px; flex-shrink: 0; }
+  .partial-cta .content { flex: 1; }
+  .partial-cta h3 { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; margin-bottom: 8px; color: var(--accent-orange); }
+  .partial-cta p { font-size: 15px; color: var(--text-muted); line-height: 1.6; }
+  .partial-cta p strong { color: var(--text); }
+  .partial-cta .cta-btn { flex-shrink: 0; padding: 14px 32px; border-radius: 12px; background: var(--accent-orange); color: var(--bg); font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; border: none; cursor: pointer; transition: all 0.25s; white-space: nowrap; text-decoration: none; display: inline-block; }
+  .partial-cta .cta-btn:hover { background: #f9a854; }
+
+  .comparison-section { margin-top: 0; }
+  .comparison-section h2 { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; text-align: center; margin-bottom: 12px; }
+  .comparison-section .sub { text-align: center; color: var(--text-muted); font-size: 14px; margin-bottom: 32px; }
+  .comp-table-wrapper { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--border); }
+  .comp-table { width: 100%; border-collapse: collapse; min-width: 550px; }
+  .comp-table th, .comp-table td { padding: 14px 20px; text-align: left; font-size: 13.5px; border-bottom: 1px solid var(--border); }
+  .comp-table thead th { background: var(--surface); font-weight: 600; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); }
+  .comp-table thead th:first-child { border-radius: var(--radius) 0 0 0; }
+  .comp-table thead th:last-child { border-radius: 0 var(--radius) 0 0; }
+  .comp-table tbody tr { transition: background 0.2s; }
+  .comp-table tbody tr:hover { background: var(--surface-hover); }
+  .comp-table tbody tr:last-child td { border-bottom: none; }
+  .comp-table .inst-label { font-weight: 600; color: var(--text); }
+  .price-cell { font-weight: 600; white-space: nowrap; }
+  .price-cell.blue { color: var(--accent-blue); }
+  .price-cell.gold { color: var(--accent-gold); }
+  .price-cell.purple { color: var(--accent-purple); }
+
+  .note-section { margin-top: 48px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px 32px; }
+  .note-section h3 { font-size: 15px; font-weight: 600; margin-bottom: 12px; color: var(--accent-gold); }
+  .note-section p { font-size: 13.5px; color: var(--text-muted); line-height: 1.7; margin-bottom: 8px; }
+  .footer-note { text-align: center; margin-top: 40px; font-size: 12px; color: var(--text-muted); opacity: 0.6; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  .card { animation: fadeUp 0.6s ease both; }
+  .card:nth-child(1) { animation-delay: 0.1s; }
+  .card:nth-child(2) { animation-delay: 0.2s; }
+  .card:nth-child(3) { animation-delay: 0.3s; }
+</style>
+</head>
+<body>
+  <div class="grain"></div>
+  <div class="glow-orb gold"></div>
+  <div class="glow-orb blue"></div>
+
+  <div class="container">
+    <header>
+      <div class="badge">Servicios Académicos 2026</div>
+      <h1>Planes & Precios</h1>
+      <p>Elaboración profesional de tesis, memorias y proyectos de título adaptados a los requisitos y exigencias de tu institución.</p>
+    </header>
+
+    <div class="tabs" id="tabs">
+      <button class="tab active" data-tab="cft">CFT</button>
+      <button class="tab" data-tab="ip">Instituto Profesional</button>
+      <button class="tab" data-tab="uni">Universidad (Pregrado)</button>
+      <button class="tab" data-tab="master">Magíster</button>
+      <button class="tab" data-tab="doc">Doctorado</button>
+    </div>
+
+    <div class="pricing-grid" id="pricingGrid"></div>
+
+    <div class="partial-cta">
+      <div class="icon-big">📝</div>
+      <div class="content">
+        <h3>¿Solo necesitas una parte de tu tesis?</h3>
+        <p>No tienes que contratar el documento completo. Si necesitas solo un capítulo, el marco teórico, la metodología, el análisis de datos o las correcciones, <strong>indícanos exactamente qué necesitas y lo cotizamos a tu medida.</strong></p>
+      </div>
+      <a href="cotizador.html" class="cta-btn">Cotizar ahora</a>
+    </div>
+
+    <div class="comparison-section">
+      <h2>Resumen Comparativo</h2>
+      <p class="sub">Todos los precios en pesos chilenos (CLP). Valores referenciales para tesis completa.</p>
+      <div class="comp-table-wrapper">
+        <table class="comp-table">
+          <thead><tr><th>Tipo de Institución</th><th>Estándar</th><th>Preferente</th><th>Élite</th></tr></thead>
+          <tbody>
+            <tr><td class="inst-label">CFT</td><td class="price-cell blue">$60.000</td><td class="price-cell gold">$100.000</td><td class="price-cell purple">$150.000</td></tr>
+            <tr><td class="inst-label">Instituto Profesional</td><td class="price-cell blue">$90.000</td><td class="price-cell gold">$150.000</td><td class="price-cell purple">$225.000</td></tr>
+            <tr><td class="inst-label">Universidad (Pregrado)</td><td class="price-cell blue">$150.000</td><td class="price-cell gold">$250.000</td><td class="price-cell purple">$375.000</td></tr>
+            <tr><td class="inst-label">Magíster</td><td class="price-cell blue">$300.000</td><td class="price-cell gold">$500.000</td><td class="price-cell purple">$750.000</td></tr>
+            <tr><td class="inst-label">Doctorado</td><td class="price-cell blue">$500.000</td><td class="price-cell gold">$850.000</td><td class="price-cell purple">$1.250.000</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="note-section">
+      <h3>¿Por qué varían los precios entre instituciones?</h3>
+      <p>Los CFT exigen proyectos más acotados y aplicados. Los Institutos Profesionales requieren mayor profundidad metodológica. Las universidades tradicionales tienen estándares de investigación más rigurosos, normativas internas específicas y comisiones evaluadoras más exigentes. A nivel de postgrado, se requiere contribución original al conocimiento, revisión bibliográfica exhaustiva y coherencia metodológica avanzada.</p>
+    </div>
+
+    <p class="footer-note">Precios vigentes 2026 · Sujetos a cotización personalizada según requerimientos específicos</p>
+  </div>
+
+  <script>
+    // ============================================================
+    // CONFIGURACIÓN: Cambia este número por tu WhatsApp real
+    // ============================================================
+    const WA_NUMBER = '56912345678'; // <-- TU NÚMERO AQUÍ (sin + ni espacios)
+    // ============================================================
+
+    const WA_SVG = `<svg class="wa-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>`;
+
+    const tabLabels = {
+      cft: 'CFT',
+      ip: 'Instituto Profesional',
+      uni: 'Universidad (Pregrado)',
+      master: 'Magíster',
+      doc: 'Doctorado'
+    };
+
+    const bases = {
+      cft: { base: 60000, p: 100000, e: 150000 },
+      ip: { base: 90000, p: 150000, e: 225000 },
+      uni: { base: 150000, p: 250000, e: 375000 },
+      master: { base: 300000, p: 500000, e: 750000 },
+      doc: { base: 500000, p: 850000, e: 1250000 }
+    };
+
+    let currentTab = 'cft';
+
+    function formatPrice(n) { return '$' + n.toLocaleString('es-CL'); }
+
+    function waLink(instKey, plan, price) {
+      const inst = tabLabels[instKey];
+      const msg = encodeURIComponent(`Hola, necesito una tesis de ${inst}, plan ${plan} (${price}). Me gustaría recibir más información.`);
+      return `https://wa.me/${WA_NUMBER}?text=${msg}`;
+    }
+
+    function buildPlans(key) {
+      const b = bases[key];
+      return [
+        {
+          tier: "Estándar", tierClass: "tier-estandar", featured: false, elite: false,
+          name: "Tu Tesis Resuelta",
+          desc: "Documento completo con investigación, redacción y formato según tu institución.",
+          price: formatPrice(b.base), priceRaw: b.base,
+          priceSub: "Tesis completa",
+          included: [
+            "Documento completo según normativa institucional",
+            "Investigación y redacción profesional",
+            "Marco teórico + metodología",
+            "Formato APA / Vancouver / según guía",
+            "Informe antiplagio",
+            "Máximo <strong>3 correcciones</strong>",
+            "Entrega digital (Word + PDF)"
+          ],
+          extras: [], vip: [],
+          btnClass: "btn-outline", btnText: "Solicitar", planLabel: "Estándar"
+        },
+        {
+          tier: "Preferente", tierClass: "tier-preferente", featured: true, elite: false,
+          name: "Sin Preocupaciones",
+          desc: "Más correcciones, presentación incluida y un asesor dedicado a tu carrera.",
+          price: formatPrice(b.p), priceRaw: b.p,
+          priceSub: "Tesis completa + extras",
+          included: [ "Todo lo del plan Estándar" ],
+          extras: [
+            "Máximo <strong>6 correcciones</strong>",
+            "Presentación PPT para defensa",
+            "<strong>1 asesor dedicado</strong> a tu carrera",
+            "Soporte prioritario",
+            "Análisis de datos si aplica"
+          ],
+          vip: [],
+          btnClass: "btn-gold", btnText: "Elegir Preferente", planLabel: "Preferente"
+        },
+        {
+          tier: "Élite", tierClass: "tier-elite", featured: false, elite: true,
+          name: "Servicio Total",
+          desc: "El nivel más alto. Dos asesores, entregas express y preparación completa para tu defensa.",
+          price: formatPrice(b.e), priceRaw: b.e,
+          priceSub: "Tesis completa + servicio exclusivo",
+          included: [ "Todo lo del plan Preferente" ],
+          extras: [],
+          vip: [
+            "<strong>Correcciones sin límite</strong>",
+            "Entregas hasta en <strong>1 día o menos</strong>",
+            "<strong>2 asesores:</strong> 1 metodológico + 1 temático",
+            "Presentación PPT profesional",
+            "Guion de exposición completo",
+            "Cuestionario de preguntas y respuestas",
+            "Explicación detallada de la tesis",
+            "Soporte prioritario permanente"
+          ],
+          btnClass: "btn-purple", btnText: "Acceder al plan Élite", planLabel: "Élite"
+        }
+      ];
+    }
+
+    function renderCards(tabKey) {
+      currentTab = tabKey;
+      const plans = buildPlans(tabKey);
+      const grid = document.getElementById('pricingGrid');
+      grid.innerHTML = '';
+
+      plans.forEach((plan, i) => {
+        const card = document.createElement('div');
+        let cls = 'card';
+        if (plan.featured) cls += ' featured';
+        if (plan.elite) cls += ' elite';
+        card.className = cls;
+        card.style.animationDelay = `${i * 0.1}s`;
+
+        let fHTML = '';
+        if (plan.included.length) {
+          fHTML += `<div class="section-label included">INCLUIDO</div><ul class="features">`;
+          plan.included.forEach(f => fHTML += `<li><span class="icon icon-green">✓</span> ${f}</li>`);
+          fHTML += `</ul>`;
+        }
+        if (plan.extras.length) {
+          fHTML += `<div class="section-label extras">ADICIONAL EN ESTE PLAN</div><ul class="features">`;
+          plan.extras.forEach(f => fHTML += `<li><span class="icon icon-gold">★</span> ${f}</li>`);
+          fHTML += `</ul>`;
+        }
+        if (plan.vip.length) {
+          fHTML += `<div class="section-label vip">EXCLUSIVO ÉLITE</div><ul class="features">`;
+          plan.vip.forEach(f => fHTML += `<li><span class="icon icon-purple">◆</span> ${f}</li>`);
+          fHTML += `</ul>`;
+        }
+
+        const link = waLink(tabKey, plan.planLabel, plan.price);
+
+        card.innerHTML = `
+          <div class="card-tier ${plan.tierClass}">${plan.tier}</div>
+          <div class="card-name">${plan.name}</div>
+          <div class="card-desc">${plan.desc}</div>
+          <div class="price-block">
+            <div class="price">${plan.price}</div>
+            <div class="price-sub">${plan.priceSub}</div>
+          </div>
+          <div class="divider"></div>
+          ${fHTML}
+          <div class="spacer"></div>
+          <a href="${link}" target="_blank" class="card-btn ${plan.btnClass}">${WA_SVG} ${plan.btnText}</a>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    document.getElementById('tabs').addEventListener('click', (e) => {
+      if (!e.target.classList.contains('tab')) return;
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      e.target.classList.add('active');
+      renderCards(e.target.dataset.tab);
+    });
+
+    renderCards('cft');
+  </script>
+</body>
+</html>

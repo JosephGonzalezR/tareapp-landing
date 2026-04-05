@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git pull:*)",
+      "Bash(git rebase:*)",
+      "Bash(git stash:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git merge:*)",
+      "Bash(git push:*)",
+      "WebFetch(domain:tareapp.ags-ed.com)",
+      "WebFetch(domain:josephgonzalezr.github.io)",
+      "Bash(gh api:*)",
+      "Bash(gh repo:*)"
+    ]
+  }
+}
