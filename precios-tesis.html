@@ -1,0 +1,791 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light" />
+
+  <title>Planes & Precios de Tesis | Tareapp</title>
+  <meta name="description" content="Conoce los planes y precios para la elaboración de tu tesis: Estándar, Preferente y Élite. Adaptados a CFT, Institutos Profesionales, Universidades, Magíster y Doctorado." />
+  <meta name="author" content="Tareapp" />
+  <meta name="theme-color" content="#F7C948" />
+
+  <link rel="icon" href="NUEVO LOGO TAREAPP.png" />
+  <link rel="apple-touch-icon" href="NUEVO LOGO TAREAPP.png" />
+
+  <meta property="og:title" content="Planes & Precios de Tesis | Tareapp" />
+  <meta property="og:description" content="Elaboración profesional de tesis adaptada a tu institución. Conoce nuestros planes Estándar, Preferente y Élite." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    /* ===== Pricing page specific styles ===== */
+    .pricing-hero {
+      text-align: center;
+      padding: var(--pad-lg) 0 clamp(24px, 3vw, 40px);
+    }
+    .pricing-hero .badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--brand2);
+      background: var(--brand3);
+      border: 1px solid rgba(229, 181, 46, 0.25);
+      padding: 8px 20px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+    }
+    .pricing-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: var(--h1);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      color: var(--text);
+    }
+    .pricing-hero p {
+      color: var(--muted);
+      font-size: 17px;
+      max-width: 620px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+    }
+    .tab {
+      padding: 12px 24px;
+      border-radius: 100px;
+      border: 1px solid var(--line);
+      background: transparent;
+      color: var(--muted);
+      font-family: var(--font);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .tab:hover {
+      border-color: var(--brand2);
+      color: var(--text);
+    }
+    .tab.active {
+      background: var(--brand);
+      color: var(--text);
+      border-color: var(--brand);
+      font-weight: 600;
+    }
+
+    /* Pricing grid */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 60px;
+    }
+    @media (max-width: 960px) {
+      .pricing-grid { grid-template-columns: 1fr; max-width: 440px; margin-left: auto; margin-right: auto; }
+    }
+
+    /* Pricing card */
+    .p-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 36px 28px;
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-sm);
+    }
+    .p-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+    .p-card.featured {
+      border-color: var(--brand2);
+      background: linear-gradient(180deg, var(--brand3) 0%, var(--card) 40%);
+      box-shadow: var(--shadow);
+    }
+    .p-card.featured::before {
+      content: 'MÁS ELEGIDO';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--brand);
+      color: var(--text);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      padding: 5px 16px;
+      border-radius: 100px;
+    }
+    .p-card.elite {
+      border-color: #a78bfa;
+      background: linear-gradient(180deg, rgba(167,139,250,0.08) 0%, var(--card) 50%);
+    }
+    .p-card.elite::before {
+      content: 'MÁXIMO NIVEL';
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, #a78bfa, #8b5cf6);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      padding: 5px 16px;
+      border-radius: 100px;
+    }
+
+    .p-card-tier {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .tier-estandar { color: #5b8def; }
+    .tier-preferente { color: var(--brand2); }
+    .tier-elite { color: #a78bfa; }
+
+    .p-card-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--text);
+    }
+    .p-card-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 24px;
+      min-height: 40px;
+    }
+    .price-block { margin-bottom: 28px; }
+    .price {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      font-weight: 800;
+      line-height: 1;
+      color: var(--text);
+    }
+    .price-sub {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    .p-divider {
+      height: 1px;
+      background: var(--line);
+      margin-bottom: 20px;
+    }
+
+    .section-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .section-label.included { color: #34d399; }
+    .section-label.extras { color: var(--brand2); }
+    .section-label.vip { color: #a78bfa; }
+
+    .features {
+      list-style: none;
+      margin: 0 0 20px;
+      padding: 0;
+    }
+    .features li {
+      font-size: 13.5px;
+      color: var(--muted);
+      padding: 6px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      line-height: 1.45;
+    }
+    .features li .icon {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      margin-top: 1px;
+    }
+    .icon-green { background: rgba(52,211,153,0.12); color: #34d399; }
+    .icon-gold { background: rgba(229,181,46,0.12); color: var(--brand2); }
+    .icon-purple { background: rgba(167,139,250,0.12); color: #a78bfa; }
+    .features li strong { color: var(--text); font-weight: 600; }
+    .spacer { flex: 1; }
+
+    .p-card-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 14px;
+      border-radius: 12px;
+      font-family: var(--font);
+      font-size: 14px;
+      font-weight: 600;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      border: none;
+      margin-top: 8px;
+      text-decoration: none;
+    }
+    .p-card-btn:hover { text-decoration: none; }
+    .btn-outline-price {
+      background: transparent;
+      border: 1px solid var(--line);
+      color: var(--text);
+    }
+    .btn-outline-price:hover {
+      border-color: #25d366;
+      background: rgba(37,211,102,0.08);
+      color: #25d366;
+    }
+    .btn-gold {
+      background: var(--brand);
+      color: var(--text);
+    }
+    .btn-gold:hover {
+      background: var(--brand2);
+    }
+    .btn-purple {
+      background: linear-gradient(135deg, #a78bfa, #8b5cf6);
+      color: #fff;
+    }
+    .btn-purple:hover {
+      background: linear-gradient(135deg, #b99dff, #a78bfa);
+    }
+
+    .wa-icon { width: 18px; height: 18px; }
+
+    /* Partial CTA */
+    .partial-cta {
+      margin-top: 8px;
+      margin-bottom: 60px;
+      background: linear-gradient(135deg, rgba(251,146,60,0.06), rgba(247,201,72,0.06));
+      border: 1px solid rgba(251,146,60,0.2);
+      border-radius: var(--radius);
+      padding: 36px 40px;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+    @media (max-width: 700px) {
+      .partial-cta { flex-direction: column; text-align: center; padding: 28px 24px; }
+    }
+    .partial-cta .icon-big { font-size: 48px; flex-shrink: 0; }
+    .partial-cta .content { flex: 1; }
+    .partial-cta h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #fb923c;
+    }
+    .partial-cta p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .partial-cta p strong { color: var(--text); }
+    .partial-cta .cta-btn {
+      flex-shrink: 0;
+      padding: 14px 32px;
+      border-radius: 12px;
+      background: #fb923c;
+      color: #fff;
+      font-family: var(--font);
+      font-size: 14px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s;
+      white-space: nowrap;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .partial-cta .cta-btn:hover { background: #f9a854; text-decoration: none; }
+
+    /* Comparison table */
+    .comparison-section { margin-top: 0; }
+    .comparison-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(22px, 2.5vw, 28px);
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+    .comparison-section .sub {
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 32px;
+    }
+    .comp-table-wrapper {
+      overflow-x: auto;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-sm);
+    }
+    .comp-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 550px;
+    }
+    .comp-table th, .comp-table td {
+      padding: 14px 20px;
+      text-align: left;
+      font-size: 13.5px;
+      border-bottom: 1px solid var(--line);
+    }
+    .comp-table thead th {
+      background: var(--bg2);
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .comp-table thead th:first-child { border-radius: var(--radius) 0 0 0; }
+    .comp-table thead th:last-child { border-radius: 0 var(--radius) 0 0; }
+    .comp-table tbody tr { transition: background 0.2s; }
+    .comp-table tbody tr:hover { background: rgba(247,201,72,0.04); }
+    .comp-table tbody tr:last-child td { border-bottom: none; }
+    .comp-table .inst-label { font-weight: 600; color: var(--text); }
+    .price-cell { font-weight: 600; white-space: nowrap; }
+    .price-cell.blue { color: #5b8def; }
+    .price-cell.gold { color: var(--brand2); }
+    .price-cell.purple { color: #a78bfa; }
+
+    /* Note section */
+    .note-section {
+      margin-top: 48px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      box-shadow: var(--shadow-sm);
+    }
+    .note-section h3 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--brand2);
+    }
+    .note-section p {
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 8px;
+    }
+    .footer-note {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 12px;
+      color: var(--muted);
+      opacity: 0.6;
+    }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    .p-card { animation: fadeUp 0.6s ease both; }
+    .p-card:nth-child(1) { animation-delay: 0.1s; }
+    .p-card:nth-child(2) { animation-delay: 0.2s; }
+    .p-card:nth-child(3) { animation-delay: 0.3s; }
+  </style>
+</head>
+
+<body data-page="tesis">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <div class="scroll-progress" aria-hidden="true">
+    <div class="scroll-progress__bar" id="scrollProgress"></div>
+  </div>
+
+  <!-- SVG icons -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" focusable="false">
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 22s7-4.5 7-12a7 7 0 0 0-14 0c0 7.5 7 12 7 12z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 11.2a2.2 2.2 0 1 0 0-4.4 2.2 2.2 0 0 0 0 4.4z" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-whatsapp" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="currentColor"/></symbol>
+    <symbol id="i-facebook" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" fill="currentColor"/></symbol>
+    <symbol id="i-tiktok" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.84 1.55V6.79a4.85 4.85 0 0 1-1.07-.1z" fill="currentColor"/></symbol>
+    <symbol id="i-instagram" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></symbol>
+  </svg>
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="container topbar__inner">
+      <div class="topbar__left">
+        <span class="dot" aria-hidden="true"></span>
+        <span class="topbar__text">Atención por WhatsApp • <span data-bind="location">Santiago, Chile</span></span>
+      </div>
+      <div class="topbar__right">
+        <div class="social-links">
+          <a class="social-link" data-href="facebookUrl" href="#" target="_blank" rel="noopener" aria-label="Facebook"><svg class="i i--sm" aria-hidden="true"><use href="#i-facebook"></use></svg></a>
+          <a class="social-link" data-href="tiktokUrl" href="#" target="_blank" rel="noopener" aria-label="TikTok"><svg class="i i--sm" aria-hidden="true"><use href="#i-tiktok"></use></svg></a>
+          <a class="social-link" data-href="instagramUrl" href="#" target="_blank" rel="noopener" aria-label="Instagram"><svg class="i i--sm" aria-hidden="true"><use href="#i-instagram"></use></svg></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVBAR -->
+  <header class="nav" id="top">
+    <div class="container nav__inner">
+      <a class="brand" href="index.html" aria-label="Ir al inicio">
+        <img src="NUEVO LOGO TAREAPP.png" width="40" height="40" alt="Logo de Tareapp" decoding="async" style="border-radius:10px" />
+        <span class="brand__text">
+          <strong data-bind="brand">Tareapp</strong>
+          <small>Soluciones Académicas</small>
+        </span>
+      </a>
+
+      <div class="page-switcher" aria-label="Tipo de servicio">
+        <a class="page-switcher__tab" href="index.html">Trabajos</a>
+        <a class="page-switcher__tab page-switcher__tab--active" href="tesis.html">Tesis</a>
+      </div>
+
+      <nav class="nav__links" aria-label="Navegación principal" id="navLinks">
+        <a href="tesis.html#servicios">Servicios</a>
+        <a href="tesis.html#proceso">Proceso</a>
+        <a href="precios-tesis.html" style="color:var(--brand2);font-weight:600">Precios</a>
+        <a href="tesis.html#opiniones">Opiniones</a>
+        <a href="tesis.html#preguntas">FAQ</a>
+        <a href="blog.html">Blog</a>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="tesis.html#contacto" class="nav__cta">Agendar</a>
+      </nav>
+
+      <div class="nav__actions">
+        <a class="btn btn--ghost btn--sm hide-sm" data-wa-message="Hola, quiero agendar una asesoría. ¿Me orientan por favor?" href="#" rel="noopener">
+          <svg class="i" aria-hidden="true"><use href="#i-whatsapp"></use></svg>
+          <span class="btn__hint" data-bind="whatsappDisplay">+56 9 5307 8288</span>
+        </a>
+        <button class="nav__burger" type="button" id="menuBtn" aria-label="Abrir menú" aria-controls="mobileMenu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu" hidden>
+      <div class="mobile-menu__inner container">
+        <div class="page-switcher page-switcher--mobile" aria-label="Tipo de servicio">
+          <a class="page-switcher__tab" href="index.html">Trabajos</a>
+          <a class="page-switcher__tab page-switcher__tab--active" href="tesis.html">Tesis</a>
+        </div>
+        <a href="tesis.html#servicios">Servicios</a>
+        <a href="tesis.html#proceso">Proceso</a>
+        <a href="precios-tesis.html" style="color:var(--brand2);font-weight:600">Precios</a>
+        <a href="tesis.html#opiniones">Opiniones</a>
+        <a href="tesis.html#preguntas">Preguntas</a>
+        <a href="blog.html">Blog</a>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="tesis.html#contacto" class="btn btn--primary btn--block">Agendar por WhatsApp</a>
+        <div class="mobile-menu__meta">
+          <span class="muted"><svg class="i i--sm" aria-hidden="true"><use href="#i-pin"></use></svg> <span data-bind="location">Santiago, Chile</span></span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main id="contenido">
+    <div class="container">
+      <!-- HERO -->
+      <div class="pricing-hero">
+        <div class="badge">Servicios Académicos 2026</div>
+        <h1>Planes & Precios</h1>
+        <p>Elaboración profesional de tesis, memorias y proyectos de título adaptados a los requisitos y exigencias de tu institución.</p>
+      </div>
+
+      <!-- TABS -->
+      <div class="tabs" id="tabs">
+        <button class="tab active" data-tab="cft">CFT</button>
+        <button class="tab" data-tab="ip">Instituto Profesional</button>
+        <button class="tab" data-tab="uni">Universidad (Pregrado)</button>
+        <button class="tab" data-tab="master">Magíster</button>
+        <button class="tab" data-tab="doc">Doctorado</button>
+      </div>
+
+      <!-- PRICING CARDS -->
+      <div class="pricing-grid" id="pricingGrid"></div>
+
+      <!-- PARTIAL CTA -->
+      <div class="partial-cta">
+        <div class="icon-big">📝</div>
+        <div class="content">
+          <h3>¿Solo necesitas una parte de tu tesis?</h3>
+          <p>No tienes que contratar el documento completo. Si necesitas solo un capítulo, el marco teórico, la metodología, el análisis de datos o las correcciones, <strong>indícanos exactamente qué necesitas y lo cotizamos a tu medida.</strong></p>
+        </div>
+        <a href="cotizador.html" class="cta-btn">Cotizar ahora</a>
+      </div>
+
+      <!-- COMPARISON TABLE -->
+      <div class="comparison-section">
+        <h2>Resumen Comparativo</h2>
+        <p class="sub">Todos los precios en pesos chilenos (CLP). Valores referenciales para tesis completa.</p>
+        <div class="comp-table-wrapper">
+          <table class="comp-table">
+            <thead>
+              <tr><th>Tipo de Institución</th><th>Estándar</th><th>Preferente</th><th>Élite</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="inst-label">CFT</td><td class="price-cell blue">$60.000</td><td class="price-cell gold">$100.000</td><td class="price-cell purple">$150.000</td></tr>
+              <tr><td class="inst-label">Instituto Profesional</td><td class="price-cell blue">$90.000</td><td class="price-cell gold">$150.000</td><td class="price-cell purple">$225.000</td></tr>
+              <tr><td class="inst-label">Universidad (Pregrado)</td><td class="price-cell blue">$150.000</td><td class="price-cell gold">$250.000</td><td class="price-cell purple">$375.000</td></tr>
+              <tr><td class="inst-label">Magíster</td><td class="price-cell blue">$300.000</td><td class="price-cell gold">$500.000</td><td class="price-cell purple">$750.000</td></tr>
+              <tr><td class="inst-label">Doctorado</td><td class="price-cell blue">$500.000</td><td class="price-cell gold">$850.000</td><td class="price-cell purple">$1.250.000</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- NOTE -->
+      <div class="note-section">
+        <h3>¿Por qué varían los precios entre instituciones?</h3>
+        <p>Los CFT exigen proyectos más acotados y aplicados. Los Institutos Profesionales requieren mayor profundidad metodológica. Las universidades tradicionales tienen estándares de investigación más rigurosos, normativas internas específicas y comisiones evaluadoras más exigentes. A nivel de postgrado, se requiere contribución original al conocimiento, revisión bibliográfica exhaustiva y coherencia metodológica avanzada.</p>
+      </div>
+
+      <p class="footer-note">Precios vigentes 2026 · Sujetos a cotización personalizada según requerimientos específicos</p>
+    </div>
+  </main>
+
+  <!-- Footer wave -->
+  <div class="footer-wave" aria-hidden="true">
+    <svg viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,30 C360,90 720,0 1080,50 C1260,75 1380,20 1440,30 L1440,90 L0,90 Z" fill="#FAFAFA"/>
+    </svg>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <img src="NUEVO LOGO TAREAPP.png" width="56" height="56" alt="Logo de Tareapp" loading="lazy" decoding="async" style="border-radius:12px" />
+        <div>
+          <strong data-bind="brand">Tareapp</strong>
+          <p class="muted">Soluciones Académicas</p>
+        </div>
+      </div>
+      <div class="footer__cols">
+        <div>
+          <h4>Secciones</h4>
+          <a href="index.html">Trabajos</a>
+          <a href="tesis.html#servicios">Servicios</a>
+          <a href="precios-tesis.html">Precios</a>
+          <a href="tesis.html#proceso">Proceso</a>
+          <a href="tesis.html#opiniones">Opiniones</a>
+          <a href="blog.html">Blog</a>
+          <a href="nosotros.html">Nosotros</a>
+          <a href="tesis.html#contacto">Contacto</a>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <a href="privacy.html">Privacidad</a>
+          <a href="terms.html">Términos</a>
+        </div>
+        <div>
+          <h4>Contacto</h4>
+          <a data-wa-message="Hola, quiero información. ¿Me orientan?" href="#" rel="noopener">
+            <svg class="i i--sm" aria-hidden="true"><use href="#i-whatsapp"></use></svg> WhatsApp
+          </a>
+          <a data-href="facebookUrl" href="#" target="_blank" rel="noopener"><svg class="i i--sm" aria-hidden="true"><use href="#i-facebook"></use></svg> Facebook</a>
+          <a data-href="tiktokUrl" href="#" target="_blank" rel="noopener"><svg class="i i--sm" aria-hidden="true"><use href="#i-tiktok"></use></svg> TikTok</a>
+          <a data-href="instagramUrl" href="#" target="_blank" rel="noopener"><svg class="i i--sm" aria-hidden="true"><use href="#i-instagram"></use></svg> Instagram</a>
+          <span class="muted"><svg class="i i--sm" aria-hidden="true"><use href="#i-pin"></use></svg> <span data-bind="location">Santiago, Chile</span></span>
+        </div>
+      </div>
+    </div>
+    <div class="container footer__bottom">
+      <span class="muted">© <span id="year"></span> <span data-bind="brand">Tareapp</span>. Todos los derechos reservados.</span>
+    </div>
+  </footer>
+
+  <!-- Floating buttons -->
+  <button class="to-top" id="toTop" type="button" aria-label="Volver arriba">↑</button>
+
+  <script src="app.js"></script>
+  <script>
+    const WA_NUMBER = '56953078288';
+
+    const WA_SVG = '<svg class="wa-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>';
+
+    const tabLabels = {
+      cft: 'CFT',
+      ip: 'Instituto Profesional',
+      uni: 'Universidad (Pregrado)',
+      master: 'Magíster',
+      doc: 'Doctorado'
+    };
+
+    const bases = {
+      cft: { base: 60000, p: 100000, e: 150000 },
+      ip: { base: 90000, p: 150000, e: 225000 },
+      uni: { base: 150000, p: 250000, e: 375000 },
+      master: { base: 300000, p: 500000, e: 750000 },
+      doc: { base: 500000, p: 850000, e: 1250000 }
+    };
+
+    let currentTab = 'cft';
+
+    function formatPrice(n) { return '$' + n.toLocaleString('es-CL'); }
+
+    function waLink(instKey, plan, price) {
+      const inst = tabLabels[instKey];
+      const msg = encodeURIComponent('Hola, necesito una tesis de ' + inst + ', plan ' + plan + ' (' + price + '). Me gustaría recibir más información.');
+      return 'https://wa.me/' + WA_NUMBER + '?text=' + msg;
+    }
+
+    function buildPlans(key) {
+      const b = bases[key];
+      return [
+        {
+          tier: "Estándar", tierClass: "tier-estandar", featured: false, elite: false,
+          name: "Tu Tesis Resuelta",
+          desc: "Documento completo con investigación, redacción y formato según tu institución.",
+          price: formatPrice(b.base), priceRaw: b.base,
+          priceSub: "Tesis completa",
+          included: [
+            "Documento completo según normativa institucional",
+            "Investigación y redacción profesional",
+            "Marco teórico + metodología",
+            "Formato APA / Vancouver / según guía",
+            "Informe antiplagio",
+            "Máximo <strong>3 correcciones</strong>",
+            "Entrega digital (Word + PDF)"
+          ],
+          extras: [], vip: [],
+          btnClass: "btn-outline-price", btnText: "Solicitar", planLabel: "Estándar"
+        },
+        {
+          tier: "Preferente", tierClass: "tier-preferente", featured: true, elite: false,
+          name: "Sin Preocupaciones",
+          desc: "Más correcciones, presentación incluida y un asesor dedicado a tu carrera.",
+          price: formatPrice(b.p), priceRaw: b.p,
+          priceSub: "Tesis completa + extras",
+          included: [ "Todo lo del plan Estándar" ],
+          extras: [
+            "Máximo <strong>6 correcciones</strong>",
+            "Presentación PPT para defensa",
+            "<strong>1 asesor dedicado</strong> a tu carrera",
+            "Soporte prioritario",
+            "Análisis de datos si aplica"
+          ],
+          vip: [],
+          btnClass: "btn-gold", btnText: "Elegir Preferente", planLabel: "Preferente"
+        },
+        {
+          tier: "Élite", tierClass: "tier-elite", featured: false, elite: true,
+          name: "Servicio Total",
+          desc: "El nivel más alto. Dos asesores, entregas express y preparación completa para tu defensa.",
+          price: formatPrice(b.e), priceRaw: b.e,
+          priceSub: "Tesis completa + servicio exclusivo",
+          included: [ "Todo lo del plan Preferente" ],
+          extras: [],
+          vip: [
+            "<strong>Correcciones sin límite</strong>",
+            "Entregas hasta en <strong>1 día o menos</strong>",
+            "<strong>2 asesores:</strong> 1 metodológico + 1 temático",
+            "Presentación PPT profesional",
+            "Guion de exposición completo",
+            "Cuestionario de preguntas y respuestas",
+            "Explicación detallada de la tesis",
+            "Soporte prioritario permanente"
+          ],
+          btnClass: "btn-purple", btnText: "Acceder al plan Élite", planLabel: "Élite"
+        }
+      ];
+    }
+
+    function renderCards(tabKey) {
+      currentTab = tabKey;
+      const plans = buildPlans(tabKey);
+      const grid = document.getElementById('pricingGrid');
+      grid.innerHTML = '';
+
+      plans.forEach(function(plan, i) {
+        var card = document.createElement('div');
+        var cls = 'p-card';
+        if (plan.featured) cls += ' featured';
+        if (plan.elite) cls += ' elite';
+        card.className = cls;
+        card.style.animationDelay = (i * 0.1) + 's';
+
+        var fHTML = '';
+        if (plan.included.length) {
+          fHTML += '<div class="section-label included">INCLUIDO</div><ul class="features">';
+          plan.included.forEach(function(f) { fHTML += '<li><span class="icon icon-green">✓</span> ' + f + '</li>'; });
+          fHTML += '</ul>';
+        }
+        if (plan.extras.length) {
+          fHTML += '<div class="section-label extras">ADICIONAL EN ESTE PLAN</div><ul class="features">';
+          plan.extras.forEach(function(f) { fHTML += '<li><span class="icon icon-gold">★</span> ' + f + '</li>'; });
+          fHTML += '</ul>';
+        }
+        if (plan.vip.length) {
+          fHTML += '<div class="section-label vip">EXCLUSIVO ÉLITE</div><ul class="features">';
+          plan.vip.forEach(function(f) { fHTML += '<li><span class="icon icon-purple">◆</span> ' + f + '</li>'; });
+          fHTML += '</ul>';
+        }
+
+        var link = waLink(tabKey, plan.planLabel, plan.price);
+
+        card.innerHTML =
+          '<div class="p-card-tier ' + plan.tierClass + '">' + plan.tier + '</div>' +
+          '<div class="p-card-name">' + plan.name + '</div>' +
+          '<div class="p-card-desc">' + plan.desc + '</div>' +
+          '<div class="price-block">' +
+            '<div class="price">' + plan.price + '</div>' +
+            '<div class="price-sub">' + plan.priceSub + '</div>' +
+          '</div>' +
+          '<div class="p-divider"></div>' +
+          fHTML +
+          '<div class="spacer"></div>' +
+          '<a href="' + link + '" target="_blank" rel="noopener" class="p-card-btn ' + plan.btnClass + '">' + WA_SVG + ' ' + plan.btnText + '</a>';
+
+        grid.appendChild(card);
+      });
+    }
+
+    document.getElementById('tabs').addEventListener('click', function(e) {
+      if (!e.target.classList.contains('tab')) return;
+      document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
+      e.target.classList.add('active');
+      renderCards(e.target.dataset.tab);
+    });
+
+    renderCards('cft');
+  </script>
+</body>
+</html>
