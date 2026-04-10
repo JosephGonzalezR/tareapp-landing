@@ -362,6 +362,10 @@ export default {
           if (file.size > 10 * 1024 * 1024) {
             throw new Error(`El archivo ${label} no debe superar los 10MB`);
           }
+          // Solo PDF — DOCX no se puede leer correctamente
+          if (!file.name.toLowerCase().endsWith('.pdf')) {
+            throw new Error(`El archivo ${label} debe ser PDF. Si tienes Word, expórtalo como PDF (Archivo → Guardar como → PDF).`);
+          }
 
           const buffer = await file.arrayBuffer();
           const bytes = new Uint8Array(buffer);
@@ -372,15 +376,10 @@ export default {
           }
           const base64 = btoa(binary);
 
-          let mediaType = 'application/pdf';
-          if (file.name.endsWith('.docx')) {
-            mediaType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
-          }
-
           filesToAnalyze.push({
             name: file.name,
             data: base64,
-            mediaType: mediaType,
+            mediaType: 'application/pdf',
             size: file.size
           });
 
