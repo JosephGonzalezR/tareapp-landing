@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="color-scheme" content="light" />
 
-  <title>Cotizador de Tesis con IA | Tareapp</title>
-  <meta name="description" content="Sube tu documento de tesis y nuestra IA calcula cuánto llevas avanzado. Obtén una cotización personalizada al instante." />
+  <title>Cotizador de Tesis | Tareapp</title>
+  <meta name="description" content="Sube tu documento de tesis y te calculamos cuánto llevas avanzado. Obtén una cotización personalizada al instante." />
   <meta name="author" content="Tareapp" />
   <meta name="theme-color" content="#F7C948" />
 
@@ -623,8 +623,8 @@
       <a href="/precios/" class="back-link">← Volver a planes</a>
 
       <div class="cot-header">
-        <h1>Cotizador Inteligente</h1>
-        <p>Sube tu documento de tesis y nuestra IA calcula cuánto llevas avanzado. Obtén una cotización personalizada al instante.</p>
+        <h1>Cotizador de Tesis</h1>
+        <p>Sube tu documento de tesis y nuestro equipo calcula cuánto llevas avanzado. Obtén una cotización personalizada al instante.</p>
       </div>
 
       <!-- PROGRESS BAR -->
@@ -694,7 +694,7 @@
       <div class="step-section hidden" id="step4">
         <div class="step-label">Paso 4 de 5</div>
         <div class="step-title">Sube tu documento de tesis</div>
-        <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">Sube lo que lleves avanzado para que nuestra IA analice tu progreso. Si no tienes archivo, puedes pegar tu estructura abajo.</p>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">Sube lo que lleves avanzado para que nuestro equipo analice tu progreso. Si no tienes archivo, puedes pegar tu estructura abajo.</p>
 
         <div class="upload-zone" id="uploadZone">
           <div class="upload-icon">📄</div>
@@ -722,7 +722,7 @@
         <div class="step-actions">
           <button class="btn-back" onclick="goToStep(3)">← Atrás</button>
           <button class="btn-analyze" id="btnAnalyze" onclick="startAnalysis()">
-            🔍 Analizar con IA y obtener cotización
+            🔍 Analizar y obtener cotización
           </button>
         </div>
       </div>
@@ -732,7 +732,7 @@
         <div class="analysis-loading">
           <div class="spinner"></div>
           <div class="loading-title">Analizando tu tesis...</div>
-          <div class="loading-sub">Nuestra IA está revisando tu documento para calcular tu avance y generar una cotización personalizada.</div>
+          <div class="loading-sub">Estamos revisando tu documento para calcular tu avance y generar una cotización personalizada.</div>
           <div class="loading-steps">
             <div class="loading-step active" id="ls1">⏳ Subiendo documento...</div>
             <div class="loading-step" id="ls2">⏳ Analizando estructura...</div>
@@ -1155,7 +1155,7 @@
       // Assessment
       var assessEl = document.getElementById('resultAssessment');
       assessEl.innerHTML = '📋 ' + (data.overall_assessment || 'Un asesor verificará esta cotización y te contactará para confirmar el precio final.') +
-        '<br><br><strong>Importante:</strong> Esta es una estimación generada por IA. Un asesor humano verificará el precio real revisando tu documento.';
+        '<br><br><strong>Importante:</strong> Esta es una estimación preliminar. Un asesor verificará el precio final revisando tu documento.';
 
       // WhatsApp link
       var instLabel = data.institution_label || INST_LABELS[selectedInst];
