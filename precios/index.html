@@ -417,11 +417,166 @@
       opacity: 0.6;
     }
 
+    /* Installment line on pricing cards */
+    .price-installment {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+    .price-installment strong {
+      color: #34d399;
+      font-weight: 700;
+    }
+    .price-cash {
+      font-size: 12.5px;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+    .price-cash strong {
+      color: var(--brand2);
+      font-weight: 700;
+    }
+
+    /* Urgency pill */
+    .urgency-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #fb923c;
+      background: rgba(251,146,60,0.08);
+      border: 1px solid rgba(251,146,60,0.2);
+      padding: 8px 18px;
+      border-radius: 100px;
+      margin-bottom: 32px;
+    }
+
+    /* Social proof */
+    .social-proof {
+      text-align: center;
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+    .social-proof strong {
+      color: var(--text);
+    }
+
+    /* Payment options section */
+    .payment-options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    @media (max-width: 700px) {
+      .payment-options { grid-template-columns: 1fr; }
+    }
+    .payment-option-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .payment-option-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow);
+    }
+    .installment-card {
+      border-top: 3px solid #34d399;
+    }
+    .installment-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+    .installment-card h3 strong {
+      color: #34d399;
+    }
+    .cash-card {
+      border-top: 3px solid var(--brand2);
+      background: linear-gradient(180deg, var(--brand3) 0%, var(--card) 30%);
+    }
+    .cash-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+    .cash-card h3 strong {
+      color: var(--brand2);
+    }
+    .payment-icon {
+      font-size: 36px;
+      margin-bottom: 12px;
+    }
+    .payment-option-card p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    .payment-option-card p strong {
+      color: var(--text);
+    }
+    .payment-mini-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    .payment-mini-table th {
+      text-align: left;
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 6px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .payment-mini-table td {
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+    }
+    .payment-mini-table .plan-name {
+      font-weight: 500;
+      color: var(--text);
+    }
+    .payment-mini-table .mini-price {
+      font-weight: 700;
+      text-align: right;
+    }
+    .payment-mini-table .savings {
+      color: #34d399;
+      font-weight: 600;
+      font-size: 12px;
+      text-align: right;
+    }
+
+    /* Highlight utility */
+    .highlight-gold {
+      background: linear-gradient(180deg, transparent 60%, rgba(247,201,72,0.3) 60%);
+      font-weight: 700;
+      padding: 0 2px;
+    }
+    .highlight-green {
+      background: linear-gradient(180deg, transparent 60%, rgba(52,211,153,0.25) 60%);
+      font-weight: 700;
+      padding: 0 2px;
+    }
+
     @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
     .p-card { animation: fadeUp 0.6s ease both; }
     .p-card:nth-child(1) { animation-delay: 0.1s; }
     .p-card:nth-child(2) { animation-delay: 0.2s; }
     .p-card:nth-child(3) { animation-delay: 0.3s; }
+    .payment-option-card { animation: fadeUp 0.6s ease both; animation-delay: 0.2s; }
   </style>
 </head>
 
@@ -538,8 +693,34 @@
         <button class="tab" data-tab="doc">Doctorado</button>
       </div>
 
+      <!-- URGENCY + SOCIAL PROOF -->
+      <div style="text-align:center">
+        <span class="urgency-pill">🔥 Precios vigentes hasta el 30 de abril 2026</span>
+      </div>
+
       <!-- PRICING CARDS -->
       <div class="pricing-grid" id="pricingGrid"></div>
+
+      <!-- SOCIAL PROOF -->
+      <p class="social-proof">
+        ✅ <strong>+500 tesis entregadas</strong> en 2025 · <strong>98% de aprobación</strong> en primera entrega
+      </p>
+
+      <!-- PAYMENT OPTIONS -->
+      <div class="payment-options">
+        <div class="payment-option-card installment-card">
+          <div class="payment-icon">💳</div>
+          <h3>Paga en <strong>hasta 4 cuotas</strong> sin interés</h3>
+          <p>Divide el valor total de tu plan en <strong>hasta 4 cuotas mensuales iguales</strong>. Sin recargo, sin letra chica. Tú eliges cómo dividirlo.</p>
+          <div id="installmentExample"></div>
+        </div>
+        <div class="payment-option-card cash-card">
+          <div class="payment-icon">💰</div>
+          <h3><strong class="highlight-gold">10% de descuento</strong> pagando <strong>al contado</strong></h3>
+          <p>Paga el total en un solo abono y obtén un <strong class="highlight-gold">10% de descuento</strong> inmediato. <strong>Ahorras</strong> desde <strong id="cashSavingsMin" style="color:#34d399"></strong>.</p>
+          <div id="cashExample"></div>
+        </div>
+      </div>
 
       <!-- PARTIAL CTA -->
       <div class="partial-cta">
@@ -561,11 +742,11 @@
               <tr><th>Tipo de Institución</th><th>Estándar</th><th>Preferente</th><th>Élite</th></tr>
             </thead>
             <tbody>
-              <tr><td class="inst-label">CFT</td><td class="price-cell blue">$60.000</td><td class="price-cell gold">$100.000</td><td class="price-cell purple">$150.000</td></tr>
-              <tr><td class="inst-label">Instituto Profesional</td><td class="price-cell blue">$90.000</td><td class="price-cell gold">$150.000</td><td class="price-cell purple">$225.000</td></tr>
-              <tr><td class="inst-label">Universidad (Pregrado)</td><td class="price-cell blue">$150.000</td><td class="price-cell gold">$250.000</td><td class="price-cell purple">$375.000</td></tr>
-              <tr><td class="inst-label">Magíster</td><td class="price-cell blue">$300.000</td><td class="price-cell gold">$500.000</td><td class="price-cell purple">$750.000</td></tr>
-              <tr><td class="inst-label">Doctorado</td><td class="price-cell blue">$500.000</td><td class="price-cell gold">$850.000</td><td class="price-cell purple">$1.250.000</td></tr>
+              <tr><td class="inst-label">CFT</td><td class="price-cell blue">$150.000</td><td class="price-cell gold">$250.000</td><td class="price-cell purple">$375.000</td></tr>
+              <tr><td class="inst-label">Instituto Profesional</td><td class="price-cell blue">$250.000</td><td class="price-cell gold">$420.000</td><td class="price-cell purple">$625.000</td></tr>
+              <tr><td class="inst-label">Universidad (Pregrado)</td><td class="price-cell blue">$350.000</td><td class="price-cell gold">$585.000</td><td class="price-cell purple">$875.000</td></tr>
+              <tr><td class="inst-label">Magíster</td><td class="price-cell blue">$550.000</td><td class="price-cell gold">$920.000</td><td class="price-cell purple">$1.375.000</td></tr>
+              <tr><td class="inst-label">Doctorado</td><td class="price-cell blue">$950.000</td><td class="price-cell gold">$1.615.000</td><td class="price-cell purple">$2.375.000</td></tr>
             </tbody>
           </table>
         </div>
@@ -650,11 +831,11 @@
     };
 
     const bases = {
-      cft: { base: 60000, p: 100000, e: 150000 },
-      ip: { base: 90000, p: 150000, e: 225000 },
-      uni: { base: 150000, p: 250000, e: 375000 },
-      master: { base: 300000, p: 500000, e: 750000 },
-      doc: { base: 500000, p: 850000, e: 1250000 }
+      cft: { base: 150000, p: 250000, e: 375000 },
+      ip: { base: 250000, p: 420000, e: 625000 },
+      uni: { base: 350000, p: 585000, e: 875000 },
+      master: { base: 550000, p: 920000, e: 1375000 },
+      doc: { base: 950000, p: 1615000, e: 2375000 }
     };
 
     let currentTab = 'cft';
@@ -761,6 +942,9 @@
 
         var link = waLink(tabKey, plan.planLabel, plan.price);
 
+        var installment4 = formatPrice(Math.round(plan.priceRaw / 4));
+        var cashPrice = formatPrice(Math.round(plan.priceRaw * 0.9));
+
         card.innerHTML =
           '<div class="p-card-tier ' + plan.tierClass + '">' + plan.tier + '</div>' +
           '<div class="p-card-name">' + plan.name + '</div>' +
@@ -768,6 +952,8 @@
           '<div class="price-block">' +
             '<div class="price">' + plan.price + '</div>' +
             '<div class="price-sub">' + plan.priceSub + '</div>' +
+            '<div class="price-installment">o <strong>' + installment4 + '</strong> en 4 cuotas sin interés</div>' +
+            '<div class="price-cash">Al contado: <strong>' + cashPrice + '</strong> (ahorras 10%)</div>' +
           '</div>' +
           '<div class="p-divider"></div>' +
           fHTML +
@@ -776,6 +962,37 @@
 
         grid.appendChild(card);
       });
+
+      renderPaymentOptions(tabKey);
+    }
+
+    function renderPaymentOptions(tabKey) {
+      var b = bases[tabKey];
+      var plans = [
+        { name: 'Estándar', val: b.base },
+        { name: 'Preferente', val: b.p },
+        { name: 'Élite', val: b.e }
+      ];
+
+      // Installment table
+      var instHTML = '<table class="payment-mini-table"><tr><th>Plan</th><th style="text-align:right">Cuota mensual</th></tr>';
+      plans.forEach(function(p) {
+        instHTML += '<tr><td class="plan-name">' + p.name + '</td><td class="mini-price" style="color:#34d399">' + formatPrice(Math.round(p.val / 4)) + ' /mes</td></tr>';
+      });
+      instHTML += '</table>';
+      document.getElementById('installmentExample').innerHTML = instHTML;
+
+      // Cash discount table
+      var cashHTML = '<table class="payment-mini-table"><tr><th>Plan</th><th style="text-align:right">Al contado</th><th style="text-align:right">Ahorras</th></tr>';
+      plans.forEach(function(p) {
+        var saved = Math.round(p.val * 0.1);
+        cashHTML += '<tr><td class="plan-name">' + p.name + '</td><td class="mini-price" style="color:var(--brand2)">' + formatPrice(Math.round(p.val * 0.9)) + '</td><td class="savings">-' + formatPrice(saved) + '</td></tr>';
+      });
+      cashHTML += '</table>';
+      document.getElementById('cashExample').innerHTML = cashHTML;
+
+      // Update min savings
+      document.getElementById('cashSavingsMin').textContent = formatPrice(Math.round(b.base * 0.1));
     }
 
     document.getElementById('tabs').addEventListener('click', function(e) {
