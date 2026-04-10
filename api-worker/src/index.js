@@ -323,7 +323,13 @@ export default {
           }
 
           const buffer = await file.arrayBuffer();
-          const base64 = btoa(String.fromCharCode(...new Uint8Array(buffer)));
+          const bytes = new Uint8Array(buffer);
+          let binary = '';
+          const chunkSize = 8192;
+          for (let i = 0; i < bytes.length; i += chunkSize) {
+            binary += String.fromCharCode.apply(null, bytes.subarray(i, i + chunkSize));
+          }
+          const base64 = btoa(binary);
 
           let mediaType = 'application/pdf';
           if (file.name.endsWith('.docx')) {
