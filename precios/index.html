@@ -716,8 +716,8 @@
         </div>
         <div class="payment-option-card cash-card">
           <div class="payment-icon">💰</div>
-          <h3><strong class="highlight-gold">10% de descuento</strong> pagando <strong>al contado</strong></h3>
-          <p>Paga el total en un solo abono y obtén un <strong class="highlight-gold">10% de descuento</strong> inmediato. <strong>Ahorras</strong> desde <strong id="cashSavingsMin" style="color:#34d399"></strong>.</p>
+          <h3><strong class="highlight-gold">20% de descuento</strong> pagando <strong>al contado</strong></h3>
+          <p>Paga el total en un solo abono y obtén un <strong class="highlight-gold">20% de descuento</strong> inmediato. <strong>Ahorras</strong> desde <strong id="cashSavingsMin" style="color:#34d399"></strong>.</p>
           <div id="cashExample"></div>
         </div>
       </div>
@@ -943,7 +943,7 @@
         var link = waLink(tabKey, plan.planLabel, plan.price);
 
         var installment4 = formatPrice(Math.round(plan.priceRaw / 4));
-        var cashPrice = formatPrice(Math.round(plan.priceRaw * 0.9));
+        var cashPrice = formatPrice(Math.round(plan.priceRaw * 0.8));
 
         card.innerHTML =
           '<div class="p-card-tier ' + plan.tierClass + '">' + plan.tier + '</div>' +
@@ -953,7 +953,7 @@
             '<div class="price">' + plan.price + '</div>' +
             '<div class="price-sub">' + plan.priceSub + '</div>' +
             '<div class="price-installment">o <strong>' + installment4 + '</strong> x 4 cuotas flexibles</div>' +
-            '<div class="price-cash">Al contado: <strong>' + cashPrice + '</strong> (ahorras 10%)</div>' +
+            '<div class="price-cash">Al contado: <strong>' + cashPrice + '</strong> (ahorras 20%)</div>' +
           '</div>' +
           '<div class="p-divider"></div>' +
           fHTML +
@@ -985,14 +985,14 @@
       // Cash discount table
       var cashHTML = '<table class="payment-mini-table"><tr><th>Plan</th><th style="text-align:right">Al contado</th><th style="text-align:right">Ahorras</th></tr>';
       plans.forEach(function(p) {
-        var saved = Math.round(p.val * 0.1);
-        cashHTML += '<tr><td class="plan-name">' + p.name + '</td><td class="mini-price" style="color:var(--brand2)">' + formatPrice(Math.round(p.val * 0.9)) + '</td><td class="savings">-' + formatPrice(saved) + '</td></tr>';
+        var saved = Math.round(p.val * 0.2);
+        cashHTML += '<tr><td class="plan-name">' + p.name + '</td><td class="mini-price" style="color:var(--brand2)">' + formatPrice(Math.round(p.val * 0.8)) + '</td><td class="savings">-' + formatPrice(saved) + '</td></tr>';
       });
       cashHTML += '</table>';
       document.getElementById('cashExample').innerHTML = cashHTML;
 
       // Update min savings
-      document.getElementById('cashSavingsMin').textContent = formatPrice(Math.round(b.base * 0.1));
+      document.getElementById('cashSavingsMin').textContent = formatPrice(Math.round(b.base * 0.2));
     }
 
     document.getElementById('tabs').addEventListener('click', function(e) {
