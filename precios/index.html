@@ -711,7 +711,7 @@
         <div class="payment-option-card installment-card">
           <div class="payment-icon">💳</div>
           <h3>Paga en <strong>hasta 4 cuotas</strong> sin interés</h3>
-          <p>Divide el valor total de tu plan en <strong>hasta 4 cuotas mensuales iguales</strong>. Sin recargo, sin letra chica. Tú eliges cómo dividirlo.</p>
+          <p>Divide el valor total de tu plan en <strong>hasta 4 cuotas</strong> que se adaptan a tu presupuesto y tus tiempos. <strong>Sin recargo, sin letra chica.</strong> Tú decides cuándo y cómo pagas cada cuota.</p>
           <div id="installmentExample"></div>
         </div>
         <div class="payment-option-card cash-card">
@@ -952,7 +952,7 @@
           '<div class="price-block">' +
             '<div class="price">' + plan.price + '</div>' +
             '<div class="price-sub">' + plan.priceSub + '</div>' +
-            '<div class="price-installment">o <strong>' + installment4 + '</strong> en 4 cuotas sin interés</div>' +
+            '<div class="price-installment">o <strong>' + installment4 + '</strong> x 4 cuotas flexibles</div>' +
             '<div class="price-cash">Al contado: <strong>' + cashPrice + '</strong> (ahorras 10%)</div>' +
           '</div>' +
           '<div class="p-divider"></div>' +
@@ -975,9 +975,9 @@
       ];
 
       // Installment table
-      var instHTML = '<table class="payment-mini-table"><tr><th>Plan</th><th style="text-align:right">Cuota mensual</th></tr>';
+      var instHTML = '<table class="payment-mini-table"><tr><th>Plan</th><th style="text-align:right">Valor por cuota</th></tr>';
       plans.forEach(function(p) {
-        instHTML += '<tr><td class="plan-name">' + p.name + '</td><td class="mini-price" style="color:#34d399">' + formatPrice(Math.round(p.val / 4)) + ' /mes</td></tr>';
+        instHTML += '<tr><td class="plan-name">' + p.name + '</td><td class="mini-price" style="color:#34d399">' + formatPrice(Math.round(p.val / 4)) + ' x 4</td></tr>';
       });
       instHTML += '</table>';
       document.getElementById('installmentExample').innerHTML = instHTML;
