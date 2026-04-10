@@ -1,0 +1,421 @@
+import { buildAnalysisPrompt, SECTION_WEIGHTS } from './prompts.js';
+
+// ============================================================
+// PRECIOS (deben coincidir con precios/index.html)
+// ============================================================
+const PRICES = {
+  cft:    { estandar: 150000, preferente: 250000, elite: 375000 },
+  ip:     { estandar: 250000, preferente: 420000, elite: 625000 },
+  uni:    { estandar: 350000, preferente: 585000, elite: 875000 },
+  master: { estandar: 550000, preferente: 920000, elite: 1375000 },
+  doc:    { estandar: 950000, preferente: 1615000, elite: 2375000 }
+};
+
+const INST_LABELS = {
+  cft: 'CFT', ip: 'Instituto Profesional', uni: 'Universidad (Pregrado)',
+  master: 'Magíster', doc: 'Doctorado'
+};
+const PLAN_LABELS = { estandar: 'Estándar', preferente: 'Preferente', elite: 'Élite' };
+
+// ============================================================
+// CORS
+// ============================================================
+function corsHeaders(env) {
+  return {
+    'Access-Control-Allow-Origin': env.ALLOWED_ORIGIN || '*',
+    'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Max-Age': '86400'
+  };
+}
+
+function jsonResponse(data, status, env) {
+  return new Response(JSON.stringify(data), {
+    status,
+    headers: { 'Content-Type': 'application/json', ...corsHeaders(env) }
+  });
+}
+
+// ============================================================
+// RATE LIMITING (KV)
+// ============================================================
+async function checkRateLimit(phone, env) {
+  const key = `rate:${phone}`;
+  const existing = await env.RATE_LIMIT.get(key);
+  if (existing) return false; // ya cotizó hoy
+  return true;
+}
+
+async function setRateLimit(phone, env) {
+  const key = `rate:${phone}`;
+  // Expira en 24 horas (86400 segundos)
+  await env.RATE_LIMIT.put(key, Date.now().toString(), { expirationTtl: 86400 });
+}
+
+// ============================================================
+// SUPABASE
+// ============================================================
+async function saveToSupabase(data, env) {
+  const res = await fetch(`${env.SUPABASE_URL}/rest/v1/quotations`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'apikey': env.SUPABASE_SERVICE_KEY,
+      'Authorization': `Bearer ${env.SUPABASE_SERVICE_KEY}`,
+      'Prefer': 'return=representation'
+    },
+    body: JSON.stringify(data)
+  });
+
+  if (!res.ok) {
+    const error = await res.text();
+    throw new Error(`Supabase error: ${error}`);
+  }
+
+  const rows = await res.json();
+  return rows[0];
+}
+
+async function uploadDocument(file, filename, env) {
+  const timestamp = Date.now();
+  const safeName = filename.replace(/[^a-zA-Z0-9._-]/g, '_');
+  const path = `uploads/${timestamp}_${safeName}`;
+
+  const res = await fetch(`${env.SUPABASE_URL}/storage/v1/object/thesis-documents/${path}`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${env.SUPABASE_SERVICE_KEY}`,
+      'Content-Type': file.type || 'application/octet-stream'
+    },
+    body: file
+  });
+
+  if (!res.ok) {
+    const error = await res.text();
+    throw new Error(`Storage error: ${error}`);
+  }
+
+  return `${env.SUPABASE_URL}/storage/v1/object/thesis-documents/${path}`;
+}
+
+// ============================================================
+// CLAUDE API - Análisis de documento
+// ============================================================
+async function analyzeWithClaude(documentText, institutionType, env) {
+  const systemPrompt = buildAnalysisPrompt(institutionType);
+
+  const res = await fetch('https://api.anthropic.com/v1/messages', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': env.ANTHROPIC_API_KEY,
+      'anthropic-version': '2023-06-01'
+    },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 2000,
+      system: systemPrompt,
+      messages: [{
+        role: 'user',
+        content: `Analiza el siguiente documento de tesis y calcula el porcentaje de completitud:\n\n---\n${documentText}\n---`
+      }]
+    })
+  });
+
+  if (!res.ok) {
+    const error = await res.text();
+    throw new Error(`Claude API error: ${error}`);
+  }
+
+  const data = await res.json();
+  const rawText = data.content.map(c => c.text || '').join('').trim();
+
+  // Parsear JSON de la respuesta
+  const clean = rawText.replace(/```json\s*/g, '').replace(/```\s*/g, '').trim();
+  return JSON.parse(clean);
+}
+
+// ============================================================
+// EXTRAER TEXTO DE PDF (básico - extrae texto embebido)
+// ============================================================
+async function extractTextFromPDF(arrayBuffer) {
+  // Extracción básica de texto de PDF
+  // Para PDFs complejos, Claude puede leer el PDF directamente
+  const bytes = new Uint8Array(arrayBuffer);
+  const text = new TextDecoder('utf-8', { fatal: false }).decode(bytes);
+
+  // Intentar extraer texto legible entre streams de PDF
+  const textParts = [];
+  const streamRegex = /stream\s*([\s\S]*?)endstream/g;
+  let match;
+  while ((match = streamRegex.exec(text)) !== null) {
+    const content = match[1].trim();
+    // Filtrar contenido binario
+    if (content.length > 10 && /[a-záéíóúñ]{3,}/i.test(content)) {
+      textParts.push(content);
+    }
+  }
+
+  // Si no encontramos texto en streams, intentar BT/ET blocks
+  if (textParts.length === 0) {
+    const btRegex = /BT\s*([\s\S]*?)ET/g;
+    while ((match = btRegex.exec(text)) !== null) {
+      const tjRegex = /\(([^)]+)\)\s*Tj/g;
+      let tjMatch;
+      while ((tjMatch = tjRegex.exec(match[1])) !== null) {
+        textParts.push(tjMatch[1]);
+      }
+    }
+  }
+
+  return textParts.join('\n').trim();
+}
+
+// ============================================================
+// ENVIAR EMAIL CON RESEND
+// ============================================================
+async function sendAdminEmail(quotation, env) {
+  if (!env.RESEND_API_KEY || !env.ADMIN_EMAIL) return;
+
+  const instLabel = INST_LABELS[quotation.institution_type] || quotation.institution_type;
+  const planLabel = PLAN_LABELS[quotation.plan_type] || quotation.plan_type;
+
+  const formatCLP = (n) => '$' + Math.round(n).toLocaleString('es-CL');
+
+  const html = `
+    <div style="font-family:sans-serif;max-width:600px;margin:0 auto">
+      <h2 style="color:#E5B52E">Nueva Cotización - Tareapp</h2>
+      <table style="width:100%;border-collapse:collapse;margin:16px 0">
+        <tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:600">Nombre</td><td style="padding:8px;border-bottom:1px solid #eee">${quotation.student_name}</td></tr>
+        <tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:600">Teléfono</td><td style="padding:8px;border-bottom:1px solid #eee">${quotation.student_phone}</td></tr>
+        <tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:600">Email</td><td style="padding:8px;border-bottom:1px solid #eee">${quotation.student_email}</td></tr>
+        <tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:600">Carrera</td><td style="padding:8px;border-bottom:1px solid #eee">${quotation.student_career}</td></tr>
+        <tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:600">Institución</td><td style="padding:8px;border-bottom:1px solid #eee">${instLabel}</td></tr>
+        <tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:600">Plan</td><td style="padding:8px;border-bottom:1px solid #eee">${planLabel}</td></tr>
+        <tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:600">Precio Total</td><td style="padding:8px;border-bottom:1px solid #eee">${formatCLP(quotation.full_price)}</td></tr>
+        <tr><td style="padding:8px;border-bottom:1px solid #eee;font-weight:600">% Completado</td><td style="padding:8px;border-bottom:1px solid #eee">${quotation.completion_pct}%</td></tr>
+        <tr style="background:#f8f8f8"><td style="padding:12px;font-weight:700;font-size:16px">Precio Cotizado</td><td style="padding:12px;font-weight:700;font-size:16px;color:#34d399">${formatCLP(quotation.quoted_price)}</td></tr>
+      </table>
+      ${quotation.document_url ? `<p><a href="${quotation.document_url}" style="color:#E5B52E">Ver documento subido</a></p>` : ''}
+      <p style="color:#888;font-size:12px">Verifica en Supabase Dashboard > Table Editor > quotations</p>
+    </div>
+  `;
+
+  await fetch('https://api.resend.com/emails', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${env.RESEND_API_KEY}`
+    },
+    body: JSON.stringify({
+      from: 'Tareapp Cotizador <cotizador@tareapp.cl>',
+      to: [env.ADMIN_EMAIL],
+      subject: `Nueva cotización: ${quotation.student_name} - ${instLabel} ${planLabel} - ${formatCLP(quotation.quoted_price)}`,
+      html
+    })
+  });
+}
+
+// ============================================================
+// HANDLER PRINCIPAL
+// ============================================================
+export default {
+  async fetch(request, env) {
+    const url = new URL(request.url);
+
+    // CORS preflight
+    if (request.method === 'OPTIONS') {
+      return new Response(null, { status: 204, headers: corsHeaders(env) });
+    }
+
+    try {
+      // GET /api/rate-check?phone=XXXXX
+      if (url.pathname === '/api/rate-check' && request.method === 'GET') {
+        const phone = url.searchParams.get('phone');
+        if (!phone) return jsonResponse({ error: 'Falta el teléfono' }, 400, env);
+
+        const allowed = await checkRateLimit(phone, env);
+        return jsonResponse({ allowed }, 200, env);
+      }
+
+      // POST /api/analyze
+      if (url.pathname === '/api/analyze' && request.method === 'POST') {
+        const formData = await request.formData();
+
+        // Extraer campos
+        const studentName = formData.get('student_name');
+        const studentPhone = formData.get('student_phone');
+        const studentEmail = formData.get('student_email');
+        const studentCareer = formData.get('student_career');
+        const institutionType = formData.get('institution_type');
+        const planType = formData.get('plan_type');
+        const file = formData.get('document');
+        const manualText = formData.get('manual_text'); // Texto pegado manualmente
+
+        // Validaciones
+        if (!studentName || !studentPhone || !studentEmail || !studentCareer) {
+          return jsonResponse({ error: 'Faltan datos del estudiante' }, 400, env);
+        }
+        if (!institutionType || !PRICES[institutionType]) {
+          return jsonResponse({ error: 'Tipo de institución inválido' }, 400, env);
+        }
+        if (!planType || !PRICES[institutionType][planType]) {
+          return jsonResponse({ error: 'Tipo de plan inválido' }, 400, env);
+        }
+        if (!file && !manualText) {
+          return jsonResponse({ error: 'Debes subir un documento o pegar tu estructura' }, 400, env);
+        }
+
+        // Rate limiting
+        const allowed = await checkRateLimit(studentPhone, env);
+        if (!allowed) {
+          return jsonResponse({
+            error: 'Ya realizaste una cotización hoy. Puedes volver a cotizar mañana.',
+            rate_limited: true
+          }, 429, env);
+        }
+
+        // Obtener precio total
+        const fullPrice = PRICES[institutionType][planType];
+
+        // Extraer texto del documento
+        let documentText = '';
+        let documentUrl = null;
+        let documentFilename = null;
+        let documentSize = 0;
+
+        if (file && file.size > 0) {
+          // Validar tamaño (10MB max)
+          if (file.size > 10 * 1024 * 1024) {
+            return jsonResponse({ error: 'El archivo no debe superar los 10MB' }, 400, env);
+          }
+
+          documentFilename = file.name;
+          documentSize = file.size;
+
+          // Subir a Supabase Storage
+          try {
+            documentUrl = await uploadDocument(file, file.name, env);
+          } catch (e) {
+            console.error('Error uploading:', e);
+          }
+
+          // Extraer texto
+          const buffer = await file.arrayBuffer();
+          if (file.name.endsWith('.pdf')) {
+            documentText = await extractTextFromPDF(buffer);
+          } else {
+            // Para DOCX, extraer texto básico
+            const decoder = new TextDecoder('utf-8', { fatal: false });
+            const raw = decoder.decode(buffer);
+            // DOCX es un ZIP con XML adentro
+            const xmlTextRegex = /<w:t[^>]*>([^<]+)<\/w:t>/g;
+            let m;
+            const parts = [];
+            while ((m = xmlTextRegex.exec(raw)) !== null) {
+              parts.push(m[1]);
+            }
+            documentText = parts.join(' ').trim();
+          }
+
+          // Si no pudimos extraer texto, usar el nombre del archivo como contexto mínimo
+          if (!documentText || documentText.length < 50) {
+            documentText = manualText || `[Documento subido: ${file.name}, ${file.size} bytes. No se pudo extraer texto legible. El documento necesita revisión manual.]`;
+          }
+        } else if (manualText) {
+          documentText = manualText;
+        }
+
+        // Analizar con Claude
+        let analysis;
+        try {
+          analysis = await analyzeWithClaude(documentText, institutionType, env);
+        } catch (e) {
+          console.error('Claude analysis error:', e);
+          // Fallback: asignar 0% si Claude falla
+          const weights = SECTION_WEIGHTS[institutionType];
+          analysis = {
+            sections: weights.map(w => ({
+              standard_name: w.name,
+              found_name: 'No encontrada',
+              weight_pct: w.weight,
+              completion_pct: 0,
+              effective_pct: 0,
+              assessment: 'No se pudo analizar automáticamente'
+            })),
+            total_completion_pct: 0,
+            overall_assessment: 'El análisis automático no pudo completarse. Un asesor revisará tu documento manualmente.'
+          };
+        }
+
+        const completionPct = Math.min(Math.max(analysis.total_completion_pct || 0, 0), 95);
+        const remainingPct = 100 - completionPct;
+        const quotedPrice = Math.round(fullPrice * (remainingPct / 100));
+
+        // Guardar en Supabase
+        let savedQuotation = null;
+        try {
+          savedQuotation = await saveToSupabase({
+            student_name: studentName,
+            student_phone: studentPhone,
+            student_email: studentEmail,
+            student_career: studentCareer,
+            institution_type: institutionType,
+            plan_type: planType,
+            full_price: fullPrice,
+            completion_pct: completionPct,
+            quoted_price: quotedPrice,
+            ai_analysis: analysis,
+            document_url: documentUrl,
+            document_filename: documentFilename,
+            document_size_bytes: documentSize,
+            client_ip: request.headers.get('CF-Connecting-IP') || 'unknown',
+            user_agent: request.headers.get('User-Agent') || 'unknown'
+          }, env);
+        } catch (e) {
+          console.error('Supabase save error:', e);
+        }
+
+        // Marcar rate limit
+        await setRateLimit(studentPhone, env);
+
+        // Enviar email al admin
+        try {
+          await sendAdminEmail({
+            student_name: studentName,
+            student_phone: studentPhone,
+            student_email: studentEmail,
+            student_career: studentCareer,
+            institution_type: institutionType,
+            plan_type: planType,
+            full_price: fullPrice,
+            completion_pct: completionPct,
+            quoted_price: quotedPrice,
+            document_url: documentUrl
+          }, env);
+        } catch (e) {
+          console.error('Email error:', e);
+        }
+
+        return jsonResponse({
+          success: true,
+          quote_id: savedQuotation?.id || null,
+          completion_pct: completionPct,
+          remaining_pct: remainingPct,
+          full_price: fullPrice,
+          quoted_price: quotedPrice,
+          sections: analysis.sections || [],
+          overall_assessment: analysis.overall_assessment || '',
+          institution_label: INST_LABELS[institutionType],
+          plan_label: PLAN_LABELS[planType]
+        }, 200, env);
+      }
+
+      return jsonResponse({ error: 'Ruta no encontrada' }, 404, env);
+
+    } catch (err) {
+      console.error('Unhandled error:', err);
+      return jsonResponse({ error: 'Error interno del servidor' }, 500, env);
+    }
+  }
+};

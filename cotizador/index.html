@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="color-scheme" content="light" />
 
-  <title>Cotizador Parcial de Tesis | Tareapp</title>
-  <meta name="description" content="Cotiza las partes específicas de tu tesis que necesitas. Nuestra IA calcula el precio según las secciones que requieras." />
+  <title>Cotizador de Tesis con IA | Tareapp</title>
+  <meta name="description" content="Sube tu documento de tesis y nuestra IA calcula cuánto llevas avanzado. Obtén una cotización personalizada al instante." />
   <meta name="author" content="Tareapp" />
   <meta name="theme-color" content="#F7C948" />
 
@@ -20,8 +20,9 @@
   <link rel="stylesheet" href="/styles.css" />
 
   <style>
+    /* ===== COTIZADOR STYLES ===== */
     .cotizador-wrap {
-      max-width: 800px;
+      max-width: 720px;
       margin: 0 auto;
       padding: var(--pad-lg) 0 clamp(40px, 5vw, 80px);
     }
@@ -38,10 +39,7 @@
     }
     .back-link:hover { color: var(--brand2); text-decoration: none; }
 
-    .cot-header {
-      text-align: center;
-      margin-bottom: 36px;
-    }
+    .cot-header { text-align: center; margin-bottom: 36px; }
     .cot-header h1 {
       font-family: 'Playfair Display', serif;
       font-size: clamp(28px, 4vw, 38px);
@@ -49,13 +47,58 @@
       margin-bottom: 10px;
       color: var(--text);
     }
-    .cot-header p {
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.6;
-    }
+    .cot-header p { color: var(--muted); font-size: 15px; line-height: 1.6; }
 
-    /* Steps */
+    /* Progress bar */
+    .progress-bar {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 36px;
+      padding: 0 8px;
+    }
+    .progress-step {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      flex: 1;
+    }
+    .progress-step:last-child { flex: 0; }
+    .progress-dot {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 2px solid var(--line);
+      background: var(--card);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+      flex-shrink: 0;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    .progress-dot.active {
+      border-color: var(--brand2);
+      background: var(--brand);
+      color: var(--text);
+    }
+    .progress-dot.done {
+      border-color: #34d399;
+      background: #34d399;
+      color: #fff;
+    }
+    .progress-line {
+      flex: 1;
+      height: 2px;
+      background: var(--line);
+      transition: background 0.3s ease;
+    }
+    .progress-line.done { background: #34d399; }
+
+    /* Step sections */
     .step-section {
       background: var(--card);
       border: 1px solid var(--line);
@@ -63,6 +106,7 @@
       padding: 28px;
       margin-bottom: 20px;
       box-shadow: var(--shadow-sm);
+      animation: fadeUp 0.4s ease;
     }
     .step-label {
       font-size: 11px;
@@ -79,6 +123,7 @@
       color: var(--text);
     }
 
+    /* Option buttons */
     .option-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
@@ -111,213 +156,375 @@
     .plan-option { text-align: left; padding: 16px; }
     .plan-option .plan-name { font-weight: 600; color: var(--text); margin-bottom: 2px; }
     .plan-option .plan-price { font-size: 12px; }
+    .plan-option .plan-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
     .plan-option.selected .plan-name { color: var(--brand2); }
 
-    /* Chat */
-    .chat-container {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      min-height: 480px;
-      box-shadow: var(--shadow-sm);
-    }
-
-    .chat-header {
-      padding: 16px 24px;
-      border-bottom: 1px solid var(--line);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: var(--bg2);
-    }
-    .chat-avatar {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #fb923c, var(--brand));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      font-weight: 700;
-      color: #fff;
-    }
-    .chat-header-info .chat-name { font-size: 14px; font-weight: 600; color: var(--text); }
-    .chat-header-info .chat-status { font-size: 11px; color: #34d399; }
-
-    .chat-messages {
-      flex: 1;
-      padding: 20px 24px;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
+    /* Form fields */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 16px;
-      max-height: 400px;
-      background: var(--bg);
     }
-
-    .msg {
-      max-width: 85%;
-      padding: 14px 18px;
-      border-radius: 16px;
-      font-size: 14px;
-      line-height: 1.55;
-      animation: fadeUp 0.3s ease;
-    }
-    .msg.bot {
-      align-self: flex-start;
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-bottom-left-radius: 4px;
-      color: var(--text);
-    }
-    .msg.user {
-      align-self: flex-end;
-      background: var(--brand3);
-      border: 1px solid rgba(229,181,46,0.3);
-      border-bottom-right-radius: 4px;
-      color: var(--text);
-    }
-    .msg.quote-result {
-      align-self: flex-start;
-      background: linear-gradient(135deg, rgba(52,211,153,0.06), rgba(167,139,250,0.04));
-      border: 1px solid rgba(52,211,153,0.2);
-      border-bottom-left-radius: 4px;
-      max-width: 95%;
-      color: var(--text);
-    }
-    .msg .quote-price {
-      font-family: 'Playfair Display', serif;
-      font-size: 32px;
-      font-weight: 800;
-      color: #34d399;
-      margin: 12px 0;
-    }
-    .msg .quote-breakdown { margin-top: 12px; }
-    .msg .quote-line {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 6px 0;
-      border-bottom: 1px solid var(--line);
-      font-size: 13px;
-    }
-    .msg .quote-line:last-child { border-bottom: none; }
-    .msg .quote-line .ql-name { color: var(--muted); }
-    .msg .quote-line .ql-pct { color: var(--muted); font-size: 11px; }
-    .msg .quote-line .ql-price { color: var(--text); font-weight: 600; }
-    .msg .quote-total {
-      display: flex;
-      justify-content: space-between;
-      padding: 10px 0 0;
-      margin-top: 8px;
-      border-top: 2px solid rgba(52,211,153,0.3);
-      font-weight: 700;
-      font-size: 15px;
-    }
-    .msg .quote-total .qt-price { color: #34d399; }
-
-    .msg .wa-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 14px;
-      padding: 10px 20px;
-      border-radius: 10px;
-      background: #25d366;
-      color: #fff;
+    @media (max-width: 500px) { .form-grid { grid-template-columns: 1fr; } }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group.full { grid-column: 1 / -1; }
+    .form-label {
       font-size: 13px;
       font-weight: 600;
-      text-decoration: none;
-      transition: background 0.2s;
+      color: var(--text);
     }
-    .msg .wa-cta:hover { background: #20bd5a; text-decoration: none; }
-
-    .msg .wa-special-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 14px;
-      padding: 12px 24px;
-      border-radius: 10px;
-      background: #25d366;
-      color: #fff;
-      font-size: 14px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: background 0.2s;
-    }
-    .msg .wa-special-cta:hover { background: #20bd5a; text-decoration: none; }
-
-    .typing-indicator {
-      align-self: flex-start;
-      display: flex;
-      gap: 4px;
-      padding: 14px 18px;
-    }
-    .typing-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--muted);
-      animation: typingBounce 1.4s infinite ease-in-out;
-    }
-    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
-    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
-    @keyframes typingBounce {
-      0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
-      40% { transform: scale(1); opacity: 1; }
-    }
-
-    .chat-input-area {
-      padding: 16px 20px;
-      border-top: 1px solid var(--line);
-      display: flex;
-      gap: 10px;
-      align-items: flex-end;
-      background: var(--bg2);
-    }
-    .chat-input-area textarea {
-      flex: 1;
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 12px;
+    .form-input {
       padding: 12px 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      background: var(--bg);
       color: var(--text);
       font-family: var(--font);
       font-size: 14px;
-      resize: none;
-      min-height: 44px;
-      max-height: 120px;
       outline: none;
       transition: border-color 0.2s;
     }
-    .chat-input-area textarea:focus { border-color: var(--brand2); }
-    .chat-input-area textarea::placeholder { color: var(--muted); }
+    .form-input:focus { border-color: var(--brand2); }
+    .form-input::placeholder { color: var(--muted); }
+    .form-hint { font-size: 11px; color: var(--muted); }
+    .form-error { font-size: 11px; color: #ef4444; display: none; }
 
-    .send-btn {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      background: var(--brand);
-      border: none;
+    /* File upload */
+    .upload-zone {
+      border: 2px dashed var(--line);
+      border-radius: var(--radius);
+      padding: 40px 24px;
+      text-align: center;
       cursor: pointer;
+      transition: all 0.3s ease;
+      background: var(--bg);
+    }
+    .upload-zone:hover, .upload-zone.dragover {
+      border-color: var(--brand2);
+      background: var(--brand3);
+    }
+    .upload-zone .upload-icon { font-size: 48px; margin-bottom: 12px; }
+    .upload-zone .upload-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .upload-zone .upload-sub { font-size: 13px; color: var(--muted); }
+    .upload-zone .upload-formats { font-size: 11px; color: var(--muted); margin-top: 8px; }
+
+    .file-preview {
+      display: none;
+      align-items: center;
+      gap: 12px;
+      padding: 16px;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      margin-top: 12px;
+    }
+    .file-preview.visible { display: flex; }
+    .file-preview .file-icon { font-size: 28px; }
+    .file-preview .file-info { flex: 1; }
+    .file-preview .file-name { font-size: 13px; font-weight: 600; color: var(--text); }
+    .file-preview .file-size { font-size: 11px; color: var(--muted); }
+    .file-preview .file-remove {
+      background: none;
+      border: none;
+      color: #ef4444;
+      cursor: pointer;
+      font-size: 18px;
+      padding: 4px;
+    }
+
+    .or-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 16px 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .or-divider::before, .or-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--line);
+    }
+
+    .manual-textarea {
+      width: 100%;
+      min-height: 100px;
+      padding: 12px 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 13px;
+      resize: vertical;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .manual-textarea:focus { border-color: var(--brand2); }
+    .manual-textarea::placeholder { color: var(--muted); }
+
+    /* Action buttons */
+    .step-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+      gap: 12px;
+    }
+    .btn-back {
+      padding: 10px 20px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      background: transparent;
+      color: var(--muted);
+      font-family: var(--font);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-back:hover { border-color: var(--brand2); color: var(--text); }
+    .btn-next {
+      padding: 12px 28px;
+      border: none;
+      border-radius: var(--radius-sm);
+      background: var(--brand);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-next:hover { background: var(--brand2); }
+    .btn-next:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .btn-analyze {
+      width: 100%;
+      padding: 16px;
+      border: none;
+      border-radius: var(--radius-sm);
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: background 0.2s;
+      gap: 8px;
+    }
+    .btn-analyze:hover { transform: translateY(-1px); box-shadow: var(--shadow); }
+    .btn-analyze:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    /* Loading / Analysis step */
+    .analysis-loading {
+      text-align: center;
+      padding: 48px 24px;
+    }
+    .analysis-loading .spinner {
+      width: 56px;
+      height: 56px;
+      border: 3px solid var(--line);
+      border-top-color: var(--brand2);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto 20px;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .analysis-loading .loading-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .analysis-loading .loading-sub {
+      font-size: 13px;
+      color: var(--muted);
+      max-width: 400px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+    .loading-steps {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .loading-step {
+      font-size: 13px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.3s;
+    }
+    .loading-step.active { color: var(--brand2); font-weight: 600; }
+    .loading-step.done { color: #34d399; }
+
+    /* Results */
+    .result-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: var(--shadow-sm);
+      animation: fadeUp 0.5s ease;
+    }
+    .result-header { text-align: center; margin-bottom: 28px; }
+    .result-header .result-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #34d399;
+      background: rgba(52,211,153,0.08);
+      border: 1px solid rgba(52,211,153,0.2);
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 16px;
+    }
+    .result-pct {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(48px, 8vw, 64px);
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .result-pct-label { font-size: 14px; color: var(--muted); }
+
+    /* Progress bars por sección */
+    .section-breakdown { margin: 24px 0; }
+    .section-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+    }
+    .section-row:last-child { border-bottom: none; }
+    .section-name {
+      width: 160px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text);
       flex-shrink: 0;
     }
-    .send-btn:hover { background: var(--brand2); }
-    .send-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-    .send-btn svg { width: 18px; height: 18px; fill: var(--text); }
+    @media (max-width: 500px) { .section-name { width: 100px; font-size: 12px; } }
+    .section-bar-wrap {
+      flex: 1;
+      height: 8px;
+      background: var(--bg2);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .section-bar {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.8s ease;
+      background: linear-gradient(90deg, #34d399, #5b8def);
+    }
+    .section-pct {
+      width: 40px;
+      text-align: right;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+
+    /* Price result */
+    .price-result {
+      background: linear-gradient(135deg, rgba(52,211,153,0.06), rgba(247,201,72,0.06));
+      border: 1px solid rgba(52,211,153,0.2);
+      border-radius: var(--radius);
+      padding: 24px;
+      text-align: center;
+      margin: 24px 0;
+    }
+    .price-result .pr-label { font-size: 13px; color: var(--muted); margin-bottom: 4px; }
+    .price-result .pr-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 42px;
+      font-weight: 800;
+      color: #34d399;
+      line-height: 1.1;
+    }
+    .price-result .pr-detail {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 8px;
+      line-height: 1.5;
+    }
+    .price-result .pr-detail strong { color: var(--text); }
+
+    .result-note {
+      font-size: 12px;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.5;
+      margin-top: 16px;
+      padding: 12px;
+      background: var(--bg);
+      border-radius: var(--radius-sm);
+    }
+
+    /* WhatsApp CTA */
+    .wa-cta-big {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 16px;
+      border-radius: var(--radius-sm);
+      background: #25d366;
+      color: #fff;
+      font-family: var(--font);
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.2s;
+      margin-top: 20px;
+      border: none;
+      cursor: pointer;
+    }
+    .wa-cta-big:hover { background: #20bd5a; transform: translateY(-1px); text-decoration: none; }
+    .wa-cta-big svg { width: 20px; height: 20px; fill: currentColor; }
+
+    .quote-id {
+      text-align: center;
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 12px;
+    }
+
+    /* Error state */
+    .error-box {
+      background: rgba(239,68,68,0.06);
+      border: 1px solid rgba(239,68,68,0.2);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      text-align: center;
+      color: #ef4444;
+      font-size: 14px;
+      margin-top: 16px;
+      display: none;
+    }
 
     .hidden { display: none !important; }
-
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
   </style>
 </head>
 
@@ -365,12 +572,10 @@
           <small>Soluciones Académicas</small>
         </span>
       </a>
-
       <div class="page-switcher" aria-label="Tipo de servicio">
         <a class="page-switcher__tab" href="/">Trabajos</a>
         <a class="page-switcher__tab page-switcher__tab--active" href="/tesis/">Tesis</a>
       </div>
-
       <nav class="nav__links" aria-label="Navegación principal" id="navLinks">
         <a href="/tesis/#servicios">Servicios</a>
         <a href="/tesis/#proceso">Proceso</a>
@@ -381,7 +586,6 @@
         <a href="/nosotros/">Nosotros</a>
         <a href="/tesis/#contacto" class="nav__cta">Agendar</a>
       </nav>
-
       <div class="nav__actions">
         <a class="btn btn--ghost btn--sm hide-sm" data-wa-message="Hola, quiero agendar una asesoría. ¿Me orientan por favor?" href="#" rel="noopener">
           <svg class="i" aria-hidden="true"><use href="#i-whatsapp"></use></svg>
@@ -392,7 +596,6 @@
         </button>
       </div>
     </div>
-
     <div class="mobile-menu" id="mobileMenu" hidden>
       <div class="mobile-menu__inner container">
         <div class="page-switcher page-switcher--mobile" aria-label="Tipo de servicio">
@@ -420,13 +623,22 @@
       <a href="/precios/" class="back-link">← Volver a planes</a>
 
       <div class="cot-header">
-        <h1>Cotizador Parcial</h1>
-        <p>Selecciona tu institución y plan, luego describe qué partes de tu tesis necesitas. Nuestra IA calculará tu cotización al instante.</p>
+        <h1>Cotizador Inteligente</h1>
+        <p>Sube tu documento de tesis y nuestra IA calcula cuánto llevas avanzado. Obtén una cotización personalizada al instante.</p>
       </div>
 
-      <!-- STEP 1: Institution -->
+      <!-- PROGRESS BAR -->
+      <div class="progress-bar" id="progressBar">
+        <div class="progress-step"><div class="progress-dot active" data-step="1">1</div><div class="progress-line"></div></div>
+        <div class="progress-step"><div class="progress-dot" data-step="2">2</div><div class="progress-line"></div></div>
+        <div class="progress-step"><div class="progress-dot" data-step="3">3</div><div class="progress-line"></div></div>
+        <div class="progress-step"><div class="progress-dot" data-step="4">4</div><div class="progress-line"></div></div>
+        <div class="progress-step"><div class="progress-dot" data-step="5">5</div></div>
+      </div>
+
+      <!-- STEP 1: Institución -->
       <div class="step-section" id="step1">
-        <div class="step-label">Paso 1</div>
+        <div class="step-label">Paso 1 de 5</div>
         <div class="step-title">¿En qué tipo de institución estudias?</div>
         <div class="option-grid" id="instGrid">
           <button class="option-btn" data-value="cft">CFT</button>
@@ -439,30 +651,141 @@
 
       <!-- STEP 2: Plan -->
       <div class="step-section hidden" id="step2">
-        <div class="step-label">Paso 2</div>
+        <div class="step-label">Paso 2 de 5</div>
         <div class="step-title">¿Qué plan te interesa?</div>
         <div class="option-grid option-grid-3" id="planGrid"></div>
+        <div class="step-actions">
+          <button class="btn-back" onclick="goToStep(1)">← Atrás</button>
+        </div>
       </div>
 
-      <!-- STEP 3: Chat -->
-      <div class="hidden" id="step3">
-        <div class="chat-container">
-          <div class="chat-header">
-            <div class="chat-avatar">IA</div>
-            <div class="chat-header-info">
-              <div class="chat-name">Asistente de Cotización</div>
-              <div class="chat-status">● En línea</div>
-            </div>
+      <!-- STEP 3: Datos personales -->
+      <div class="step-section hidden" id="step3">
+        <div class="step-label">Paso 3 de 5</div>
+        <div class="step-title">Tus datos de contacto</div>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">Necesitamos tus datos para enviarte la cotización y que nuestro equipo pueda verificar el precio.</p>
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label" for="fName">Nombre completo</label>
+            <input class="form-input" type="text" id="fName" placeholder="Ej: María González" required />
           </div>
-          <div class="chat-messages" id="chatMessages"></div>
-          <div class="chat-input-area" id="chatInputArea">
-            <textarea id="chatInput" placeholder="Describe qué partes necesitas o pega tu estructura aquí..." rows="1"></textarea>
-            <button class="send-btn" id="sendBtn">
-              <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
-            </button>
+          <div class="form-group">
+            <label class="form-label" for="fPhone">Teléfono (WhatsApp)</label>
+            <input class="form-input" type="tel" id="fPhone" placeholder="+56 9 1234 5678" required />
+            <span class="form-hint">Formato chileno: +56 9 XXXX XXXX</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="fEmail">Email</label>
+            <input class="form-input" type="email" id="fEmail" placeholder="tu@email.com" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="fCareer">Carrera / Programa</label>
+            <input class="form-input" type="text" id="fCareer" placeholder="Ej: Ingeniería Comercial" required />
+          </div>
+        </div>
+        <div id="formError" class="error-box"></div>
+        <div class="step-actions">
+          <button class="btn-back" onclick="goToStep(2)">← Atrás</button>
+          <button class="btn-next" id="btnToStep4" onclick="validateAndGoStep4()">Continuar →</button>
+        </div>
+      </div>
+
+      <!-- STEP 4: Subir documento -->
+      <div class="step-section hidden" id="step4">
+        <div class="step-label">Paso 4 de 5</div>
+        <div class="step-title">Sube tu documento de tesis</div>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">Sube lo que lleves avanzado para que nuestra IA analice tu progreso. Si no tienes archivo, puedes pegar tu estructura abajo.</p>
+
+        <div class="upload-zone" id="uploadZone">
+          <div class="upload-icon">📄</div>
+          <div class="upload-title">Arrastra tu archivo aquí o haz clic para seleccionar</div>
+          <div class="upload-sub">PDF o Word (.docx)</div>
+          <div class="upload-formats">Tamaño máximo: 10 MB</div>
+          <input type="file" id="fileInput" accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document" style="display:none" />
+        </div>
+
+        <div class="file-preview" id="filePreview">
+          <span class="file-icon">📎</span>
+          <div class="file-info">
+            <div class="file-name" id="fileName"></div>
+            <div class="file-size" id="fileSize"></div>
+          </div>
+          <button class="file-remove" id="fileRemove" title="Quitar archivo">✕</button>
+        </div>
+
+        <div class="or-divider">o pega tu estructura aquí</div>
+
+        <textarea class="manual-textarea" id="manualText" placeholder="Pega aquí el índice de tu tesis o describe qué capítulos tienes listos...&#10;&#10;Ejemplo:&#10;Capítulo 1: Introducción (listo)&#10;Capítulo 2: Marco teórico (tengo la mitad)&#10;Capítulo 3: Metodología (no lo he empezado)"></textarea>
+
+        <div id="uploadError" class="error-box"></div>
+
+        <div class="step-actions">
+          <button class="btn-back" onclick="goToStep(3)">← Atrás</button>
+          <button class="btn-analyze" id="btnAnalyze" onclick="startAnalysis()">
+            🔍 Analizar con IA y obtener cotización
+          </button>
+        </div>
+      </div>
+
+      <!-- STEP 5: Loading -->
+      <div class="step-section hidden" id="step5">
+        <div class="analysis-loading">
+          <div class="spinner"></div>
+          <div class="loading-title">Analizando tu tesis...</div>
+          <div class="loading-sub">Nuestra IA está revisando tu documento para calcular tu avance y generar una cotización personalizada.</div>
+          <div class="loading-steps">
+            <div class="loading-step active" id="ls1">⏳ Subiendo documento...</div>
+            <div class="loading-step" id="ls2">⏳ Analizando estructura...</div>
+            <div class="loading-step" id="ls3">⏳ Calculando porcentaje...</div>
+            <div class="loading-step" id="ls4">⏳ Generando cotización...</div>
           </div>
         </div>
       </div>
+
+      <!-- STEP 6: Resultados -->
+      <div class="hidden" id="step6">
+        <div class="result-card">
+          <div class="result-header">
+            <div class="result-badge">Análisis completado</div>
+            <div class="result-pct" id="resultPct">0%</div>
+            <div class="result-pct-label">de tu tesis está completado</div>
+          </div>
+
+          <div class="section-breakdown" id="sectionBreakdown"></div>
+
+          <div class="price-result">
+            <div class="pr-label">Tu precio estimado (lo que falta)</div>
+            <div class="pr-price" id="resultPrice">$0</div>
+            <div class="pr-detail">
+              <span id="resultDetail"></span>
+            </div>
+          </div>
+
+          <div class="result-note" id="resultAssessment"></div>
+
+          <a class="wa-cta-big" id="waButton" href="#" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Enviar cotización por WhatsApp
+          </a>
+
+          <div class="quote-id" id="quoteId"></div>
+
+          <div class="step-actions" style="margin-top:16px">
+            <button class="btn-back" onclick="location.reload()">← Nueva cotización</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ERROR GENERAL -->
+      <div class="step-section hidden" id="stepError">
+        <div style="text-align:center;padding:24px 0">
+          <div style="font-size:48px;margin-bottom:12px">⚠️</div>
+          <div style="font-size:16px;font-weight:600;color:var(--text);margin-bottom:8px" id="errorTitle">Error al procesar</div>
+          <div style="font-size:14px;color:var(--muted);margin-bottom:20px" id="errorMsg"></div>
+          <button class="btn-next" onclick="goToStep(4)">Intentar de nuevo</button>
+        </div>
+      </div>
+
     </div>
   </main>
 
@@ -521,30 +844,79 @@
 
   <script src="/app.js"></script>
   <script>
+    // ============================================================
+    // CONFIGURACIÓN
+    // ============================================================
+    var API_URL = 'https://tareapp-cotizador.TUUSUARIO.workers.dev'; // <-- CAMBIAR por tu Worker URL
     var WA_NUMBER = '56953078288';
 
+    // ============================================================
+    // PRECIOS (sincronizados con precios/index.html)
+    // ============================================================
     var PRICES = {
-      cft:    { estandar: 60000, preferente: 100000, elite: 150000 },
-      ip:     { estandar: 90000, preferente: 150000, elite: 225000 },
-      uni:    { estandar: 150000, preferente: 250000, elite: 375000 },
-      master: { estandar: 300000, preferente: 500000, elite: 750000 },
-      doc:    { estandar: 500000, preferente: 850000, elite: 1250000 }
+      cft:    { estandar: 150000, preferente: 250000, elite: 375000 },
+      ip:     { estandar: 250000, preferente: 420000, elite: 625000 },
+      uni:    { estandar: 350000, preferente: 585000, elite: 875000 },
+      master: { estandar: 550000, preferente: 920000, elite: 1375000 },
+      doc:    { estandar: 950000, preferente: 1615000, elite: 2375000 }
     };
 
     var INST_LABELS = {
       cft: 'CFT', ip: 'Instituto Profesional', uni: 'Universidad (Pregrado)',
       master: 'Magíster', doc: 'Doctorado'
     };
-
     var PLAN_LABELS = { estandar: 'Estándar', preferente: 'Preferente', elite: 'Élite' };
 
+    // ============================================================
+    // ESTADO
+    // ============================================================
+    var currentStep = 1;
     var selectedInst = null;
     var selectedPlan = null;
-    var conversationHistory = [];
+    var uploadedFile = null;
 
     function formatCLP(n) { return '$' + Math.round(n).toLocaleString('es-CL'); }
 
-    // STEP 1: Institution
+    // ============================================================
+    // NAVEGACIÓN DE PASOS
+    // ============================================================
+    function goToStep(n) {
+      // Ocultar todos
+      for (var i = 1; i <= 6; i++) {
+        var el = document.getElementById('step' + i);
+        if (el) el.classList.add('hidden');
+      }
+      document.getElementById('stepError').classList.add('hidden');
+
+      // Mostrar paso actual
+      var target = document.getElementById('step' + n);
+      if (target) target.classList.remove('hidden');
+      currentStep = n;
+
+      // Actualizar progress bar
+      var dots = document.querySelectorAll('.progress-dot');
+      var lines = document.querySelectorAll('.progress-line');
+      dots.forEach(function(dot, i) {
+        var stepNum = i + 1;
+        dot.classList.remove('active', 'done');
+        if (stepNum < n) dot.classList.add('done');
+        else if (stepNum === n) dot.classList.add('active');
+      });
+      lines.forEach(function(line, i) {
+        line.classList.toggle('done', i + 1 < n);
+      });
+
+      // Scroll suave
+      if (n <= 4) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    // ============================================================
+    // STEP 1: Institución
+    // ============================================================
     document.getElementById('instGrid').addEventListener('click', function(e) {
       var btn = e.target.closest('.option-btn');
       if (!btn) return;
@@ -552,256 +924,266 @@
       btn.classList.add('selected');
       selectedInst = btn.dataset.value;
       selectedPlan = null;
-      document.getElementById('step3').classList.add('hidden');
       showStep2();
     });
 
+    // ============================================================
+    // STEP 2: Plan
+    // ============================================================
     function showStep2() {
-      var s2 = document.getElementById('step2');
-      s2.classList.remove('hidden');
+      goToStep(2);
       var grid = document.getElementById('planGrid');
       var p = PRICES[selectedInst];
-      grid.innerHTML = ['estandar','preferente','elite'].map(function(k) {
+      grid.innerHTML = ['estandar', 'preferente', 'elite'].map(function(k) {
+        var cuota = formatCLP(Math.round(p[k] / 4));
         return '<button class="option-btn plan-option" data-value="' + k + '">' +
           '<div class="plan-name">' + PLAN_LABELS[k] + '</div>' +
-          '<div class="plan-price">' + formatCLP(p[k]) + '</div>' +
+          '<div class="plan-price">' + formatCLP(p[k]) + ' tesis completa</div>' +
+          '<div class="plan-sub">o ' + cuota + ' x 4 cuotas</div>' +
         '</button>';
       }).join('');
 
-      grid.addEventListener('click', function(e) {
+      grid.onclick = function(e) {
         var btn = e.target.closest('.option-btn');
         if (!btn) return;
         grid.querySelectorAll('.option-btn').forEach(function(b) { b.classList.remove('selected'); });
         btn.classList.add('selected');
         selectedPlan = btn.dataset.value;
-        showStep3();
-      });
-
-      s2.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        goToStep(3);
+      };
     }
 
-    function showStep3() {
-      document.getElementById('step3').classList.remove('hidden');
-      var msgs = document.getElementById('chatMessages');
-      msgs.innerHTML = '';
-      conversationHistory = [];
+    // ============================================================
+    // STEP 3: Validación de datos
+    // ============================================================
+    function validateAndGoStep4() {
+      var name = document.getElementById('fName').value.trim();
+      var phone = document.getElementById('fPhone').value.trim();
+      var email = document.getElementById('fEmail').value.trim();
+      var career = document.getElementById('fCareer').value.trim();
+      var errorEl = document.getElementById('formError');
 
-      var totalPrice = PRICES[selectedInst][selectedPlan];
-      var instLabel = INST_LABELS[selectedInst];
-      var planLabel = PLAN_LABELS[selectedPlan];
+      // Limpiar
+      errorEl.style.display = 'none';
 
-      addBotMessage(
-        '¡Perfecto! Has seleccionado <strong>' + instLabel + '</strong> con plan <strong>' + planLabel + '</strong> (' + formatCLP(totalPrice) + ' tesis completa).<br><br>' +
-        'Para cotizar las partes que necesitas, <strong>pega aquí la estructura completa de tu tesis</strong> (el índice o pauta de tu institución). Así puedo identificar exactamente qué secciones necesitas.<br><br>' +
-        'También puedes decirme algo como:<br>' +
-        '• "Solo necesito el marco teórico y la metodología"<br>' +
-        '• "Necesito todo menos la introducción"<br>' +
-        '• O pega tu estructura y marca qué capítulos necesitas.'
-      );
+      if (!name || !phone || !email || !career) {
+        errorEl.textContent = 'Por favor completa todos los campos.';
+        errorEl.style.display = 'block';
+        return;
+      }
 
-      document.getElementById('step3').scrollIntoView({ behavior: 'smooth', block: 'start' });
-      document.getElementById('chatInput').focus();
+      // Validar teléfono chileno (flexible)
+      var phoneClean = phone.replace(/[\s\-\(\)]/g, '');
+      if (!/^(\+?56)?9\d{8}$/.test(phoneClean) && !/^\d{9,12}$/.test(phoneClean)) {
+        errorEl.textContent = 'Ingresa un teléfono válido (ej: +56 9 1234 5678).';
+        errorEl.style.display = 'block';
+        return;
+      }
+
+      // Validar email
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        errorEl.textContent = 'Ingresa un email válido.';
+        errorEl.style.display = 'block';
+        return;
+      }
+
+      goToStep(4);
     }
 
-    function addBotMessage(html) {
-      var msgs = document.getElementById('chatMessages');
-      var div = document.createElement('div');
-      div.className = 'msg bot';
-      div.innerHTML = html;
-      msgs.appendChild(div);
-      msgs.scrollTop = msgs.scrollHeight;
-    }
+    // ============================================================
+    // STEP 4: Upload de archivo
+    // ============================================================
+    var uploadZone = document.getElementById('uploadZone');
+    var fileInput = document.getElementById('fileInput');
+    var filePreview = document.getElementById('filePreview');
 
-    function addUserMessage(text) {
-      var msgs = document.getElementById('chatMessages');
-      var div = document.createElement('div');
-      div.className = 'msg user';
-      div.textContent = text;
-      msgs.appendChild(div);
-      msgs.scrollTop = msgs.scrollHeight;
-    }
+    uploadZone.addEventListener('click', function() { fileInput.click(); });
 
-    function addQuoteMessage(sections, totalPrice) {
-      var msgs = document.getElementById('chatMessages');
-      var div = document.createElement('div');
-      div.className = 'msg quote-result';
-
-      var totalPct = 0;
-      var breakdownHTML = '';
-      sections.forEach(function(s) {
-        totalPct += s.pct;
-        var sectionPrice = totalPrice * (s.pct / 100);
-        breakdownHTML +=
-          '<div class="quote-line">' +
-            '<span class="ql-name">' + s.name + '</span>' +
-            '<span class="ql-pct">' + s.pct + '%</span>' +
-            '<span class="ql-price">' + formatCLP(sectionPrice) + '</span>' +
-          '</div>';
-      });
-
-      var finalPrice = totalPrice * (totalPct / 100);
-      var instLabel = INST_LABELS[selectedInst];
-      var planLabel = PLAN_LABELS[selectedPlan];
-
-      var waMsg = encodeURIComponent('Hola, necesito una cotización parcial de tesis (' + instLabel + ', plan ' + planLabel + '). Secciones: ' + sections.map(function(s) { return s.name; }).join(', ') + '. Total estimado: ' + formatCLP(finalPrice));
-
-      div.innerHTML =
-        '<strong>Tu cotización parcial</strong>' +
-        '<div class="quote-price">' + formatCLP(finalPrice) + '</div>' +
-        '<div style="font-size:12px;color:var(--muted);margin-bottom:8px;">' + instLabel + ' · Plan ' + planLabel + ' · ' + totalPct + '% del total</div>' +
-        '<div class="quote-breakdown">' + breakdownHTML + '</div>' +
-        '<div class="quote-total">' +
-          '<span>Total estimado</span>' +
-          '<span class="qt-price">' + formatCLP(finalPrice) + '</span>' +
-        '</div>' +
-        '<a href="https://wa.me/' + WA_NUMBER + '?text=' + waMsg + '" target="_blank" rel="noopener" class="wa-cta">' +
-          '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>' +
-          ' Confirmar por WhatsApp' +
-        '</a>';
-
-      msgs.appendChild(div);
-      msgs.scrollTop = msgs.scrollHeight;
-    }
-
-    function addSpecialCaseMessage(message) {
-      var msgs = document.getElementById('chatMessages');
-      var div = document.createElement('div');
-      div.className = 'msg bot';
-
-      var instLabel = INST_LABELS[selectedInst];
-      var planLabel = PLAN_LABELS[selectedPlan];
-      var waMsg = encodeURIComponent('Hola, necesito una cotización personalizada de tesis (' + instLabel + ', plan ' + planLabel + '). Mi tesis tiene una estructura específica que requiere evaluación.');
-
-      div.innerHTML =
-        '<p>' + message + '</p>' +
-        '<a href="https://wa.me/' + WA_NUMBER + '?text=' + waMsg + '" target="_blank" rel="noopener" class="wa-special-cta">' +
-          '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>' +
-          ' Consultar por WhatsApp' +
-        '</a>';
-
-      msgs.appendChild(div);
-      msgs.scrollTop = msgs.scrollHeight;
-    }
-
-    function showTyping() {
-      var msgs = document.getElementById('chatMessages');
-      var div = document.createElement('div');
-      div.className = 'typing-indicator';
-      div.id = 'typingIndicator';
-      div.innerHTML = '<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>';
-      msgs.appendChild(div);
-      msgs.scrollTop = msgs.scrollHeight;
-    }
-
-    function hideTyping() {
-      var el = document.getElementById('typingIndicator');
-      if (el) el.remove();
-    }
-
-    // Auto-resize textarea
-    var chatInput = document.getElementById('chatInput');
-    chatInput.addEventListener('input', function() {
-      chatInput.style.height = 'auto';
-      chatInput.style.height = Math.min(chatInput.scrollHeight, 120) + 'px';
+    uploadZone.addEventListener('dragover', function(e) {
+      e.preventDefault();
+      uploadZone.classList.add('dragover');
     });
-    chatInput.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend(); }
+    uploadZone.addEventListener('dragleave', function() {
+      uploadZone.classList.remove('dragover');
+    });
+    uploadZone.addEventListener('drop', function(e) {
+      e.preventDefault();
+      uploadZone.classList.remove('dragover');
+      if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
     });
 
-    document.getElementById('sendBtn').addEventListener('click', handleSend);
+    fileInput.addEventListener('change', function() {
+      if (fileInput.files.length) handleFile(fileInput.files[0]);
+    });
 
-    async function handleSend() {
-      var input = document.getElementById('chatInput');
-      var text = input.value.trim();
-      if (!text) return;
+    function handleFile(file) {
+      var validTypes = ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+      if (!validTypes.includes(file.type) && !file.name.endsWith('.pdf') && !file.name.endsWith('.docx')) {
+        document.getElementById('uploadError').textContent = 'Solo se aceptan archivos PDF o DOCX.';
+        document.getElementById('uploadError').style.display = 'block';
+        return;
+      }
+      if (file.size > 10 * 1024 * 1024) {
+        document.getElementById('uploadError').textContent = 'El archivo no debe superar los 10 MB.';
+        document.getElementById('uploadError').style.display = 'block';
+        return;
+      }
 
-      input.value = '';
-      input.style.height = 'auto';
-      document.getElementById('sendBtn').disabled = true;
+      document.getElementById('uploadError').style.display = 'none';
+      uploadedFile = file;
+      document.getElementById('fileName').textContent = file.name;
+      document.getElementById('fileSize').textContent = (file.size / 1024 / 1024).toFixed(2) + ' MB';
+      filePreview.classList.add('visible');
+      uploadZone.style.display = 'none';
+    }
 
-      addUserMessage(text);
-      showTyping();
+    document.getElementById('fileRemove').addEventListener('click', function() {
+      uploadedFile = null;
+      fileInput.value = '';
+      filePreview.classList.remove('visible');
+      uploadZone.style.display = '';
+    });
 
-      var totalPrice = PRICES[selectedInst][selectedPlan];
-      var instLabel = INST_LABELS[selectedInst];
-      var planLabel = PLAN_LABELS[selectedPlan];
+    // ============================================================
+    // STEP 5: Análisis
+    // ============================================================
+    async function startAnalysis() {
+      var manualText = document.getElementById('manualText').value.trim();
+      var errorEl = document.getElementById('uploadError');
 
-      conversationHistory.push({ role: 'user', content: text });
+      if (!uploadedFile && !manualText) {
+        errorEl.textContent = 'Sube un documento o pega tu estructura de tesis.';
+        errorEl.style.display = 'block';
+        return;
+      }
+      errorEl.style.display = 'none';
 
-      var systemPrompt = 'Eres el asistente de cotización de Tareapp, un servicio de elaboración de tesis académicas en Chile.\n\n' +
-        'CONTEXTO:\n' +
-        '- Institución: ' + instLabel + '\n' +
-        '- Plan: ' + planLabel + '\n' +
-        '- Precio total de tesis completa: ' + formatCLP(totalPrice) + ' (' + totalPrice + ' CLP)\n\n' +
-        'Tu trabajo es:\n' +
-        '1. Pedir al cliente que pegue o describa la estructura completa de su tesis (el índice o pauta de su institución)\n' +
-        '2. Identificar qué secciones necesita que elaboremos\n' +
-        '3. Calcular el precio parcial basándote en el porcentaje que representa cada sección\n\n' +
-        'REGLAS:\n' +
-        '- Bibliografía, anexos, portada, índice, abstract y dedicatorias NO se cobran por separado, van incluidos.\n' +
-        '- Si el cliente pide la tesis completa, el precio es el total del plan seleccionado.\n' +
-        '- Si la estructura tiene secciones no convencionales que no puedes clasificar (ej: "propuesta de mejora", "plan de negocio", "diseño de prototipo", etc.), indica que es un caso especial y que debe consultar por WhatsApp para una cotización personalizada.\n\n' +
-        'PORCENTAJES BASE (ajustar según la estructura real del cliente):\n' +
-        '- Introducción (planteamiento, objetivos, justificación): 10%\n' +
-        '- Marco teórico / Revisión bibliográfica: 30%\n' +
-        '- Metodología: 18%\n' +
-        '- Resultados / Análisis: 30%\n' +
-        '- Conclusiones y recomendaciones: 12%\n\n' +
-        'Si la estructura del cliente agrupa secciones diferente (ej: "Capítulo 1: Introducción y Marco Teórico"), combina los porcentajes correspondientes.\n\n' +
-        'FORMATO DE RESPUESTA:\n' +
-        '- Si necesitas más información, responde con: {"ready": false, "message": "tu pregunta"}\n' +
-        '- Si puedes calcular, responde con: {"ready": true, "sections": [{"name": "Sección", "pct": número}], "message": "confirmación amable"}\n' +
-        '- Si es caso especial, responde con: {"ready": false, "special": true, "message": "explicación de que debe ir a WhatsApp"}\n\n' +
-        'Responde SOLO JSON puro, sin markdown ni backticks.';
+      // Mostrar loading
+      goToStep(5);
+
+      // Animar pasos del loading
+      var steps = ['ls1', 'ls2', 'ls3', 'ls4'];
+      var stepIdx = 0;
+      var loadingInterval = setInterval(function() {
+        if (stepIdx > 0) {
+          document.getElementById(steps[stepIdx - 1]).classList.remove('active');
+          document.getElementById(steps[stepIdx - 1]).classList.add('done');
+          document.getElementById(steps[stepIdx - 1]).textContent = '✅ ' + document.getElementById(steps[stepIdx - 1]).textContent.substring(2);
+        }
+        if (stepIdx < steps.length) {
+          document.getElementById(steps[stepIdx]).classList.add('active');
+        }
+        stepIdx++;
+        if (stepIdx > steps.length) clearInterval(loadingInterval);
+      }, 2000);
+
+      // Preparar FormData
+      var formData = new FormData();
+      formData.append('student_name', document.getElementById('fName').value.trim());
+      formData.append('student_phone', document.getElementById('fPhone').value.trim());
+      formData.append('student_email', document.getElementById('fEmail').value.trim());
+      formData.append('student_career', document.getElementById('fCareer').value.trim());
+      formData.append('institution_type', selectedInst);
+      formData.append('plan_type', selectedPlan);
+
+      if (uploadedFile) {
+        formData.append('document', uploadedFile);
+      }
+      if (manualText) {
+        formData.append('manual_text', manualText);
+      }
 
       try {
-        var response = await fetch('https://api.anthropic.com/v1/messages', {
+        var response = await fetch(API_URL + '/api/analyze', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            model: 'claude-sonnet-4-20250514',
-            max_tokens: 1000,
-            system: systemPrompt,
-            messages: conversationHistory
-          })
+          body: formData
         });
 
+        clearInterval(loadingInterval);
+
         var data = await response.json();
-        hideTyping();
 
-        var rawText = data.content.map(function(c) { return c.text || ''; }).join('').trim();
-
-        var parsed;
-        try {
-          var clean = rawText.replace(/```json\s*/g, '').replace(/```\s*/g, '').trim();
-          parsed = JSON.parse(clean);
-        } catch(e) {
-          addBotMessage(rawText);
-          conversationHistory.push({ role: 'assistant', content: rawText });
-          document.getElementById('sendBtn').disabled = false;
+        if (!response.ok) {
+          if (data.rate_limited) {
+            showError('Límite alcanzado', data.error || 'Ya realizaste una cotización hoy. Vuelve mañana.');
+          } else {
+            showError('Error', data.error || 'Ocurrió un error al procesar tu cotización.');
+          }
           return;
         }
 
-        conversationHistory.push({ role: 'assistant', content: rawText });
-
-        if (parsed.special) {
-          addSpecialCaseMessage(parsed.message);
-        } else if (parsed.ready && parsed.sections) {
-          addBotMessage(parsed.message);
-          setTimeout(function() {
-            addQuoteMessage(parsed.sections, totalPrice);
-          }, 500);
-        } else {
-          addBotMessage(parsed.message);
-        }
+        showResults(data);
 
       } catch (err) {
-        hideTyping();
-        addBotMessage('Hubo un error al procesar tu solicitud. Por favor intenta de nuevo o <a href="https://wa.me/' + WA_NUMBER + '?text=Hola%2C%20necesito%20una%20cotizaci%C3%B3n%20parcial%20de%20tesis." target="_blank" rel="noopener" style="color:var(--brand2);font-weight:600">escríbenos por WhatsApp</a>.');
+        clearInterval(loadingInterval);
         console.error(err);
+        showError('Error de conexión', 'No pudimos conectar con el servidor. Verifica tu conexión e intenta de nuevo.');
+      }
+    }
+
+    // ============================================================
+    // STEP 6: Mostrar resultados
+    // ============================================================
+    function showResults(data) {
+      goToStep(6);
+
+      // Porcentaje
+      document.getElementById('resultPct').textContent = Math.round(data.completion_pct) + '%';
+
+      // Barras de progreso por sección
+      var breakdown = document.getElementById('sectionBreakdown');
+      breakdown.innerHTML = '';
+      if (data.sections && data.sections.length) {
+        data.sections.forEach(function(s) {
+          var pct = Math.round(s.completion_pct || 0);
+          breakdown.innerHTML +=
+            '<div class="section-row">' +
+              '<div class="section-name">' + (s.standard_name || s.name || 'Sección') + '</div>' +
+              '<div class="section-bar-wrap"><div class="section-bar" style="width:' + pct + '%"></div></div>' +
+              '<div class="section-pct">' + pct + '%</div>' +
+            '</div>';
+        });
       }
 
-      document.getElementById('sendBtn').disabled = false;
+      // Precio
+      document.getElementById('resultPrice').textContent = formatCLP(data.quoted_price);
+      var detail = (data.institution_label || '') + ' · Plan ' + (data.plan_label || '') +
+        ' · Precio completo: ' + formatCLP(data.full_price) +
+        ' · <strong>Pagas solo el ' + Math.round(data.remaining_pct) + '% restante</strong>';
+      document.getElementById('resultDetail').innerHTML = detail;
+
+      // Assessment
+      var assessEl = document.getElementById('resultAssessment');
+      assessEl.innerHTML = '📋 ' + (data.overall_assessment || 'Un asesor verificará esta cotización y te contactará para confirmar el precio final.') +
+        '<br><br><strong>Importante:</strong> Esta es una estimación generada por IA. Un asesor humano verificará el precio real revisando tu documento.';
+
+      // WhatsApp link
+      var instLabel = data.institution_label || INST_LABELS[selectedInst];
+      var planLabel = data.plan_label || PLAN_LABELS[selectedPlan];
+      var waMsg = 'Hola, acabo de cotizar en Tareapp.\n' +
+        '• Nombre: ' + document.getElementById('fName').value.trim() + '\n' +
+        '• ' + instLabel + ' - Plan ' + planLabel + '\n' +
+        '• Mi tesis va al ' + Math.round(data.completion_pct) + '% de avance\n' +
+        '• Precio cotizado: ' + formatCLP(data.quoted_price) + '\n' +
+        (data.quote_id ? '• ID: ' + data.quote_id + '\n' : '') +
+        'Me gustaría confirmar mi cotización.';
+      document.getElementById('waButton').href = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(waMsg);
+
+      // Quote ID
+      if (data.quote_id) {
+        document.getElementById('quoteId').textContent = 'ID de cotización: ' + data.quote_id.substring(0, 8).toUpperCase() + ' · Nuestro equipo verificará el precio en las próximas horas.';
+      }
+    }
+
+    // ============================================================
+    // ERROR
+    // ============================================================
+    function showError(title, msg) {
+      document.getElementById('step5').classList.add('hidden');
+      var errSection = document.getElementById('stepError');
+      errSection.classList.remove('hidden');
+      document.getElementById('errorTitle').textContent = title;
+      document.getElementById('errorMsg').textContent = msg;
     }
   </script>
 </body>

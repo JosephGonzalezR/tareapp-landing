@@ -1,0 +1,15 @@
+{
+  "name": "tareapp-cotizador-api",
+  "version": "1.0.0",
+  "description": "API backend para el cotizador de tesis con IA - Tareapp",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "kv:create": "wrangler kv:namespace create RATE_LIMIT"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+}
