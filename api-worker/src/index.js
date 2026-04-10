@@ -1,4 +1,4 @@
-import { buildAnalysisPrompt, SECTION_WEIGHTS } from './prompts.js';
+import { buildAnalysisPrompt } from './prompts.js';
 
 // ============================================================
 // PRECIOS (deben coincidir con precios/index.html)
@@ -116,8 +116,8 @@ function extractTextFromDocx(buffer) {
 // ============================================================
 // CLAUDE API - Análisis de documento
 // ============================================================
-async function analyzeWithClaude(files, textContent, institutionType, env) {
-  const systemPrompt = buildAnalysisPrompt(institutionType);
+async function analyzeWithClaude(files, textContent, env) {
+  const systemPrompt = buildAnalysisPrompt();
 
   // Construir contenido del mensaje
   const contentParts = [];
@@ -413,22 +413,14 @@ export default {
         // Analizar con Claude (envía archivos como base64 directo)
         let analysis;
         try {
-          analysis = await analyzeWithClaude(filesToAnalyze, manualText, institutionType, env);
+          analysis = await analyzeWithClaude(filesToAnalyze, manualText, env);
         } catch (e) {
           console.error('Claude analysis error:', e.message, e.stack);
-          // Fallback: asignar 0% si Claude falla
-          const weights = SECTION_WEIGHTS[institutionType];
+          // Fallback: 0% si Claude falla
           analysis = {
-            sections: weights.map(w => ({
-              standard_name: w.name,
-              found_name: 'No encontrada',
-              weight_pct: w.weight,
-              completion_pct: 0,
-              effective_pct: 0,
-              assessment: 'No se pudo analizar automáticamente'
-            })),
+            sections: [],
             total_completion_pct: 0,
-            overall_assessment: 'El análisis automático no pudo completarse. Un asesor revisará tu documento manualmente.'
+            overall_assessment: 'No se pudo analizar el documento. Será revisado manualmente para confirmar el precio.'
           };
         }
 
