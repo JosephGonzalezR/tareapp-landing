@@ -703,8 +703,8 @@
           <div class="upload-zone" id="uploadZoneGuide">
             <div class="upload-icon">📋</div>
             <div class="upload-title">Subir pauta / guía de tesis</div>
-            <div class="upload-sub">PDF o Word (.docx)</div>
-            <input type="file" id="fileInputGuide" accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document" style="display:none" />
+            <div class="upload-sub">Solo PDF — si tienes Word, expórtalo como PDF primero</div>
+            <input type="file" id="fileInputGuide" accept=".pdf,application/pdf" style="display:none" />
           </div>
           <div class="file-preview" id="filePreviewGuide">
             <span class="file-icon">📋</span>
@@ -723,8 +723,8 @@
           <div class="upload-zone" id="uploadZoneProgress">
             <div class="upload-icon">📄</div>
             <div class="upload-title">Subir avance de tesis</div>
-            <div class="upload-sub">PDF o Word (.docx)</div>
-            <input type="file" id="fileInputProgress" accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document" style="display:none" />
+            <div class="upload-sub">Solo PDF — si tienes Word, expórtalo como PDF primero</div>
+            <input type="file" id="fileInputProgress" accept=".pdf,application/pdf" style="display:none" />
           </div>
           <div class="file-preview" id="filePreviewProgress">
             <span class="file-icon">📄</span>
@@ -1042,9 +1042,8 @@
     }
 
     function processUpload(file, zone, preview, nameId, sizeId, setter) {
-      var validTypes = ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
-      if (!validTypes.includes(file.type) && !file.name.endsWith('.pdf') && !file.name.endsWith('.docx')) {
-        document.getElementById('uploadError').textContent = 'Solo se aceptan archivos PDF o DOCX.';
+      if (file.type !== 'application/pdf' && !file.name.endsWith('.pdf')) {
+        document.getElementById('uploadError').textContent = 'Solo se aceptan archivos PDF. Si tienes Word, expórtalo como PDF (Archivo → Guardar como → PDF).';
         document.getElementById('uploadError').style.display = 'block';
         return;
       }
