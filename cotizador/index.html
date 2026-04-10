@@ -443,6 +443,24 @@
       color: var(--muted);
       flex-shrink: 0;
     }
+    .section-stars {
+      width: 70px;
+      text-align: center;
+      font-size: 12px;
+      flex-shrink: 0;
+      letter-spacing: 1px;
+    }
+    .section-issue {
+      font-size: 11px;
+      color: #ef4444;
+      padding: 4px 0 4px 172px;
+      margin-top: -6px;
+    }
+    @media (max-width: 500px) { .section-issue { padding-left: 112px; } }
+    .stars-1, .stars-2 { color: #ef4444; }
+    .stars-3 { color: #fb923c; }
+    .stars-4 { color: var(--brand2); }
+    .stars-5 { color: #34d399; }
 
     /* Price result */
     .price-result {
@@ -1157,18 +1175,30 @@
       // Porcentaje
       document.getElementById('resultPct').textContent = Math.round(data.completion_pct) + '%';
 
-      // Barras de progreso por sección
+      // Barras de progreso por sección con estrellas
       var breakdown = document.getElementById('sectionBreakdown');
       breakdown.innerHTML = '';
       if (data.sections && data.sections.length) {
         data.sections.forEach(function(s) {
-          var pct = Math.round(s.completion_pct || 0);
+          var pct = Math.round(s.adjusted_completion_pct || s.completion_pct || 0);
+          var stars = s.quality_stars || 0;
+          var starsHTML = '';
+          if (stars > 0) {
+            for (var i = 0; i < 5; i++) {
+              starsHTML += i < stars ? '★' : '☆';
+            }
+          }
+          var barColor = stars <= 2 ? '#ef4444' : (stars === 3 ? '#fb923c' : 'linear-gradient(90deg, #34d399, #5b8def)');
+          var barStyle = stars <= 2 ? 'background:#ef4444' : (stars === 3 ? 'background:#fb923c' : 'background:linear-gradient(90deg, #34d399, #5b8def)');
+
           breakdown.innerHTML +=
             '<div class="section-row">' +
-              '<div class="section-name">' + (s.standard_name || s.name || 'Sección') + '</div>' +
-              '<div class="section-bar-wrap"><div class="section-bar" style="width:' + pct + '%"></div></div>' +
+              '<div class="section-name">' + (s.standard_name || 'Sección') + '</div>' +
+              '<div class="section-bar-wrap"><div class="section-bar" style="width:' + pct + '%;' + barStyle + '"></div></div>' +
               '<div class="section-pct">' + pct + '%</div>' +
-            '</div>';
+              (starsHTML ? '<div class="section-stars stars-' + stars + '">' + starsHTML + '</div>' : '') +
+            '</div>' +
+            (s.quality_issue && stars <= 2 ? '<div class="section-issue">⚠ ' + s.quality_issue + '</div>' : '');
         });
       }
 
