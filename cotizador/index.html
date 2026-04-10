@@ -624,7 +624,7 @@
 
       <div class="cot-header">
         <h1>Cotizador de Tesis</h1>
-        <p>Sube tu documento de tesis y nuestro equipo calcula cuánto llevas avanzado. Obtén una cotización personalizada al instante.</p>
+        <p>Sube tu documento de tesis y recibe una cotización personalizada al instante.</p>
       </div>
 
       <!-- PROGRESS BAR -->
@@ -694,7 +694,7 @@
       <div class="step-section hidden" id="step4">
         <div class="step-label">Paso 4 de 5</div>
         <div class="step-title">Sube tu documento de tesis</div>
-        <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">Sube lo que lleves avanzado para que nuestro equipo analice tu progreso. Si no tienes archivo, puedes pegar tu estructura abajo.</p>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">Sube lo que lleves avanzado y te daremos una cotización. Si no tienes archivo, puedes pegar tu estructura abajo.</p>
 
         <div class="upload-zone" id="uploadZone">
           <div class="upload-icon">📄</div>
@@ -732,7 +732,7 @@
         <div class="analysis-loading">
           <div class="spinner"></div>
           <div class="loading-title">Analizando tu tesis...</div>
-          <div class="loading-sub">Estamos revisando tu documento para calcular tu avance y generar una cotización personalizada.</div>
+          <div class="loading-sub">Revisando tu documento para calcular tu avance y generar una cotización personalizada.</div>
           <div class="loading-steps">
             <div class="loading-step active" id="ls1">⏳ Subiendo documento...</div>
             <div class="loading-step" id="ls2">⏳ Analizando estructura...</div>
@@ -1155,7 +1155,7 @@
       // Assessment
       var assessEl = document.getElementById('resultAssessment');
       assessEl.innerHTML = '📋 ' + (data.overall_assessment || 'Un asesor verificará esta cotización y te contactará para confirmar el precio final.') +
-        '<br><br><strong>Importante:</strong> Esta es una estimación preliminar. Un asesor verificará el precio final revisando tu documento.';
+        '<br><br><strong>Importante:</strong> Esta es una estimación preliminar. El precio final será confirmado al revisar tu documento.';
 
       // WhatsApp link
       var instLabel = data.institution_label || INST_LABELS[selectedInst];
