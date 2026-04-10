@@ -99,7 +99,22 @@ async function uploadDocument(file, filename, env) {
 }
 
 // ============================================================
-// CLAUDE API - Análisis de documento (envía PDF/DOCX directo)
+// EXTRAER TEXTO DE DOCX
+// ============================================================
+function extractTextFromDocx(buffer) {
+  const decoder = new TextDecoder('utf-8', { fatal: false });
+  const raw = decoder.decode(buffer);
+  const xmlTextRegex = /<w:t[^>]*>([^<]+)<\/w:t>/g;
+  let m;
+  const parts = [];
+  while ((m = xmlTextRegex.exec(raw)) !== null) {
+    parts.push(m[1]);
+  }
+  return parts.join(' ').trim();
+}
+
+// ============================================================
+// CLAUDE API - Análisis de documento
 // ============================================================
 async function analyzeWithClaude(files, textContent, institutionType, env) {
   const systemPrompt = buildAnalysisPrompt(institutionType);
@@ -107,21 +122,38 @@ async function analyzeWithClaude(files, textContent, institutionType, env) {
   // Construir contenido del mensaje
   const contentParts = [];
 
-  // Agregar archivos como documentos nativos (Claude lee PDFs directo)
   for (const file of files) {
-    if (file.data && file.mediaType) {
+    if (!file.data) continue;
+
+    if (file.mediaType === 'application/pdf') {
+      // PDFs: enviar como document nativo (Claude los lee directo)
       contentParts.push({
         type: 'document',
         source: {
           type: 'base64',
-          media_type: file.mediaType,
+          media_type: 'application/pdf',
           data: file.data
         }
       });
       contentParts.push({
         type: 'text',
-        text: `[Archivo: ${file.name}]`
+        text: `[Archivo PDF: ${file.name}]`
       });
+    } else {
+      // DOCX: extraer texto y enviar como texto
+      const bytes = Uint8Array.from(atob(file.data), c => c.charCodeAt(0));
+      const text = extractTextFromDocx(bytes.buffer);
+      if (text.length > 50) {
+        contentParts.push({
+          type: 'text',
+          text: `[Contenido del archivo "${file.name}"]:\n\n${text}`
+        });
+      } else {
+        contentParts.push({
+          type: 'text',
+          text: `[Archivo "${file.name}" - no se pudo extraer texto legible del DOCX]`
+        });
+      }
     }
   }
 
@@ -129,7 +161,7 @@ async function analyzeWithClaude(files, textContent, institutionType, env) {
   if (textContent) {
     contentParts.push({
       type: 'text',
-      text: `Texto adicional proporcionado por el estudiante:\n\n${textContent}`
+      text: `Información adicional del estudiante:\n\n${textContent}`
     });
   }
 
@@ -139,12 +171,21 @@ async function analyzeWithClaude(files, textContent, institutionType, env) {
     text: 'Analiza los documentos anteriores. El primero es la pauta/guía institucional con la estructura requerida. El segundo es el avance del estudiante. Compara ambos y calcula el porcentaje de completitud de la tesis.'
   });
 
+  // Si no hay contenido real, agregar nota
+  if (contentParts.length <= 1) {
+    contentParts.unshift({
+      type: 'text',
+      text: 'No se pudieron leer los documentos. Asume 0% de completitud.'
+    });
+  }
+
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       'x-api-key': env.ANTHROPIC_API_KEY,
-      'anthropic-version': '2023-06-01'
+      'anthropic-version': '2023-06-01',
+      'anthropic-beta': 'pdfs-2024-09-25'
     },
     body: JSON.stringify({
       model: 'claude-sonnet-4-20250514',
@@ -375,7 +416,7 @@ export default {
         try {
           analysis = await analyzeWithClaude(filesToAnalyze, manualText, institutionType, env);
         } catch (e) {
-          console.error('Claude analysis error:', e);
+          console.error('Claude analysis error:', e.message, e.stack);
           // Fallback: asignar 0% si Claude falla
           const weights = SECTION_WEIGHTS[institutionType];
           analysis = {
