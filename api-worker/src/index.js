@@ -99,10 +99,45 @@ async function uploadDocument(file, filename, env) {
 }
 
 // ============================================================
-// CLAUDE API - Análisis de documento
+// CLAUDE API - Análisis de documento (envía PDF/DOCX directo)
 // ============================================================
-async function analyzeWithClaude(documentText, institutionType, env) {
+async function analyzeWithClaude(files, textContent, institutionType, env) {
   const systemPrompt = buildAnalysisPrompt(institutionType);
+
+  // Construir contenido del mensaje
+  const contentParts = [];
+
+  // Agregar archivos como documentos nativos (Claude lee PDFs directo)
+  for (const file of files) {
+    if (file.data && file.mediaType) {
+      contentParts.push({
+        type: 'document',
+        source: {
+          type: 'base64',
+          media_type: file.mediaType,
+          data: file.data
+        }
+      });
+      contentParts.push({
+        type: 'text',
+        text: `[Archivo: ${file.name}]`
+      });
+    }
+  }
+
+  // Agregar texto manual si hay
+  if (textContent) {
+    contentParts.push({
+      type: 'text',
+      text: `Texto adicional proporcionado por el estudiante:\n\n${textContent}`
+    });
+  }
+
+  // Instrucción final
+  contentParts.push({
+    type: 'text',
+    text: 'Analiza los documentos anteriores. El primero es la pauta/guía institucional con la estructura requerida. El segundo es el avance del estudiante. Compara ambos y calcula el porcentaje de completitud de la tesis.'
+  });
 
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
@@ -115,10 +150,7 @@ async function analyzeWithClaude(documentText, institutionType, env) {
       model: 'claude-sonnet-4-20250514',
       max_tokens: 2000,
       system: systemPrompt,
-      messages: [{
-        role: 'user',
-        content: `Analiza el siguiente documento de tesis y calcula el porcentaje de completitud:\n\n---\n${documentText}\n---`
-      }]
+      messages: [{ role: 'user', content: contentParts }]
     })
   });
 
@@ -130,7 +162,6 @@ async function analyzeWithClaude(documentText, institutionType, env) {
   const data = await res.json();
   const rawText = data.content.map(c => c.text || '').join('').trim();
 
-  // Parsear JSON de la respuesta
   const clean = rawText.replace(/```json\s*/g, '').replace(/```\s*/g, '').trim();
   return JSON.parse(clean);
 }
@@ -249,7 +280,8 @@ export default {
         const studentCareer = formData.get('student_career');
         const institutionType = formData.get('institution_type');
         const planType = formData.get('plan_type');
-        const file = formData.get('document');
+        const guideFile = formData.get('guide_document'); // Pauta/guía institucional
+        const progressFile = formData.get('progress_document'); // Documento de avance
         const manualText = formData.get('manual_text'); // Texto pegado manualmente
 
         // Validaciones
@@ -262,8 +294,8 @@ export default {
         if (!planType || !PRICES[institutionType][planType]) {
           return jsonResponse({ error: 'Tipo de plan inválido' }, 400, env);
         }
-        if (!file && !manualText) {
-          return jsonResponse({ error: 'Debes subir un documento o pegar tu estructura' }, 400, env);
+        if (!guideFile && !progressFile && !manualText) {
+          return jsonResponse({ error: 'Debes subir al menos un documento o pegar tu estructura' }, 400, env);
         }
 
         // Rate limiting
@@ -278,58 +310,64 @@ export default {
         // Obtener precio total
         const fullPrice = PRICES[institutionType][planType];
 
-        // Extraer texto del documento
-        let documentText = '';
+        // Procesar archivos para enviar directo a Claude (base64)
+        const filesToAnalyze = [];
         let documentUrl = null;
         let documentFilename = null;
         let documentSize = 0;
 
-        if (file && file.size > 0) {
-          // Validar tamaño (10MB max)
+        async function processFile(file, label) {
+          if (!file || file.size === 0) return;
           if (file.size > 10 * 1024 * 1024) {
-            return jsonResponse({ error: 'El archivo no debe superar los 10MB' }, 400, env);
+            throw new Error(`El archivo ${label} no debe superar los 10MB`);
           }
 
-          documentFilename = file.name;
-          documentSize = file.size;
+          const buffer = await file.arrayBuffer();
+          const base64 = btoa(String.fromCharCode(...new Uint8Array(buffer)));
 
-          // Subir a Supabase Storage
+          let mediaType = 'application/pdf';
+          if (file.name.endsWith('.docx')) {
+            mediaType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+          }
+
+          filesToAnalyze.push({
+            name: file.name,
+            data: base64,
+            mediaType: mediaType,
+            size: file.size
+          });
+
+          return file;
+        }
+
+        try {
+          await processFile(guideFile, 'pauta/guía');
+          const mainFile = await processFile(progressFile, 'avance');
+          if (mainFile) {
+            documentFilename = mainFile.name;
+            documentSize = mainFile.size;
+          } else if (guideFile) {
+            documentFilename = guideFile.name;
+            documentSize = guideFile.size;
+          }
+        } catch (e) {
+          return jsonResponse({ error: e.message }, 400, env);
+        }
+
+        // Subir documento de avance a Supabase Storage
+        const fileToUpload = progressFile || guideFile;
+        if (fileToUpload && fileToUpload.size > 0) {
           try {
-            documentUrl = await uploadDocument(file, file.name, env);
+            documentUrl = await uploadDocument(fileToUpload, fileToUpload.name, env);
           } catch (e) {
             console.error('Error uploading:', e);
           }
-
-          // Extraer texto
-          const buffer = await file.arrayBuffer();
-          if (file.name.endsWith('.pdf')) {
-            documentText = await extractTextFromPDF(buffer);
-          } else {
-            // Para DOCX, extraer texto básico
-            const decoder = new TextDecoder('utf-8', { fatal: false });
-            const raw = decoder.decode(buffer);
-            // DOCX es un ZIP con XML adentro
-            const xmlTextRegex = /<w:t[^>]*>([^<]+)<\/w:t>/g;
-            let m;
-            const parts = [];
-            while ((m = xmlTextRegex.exec(raw)) !== null) {
-              parts.push(m[1]);
-            }
-            documentText = parts.join(' ').trim();
-          }
-
-          // Si no pudimos extraer texto, usar el nombre del archivo como contexto mínimo
-          if (!documentText || documentText.length < 50) {
-            documentText = manualText || `[Documento subido: ${file.name}, ${file.size} bytes. No se pudo extraer texto legible. El documento necesita revisión manual.]`;
-          }
-        } else if (manualText) {
-          documentText = manualText;
         }
 
-        // Analizar con Claude
+        // Analizar con Claude (envía archivos como base64 directo)
         let analysis;
         try {
-          analysis = await analyzeWithClaude(documentText, institutionType, env);
+          analysis = await analyzeWithClaude(filesToAnalyze, manualText, institutionType, env);
         } catch (e) {
           console.error('Claude analysis error:', e);
           // Fallback: asignar 0% si Claude falla

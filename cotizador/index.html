@@ -663,7 +663,7 @@
       <div class="step-section hidden" id="step3">
         <div class="step-label">Paso 3 de 5</div>
         <div class="step-title">Tus datos de contacto</div>
-        <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">Necesitamos tus datos para enviarte la cotización y que nuestro equipo pueda verificar el precio.</p>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">Necesitamos tus datos para enviarte la cotización y verificar el precio.</p>
         <div class="form-grid">
           <div class="form-group">
             <label class="form-label" for="fName">Nombre completo</label>
@@ -693,29 +693,52 @@
       <!-- STEP 4: Subir documento -->
       <div class="step-section hidden" id="step4">
         <div class="step-label">Paso 4 de 5</div>
-        <div class="step-title">Sube tu documento de tesis</div>
-        <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">Sube lo que lleves avanzado y te daremos una cotización. Si no tienes archivo, puedes pegar tu estructura abajo.</p>
+        <div class="step-title">Sube tus documentos</div>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">Necesitamos <strong>2 documentos</strong> para darte una cotización precisa: la pauta de tu institución y lo que lleves avanzado.</p>
 
-        <div class="upload-zone" id="uploadZone">
-          <div class="upload-icon">📄</div>
-          <div class="upload-title">Arrastra tu archivo aquí o haz clic para seleccionar</div>
-          <div class="upload-sub">PDF o Word (.docx)</div>
-          <div class="upload-formats">Tamaño máximo: 10 MB</div>
-          <input type="file" id="fileInput" accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document" style="display:none" />
-        </div>
-
-        <div class="file-preview" id="filePreview">
-          <span class="file-icon">📎</span>
-          <div class="file-info">
-            <div class="file-name" id="fileName"></div>
-            <div class="file-size" id="fileSize"></div>
+        <!-- Documento 1: Pauta/Guía -->
+        <div style="margin-bottom:20px">
+          <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px;">1. Pauta o guía institucional <span style="color:var(--brand2)">(obligatorio)</span></div>
+          <p style="font-size:12px;color:var(--muted);margin-bottom:8px;">El documento de tu institución con la estructura requerida de la tesis.</p>
+          <div class="upload-zone" id="uploadZoneGuide">
+            <div class="upload-icon">📋</div>
+            <div class="upload-title">Subir pauta / guía de tesis</div>
+            <div class="upload-sub">PDF o Word (.docx)</div>
+            <input type="file" id="fileInputGuide" accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document" style="display:none" />
           </div>
-          <button class="file-remove" id="fileRemove" title="Quitar archivo">✕</button>
+          <div class="file-preview" id="filePreviewGuide">
+            <span class="file-icon">📋</span>
+            <div class="file-info">
+              <div class="file-name" id="fileNameGuide"></div>
+              <div class="file-size" id="fileSizeGuide"></div>
+            </div>
+            <button class="file-remove" id="fileRemoveGuide" title="Quitar archivo">✕</button>
+          </div>
         </div>
 
-        <div class="or-divider">o pega tu estructura aquí</div>
+        <!-- Documento 2: Avance -->
+        <div style="margin-bottom:16px">
+          <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px;">2. Tu documento de avance <span style="color:var(--brand2)">(obligatorio)</span></div>
+          <p style="font-size:12px;color:var(--muted);margin-bottom:8px;">Lo que lleves escrito de tu tesis hasta ahora.</p>
+          <div class="upload-zone" id="uploadZoneProgress">
+            <div class="upload-icon">📄</div>
+            <div class="upload-title">Subir avance de tesis</div>
+            <div class="upload-sub">PDF o Word (.docx)</div>
+            <input type="file" id="fileInputProgress" accept=".pdf,.docx,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document" style="display:none" />
+          </div>
+          <div class="file-preview" id="filePreviewProgress">
+            <span class="file-icon">📄</span>
+            <div class="file-info">
+              <div class="file-name" id="fileNameProgress"></div>
+              <div class="file-size" id="fileSizeProgress"></div>
+            </div>
+            <button class="file-remove" id="fileRemoveProgress" title="Quitar archivo">✕</button>
+          </div>
+        </div>
 
-        <textarea class="manual-textarea" id="manualText" placeholder="Pega aquí el índice de tu tesis o describe qué capítulos tienes listos...&#10;&#10;Ejemplo:&#10;Capítulo 1: Introducción (listo)&#10;Capítulo 2: Marco teórico (tengo la mitad)&#10;Capítulo 3: Metodología (no lo he empezado)"></textarea>
+        <div class="or-divider">complemento opcional</div>
+
+        <textarea class="manual-textarea" id="manualText" placeholder="Si quieres agregar contexto adicional, escríbelo aquí...&#10;&#10;Ejemplo:&#10;- La introducción está lista&#10;- El marco teórico lo tengo a la mitad&#10;- Metodología no la he empezado"></textarea>
 
         <div id="uploadError" class="error-box"></div>
 
@@ -873,7 +896,8 @@
     var currentStep = 1;
     var selectedInst = null;
     var selectedPlan = null;
-    var uploadedFile = null;
+    var uploadedGuide = null;
+    var uploadedProgress = null;
 
     function formatCLP(n) { return '$' + Math.round(n).toLocaleString('es-CL'); }
 
@@ -991,32 +1015,33 @@
     }
 
     // ============================================================
-    // STEP 4: Upload de archivo
+    // STEP 4: Upload de archivos (2 documentos)
     // ============================================================
-    var uploadZone = document.getElementById('uploadZone');
-    var fileInput = document.getElementById('fileInput');
-    var filePreview = document.getElementById('filePreview');
+    function setupUpload(zoneId, inputId, previewId, nameId, sizeId, removeId, setter) {
+      var zone = document.getElementById(zoneId);
+      var input = document.getElementById(inputId);
+      var preview = document.getElementById(previewId);
 
-    uploadZone.addEventListener('click', function() { fileInput.click(); });
+      zone.addEventListener('click', function() { input.click(); });
+      zone.addEventListener('dragover', function(e) { e.preventDefault(); zone.classList.add('dragover'); });
+      zone.addEventListener('dragleave', function() { zone.classList.remove('dragover'); });
+      zone.addEventListener('drop', function(e) {
+        e.preventDefault();
+        zone.classList.remove('dragover');
+        if (e.dataTransfer.files.length) processUpload(e.dataTransfer.files[0], zone, preview, nameId, sizeId, setter);
+      });
+      input.addEventListener('change', function() {
+        if (input.files.length) processUpload(input.files[0], zone, preview, nameId, sizeId, setter);
+      });
+      document.getElementById(removeId).addEventListener('click', function() {
+        setter(null);
+        input.value = '';
+        preview.classList.remove('visible');
+        zone.style.display = '';
+      });
+    }
 
-    uploadZone.addEventListener('dragover', function(e) {
-      e.preventDefault();
-      uploadZone.classList.add('dragover');
-    });
-    uploadZone.addEventListener('dragleave', function() {
-      uploadZone.classList.remove('dragover');
-    });
-    uploadZone.addEventListener('drop', function(e) {
-      e.preventDefault();
-      uploadZone.classList.remove('dragover');
-      if (e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
-    });
-
-    fileInput.addEventListener('change', function() {
-      if (fileInput.files.length) handleFile(fileInput.files[0]);
-    });
-
-    function handleFile(file) {
+    function processUpload(file, zone, preview, nameId, sizeId, setter) {
       var validTypes = ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
       if (!validTypes.includes(file.type) && !file.name.endsWith('.pdf') && !file.name.endsWith('.docx')) {
         document.getElementById('uploadError').textContent = 'Solo se aceptan archivos PDF o DOCX.';
@@ -1028,21 +1053,16 @@
         document.getElementById('uploadError').style.display = 'block';
         return;
       }
-
       document.getElementById('uploadError').style.display = 'none';
-      uploadedFile = file;
-      document.getElementById('fileName').textContent = file.name;
-      document.getElementById('fileSize').textContent = (file.size / 1024 / 1024).toFixed(2) + ' MB';
-      filePreview.classList.add('visible');
-      uploadZone.style.display = 'none';
+      setter(file);
+      document.getElementById(nameId).textContent = file.name;
+      document.getElementById(sizeId).textContent = (file.size / 1024 / 1024).toFixed(2) + ' MB';
+      preview.classList.add('visible');
+      zone.style.display = 'none';
     }
 
-    document.getElementById('fileRemove').addEventListener('click', function() {
-      uploadedFile = null;
-      fileInput.value = '';
-      filePreview.classList.remove('visible');
-      uploadZone.style.display = '';
-    });
+    setupUpload('uploadZoneGuide', 'fileInputGuide', 'filePreviewGuide', 'fileNameGuide', 'fileSizeGuide', 'fileRemoveGuide', function(f) { uploadedGuide = f; });
+    setupUpload('uploadZoneProgress', 'fileInputProgress', 'filePreviewProgress', 'fileNameProgress', 'fileSizeProgress', 'fileRemoveProgress', function(f) { uploadedProgress = f; });
 
     // ============================================================
     // STEP 5: Análisis
@@ -1051,8 +1071,13 @@
       var manualText = document.getElementById('manualText').value.trim();
       var errorEl = document.getElementById('uploadError');
 
-      if (!uploadedFile && !manualText) {
-        errorEl.textContent = 'Sube un documento o pega tu estructura de tesis.';
+      if (!uploadedGuide) {
+        errorEl.textContent = 'Debes subir la pauta o guía institucional de tu tesis.';
+        errorEl.style.display = 'block';
+        return;
+      }
+      if (!uploadedProgress && !manualText) {
+        errorEl.textContent = 'Debes subir tu documento de avance o describir tu progreso.';
         errorEl.style.display = 'block';
         return;
       }
@@ -1086,8 +1111,11 @@
       formData.append('institution_type', selectedInst);
       formData.append('plan_type', selectedPlan);
 
-      if (uploadedFile) {
-        formData.append('document', uploadedFile);
+      if (uploadedGuide) {
+        formData.append('guide_document', uploadedGuide);
+      }
+      if (uploadedProgress) {
+        formData.append('progress_document', uploadedProgress);
       }
       if (manualText) {
         formData.append('manual_text', manualText);
@@ -1171,7 +1199,7 @@
 
       // Quote ID
       if (data.quote_id) {
-        document.getElementById('quoteId').textContent = 'ID de cotización: ' + data.quote_id.substring(0, 8).toUpperCase() + ' · Nuestro equipo verificará el precio en las próximas horas.';
+        document.getElementById('quoteId').textContent = 'ID de cotización: ' + data.quote_id.substring(0, 8).toUpperCase() + ' · El precio será verificado en las próximas horas.';
       }
     }
 
