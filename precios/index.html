@@ -67,26 +67,30 @@
       flex-wrap: wrap;
     }
     .tab {
-      padding: 12px 24px;
+      padding: 13px 24px;
       border-radius: 100px;
-      border: 1px solid var(--line);
-      background: transparent;
-      color: var(--muted);
+      border: 1.5px solid rgba(229,181,46,0.55);
+      background: var(--card);
+      color: var(--text);
       font-family: var(--font);
       font-size: 14px;
-      font-weight: 500;
+      font-weight: 600;
       cursor: pointer;
-      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      transition: all 0.2s ease;
     }
     .tab:hover {
-      border-color: var(--brand-ink);
-      color: var(--text);
+      border-color: var(--brand2);
+      background: var(--brand3);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(229,181,46,0.25);
     }
     .tab.active {
-      background: var(--brand);
-      color: var(--text);
-      border-color: var(--brand);
-      font-weight: 600;
+      background: linear-gradient(135deg, var(--brand2), var(--brand));
+      color: #1A1A1A;
+      border-color: var(--brand2);
+      font-weight: 800;
+      box-shadow: 0 8px 20px rgba(229,181,46,0.38);
     }
 
     /* Pricing grid */
