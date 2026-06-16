@@ -35,7 +35,7 @@
       font-weight: 700;
       letter-spacing: 2.5px;
       text-transform: uppercase;
-      color: var(--brand2);
+      color: var(--brand-ink);
       background: var(--brand3);
       border: 1px solid rgba(229, 181, 46, 0.25);
       padding: 8px 20px;
@@ -79,7 +79,7 @@
       transition: all 0.3s ease;
     }
     .tab:hover {
-      border-color: var(--brand2);
+      border-color: var(--brand-ink);
       color: var(--text);
     }
     .tab.active {
@@ -117,7 +117,7 @@
       box-shadow: var(--shadow);
     }
     .p-card.featured {
-      border-color: var(--brand2);
+      border-color: var(--brand-ink);
       background: linear-gradient(180deg, var(--brand3) 0%, var(--card) 40%);
       box-shadow: var(--shadow);
     }
@@ -162,7 +162,7 @@
       margin-bottom: 8px;
     }
     .tier-estandar { color: #5b8def; }
-    .tier-preferente { color: var(--brand2); }
+    .tier-preferente { color: var(--brand-ink); }
     .tier-elite { color: #a78bfa; }
 
     .p-card-name {
@@ -207,7 +207,7 @@
       margin-bottom: 12px;
     }
     .section-label.included { color: #34d399; }
-    .section-label.extras { color: var(--brand2); }
+    .section-label.extras { color: var(--brand-ink); }
     .section-label.vip { color: #a78bfa; }
 
     .features {
@@ -236,7 +236,7 @@
       margin-top: 1px;
     }
     .icon-green { background: rgba(52,211,153,0.12); color: #34d399; }
-    .icon-gold { background: rgba(229,181,46,0.12); color: var(--brand2); }
+    .icon-gold { background: rgba(229,181,46,0.12); color: var(--brand-ink); }
     .icon-purple { background: rgba(167,139,250,0.12); color: #a78bfa; }
     .features li strong { color: var(--text); font-weight: 600; }
     .spacer { flex: 1; }
@@ -349,7 +349,7 @@
       font-size: 15px;
       font-weight: 600;
       margin-bottom: 12px;
-      color: var(--brand2);
+      color: var(--brand-ink);
     }
     .note-section p {
       font-size: 13.5px;
@@ -381,7 +381,7 @@
       margin-top: 3px;
     }
     .price-cash strong {
-      color: var(--brand2);
+      color: var(--brand-ink);
       font-weight: 700;
     }
 
@@ -458,7 +458,7 @@
       margin-bottom: 10px;
     }
     .cash-card h3 strong {
-      color: var(--brand2);
+      color: var(--brand-ink);
     }
     .payment-icon {
       font-size: 36px;
@@ -582,7 +582,7 @@
       <nav class="nav__links" aria-label="Navegación principal" id="navLinks">
         <a href="/tesis/#servicios">Servicios</a>
         <a href="/tesis/#proceso">Proceso</a>
-        <a href="/precios/" style="color:var(--brand2);font-weight:600">Precios</a>
+        <a href="/precios/" style="color:var(--brand-ink);font-weight:600">Precios</a>
         <a href="/tesis/#opiniones">Opiniones</a>
         <a href="/tesis/#preguntas">FAQ</a>
         <a href="/blog/">Blog</a>
@@ -609,7 +609,7 @@
         </div>
         <a href="/tesis/#servicios">Servicios</a>
         <a href="/tesis/#proceso">Proceso</a>
-        <a href="/precios/" style="color:var(--brand2);font-weight:600">Precios</a>
+        <a href="/precios/" style="color:var(--brand-ink);font-weight:600">Precios</a>
         <a href="/tesis/#opiniones">Opiniones</a>
         <a href="/tesis/#preguntas">Preguntas</a>
         <a href="/blog/">Blog</a>
@@ -912,7 +912,7 @@
       var cashHTML = '<table class="payment-mini-table"><tr><th>Plan</th><th style="text-align:right">Al contado</th><th style="text-align:right">Ahorras</th></tr>';
       plans.forEach(function(p) {
         var saved = Math.round(p.val * 0.2);
-        cashHTML += '<tr><td class="plan-name">' + p.name + '</td><td class="mini-price" style="color:var(--brand2)">' + formatPrice(Math.round(p.val * 0.8)) + '</td><td class="savings">-' + formatPrice(saved) + '</td></tr>';
+        cashHTML += '<tr><td class="plan-name">' + p.name + '</td><td class="mini-price" style="color:var(--brand-ink)">' + formatPrice(Math.round(p.val * 0.8)) + '</td><td class="savings">-' + formatPrice(saved) + '</td></tr>';
       });
       cashHTML += '</table>';
       document.getElementById('cashExample').innerHTML = cashHTML;

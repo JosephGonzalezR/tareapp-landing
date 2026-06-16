@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light" />
+
+  <title>Cómo trabajamos | Tareapp</title>
+  <meta name="description" content="Nuestro proceso paso a paso: nos cuentas qué necesitas, te cotizamos con precio cerrado, reservas tu cupo, elaboramos y entregamos en la fecha pactada con ajustes sin costo." />
+  <meta name="author" content="Tareapp" />
+  <meta name="theme-color" content="#F7C948" />
+
+  <link rel="icon" href="/NUEVO LOGO TAREAPP.png" />
+  <link rel="apple-touch-icon" href="/NUEVO LOGO TAREAPP.png" />
+
+  <meta property="og:title" content="Cómo trabajamos | Tareapp" />
+  <meta property="og:description" content="Un proceso claro, sin sorpresas: cotización con precio cerrado, entregas en 24 h, servicio express y ajustes sin costo." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="/styles.css" />
+
+  <style>
+    /* Mejor contraste de lectura (override local, no afecta al resto del sitio). */
+    main { --muted: #242424; }
+    main .proc-hero p { color: #242424; font-size: 17px; }
+    .step__body h3 { color: #141414; }
+    .step__body p { color: #242424; font-size: 15px; line-height: 1.66; }
+    .proc-diffs-head { text-align: center; margin: 8px auto 18px; }
+    .proc-diffs-head h2 { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 800; color: var(--text); }
+    .proc-diffs-head p { color: #3a3a3a; font-size: 15px; margin-top: 6px; }
+    .proc-diffs { max-width: 900px; margin: 0 auto clamp(36px,5vw,56px); display: grid; grid-template-columns: repeat(3,1fr); gap: 18px; }
+    @media (max-width: 760px){ .proc-diffs { grid-template-columns: 1fr; max-width: 460px; } }
+    .diff-card { text-align: center; background: linear-gradient(180deg, var(--brand3) 0%, var(--card) 60%); border: 1px solid rgba(229,181,46,0.45); border-top: 4px solid var(--brand2); border-radius: 16px; padding: 28px 22px; box-shadow: 0 14px 36px -16px rgba(229,181,46,0.55); transition: transform .25s ease, box-shadow .25s ease; }
+    .diff-card:hover { transform: translateY(-4px); box-shadow: 0 22px 50px -18px rgba(229,181,46,0.65); }
+    .diff-card .ic { font-size: 38px; margin-bottom: 10px; }
+    .diff-card h3 { font-size: 17px; font-weight: 800; color: var(--text); margin-bottom: 8px; }
+    .diff-card p { font-size: 14px; color: #242424; line-height: 1.6; }
+    .diff-card p strong { color: #8a5a00; }
+    .proc-hero { text-align: center; padding: var(--pad-lg) 0 clamp(20px,3vw,36px); }
+    .proc-hero .badge {
+      display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 2.5px;
+      text-transform: uppercase; color: var(--brand-ink); background: var(--brand3);
+      border: 1px solid rgba(229,181,46,0.25); padding: 8px 20px; border-radius: 100px; margin-bottom: 24px;
+    }
+    .proc-hero h1 { font-family: 'Playfair Display', serif; font-size: var(--h1); font-weight: 800; line-height: 1.1; margin-bottom: 16px; color: var(--text); }
+    .proc-hero p { color: var(--muted); font-size: 17px; max-width: 640px; margin: 0 auto; line-height: 1.6; }
+
+    .steps { max-width: 780px; margin: 8px auto clamp(40px,6vw,72px); position: relative; }
+    .steps::before { content: ''; position: absolute; left: 27px; top: 12px; bottom: 12px; width: 2px; background: linear-gradient(180deg, var(--brand2), rgba(229,181,46,0.1)); }
+    @media (max-width: 560px) { .steps::before { left: 21px; } }
+    .step { position: relative; display: flex; gap: 22px; padding: 14px 0; }
+    .step__num {
+      flex-shrink: 0; width: 56px; height: 56px; border-radius: 50%; background: var(--card);
+      border: 2px solid var(--brand2); color: var(--brand-ink); font-family: 'Playfair Display', serif;
+      font-size: 22px; font-weight: 800; display: flex; align-items: center; justify-content: center;
+      box-shadow: var(--shadow-sm); z-index: 1;
+    }
+    @media (max-width: 560px) { .step__num { width: 44px; height: 44px; font-size: 18px; } }
+    .step__body {
+      flex: 1; background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+      padding: 20px 24px; box-shadow: var(--shadow-sm); transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .step:hover .step__body { transform: translateY(-3px); box-shadow: var(--shadow); }
+    .step__body h3 { font-size: 17px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+    .step__body p { color: var(--muted); font-size: 14.5px; line-height: 1.65; }
+    .step__body p strong { color: var(--text); }
+
+    .proc-note {
+      max-width: 780px; margin: 0 auto clamp(40px,6vw,72px); text-align: center;
+      background: linear-gradient(180deg, var(--brand3) 0%, var(--card) 60%);
+      border: 1px solid rgba(229,181,46,0.25); border-radius: var(--radius); padding: 40px 32px; box-shadow: var(--shadow-sm);
+    }
+    .proc-note h2 { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+    .proc-note p { color: var(--muted); font-size: 15px; margin-bottom: 22px; }
+    .wa-icon { width: 18px; height: 18px; }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .step { animation: fadeUp .5s ease both; }
+    .step:nth-child(2){animation-delay:.05s}.step:nth-child(3){animation-delay:.1s}.step:nth-child(4){animation-delay:.15s}.step:nth-child(5){animation-delay:.2s}.step:nth-child(6){animation-delay:.25s}
+  </style>
+</head>
+
+<body data-page="trabajos">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <div class="scroll-progress" aria-hidden="true"><div class="scroll-progress__bar" id="scrollProgress"></div></div>
+
+  <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" focusable="false">
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 22s7-4.5 7-12a7 7 0 0 0-14 0c0 7.5 7 12 7 12z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 11.2a2.2 2.2 0 1 0 0-4.4 2.2 2.2 0 0 0 0 4.4z" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-whatsapp" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="currentColor"/></symbol>
+    <symbol id="i-facebook" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" fill="currentColor"/></symbol>
+    <symbol id="i-tiktok" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.84 1.55V6.79a4.85 4.85 0 0 1-1.07-.1z" fill="currentColor"/></symbol>
+    <symbol id="i-instagram" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></symbol>
+  </svg>
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="container topbar__inner">
+      <div class="topbar__left">
+        <span class="dot" aria-hidden="true"></span>
+        <span class="topbar__text">Atención por WhatsApp • <span data-bind="location">Santiago, Chile</span></span>
+      </div>
+      <div class="topbar__right">
+        <div class="social-links">
+          <a class="social-link" data-href="facebookUrl" href="#" target="_blank" rel="noopener" aria-label="Facebook"><svg class="i i--sm" aria-hidden="true"><use href="#i-facebook"></use></svg></a>
+          <a class="social-link" data-href="tiktokUrl" href="#" target="_blank" rel="noopener" aria-label="TikTok"><svg class="i i--sm" aria-hidden="true"><use href="#i-tiktok"></use></svg></a>
+          <a class="social-link" data-href="instagramUrl" href="#" target="_blank" rel="noopener" aria-label="Instagram"><svg class="i i--sm" aria-hidden="true"><use href="#i-instagram"></use></svg></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVBAR -->
+  <header class="nav" id="top">
+    <div class="container nav__inner">
+      <a class="brand" href="/" aria-label="Ir al inicio">
+        <img src="/NUEVO LOGO TAREAPP.png" width="40" height="40" alt="Logo de Tareapp" decoding="async" style="border-radius:10px" />
+        <span class="brand__text"><strong data-bind="brand">Tareapp</strong><small>Soluciones Académicas</small></span>
+      </a>
+      <div class="page-switcher" aria-label="Tipo de servicio">
+        <a class="page-switcher__tab page-switcher__tab--active" href="/">Trabajos</a>
+        <a class="page-switcher__tab" href="/tesis/">Tesis</a>
+      </div>
+      <nav class="nav__links" aria-label="Navegación principal" id="navLinks">
+        <a href="/#servicios">Servicios</a>
+        <a href="/procedimiento/" style="color:var(--brand-ink);font-weight:600">Proceso</a>
+        <a href="/precios/">Precios</a>
+        <a href="/faq/">FAQ</a>
+        <a href="/blog/">Blog</a>
+        <a href="/nosotros/">Nosotros</a>
+        <a data-wa-message="Hola, tengo una consulta. ¿Me orientan por favor?" href="#" class="nav__cta">Agendar</a>
+      </nav>
+      <div class="nav__actions">
+        <a class="btn btn--ghost btn--sm hide-sm" data-wa-message="Hola, quiero hacer una consulta. ¿Me orientan por favor?" href="#" rel="noopener">
+          <svg class="i" aria-hidden="true"><use href="#i-whatsapp"></use></svg>
+          <span class="btn__hint" data-bind="whatsappDisplay">+56 9 5307 8288</span>
+        </a>
+        <button class="nav__burger" type="button" id="menuBtn" aria-label="Abrir menú" aria-controls="mobileMenu" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+    <div class="mobile-menu" id="mobileMenu" hidden>
+      <div class="mobile-menu__inner container">
+        <div class="page-switcher page-switcher--mobile" aria-label="Tipo de servicio">
+          <a class="page-switcher__tab page-switcher__tab--active" href="/">Trabajos</a>
+          <a class="page-switcher__tab" href="/tesis/">Tesis</a>
+        </div>
+        <a href="/#servicios">Servicios</a>
+        <a href="/procedimiento/" style="color:var(--brand-ink);font-weight:600">Proceso</a>
+        <a href="/precios/">Precios</a>
+        <a href="/faq/">FAQ</a>
+        <a href="/blog/">Blog</a>
+        <a href="/nosotros/">Nosotros</a>
+        <a data-wa-message="Hola, quiero agendar. ¿Me orientan?" href="#" class="btn btn--primary btn--block">Agendar por WhatsApp</a>
+        <div class="mobile-menu__meta"><span class="muted"><svg class="i i--sm" aria-hidden="true"><use href="#i-pin"></use></svg> <span data-bind="location">Santiago, Chile</span></span></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main id="contenido">
+    <div class="container">
+      <div class="proc-hero">
+        <div class="badge">Cómo trabajamos</div>
+        <h1>Tu trabajo, paso a paso</h1>
+        <p>Un proceso claro y sin sorpresas. Precio cerrado antes de empezar y ajustes hasta que tu trabajo calce con la rúbrica.</p>
+      </div>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step__num">1</div>
+          <div class="step__body">
+            <h3>Cuéntanos qué necesitas</h3>
+            <p>Escríbenos por WhatsApp y envíanos la <strong>rúbrica, las instrucciones o el archivo</strong> del trabajo. Mientras más claro nos lo dejes, mejor cotizamos.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step__num">2</div>
+          <div class="step__body">
+            <h3>Cotización y plazo</h3>
+            <p>Te enviamos el <strong>valor y la fecha de entrega</strong>. Precio cerrado antes de empezar: sin sorpresas ni letra chica. <strong>Pregunta siempre por tu fecha de entrega</strong>: hacemos trabajos estándar en 24 horas y servicio express el mismo día (previa coordinación).</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step__num">3</div>
+          <div class="step__body">
+            <h3>Reservas tu cupo</h3>
+            <p>Aseguras tu cupo con un <strong>anticipo</strong>. Y si es tu <strong>primera vez con nosotros, podemos empezar sin pago inicial</strong>: pagas al recibir. Revisa <a href="/pago/" style="color:var(--brand-ink);font-weight:600">cómo pagar</a>.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step__num">4</div>
+          <div class="step__body">
+            <h3>Elaboración</h3>
+            <p>Un <strong>especialista del área</strong> desarrolla tu trabajo siguiendo tu rúbrica e indicaciones.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step__num">5</div>
+          <div class="step__body">
+            <h3>Entrega</h3>
+            <p>Recibes tu trabajo en la fecha pactada. Es una entrega; si necesita <strong>ajustes según tu rúbrica, los hacemos sin costo adicional</strong>.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step__num">6</div>
+          <div class="step__body">
+            <h3>Pago final y cierre</h3>
+            <p>Cancelas el saldo y queda todo listo para que entregues con confianza. ¿Dudas? Mira las <a href="/faq/" style="color:var(--brand-ink);font-weight:600">preguntas frecuentes</a>.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="proc-diffs-head">
+        <h2>Por qué elegirnos</h2>
+        <p>Lo que nos diferencia.</p>
+      </div>
+      <div class="proc-diffs">
+        <div class="diff-card">
+          <div class="ic">⚡</div>
+          <h3>Rápidos cuando lo necesitas</h3>
+          <p>Trabajos estándar en <strong>24 horas</strong> y <strong>servicio express el mismo día</strong> (previa coordinación).</p>
+        </div>
+        <div class="diff-card">
+          <div class="ic">🎁</div>
+          <h3>Primera vez sin pago inicial</h3>
+          <p>Si es tu primera vez con nosotros, <strong>empezamos sin pago inicial</strong>. Pagas al recibir.</p>
+        </div>
+        <div class="diff-card">
+          <div class="ic">✅</div>
+          <h3>Calidad garantizada</h3>
+          <p>Garantizamos <strong>notas entre 6,0 y 7,0</strong> cuando nos envías la pauta, la rúbrica y las indicaciones completas.</p>
+        </div>
+      </div>
+
+      <div class="proc-note">
+        <h2>¿Listo para empezar?</h2>
+        <p>Escríbenos por WhatsApp con tu rúbrica y te cotizamos al toque.</p>
+        <a class="btn btn--primary" href="https://wa.me/56953078288?text=Hola,%20quiero%20cotizar%20un%20trabajo." target="_blank" rel="noopener">
+          <svg class="wa-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884z"/></svg>
+          Cotizar por WhatsApp
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <div class="footer-wave" aria-hidden="true">
+    <svg viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,30 C360,90 720,0 1080,50 C1260,75 1380,20 1440,30 L1440,90 L0,90 Z" fill="#FAFAFA"/></svg>
+  </div>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <img src="/NUEVO LOGO TAREAPP.png" width="56" height="56" alt="Logo de Tareapp" loading="lazy" decoding="async" style="border-radius:12px" />
+        <div><strong data-bind="brand">Tareapp</strong><p class="muted">Soluciones Académicas</p></div>
+      </div>
+      <div class="footer__cols">
+        <div>
+          <h4>Secciones</h4>
+          <a href="/">Trabajos</a>
+          <a href="/precios/">Precios</a>
+          <a href="/procedimiento/">Cómo trabajamos</a>
+          <a href="/faq/">Preguntas frecuentes</a>
+          <a href="/pago/">Cómo pagar</a>
+          <a href="/blog/">Blog</a>
+          <a href="/nosotros/">Nosotros</a>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <a href="/privacy/">Privacidad</a>
+          <a href="/terms/">Términos</a>
+        </div>
+        <div>
+          <h4>Contacto</h4>
+          <a data-wa-message="Hola, quiero información. ¿Me orientan?" href="#" rel="noopener"><svg class="i i--sm" aria-hidden="true"><use href="#i-whatsapp"></use></svg> WhatsApp</a>
+          <a data-href="facebookUrl" href="#" target="_blank" rel="noopener"><svg class="i i--sm" aria-hidden="true"><use href="#i-facebook"></use></svg> Facebook</a>
+          <a data-href="tiktokUrl" href="#" target="_blank" rel="noopener"><svg class="i i--sm" aria-hidden="true"><use href="#i-tiktok"></use></svg> TikTok</a>
+          <a data-href="instagramUrl" href="#" target="_blank" rel="noopener"><svg class="i i--sm" aria-hidden="true"><use href="#i-instagram"></use></svg> Instagram</a>
+          <span class="muted"><svg class="i i--sm" aria-hidden="true"><use href="#i-pin"></use></svg> <span data-bind="location">Santiago, Chile</span></span>
+        </div>
+      </div>
+    </div>
+    <div class="container footer__bottom">
+      <span class="muted">© <span id="year"></span> <span data-bind="brand">Tareapp</span>. Todos los derechos reservados.</span>
+    </div>
+  </footer>
+
+  <button class="to-top" id="toTop" type="button" aria-label="Volver arriba">↑</button>
+
+  <script src="/app.js"></script>
+</body>
+</html>

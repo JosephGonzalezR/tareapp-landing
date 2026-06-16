@@ -200,51 +200,112 @@
       </div>
     </section>
 
+    <style>
+      .about-avatar { width: 112px; height: 112px; border-radius: 50%; margin: 0 auto 14px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #FFF4D6, #F7C948); border: 1px solid rgba(229,181,46,.5); box-shadow: 0 10px 24px -10px rgba(229,181,46,.65); }
+      .about-avatar span { font-size: 52px; line-height: 1; }
+      .about-team { grid-template-columns: repeat(2, minmax(0, 300px)); justify-content: center; }
+      @media (max-width: 768px) { .about-team { grid-template-columns: 1fr; } }
+      .careers { overflow: hidden; padding: 6px 0; -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent); }
+      .careers__track { display: flex; gap: 14px; width: max-content; animation: careers-scroll 40s linear infinite; }
+      .careers:hover .careers__track { animation-play-state: paused; }
+      @keyframes careers-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+      .career-chip { white-space: nowrap; padding: 11px 22px; border-radius: 100px; border: 1px solid rgba(229,181,46,.4); background: #fff; color: #242424; font-weight: 600; font-size: 14px; box-shadow: 0 2px 10px rgba(0,0,0,.05); }
+      @media (prefers-reduced-motion: reduce) { .careers__track { animation: none; flex-wrap: wrap; justify-content: center; } }
+    </style>
+
     <!-- EQUIPO -->
     <section class="section">
       <div class="container">
         <div class="section__head">
           <h2 data-reveal>Nuestro equipo</h2>
-          <p class="muted" data-reveal>Especialistas en distintas areas para cubrir cualquier tipo de trabajo.</p>
+          <p class="muted" data-reveal>Especialistas en distintas areas: tesis e informes, redaccion y normas APA 7, Excel y Power BI, Python y programacion, articulos cientificos y talleres.</p>
         </div>
 
         <div class="about-team" data-reveal>
           <article class="about-member">
-            <img class="about-member__photo" src="Imagenes/imagen 17.webp" alt="Joseph Gonzalez - Fundador y Director" loading="lazy" width="200" height="200" decoding="async">
-            <h3>Joseph Gonzalez</h3>
-            <p class="about-member__role">Fundador y Director</p>
-            <p class="muted">Coordinacion general, gestion de proyectos y control de calidad. Asegura que cada trabajo cumpla los estandares academicos.</p>
-            <div class="about-member__tags">
-              <span class="chip">Gestion</span>
-              <span class="chip">Calidad</span>
-              <span class="chip">Coordinacion</span>
-            </div>
-          </article>
-
-          <article class="about-member">
-            <img class="about-member__photo" src="Imagenes/imagen 18.webp" alt="Especialista Academica" loading="lazy" width="200" height="200" decoding="async">
-            <h3>Especialista Academica</h3>
-            <p class="about-member__role">Redaccion y Metodologia</p>
-            <p class="muted">Metodologia, redaccion academica y normas de citacion APA, Vancouver e IEEE. Experta en estructura de informes.</p>
+            <div class="about-member__photo about-avatar" aria-hidden="true"><span>📚</span></div>
+            <h3>Especialistas Academicos</h3>
+            <p class="about-member__role">Redaccion, Metodologia y Normas</p>
+            <p class="muted">Metodologia y redaccion academica, normas APA 7, Vancouver e IEEE. Informes, ensayos, articulos cientificos, talleres y documentos en Word con estructura profesional.</p>
             <div class="about-member__tags">
               <span class="chip">Redaccion</span>
-              <span class="chip">APA</span>
+              <span class="chip">APA 7</span>
               <span class="chip">Metodologia</span>
+              <span class="chip">Articulos cientificos</span>
+              <span class="chip">Informes</span>
+              <span class="chip">Talleres</span>
             </div>
           </article>
 
           <article class="about-member">
-            <img class="about-member__photo" src="Imagenes/imagen 19.webp" alt="Especialista Tecnico" loading="lazy" width="200" height="200" decoding="async">
-            <h3>Especialista Tecnico</h3>
-            <p class="about-member__role">Tecnologia y Datos</p>
-            <p class="muted">Power BI, Excel avanzado, programacion y bases de datos. Domina las herramientas tecnicas que piden las instituciones.</p>
+            <div class="about-member__photo about-avatar" aria-hidden="true"><span>💻</span></div>
+            <h3>Especialistas Tecnicos</h3>
+            <p class="about-member__role">Tecnologia, Datos y Programacion</p>
+            <p class="muted">Power BI, Excel avanzado, Python, SQL, bases de datos y programacion. Dominan las herramientas tecnicas y los programas que piden las instituciones.</p>
             <div class="about-member__tags">
               <span class="chip">Power BI</span>
               <span class="chip">Excel</span>
               <span class="chip">Python</span>
               <span class="chip">SQL</span>
+              <span class="chip">Programacion</span>
+              <span class="chip">Word</span>
             </div>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CARRERAS -->
+    <section class="section">
+      <div class="container">
+        <div class="section__head">
+          <h2 data-reveal>Carreras que trabajamos</h2>
+          <p class="muted" data-reveal>Cubrimos todas las areas. Estas son algunas:</p>
+        </div>
+      </div>
+      <div class="careers" data-reveal>
+        <div class="careers__track">
+          <span class="career-chip">Ingeniería Civil</span>
+          <span class="career-chip">Ingeniería Comercial</span>
+          <span class="career-chip">Ingeniería Industrial</span>
+          <span class="career-chip">Administración de Empresas</span>
+          <span class="career-chip">Contador Auditor</span>
+          <span class="career-chip">Psicología</span>
+          <span class="career-chip">Derecho</span>
+          <span class="career-chip">Enfermería</span>
+          <span class="career-chip">Trabajo Social</span>
+          <span class="career-chip">Pedagogía</span>
+          <span class="career-chip">Kinesiología</span>
+          <span class="career-chip">Nutrición y Dietética</span>
+          <span class="career-chip">Prevención de Riesgos</span>
+          <span class="career-chip">Ingeniería en Minas</span>
+          <span class="career-chip">Construcción Civil</span>
+          <span class="career-chip">Ingeniería Informática</span>
+          <span class="career-chip">Técnico en Logística</span>
+          <span class="career-chip">Ingeniería en Electricidad</span>
+          <span class="career-chip">Periodismo</span>
+          <span class="career-chip">Diseño</span>
+          <!-- duplicado para loop continuo -->
+          <span class="career-chip">Ingeniería Civil</span>
+          <span class="career-chip">Ingeniería Comercial</span>
+          <span class="career-chip">Ingeniería Industrial</span>
+          <span class="career-chip">Administración de Empresas</span>
+          <span class="career-chip">Contador Auditor</span>
+          <span class="career-chip">Psicología</span>
+          <span class="career-chip">Derecho</span>
+          <span class="career-chip">Enfermería</span>
+          <span class="career-chip">Trabajo Social</span>
+          <span class="career-chip">Pedagogía</span>
+          <span class="career-chip">Kinesiología</span>
+          <span class="career-chip">Nutrición y Dietética</span>
+          <span class="career-chip">Prevención de Riesgos</span>
+          <span class="career-chip">Ingeniería en Minas</span>
+          <span class="career-chip">Construcción Civil</span>
+          <span class="career-chip">Ingeniería Informática</span>
+          <span class="career-chip">Técnico en Logística</span>
+          <span class="career-chip">Ingeniería en Electricidad</span>
+          <span class="career-chip">Periodismo</span>
+          <span class="career-chip">Diseño</span>
         </div>
       </div>
     </section>
@@ -261,7 +322,7 @@
           <div class="about-value">
             <div class="about-value__icon"><svg class="i" aria-hidden="true"><use href="#i-check"></use></svg></div>
             <h3>Calidad</h3>
-            <p class="muted">Cada trabajo pasa por revision de calidad antes de la entrega. No enviamos nada que no cumpla los estandares.</p>
+            <p class="muted">Cada trabajo pasa por revision de calidad antes de la entrega. Garantizamos notas entre 6,0 y 7,0 cuando nos envias la pauta, la rubrica y las indicaciones completas.</p>
           </div>
           <div class="about-value">
             <div class="about-value__icon"><svg class="i" aria-hidden="true"><use href="#i-clock"></use></svg></div>
