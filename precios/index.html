@@ -525,6 +525,17 @@
     .p-card:nth-child(2) { animation-delay: 0.2s; }
     .p-card:nth-child(3) { animation-delay: 0.3s; }
     .payment-option-card { animation: fadeUp 0.6s ease both; animation-delay: 0.2s; }
+
+    /* Aviso para elegir nivel antes de ver precios */
+    .tabs-hint { text-align: center; font-size: 14px; font-weight: 600; color: var(--text); margin: 0 0 14px; }
+    .price-prompt {
+      text-align: center; max-width: 560px; margin: 0 auto 60px; padding: 40px 28px;
+      border: 2px dashed rgba(229,181,46,0.55); border-radius: var(--radius);
+      background: linear-gradient(180deg, var(--brand3), var(--card));
+    }
+    .price-prompt__ic { font-size: 42px; margin-bottom: 8px; }
+    .price-prompt p { font-family: 'Playfair Display', serif; font-size: 21px; font-weight: 700; color: var(--text); margin: 0 0 8px; }
+    .price-prompt span { font-size: 13px; color: var(--muted); }
   </style>
 </head>
 
@@ -633,8 +644,9 @@
       </div>
 
       <!-- TABS -->
+      <p class="tabs-hint" id="tabsHint">Selecciona tu nivel para ver los precios:</p>
       <div class="tabs" id="tabs">
-        <button class="tab active" data-tab="cft">CFT</button>
+        <button class="tab" data-tab="cft">CFT</button>
         <button class="tab" data-tab="ip">Instituto Profesional</button>
         <button class="tab" data-tab="uni">Universidad (Pregrado)</button>
         <button class="tab" data-tab="master">Magíster</button>
@@ -646,8 +658,15 @@
         <span class="urgency-pill" id="urgencyPill">🔥 Precios vigentes hasta fin de mes</span>
       </div>
 
+      <!-- PRICE PROMPT (visible hasta elegir nivel) -->
+      <div class="price-prompt" id="pricePrompt">
+        <div class="price-prompt__ic">👆</div>
+        <p>Elige tu nivel para ver los precios y planes</p>
+        <span>CFT · Instituto Profesional · Universidad · Magíster · Doctorado</span>
+      </div>
+
       <!-- PRICING CARDS -->
-      <div class="pricing-grid" id="pricingGrid"></div>
+      <div class="pricing-grid" id="pricingGrid" style="display:none"></div>
 
       <!-- SOCIAL PROOF -->
       <p class="social-proof">
@@ -655,7 +674,7 @@
       </p>
 
       <!-- PAYMENT OPTIONS -->
-      <div class="payment-options">
+      <div class="payment-options" id="paymentOptions" style="display:none">
         <div class="payment-option-card installment-card">
           <div class="payment-icon">💳</div>
           <h3>Paga en <strong>hasta 4 cuotas</strong> sin interés</h3>
@@ -926,9 +945,13 @@
       document.querySelectorAll('.tab').forEach(function(t) { t.classList.remove('active'); });
       e.target.classList.add('active');
       renderCards(e.target.dataset.tab);
+      var pp = document.getElementById('pricePrompt'); if (pp) pp.style.display = 'none';
+      var th = document.getElementById('tabsHint'); if (th) th.style.display = 'none';
+      document.getElementById('pricingGrid').style.display = 'grid';
+      var po = document.getElementById('paymentOptions'); if (po) po.style.display = 'grid';
     });
 
-    renderCards('cft');
+    // No se muestran precios hasta que el usuario elige su nivel.
 
     // Fecha dinámica: auto-detecta mes actual
     (function() {
