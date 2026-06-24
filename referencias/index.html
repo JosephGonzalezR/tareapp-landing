@@ -5,16 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="color-scheme" content="light" />
 
-  <title>Preguntas Frecuentes | Tareapp</title>
-  <meta name="description" content="Resolvemos las dudas más comunes: plazos de entrega, entregas en 24 h, formas de pago, correcciones sin costo y garantía de notas. Atención por WhatsApp en Chile." />
+  <title>Referencias | Tareapp - Opiniones reales de clientes</title>
+  <meta name="description" content="Trabajos entregados y experiencias reales de estudiantes que ya confiaron en Tareapp. Mira las referencias de nuestros clientes en Chile." />
   <meta name="author" content="Tareapp" />
   <meta name="theme-color" content="#F7C948" />
 
   <link rel="icon" href="/NUEVO LOGO TAREAPP.png" />
   <link rel="apple-touch-icon" href="/NUEVO LOGO TAREAPP.png" />
 
-  <meta property="og:title" content="Preguntas Frecuentes | Tareapp" />
-  <meta property="og:description" content="Plazos, originalidad, pago en cuotas, correcciones y garantía. Todo lo que necesitas saber antes de empezar." />
+  <meta property="og:title" content="Referencias | Tareapp" />
+  <meta property="og:description" content="Trabajos entregados y experiencias reales de estudiantes que ya confiaron en Tareapp." />
   <meta property="og:type" content="website" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -24,47 +24,29 @@
   <link rel="stylesheet" href="/styles.css" />
 
   <style>
-    /* Mejor contraste de lectura (override local, no afecta al resto del sitio). */
-    main { --muted: #242424; }
-    main .faq-hero p { color: #242424; font-size: 17px; }
-    .faq-item summary { color: #1a1a1a; }
-    .faq-item .answer { color: #242424; font-size: 15.5px; line-height: 1.72; }
-    .faq-hero { text-align: center; padding: var(--pad-lg) 0 clamp(20px,3vw,36px); }
-    .faq-hero .badge {
-      display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 2.5px;
-      text-transform: uppercase; color: var(--brand-ink); background: var(--brand3);
-      border: 1px solid rgba(229,181,46,0.25); padding: 8px 20px; border-radius: 100px; margin-bottom: 24px;
-    }
-    .faq-hero h1 { font-family: 'Playfair Display', serif; font-size: var(--h1); font-weight: 800; line-height: 1.1; margin-bottom: 16px; color: var(--text); }
-    .faq-hero p { color: var(--muted); font-size: 17px; max-width: 620px; margin: 0 auto; line-height: 1.6; }
+    .ref-hero { text-align: center; padding: var(--pad-lg) 0 clamp(20px,3vw,30px); }
+    .ref-hero .badge { display:inline-block; font-size:11px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--brand-ink); background:var(--brand3); border:1px solid rgba(229,181,46,0.25); padding:8px 20px; border-radius:100px; margin-bottom:20px; }
+    .ref-hero h1 { font-family:'Playfair Display',serif; font-size:var(--h1); font-weight:800; line-height:1.1; margin-bottom:14px; color:var(--text); }
+    .ref-hero p { color:#242424; font-size:17px; max-width:620px; margin:0 auto; line-height:1.6; }
 
-    .faq-wrap { max-width: 760px; margin: 0 auto clamp(40px,6vw,72px); }
-    .faq-item {
-      background: var(--card); border: 1px solid var(--line); border-radius: 14px;
-      margin-bottom: 12px; box-shadow: var(--shadow-sm); overflow: hidden; transition: box-shadow .25s ease, border-color .25s ease;
-    }
-    .faq-item[open] { border-color: var(--brand-ink); box-shadow: var(--shadow); }
-    .faq-item summary {
-      list-style: none; cursor: pointer; padding: 20px 24px; display: flex; align-items: center;
-      justify-content: space-between; gap: 16px; font-weight: 600; font-size: 16px; color: var(--text);
-    }
-    .faq-item summary::-webkit-details-marker { display: none; }
-    .faq-item summary .chev { flex-shrink: 0; width: 22px; height: 22px; color: var(--brand-ink); transition: transform .25s ease; }
-    .faq-item[open] summary .chev { transform: rotate(180deg); }
-    .faq-item .answer { padding: 0 24px 22px; color: var(--muted); font-size: 15px; line-height: 1.7; }
-    .faq-item .answer strong { color: var(--text); font-weight: 600; }
+    .ev-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:18px; max-width:980px; margin:6px auto clamp(40px,6vw,64px); }
+    .ev-item { border:0; padding:0; background:none; cursor:zoom-in; border-radius:16px; overflow:hidden; box-shadow:var(--shadow-sm); aspect-ratio:1/1; transition:transform .2s ease, box-shadow .2s ease; }
+    .ev-item:hover { transform:translateY(-4px); box-shadow:var(--shadow); }
+    .ev-item img { width:100%; height:100%; object-fit:cover; display:block; }
 
-    .faq-cta {
-      max-width: 760px; margin: 0 auto clamp(40px,6vw,72px); text-align: center;
-      background: linear-gradient(180deg, var(--brand3) 0%, var(--card) 60%);
-      border: 1px solid rgba(229,181,46,0.25); border-radius: var(--radius); padding: 40px 32px; box-shadow: var(--shadow-sm);
-    }
-    .faq-cta h2 { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
-    .faq-cta p { color: var(--muted); font-size: 15px; margin-bottom: 22px; }
-    .wa-icon { width: 18px; height: 18px; }
+    .ref-cta { max-width:760px; margin:0 auto clamp(40px,6vw,72px); text-align:center; background:linear-gradient(180deg, var(--brand3) 0%, var(--card) 60%); border:1px solid rgba(229,181,46,0.25); border-radius:var(--radius); padding:40px 32px; box-shadow:var(--shadow-sm); }
+    .ref-cta h2 { font-family:'Playfair Display',serif; font-size:26px; font-weight:700; color:var(--text); margin-bottom:10px; }
+    .ref-cta p { color:var(--muted); font-size:15px; margin-bottom:22px; }
 
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-    .faq-item { animation: fadeUp .5s ease both; }
+    .ev-lightbox { position:fixed; inset:0; background:rgba(10,15,25,.93); display:none; align-items:center; justify-content:center; z-index:9999; padding:24px; }
+    .ev-lightbox.open { display:flex; }
+    .ev-lightbox img { max-width:min(92vw,900px); max-height:88vh; border-radius:12px; box-shadow:0 20px 60px rgba(0,0,0,.5); }
+    .ev-lb-btn { position:absolute; background:rgba(255,255,255,.14); border:0; color:#fff; width:48px; height:48px; border-radius:50%; font-size:26px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+    .ev-lb-btn:hover { background:rgba(255,255,255,.3); }
+    .ev-lb-close { top:18px; right:18px; }
+    .ev-lb-prev { left:18px; top:50%; transform:translateY(-50%); }
+    .ev-lb-next { right:18px; top:50%; transform:translateY(-50%); }
+    @media(max-width:520px){ .ev-lb-prev{left:6px} .ev-lb-next{right:6px} .ev-lb-btn{width:42px;height:42px} }
   </style>
 </head>
 
@@ -83,7 +65,6 @@
     <symbol id="i-instagram" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></symbol>
   </svg>
 
-  <!-- TOPBAR -->
   <div class="topbar">
     <div class="container topbar__inner">
       <div class="topbar__left">
@@ -100,7 +81,6 @@
     </div>
   </div>
 
-  <!-- NAVBAR -->
   <header class="nav" id="top">
     <div class="container nav__inner">
       <a class="brand" href="/" aria-label="Ir al inicio">
@@ -115,8 +95,8 @@
         <a href="/#servicios">Servicios</a>
         <a href="/procedimiento/">Proceso</a>
         <a href="/precios/">Precios</a>
-        <a href="/referencias/">Referencias</a>
-        <a href="/faq/" style="color:var(--brand-ink);font-weight:600">FAQ</a>
+        <a href="/referencias/" style="color:var(--brand-ink);font-weight:600">Referencias</a>
+        <a href="/faq/">FAQ</a>
         <a href="/blog/">Blog</a>
         <a href="/nosotros/">Nosotros</a>
         <a data-wa-message="Hola, tengo una consulta. ¿Me orientan por favor?" href="#" class="nav__cta">Agendar</a>
@@ -138,8 +118,8 @@
         <a href="/#servicios">Servicios</a>
         <a href="/procedimiento/">Proceso</a>
         <a href="/precios/">Precios</a>
-        <a href="/referencias/">Referencias</a>
-        <a href="/faq/" style="color:var(--brand-ink);font-weight:600">FAQ</a>
+        <a href="/referencias/" style="color:var(--brand-ink);font-weight:600">Referencias</a>
+        <a href="/faq/">FAQ</a>
         <a href="/blog/">Blog</a>
         <a href="/nosotros/">Nosotros</a>
         <a data-wa-message="Hola, quiero agendar. ¿Me orientan?" href="#" class="btn btn--primary btn--block">Agendar por WhatsApp</a>
@@ -148,56 +128,31 @@
     </div>
   </header>
 
-  <!-- MAIN -->
   <main id="contenido">
     <div class="container">
-      <div class="faq-hero">
-        <div class="badge">Preguntas Frecuentes</div>
-        <h1>Resolvemos tus dudas</h1>
-        <p>Lo que más nos consultan antes de empezar. Si te queda alguna duda, escríbenos por WhatsApp y te respondemos rápido.</p>
+      <div class="ref-hero">
+        <div class="badge">Referencias</div>
+        <h1>Lo que dicen quienes ya confiaron en nosotros</h1>
+        <p>Trabajos entregados y experiencias reales de estudiantes de Tareapp. Toca cualquier imagen para verla en grande.</p>
       </div>
 
-      <div class="faq-wrap">
-        <details class="faq-item" open>
-          <summary>¿En cuánto tiempo entregan el trabajo?<svg class="chev" aria-hidden="true"><use href="#i-arrow"></use></svg></summary>
-          <div class="answer">Somos rápidos: hacemos <strong>trabajos estándar en 24 horas</strong> y tenemos <strong>servicio express el mismo día</strong> (previa coordinación). Dinos para cuándo lo necesitas al escribirnos y te confirmamos de inmediato si llegamos a tiempo.</div>
-        </details>
-        <details class="faq-item">
-          <summary>¿Cómo puedo pagar?<svg class="chev" aria-hidden="true"><use href="#i-arrow"></use></svg></summary>
-          <div class="answer">Por <strong>transferencia bancaria</strong> (BancoEstado). Revisa los datos en <a href="/pago/" style="color:var(--brand-ink);font-weight:600">cómo pagar</a>. Para <strong>tesis</strong> tenemos facilidades adicionales (cuotas y descuento al contado), que ves en <a href="/precios/" style="color:var(--brand-ink);font-weight:600">precios</a>.</div>
-        </details>
-        <details class="faq-item">
-          <summary>¿Tengo que pagar todo al inicio?<svg class="chev" aria-hidden="true"><use href="#i-arrow"></use></svg></summary>
-          <div class="answer">No. Si es tu <strong>primera vez con nosotros y es un trabajo corto</strong>, podemos empezar <strong>sin pago por adelantado</strong> y pagas al recibir (no aplica para trabajos largos). En general, para empezar dejas un anticipo y cancelas el saldo en la entrega.</div>
-        </details>
-        <details class="faq-item">
-          <summary>¿Y si necesito cambios o correcciones?<svg class="chev" aria-hidden="true"><use href="#i-arrow"></use></svg></summary>
-          <div class="answer">Es una entrega, y si necesita <strong>ajustes según tu rúbrica los hacemos sin costo adicional</strong>. Para eso es clave que nos envíes la pauta e indicaciones completas desde el inicio.</div>
-        </details>
-        <details class="faq-item">
-          <summary>¿Hacen pruebas o exámenes en línea?<svg class="chev" aria-hidden="true"><use href="#i-arrow"></use></svg></summary>
-          <div class="answer">Sí, con tiempo y según el ramo. Cuéntanos el <strong>día, la hora y la duración</strong> para confirmarte la disponibilidad.</div>
-        </details>
-        <details class="faq-item">
-          <summary>¿Trabajan con normas APA y el formato de mi universidad?<svg class="chev" aria-hidden="true"><use href="#i-arrow"></use></svg></summary>
-          <div class="answer">Sí. Aplicamos <strong>APA</strong> u otra norma y el formato que pida tu institución. Envíanos la rúbrica y la seguimos al pie de la letra.</div>
-        </details>
-        <details class="faq-item">
-          <summary>¿Es seguro? ¿Cómo sé que cumplen?<svg class="chev" aria-hidden="true"><use href="#i-arrow"></use></svg></summary>
-          <div class="answer">Llevamos <strong>+500 tesis entregadas en 2025</strong> y un <strong>98% de aprobación</strong> en primera entrega. Además, si es tu primera vez y es un trabajo corto, podemos empezar <strong>sin pago por adelantado</strong>, así trabajas con confianza.</div>
-        </details>
-        <details class="faq-item">
-          <summary>¿Garantizan la nota?<svg class="chev" aria-hidden="true"><use href="#i-arrow"></use></svg></summary>
-          <div class="answer">La calidad es nuestro diferencial: <strong>garantizamos notas entre 6,0 y 7,0</strong> cuando nos envías <strong>todos los datos</strong> (pauta, rúbrica e indicaciones específicas). Mientras más completa la información, mejor el resultado.</div>
-        </details>
+      <div class="ev-grid">
+        <button class="ev-item" type="button" aria-label="Ver referencia 1"><img src="/assets/referencias/ref-1.webp" loading="lazy" decoding="async" width="1200" height="1200" alt="Referencia de cliente de Tareapp" /></button>
+        <button class="ev-item" type="button" aria-label="Ver referencia 2"><img src="/assets/referencias/ref-2.webp" loading="lazy" decoding="async" width="1200" height="1200" alt="Referencia de cliente de Tareapp" /></button>
+        <button class="ev-item" type="button" aria-label="Ver referencia 3"><img src="/assets/referencias/ref-3.webp" loading="lazy" decoding="async" width="1200" height="1200" alt="Referencia de cliente de Tareapp" /></button>
+        <button class="ev-item" type="button" aria-label="Ver referencia 4"><img src="/assets/referencias/ref-4.webp" loading="lazy" decoding="async" width="1200" height="1200" alt="Referencia de cliente de Tareapp" /></button>
+        <button class="ev-item" type="button" aria-label="Ver referencia 5"><img src="/assets/referencias/ref-5.webp" loading="lazy" decoding="async" width="1200" height="1200" alt="Referencia de cliente de Tareapp" /></button>
+        <button class="ev-item" type="button" aria-label="Ver referencia 6"><img src="/assets/referencias/ref-6.webp" loading="lazy" decoding="async" width="1200" height="1200" alt="Referencia de cliente de Tareapp" /></button>
+        <button class="ev-item" type="button" aria-label="Ver referencia 7"><img src="/assets/referencias/ref-7.webp" loading="lazy" decoding="async" width="1200" height="1200" alt="Referencia de cliente de Tareapp" /></button>
+        <button class="ev-item" type="button" aria-label="Ver referencia 8"><img src="/assets/referencias/ref-8.webp" loading="lazy" decoding="async" width="1200" height="1200" alt="Referencia de cliente de Tareapp" /></button>
       </div>
 
-      <div class="faq-cta">
-        <h2>¿Te quedó alguna duda?</h2>
-        <p>Escríbenos por WhatsApp y te respondemos rápido.</p>
-        <a class="btn btn--primary" href="https://wa.me/56953078288?text=Hola,%20tengo%20una%20consulta." target="_blank" rel="noopener">
-          <svg class="wa-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884z"/></svg>
-          Escríbenos por WhatsApp
+      <div class="ref-cta">
+        <h2>¿Quieres ser el próximo?</h2>
+        <p>Escríbenos por WhatsApp y avancemos con tu trabajo hoy.</p>
+        <a class="btn btn--primary" data-wa-message="Hola, vi las referencias y quiero cotizar un trabajo." href="#" rel="noopener">
+          <svg class="i i--sm" aria-hidden="true"><use href="#i-whatsapp"></use></svg>
+          Cotizar por WhatsApp
         </a>
       </div>
     </div>
@@ -218,8 +173,8 @@
           <h4>Secciones</h4>
           <a href="/">Trabajos</a>
           <a href="/precios/">Precios</a>
-        <a href="/referencias/">Referencias</a>
           <a href="/procedimiento/">Cómo trabajamos</a>
+          <a href="/referencias/">Referencias</a>
           <a href="/faq/">Preguntas frecuentes</a>
           <a href="/pago/">Cómo pagar</a>
           <a href="/blog/">Blog</a>
@@ -247,6 +202,28 @@
 
   <button class="to-top" id="toTop" type="button" aria-label="Volver arriba">↑</button>
 
+  <div class="ev-lightbox" id="evLightbox" aria-hidden="true">
+    <button class="ev-lb-btn ev-lb-close" id="evLbClose" type="button" aria-label="Cerrar">&times;</button>
+    <button class="ev-lb-btn ev-lb-prev" id="evLbPrev" type="button" aria-label="Anterior">&#8249;</button>
+    <img id="evLbImg" src="" alt="Referencia ampliada" />
+    <button class="ev-lb-btn ev-lb-next" id="evLbNext" type="button" aria-label="Siguiente">&#8250;</button>
+  </div>
+
   <script src="/app.js"></script>
+  <script>
+    (function(){
+      var items=[].slice.call(document.querySelectorAll('.ev-item'));
+      var srcs=items.map(function(b){var i=b.querySelector('img');return i?i.getAttribute('src'):'';});
+      var lb=document.getElementById('evLightbox'), lbImg=document.getElementById('evLbImg'), idx=0;
+      function show(i){idx=(i+srcs.length)%srcs.length;lbImg.src=srcs[idx];lb.classList.add('open');lb.setAttribute('aria-hidden','false');}
+      function hide(){lb.classList.remove('open');lb.setAttribute('aria-hidden','true');}
+      items.forEach(function(b,i){b.addEventListener('click',function(){show(i);});});
+      document.getElementById('evLbClose').addEventListener('click',hide);
+      document.getElementById('evLbPrev').addEventListener('click',function(e){e.stopPropagation();show(idx-1);});
+      document.getElementById('evLbNext').addEventListener('click',function(e){e.stopPropagation();show(idx+1);});
+      lb.addEventListener('click',function(e){if(e.target===lb)hide();});
+      document.addEventListener('keydown',function(e){if(!lb.classList.contains('open'))return;if(e.key==='Escape')hide();else if(e.key==='ArrowLeft')show(idx-1);else if(e.key==='ArrowRight')show(idx+1);});
+    })();
+  </script>
 </body>
 </html>
