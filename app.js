@@ -4,8 +4,8 @@
  */
 const CONFIG = {
   brand: "Tareapp",
-  whatsappNumber: "56953078288",
-  whatsappDisplay: "+56 9 5307 8288",
+  whatsappNumber: "56971478131",
+  whatsappDisplay: "+56 9 7147 8131",
   location: "Santiago, Chile",
   facebookUrl: "https://www.facebook.com/profile.php?id=61558060587570",
   tiktokUrl: "https://www.tiktok.com/@tareapp_",

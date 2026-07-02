@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light" />
+
+  <title>Precios de Trabajos y Tareas | Tareapp</title>
+  <meta name="description" content="Precios de trabajos y tareas universitarias: trabajos cortos desde $15.000. Trabajos más extensos (con datos, programación o presentaciones) se cotizan a tu medida por WhatsApp." />
+  <meta name="author" content="Tareapp" />
+  <meta name="theme-color" content="#F7C948" />
+
+  <link rel="icon" href="/NUEVO LOGO TAREAPP.png" />
+  <link rel="apple-touch-icon" href="/NUEVO LOGO TAREAPP.png" />
+
+  <meta property="og:title" content="Precios de Trabajos y Tareas | Tareapp" />
+  <meta property="og:description" content="Trabajos cortos desde $15.000. El resto se cotiza a tu medida por WhatsApp." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="/styles.css" />
+
+  <style>
+    /* ===== Precios de trabajos — estilos de la página ===== */
+    .pricing-hero { text-align: center; padding: var(--pad-lg) 0 clamp(20px, 3vw, 36px); }
+    .pricing-hero .badge {
+      display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 2.5px;
+      text-transform: uppercase; color: var(--brand-ink); background: var(--brand3);
+      border: 1px solid rgba(229,181,46,.25); padding: 8px 20px; border-radius: 100px; margin-bottom: 24px;
+    }
+    .pricing-hero h1 { font-family: 'Playfair Display', serif; font-size: var(--h1); font-weight: 800; line-height: 1.1; margin-bottom: 16px; color: var(--text); }
+    .pricing-hero p { color: var(--muted); font-size: 17px; max-width: 620px; margin: 0 auto; line-height: 1.6; }
+
+    /* Tarjeta principal (trabajo corto) */
+    .work-price {
+      max-width: 560px; margin: 0 auto 28px; background: linear-gradient(180deg, var(--brand3) 0%, var(--card) 42%);
+      border: 1px solid var(--brand-ink); border-radius: var(--radius); padding: 40px 32px; text-align: center;
+      box-shadow: var(--shadow); position: relative;
+    }
+    .work-price__label { font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--brand-ink); margin-bottom: 10px; }
+    .work-price__amount { font-family: 'Playfair Display', serif; font-size: clamp(44px, 8vw, 60px); font-weight: 800; line-height: 1; color: var(--text); }
+    .work-price__amount small { font-size: 20px; font-weight: 600; color: var(--muted); }
+    .work-price__desde { font-size: 14px; color: var(--muted); margin-top: 6px; }
+    .work-price ul { list-style: none; margin: 24px 0 26px; padding: 0; text-align: left; max-width: 400px; margin-left: auto; margin-right: auto; }
+    .work-price li { font-size: 14.5px; color: var(--muted); padding: 6px 0; display: flex; align-items: flex-start; gap: 10px; line-height: 1.45; }
+    .work-price li .ic { flex-shrink: 0; width: 18px; height: 18px; border-radius: 50%; background: rgba(52,211,153,.14); color: #34d399; display: flex; align-items: center; justify-content: center; font-size: 11px; margin-top: 1px; }
+    .work-cta {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%;
+      padding: 15px; border-radius: 12px; background: #25d366; color: #fff; font-family: var(--font);
+      font-size: 15px; font-weight: 700; text-decoration: none; transition: background .2s ease;
+    }
+    .work-cta:hover { background: #1fb457; text-decoration: none; }
+    .wa-icon { width: 20px; height: 20px; }
+
+    /* Nota: otros trabajos → WhatsApp */
+    .quote-cta {
+      max-width: 720px; margin: 8px auto 56px;
+      background: linear-gradient(135deg, rgba(251,146,60,.06), rgba(247,201,72,.06));
+      border: 1px solid rgba(251,146,60,.2); border-radius: var(--radius); padding: 32px 36px;
+      display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+    }
+    @media (max-width: 700px) { .quote-cta { flex-direction: column; text-align: center; padding: 26px 22px; } }
+    .quote-cta .ic-big { font-size: 44px; flex-shrink: 0; }
+    .quote-cta .content { flex: 1; }
+    .quote-cta h3 { font-family: 'Playfair Display', serif; font-size: 21px; font-weight: 700; margin-bottom: 8px; color: #fb923c; }
+    .quote-cta p { font-size: 15px; color: var(--muted); line-height: 1.6; }
+    .quote-cta p strong { color: var(--text); }
+    .quote-cta .cta-btn { flex-shrink: 0; padding: 14px 30px; border-radius: 12px; background: #fb923c; color: #fff; font-family: var(--font); font-size: 14px; font-weight: 600; text-decoration: none; white-space: nowrap; transition: background .2s; }
+    .quote-cta .cta-btn:hover { background: #f9a854; }
+
+    .footer-note { text-align: center; margin-top: 8px; font-size: 12px; color: var(--muted); opacity: .65; }
+  </style>
+</head>
+
+<body data-page="trabajos">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <div class="scroll-progress" aria-hidden="true"><div class="scroll-progress__bar" id="scrollProgress"></div></div>
+
+  <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" focusable="false">
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 22s7-4.5 7-12a7 7 0 0 0-14 0c0 7.5 7 12 7 12z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 11.2a2.2 2.2 0 1 0 0-4.4 2.2 2.2 0 0 0 0 4.4z" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-whatsapp" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="currentColor"/></symbol>
+  </svg>
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="container topbar__inner">
+      <div class="topbar__left">
+        <span class="dot" aria-hidden="true"></span>
+        <span class="topbar__text">Atención por WhatsApp • <span data-bind="location">Santiago, Chile</span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVBAR -->
+  <header class="nav" id="top">
+    <div class="container nav__inner">
+      <a class="brand" href="/" aria-label="Ir al inicio">
+        <img src="/NUEVO LOGO TAREAPP.png" width="40" height="40" alt="Logo de Tareapp" decoding="async" style="border-radius:10px" />
+        <span class="brand__text"><strong data-bind="brand">Tareapp</strong><small>Soluciones Académicas</small></span>
+      </a>
+
+      <div class="page-switcher" aria-label="Tipo de servicio">
+        <a class="page-switcher__tab page-switcher__tab--active" href="/">Trabajos</a>
+        <a class="page-switcher__tab" href="/tesis/">Tesis</a>
+      </div>
+
+      <nav class="nav__links" aria-label="Navegación principal" id="navLinks">
+        <a href="/#servicios-trabajos">Servicios</a>
+        <a href="/#proceso-trabajos">Proceso</a>
+        <a href="/precios-trabajos/" style="color:var(--brand-ink);font-weight:600">Precios</a>
+        <a href="/#preguntas-trabajos">FAQ</a>
+        <a href="/blog/">Blog</a>
+        <a href="/nosotros/">Nosotros</a>
+        <a href="/#contacto-trabajos" class="nav__cta">Cotizar</a>
+      </nav>
+
+      <div class="nav__actions">
+        <a class="btn btn--ghost btn--sm hide-sm" data-wa-message="Hola, quiero cotizar un trabajo. ¿Me orientan por favor?" href="#" rel="noopener">
+          <svg class="i" aria-hidden="true"><use href="#i-whatsapp"></use></svg>
+          <span class="btn__hint" data-bind="whatsappDisplay">+56 9 7147 8131</span>
+        </a>
+        <button class="nav__burger" type="button" id="menuBtn" aria-label="Abrir menú" aria-controls="mobileMenu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu" hidden>
+      <div class="mobile-menu__inner container">
+        <div class="page-switcher page-switcher--mobile" aria-label="Tipo de servicio">
+          <a class="page-switcher__tab page-switcher__tab--active" href="/">Trabajos</a>
+          <a class="page-switcher__tab" href="/tesis/">Tesis</a>
+        </div>
+        <a href="/#servicios-trabajos">Servicios</a>
+        <a href="/#proceso-trabajos">Proceso</a>
+        <a href="/precios-trabajos/" style="color:var(--brand-ink);font-weight:600">Precios</a>
+        <a href="/#preguntas-trabajos">FAQ</a>
+        <a href="/blog/">Blog</a>
+        <a href="/nosotros/">Nosotros</a>
+        <a href="/#contacto-trabajos" class="btn btn--primary btn--block">Cotizar por WhatsApp</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main id="contenido">
+    <div class="container">
+      <div class="pricing-hero">
+        <div class="badge">Trabajos & Tareas 2026</div>
+        <h1>Precios de trabajos</h1>
+        <p>Tareas, informes y trabajos universitarios resueltos por profesionales. Precio claro para trabajos cortos; el resto lo cotizamos a tu medida.</p>
+      </div>
+
+      <!-- Trabajo corto -->
+      <div class="work-price">
+        <div class="work-price__label">Trabajos cortos</div>
+        <div class="work-price__amount">$15.000<small> CLP</small></div>
+        <div class="work-price__desde">valor aproximado · desde</div>
+        <ul>
+          <li><span class="ic">✓</span> Tareas y ejercicios resueltos</li>
+          <li><span class="ic">✓</span> Informes y resúmenes breves</li>
+          <li><span class="ic">✓</span> Ensayos y reportes cortos</li>
+          <li><span class="ic">✓</span> Formato según tu guía (APA / normas de tu institución)</li>
+          <li><span class="ic">✓</span> Entrega digital (Word + PDF)</li>
+        </ul>
+        <a class="work-cta" data-wa-message="Hola, tengo un trabajo corto y quiero cotizarlo. ¿Me ayudan?" href="#" rel="noopener">
+          <svg class="wa-icon" aria-hidden="true"><use href="#i-whatsapp"></use></svg> Cotizar mi trabajo por WhatsApp
+        </a>
+      </div>
+
+      <!-- Otros trabajos → WhatsApp -->
+      <div class="quote-cta">
+        <div class="ic-big">💬</div>
+        <div class="content">
+          <h3>¿Un trabajo más grande o específico?</h3>
+          <p>Trabajos más extensos o especializados —con <strong>análisis de datos, Excel/Power BI, programación, presentaciones o varios entregables</strong>— se cotizan <strong>a tu medida</strong>. Cuéntanos qué necesitas y te pasamos el valor al instante por WhatsApp.</p>
+        </div>
+        <a class="cta-btn" data-wa-message="Hola, tengo un trabajo más grande/específico y quiero una cotización a medida." href="#" rel="noopener">Pedir cotización</a>
+      </div>
+
+      <p class="footer-note">Precios referenciales 2026 · El valor final se confirma según el detalle de cada trabajo.</p>
+    </div>
+  </main>
+
+  <!-- Footer wave -->
+  <div class="footer-wave" aria-hidden="true">
+    <svg viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,30 C360,90 720,0 1080,50 C1260,75 1380,20 1440,30 L1440,90 L0,90 Z" fill="#FAFAFA"/>
+    </svg>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <img src="/NUEVO LOGO TAREAPP.png" width="56" height="56" alt="Logo de Tareapp" loading="lazy" decoding="async" style="border-radius:12px" />
+        <div><strong data-bind="brand">Tareapp</strong><p class="muted">Soluciones Académicas</p></div>
+      </div>
+      <div class="footer__cols">
+        <div>
+          <h4>Secciones</h4>
+          <a href="/">Trabajos</a>
+          <a href="/precios-trabajos/">Precios de trabajos</a>
+          <a href="/tesis/">Tesis</a>
+          <a href="/precios/">Precios de tesis</a>
+          <a href="/blog/">Blog</a>
+          <a href="/nosotros/">Nosotros</a>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <a href="/privacy/">Privacidad</a>
+          <a href="/terms/">Términos</a>
+        </div>
+        <div>
+          <h4>Contacto</h4>
+          <a data-wa-message="Hola, quiero información. ¿Me orientan?" href="#" rel="noopener">
+            <svg class="i i--sm" aria-hidden="true"><use href="#i-whatsapp"></use></svg> WhatsApp
+          </a>
+          <span class="muted"><svg class="i i--sm" aria-hidden="true"><use href="#i-pin"></use></svg> <span data-bind="location">Santiago, Chile</span></span>
+        </div>
+      </div>
+    </div>
+    <div class="container footer__bottom">
+      <span class="muted">© <span id="year"></span> <span data-bind="brand">Tareapp</span>. Todos los derechos reservados.</span>
+    </div>
+  </footer>
+
+  <button class="to-top" id="toTop" type="button" aria-label="Volver arriba">↑</button>
+
+  <script src="/app.js"></script>
+</body>
+</html>
