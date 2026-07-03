@@ -652,14 +652,39 @@ function setupTabTitle() {
   });
 }
 
-/* ── Modo revisión (comparador AGS): ?revisar=1 abre todos los desplegables para verlos sin clic ── */
+/* --- Modo revision (comparador AGS): ?revisar=1 abre TODO lo desplegable para verlo sin clic --- */
 (function(){
   if (!/[?&]revisar=1/.test(location.search)) return;
   function _expandir(){
+    // 1) FAQ y acordeones
     document.querySelectorAll("details").forEach(function(d){ d.open = true; });
     document.querySelectorAll(".accordion__item,.accordion,.faq__item").forEach(function(a){ a.classList.add("is-open","active","open"); });
     document.querySelectorAll(".accordion__panel,.faq__answer,[data-accordion-panel]").forEach(function(p){ p.hidden=false; p.style.maxHeight="none"; p.style.display="block"; });
+    // 2) MATRIZ DE PRECIOS: pulsar cada nivel y apilar todos los precios visibles
+    var grid = document.getElementById("pricingGrid");
+    var tabs = document.querySelectorAll("[data-tab]");
+    if (grid && tabs.length && !grid.dataset.revExpandido){
+      grid.dataset.revExpandido = "1";
+      var cont = document.createElement("div");
+      tabs.forEach(function(btn){
+        try { btn.click(); } catch(e){}
+        var sec = document.createElement("div");
+        sec.style.margin = "10px 0 26px";
+        var h = document.createElement("div");
+        h.textContent = btn.textContent.trim();
+        h.style.cssText = "text-align:center;font-weight:800;font-size:17px;margin:8px 0 14px;padding-top:10px;border-top:2px dashed rgba(0,0,0,.12)";
+        sec.appendChild(h);
+        var copia = grid.cloneNode(true);
+        copia.removeAttribute("id");
+        sec.appendChild(copia);
+        cont.appendChild(sec);
+      });
+      grid.parentNode.insertBefore(cont, grid);
+      grid.style.display = "none";
+    }
+    // 3) forzar visibles cosas con animacion de entrada
+    document.querySelectorAll("[data-reveal],.p-card,.reveal").forEach(function(el){ el.style.opacity="1"; el.style.transform="none"; });
   }
   if (document.readyState !== "loading") _expandir(); else document.addEventListener("DOMContentLoaded", _expandir);
-  setTimeout(_expandir, 900);
+  setTimeout(_expandir, 1100);
 })();
