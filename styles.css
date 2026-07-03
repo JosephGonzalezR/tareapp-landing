@@ -1924,6 +1924,19 @@ html[data-theme="dark"] .hero__bg {
   position: relative;
   z-index: 1;
 }
+/* CONTRASTE (backport 2026-07-02, detectado en la réplica AR): el head de la
+   sección usa el color/gradiente de texto por defecto (oscuro) sobre la banda
+   foto-oscura → no se leía. Sobre este fondo el texto SIEMPRE va claro. */
+#opiniones-trabajos .section__head h2,
+#opiniones .section__head h2 {
+  color: #fff;
+  -webkit-text-fill-color: #fff;
+  background: none;
+}
+#opiniones-trabajos .section__head .muted,
+#opiniones .section__head .muted {
+  color: rgba(255, 255, 255, 0.78);
+}
 
 /* ── 7b. Opiniones background tesis (imagen 8) ───────────── */
 #opiniones {

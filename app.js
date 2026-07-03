@@ -127,6 +127,13 @@ function setupReveal() {
   );
 
   els.forEach((el) => obs.observe(el));
+
+  // RED DE SEGURIDAD (2026-07-02): si el observador no dispara (iframes,
+  // navegadores raros, scroll programático), NADA puede quedar invisible.
+  // A los 1.5s todo lo aún no revelado se muestra sí o sí.
+  setTimeout(() => {
+    document.querySelectorAll("[data-reveal]:not(.revealed)").forEach((el) => el.classList.add("revealed"));
+  }, 1500);
 }
 
 function setupAccordions() {
@@ -405,12 +412,26 @@ function setupGSAP() {
   // Resto de [data-reveal]
   document.querySelectorAll("[data-reveal]").forEach((el) => {
     if (handled.has(el)) return;
+    handled.add(el);
     gsap.fromTo(el,
       { opacity: 0, y: 40 },
       { opacity: 1, y: 0, duration: 0.8, ease: "power2.out",
         scrollTrigger: { trigger: el, start: "top 88%", toggleActions: "play none none none" } }
     );
   });
+
+  // RED DE SEGURIDAD GSAP (2026-07-02): si ScrollTrigger no dispara (iframes,
+  // visores embebidos), los elementos animados con fromTo(opacity:0) quedarían
+  // invisibles PARA SIEMPRE. A los 1.8s, todo lo que siga oculto se muestra.
+  setTimeout(() => {
+    handled.forEach((el) => {
+      try {
+        if (parseFloat(getComputedStyle(el).opacity) < 0.05) {
+          gsap.set(el, { opacity: 1, y: 0, x: 0, scale: 1, clearProps: "transform" });
+        }
+      } catch (e) {}
+    });
+  }, 1800);
 
   // CountUp animado en stats
   const statVals = document.querySelectorAll(".stat__val[data-countup]");
