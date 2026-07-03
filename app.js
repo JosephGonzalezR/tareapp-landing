@@ -651,3 +651,15 @@ function setupTabTitle() {
     }
   });
 }
+
+/* ── Modo revisión (comparador AGS): ?revisar=1 abre todos los desplegables para verlos sin clic ── */
+(function(){
+  if (!/[?&]revisar=1/.test(location.search)) return;
+  function _expandir(){
+    document.querySelectorAll("details").forEach(function(d){ d.open = true; });
+    document.querySelectorAll(".accordion__item,.accordion,.faq__item").forEach(function(a){ a.classList.add("is-open","active","open"); });
+    document.querySelectorAll(".accordion__panel,.faq__answer,[data-accordion-panel]").forEach(function(p){ p.hidden=false; p.style.maxHeight="none"; p.style.display="block"; });
+  }
+  if (document.readyState !== "loading") _expandir(); else document.addEventListener("DOMContentLoaded", _expandir);
+  setTimeout(_expandir, 900);
+})();
