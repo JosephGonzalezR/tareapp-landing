@@ -34,6 +34,8 @@
     }
     .fix-hero h1 { font-family: 'Playfair Display', serif; font-size: var(--h1); font-weight: 800; line-height: 1.1; margin-bottom: 14px; color: var(--text); }
     .fix-hero p { color: #242424; font-size: 17px; max-width: 640px; margin: 0 auto; line-height: 1.6; }
+    .fix-hero .jump { margin-top: 14px; font-size: 15px; }
+    .fix-hero .jump a { color: var(--brand-ink); font-weight: 700; text-decoration: underline; }
 
     .fix-wrap { max-width: 760px; margin: 0 auto clamp(30px,5vw,56px); }
 
@@ -83,7 +85,8 @@
     .bank-panel.on { display: block; animation: fadeUp .35s ease both; }
     .bank-panel h3 { font-size: 15.5px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
     .bank-panel p { font-size: 14.5px; color: #242424; line-height: 1.65; margin: 0; }
-    .bank-panel .path { display: inline-block; font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 13.5px; background: #fff; border: 1px solid var(--line); border-radius: 7px; padding: 4px 9px; margin-top: 8px; color: #141414; }
+    .vshot { margin: 14px 0 0; background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 10px; box-shadow: var(--shadow-sm); }
+    .vshot img { display: block; width: 100%; max-width: 340px; height: auto; margin: 0 auto; border-radius: 8px; }
 
     .must { margin-top: 16px; background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; }
     .must h3 { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
@@ -188,6 +191,7 @@
         <div class="badge">Problemas con el pago</div>
         <h1>Tu banco te arroja error</h1>
         <p>No eres el único y casi siempre se arregla en un minuto. Estos son los avisos que más nos reportan y cómo se solucionan.</p>
+        <p class="jump"><a href="#comprobante">¿Solo quieres ver cómo se ve el comprobante? Selecciona tu banco aquí ↓</a></p>
       </div>
 
       <div class="fix-wrap">
@@ -283,12 +287,12 @@
         </section>
 
         <!-- 6. COMPROBANTE POR BANCO -->
-        <section class="fix">
+        <section class="fix" id="comprobante">
           <div class="fix__q">
             <span class="ic">📄</span>
-            <h2>¿Dónde saco el comprobante para enviarlo?</h2>
+            <h2>¿Cómo se ve el comprobante que necesitamos?</h2>
           </div>
-          <p>Elige tu banco y te decimos dónde está:</p>
+          <p><strong>Selecciona tu banco</strong> y te mostramos un ejemplo real del comprobante:</p>
 
           <div class="banks" role="tablist" aria-label="Elige tu banco">
             <button class="bank-chip" role="tab" aria-selected="true" data-bank="estado" type="button">BancoEstado</button>
@@ -304,48 +308,48 @@
 
           <div class="bank-panel on" data-panel="estado">
             <h3>BancoEstado</h3>
-            <p>Apenas termina la transferencia aparece el comprobante con la opción de compartir o descargar. Si ya cerraste esa pantalla, entra a tus movimientos y ábrelo desde la transferencia.</p>
-            <span class="path">Transferir → Comprobante → Compartir</span>
+            <p>Así se ve el comprobante que necesitamos. Sale apenas termina la transferencia, con la opción de compartir o descargar.</p>
+            <figure class="vshot"><img src="/assets/vouchers/voucher-estado.webp" loading="lazy" decoding="async" alt="Ejemplo de comprobante de transferencia de BancoEstado" /></figure>
           </div>
           <div class="bank-panel" data-panel="rut">
             <h3>CuentaRUT</h3>
-            <p>La CuentaRUT se maneja desde la misma app de BancoEstado. El comprobante sale al terminar la transferencia y también queda guardado en el historial de movimientos.</p>
-            <span class="path">Movimientos → toca la transferencia → Compartir</span>
+            <p>La CuentaRUT se maneja desde la misma app de BancoEstado, así que el comprobante se ve igual que este.</p>
+            <figure class="vshot"><img src="/assets/vouchers/voucher-rut.webp" loading="lazy" decoding="async" alt="Ejemplo de comprobante de transferencia desde CuentaRUT" /></figure>
           </div>
           <div class="bank-panel" data-panel="chile">
             <h3>Banco de Chile</h3>
-            <p>Al confirmar la transferencia el banco muestra el comprobante y te deja descargarlo en PDF o compartirlo directo a WhatsApp.</p>
-            <span class="path">Transferencias → Comprobantes → Descargar</span>
+            <p>Así se ve el comprobante. Al confirmar la transferencia lo puedes descargar o compartir directo a WhatsApp.</p>
+            <figure class="vshot"><img src="/assets/vouchers/voucher-chile.webp" loading="lazy" decoding="async" alt="Ejemplo de comprobante de transferencia de Banco de Chile" /></figure>
           </div>
           <div class="bank-panel" data-panel="falabella">
             <h3>Banco Falabella</h3>
-            <p>El comprobante queda disponible al final de la transferencia y en el detalle del movimiento dentro de la app.</p>
-            <span class="path">Transferencias → Historial → Ver comprobante</span>
+            <p>Así se ve el comprobante. Queda disponible al terminar y también en el detalle del movimiento.</p>
+            <figure class="vshot"><img src="/assets/vouchers/voucher-falabella.webp" loading="lazy" decoding="async" alt="Ejemplo de comprobante de transferencia de Banco Falabella" /></figure>
           </div>
           <div class="bank-panel" data-panel="santander">
             <h3>Santander</h3>
-            <p>Al terminar aparece el comprobante con el número de operación. Puedes descargarlo o compartirlo desde ahí mismo.</p>
-            <span class="path">Transferencias → Comprobante → Compartir</span>
+            <p>Así se ve el comprobante, con el código de transacción abajo. Lo puedes descargar o compartir desde ahí mismo.</p>
+            <figure class="vshot"><img src="/assets/vouchers/voucher-santander.webp" loading="lazy" decoding="async" alt="Ejemplo de comprobante de transferencia de Santander" /></figure>
           </div>
           <div class="bank-panel" data-panel="scotiabank">
             <h3>Scotiabank</h3>
-            <p>El comprobante se muestra al confirmar y queda guardado en el detalle de la transferencia dentro de tus movimientos.</p>
-            <span class="path">Movimientos → toca la transferencia → Comprobante</span>
+            <p>Así se ve el comprobante. Se muestra al confirmar y queda guardado en el detalle de la transferencia.</p>
+            <figure class="vshot"><img src="/assets/vouchers/voucher-scotiabank.webp" loading="lazy" decoding="async" alt="Ejemplo de comprobante de transferencia de Scotiabank" /></figure>
           </div>
           <div class="bank-panel" data-panel="itau">
             <h3>Itaú</h3>
-            <p>Después de confirmar, el comprobante se puede descargar en PDF o compartir. También está en el historial de transferencias.</p>
-            <span class="path">Transferencias → Historial → Comprobante</span>
+            <p>Así se ve el comprobante. Después de confirmar lo puedes descargar o compartir, y queda en el historial.</p>
+            <figure class="vshot"><img src="/assets/vouchers/voucher-itau.webp" loading="lazy" decoding="async" alt="Ejemplo de comprobante de transferencia de Itaú" /></figure>
           </div>
           <div class="bank-panel" data-panel="bci">
             <h3>Bci</h3>
-            <p>El comprobante aparece al finalizar la transferencia, con opción de descargar o enviar. Queda en el detalle del movimiento.</p>
-            <span class="path">Transferencias → Comprobante → Compartir</span>
+            <p>Así se ve el comprobante. Al finalizar aparece el botón COMPARTIR, que es el más rápido para enviarlo.</p>
+            <figure class="vshot"><img src="/assets/vouchers/voucher-bci.webp" loading="lazy" decoding="async" alt="Ejemplo de comprobante de transferencia de Bci" /></figure>
           </div>
           <div class="bank-panel" data-panel="mp">
             <h3>Mercado Pago</h3>
-            <p>Entra a tu actividad, abre el movimiento de la transferencia y usa la opción de ver o compartir el comprobante.</p>
-            <span class="path">Actividad → toca el movimiento → Compartir comprobante</span>
+            <p>Así se ve el comprobante. Entra a tu actividad, abre el movimiento y compártelo.</p>
+            <figure class="vshot"><img src="/assets/vouchers/voucher-mp.webp" loading="lazy" decoding="async" alt="Ejemplo de comprobante de transferencia de Mercado Pago" /></figure>
           </div>
 
           <div class="must">
