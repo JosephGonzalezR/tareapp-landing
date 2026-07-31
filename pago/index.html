@@ -6,7 +6,7 @@
   <meta name="color-scheme" content="light" />
 
   <title>Cómo pagar | Tareapp</title>
-  <meta name="description" content="Datos para transferencia (BancoEstado), pago en hasta 4 cuotas sin interés o 20% de descuento al contado. Recuerda registrar tu correo al pagar para validar más rápido." />
+  <meta name="description" content="Datos para transferencia (BancoEstado), pago en hasta 4 cuotas sin interés o 20% de descuento al contado. Si tu banco te da error, revisa la guía de problemas con el pago." />
   <meta name="author" content="Tareapp" />
   <meta name="theme-color" content="#F7C948" />
 
@@ -65,6 +65,9 @@
     .copy-btn:hover { border-color: var(--brand-ink); color: var(--brand-ink); }
     .copy-btn.done { color: #34d399; border-color: #34d399; }
 
+    .bank-row .opt { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: #6b6b6b; background: #f1f1f1; border-radius: 6px; padding: 3px 8px; }
+    .help-line { max-width: 620px; margin: 14px auto 0; text-align: center; font-size: 14.5px; color: #3a3a3a; }
+    .help-line a { color: var(--brand-ink); font-weight: 700; text-decoration: underline; }
     .email-note { margin-top: 18px; background: rgba(229,181,46,0.08); border: 1px solid rgba(229,181,46,0.3); border-radius: 12px; padding: 16px 18px; display: flex; gap: 12px; align-items: flex-start; }
     .email-note .ic { font-size: 20px; flex-shrink: 0; }
     .email-note p { font-size: 13.5px; color: var(--text); line-height: 1.6; }
@@ -198,11 +201,11 @@
           <div class="bank-row"><span class="k">Banco</span><span class="v"><span class="vtext">BancoEstado</span><button class="copy-btn" data-copy="BancoEstado" type="button" aria-label="Copiar banco">Copiar</button></span></div>
           <div class="bank-row"><span class="k">Tipo de cuenta</span><span class="v"><span class="vtext">Cuenta Vista</span><button class="copy-btn" data-copy="Cuenta Vista" type="button" aria-label="Copiar tipo de cuenta">Copiar</button></span></div>
           <div class="bank-row"><span class="k">N° de cuenta</span><span class="v big"><span class="vtext">35571603096</span><button class="copy-btn" data-copy="35571603096" type="button" aria-label="Copiar número de cuenta">Copiar</button></span></div>
-          <div class="bank-row"><span class="k">Correo</span><span class="v"><span class="vtext">tareappchile@gmail.com</span><button class="copy-btn" data-copy="tareappchile@gmail.com" type="button" aria-label="Copiar correo">Copiar</button></span></div>
+          <div class="bank-row"><span class="k">Correo</span><span class="v"><span class="opt">Opcional</span><span class="vtext">tareappchile@gmail.com</span><button class="copy-btn" data-copy="tareappchile@gmail.com" type="button" aria-label="Copiar correo">Copiar</button></span></div>
 
           <div class="email-note">
-            <span class="ic">⚠️</span>
-            <p>Por favor <strong>registra el correo tareappchile@gmail.com</strong> al hacer la transferencia. Así llevamos el registro y <strong>validamos tu pago más rápido</strong>.</p>
+            <span class="ic">📧</span>
+            <p>El correo es <strong>opcional</strong>: solo sirve para el aviso del banco. Si te arroja error o no te lo acepta, <strong>escribe el tuyo o déjalo en blanco</strong>. El pago llega igual y lo validamos con tu comprobante.</p>
           </div>
 
           <div class="firsttime-note">
@@ -217,9 +220,10 @@
         <h2>Para confirmar tu pago</h2>
         <ol>
           <li>Realiza la transferencia por el monto acordado (<strong>anticipo</strong>).</li>
-          <li>Agrega el correo <strong>tareappchile@gmail.com</strong> para que el pago quede registrado.</li>
           <li>Envíanos el <strong>comprobante</strong> (captura o PDF) por WhatsApp.</li>
+          <li>Validamos el pago y tu trabajo entra en proceso.</li>
         </ol>
+        <p class="help-line">¿El banco te arroja error al transferir? <a href="/pago/problemas/">Revisa aquí las soluciones</a>.</p>
       </div>
 
       <div class="pay-cta">
@@ -252,6 +256,7 @@
           <a href="/procedimiento/">Cómo trabajamos</a>
           <a href="/faq/">Preguntas frecuentes</a>
           <a href="/pago/">Cómo pagar</a>
+          <a href="/pago/problemas/">Problemas con el pago</a>
           <a href="/blog/">Blog</a>
           <a href="/nosotros/">Nosotros</a>
         </div>

@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light" />
+
+  <title>Problemas para transferir | Tareapp</title>
+  <meta name="description" content="Guia paso a paso si tu banco te arroja error al transferir: el correo es opcional, tipo de cuenta correcto, limites de transferencia, banco caido y donde sacar el comprobante en cada banco." />
+  <meta name="author" content="Tareapp" />
+  <meta name="theme-color" content="#F7C948" />
+
+  <link rel="icon" href="/NUEVO LOGO TAREAPP.png" />
+  <link rel="apple-touch-icon" href="/NUEVO LOGO TAREAPP.png" />
+
+  <meta property="og:title" content="Problemas para transferir | Tareapp" />
+  <meta property="og:description" content="Los errores mas frecuentes al transferir y como se solucionan en un minuto." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="/styles.css" />
+
+  <style>
+    main { --muted: #242424; }
+
+    .fix-hero { text-align: center; padding: var(--pad-lg) 0 clamp(18px,3vw,30px); }
+    .fix-hero .badge {
+      display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 2.5px;
+      text-transform: uppercase; color: var(--brand-ink); background: var(--brand3);
+      border: 1px solid rgba(229,181,46,0.25); padding: 8px 20px; border-radius: 100px; margin-bottom: 22px;
+    }
+    .fix-hero h1 { font-family: 'Playfair Display', serif; font-size: var(--h1); font-weight: 800; line-height: 1.1; margin-bottom: 14px; color: var(--text); }
+    .fix-hero p { color: #242424; font-size: 17px; max-width: 640px; margin: 0 auto; line-height: 1.6; }
+
+    .fix-wrap { max-width: 760px; margin: 0 auto clamp(30px,5vw,56px); }
+
+    /* Tarjeta de problema */
+    .fix { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px 26px; box-shadow: var(--shadow-sm); margin-bottom: 16px; }
+    .fix--top { border-top: 3px solid #ef5350; }
+    .fix__q { display: flex; gap: 12px; align-items: flex-start; margin-bottom: 14px; }
+    .fix__q .ic { font-size: 22px; flex-shrink: 0; line-height: 1.2; }
+    .fix__q h2 { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--text); line-height: 1.3; margin: 0; }
+    .fix__lead { font-size: 13px; font-weight: 700; letter-spacing: .4px; text-transform: uppercase; color: #c62828; margin-bottom: 10px; }
+    .fix p { font-size: 15px; color: #242424; line-height: 1.65; margin-bottom: 10px; }
+    .fix p:last-child { margin-bottom: 0; }
+    .fix strong { color: var(--text); }
+    .fix ul { margin: 6px 0 10px; padding-left: 0; list-style: none; }
+    .fix ul li { position: relative; padding: 7px 0 7px 28px; font-size: 15px; color: #242424; line-height: 1.6; }
+    .fix ul li::before { content: "✓"; position: absolute; left: 4px; top: 7px; color: #1f9d6b; font-weight: 800; }
+    .fix ul.x li::before { content: "✕"; color: #c62828; }
+
+    .solved { background: rgba(52,211,153,0.12); border: 1px solid rgba(52,211,153,0.4); border-radius: 12px; padding: 14px 16px; display: flex; gap: 11px; align-items: flex-start; margin-top: 4px; }
+    .solved .ic { font-size: 18px; flex-shrink: 0; }
+    .solved p { font-size: 14.5px; color: #1c1c1c; line-height: 1.6; margin: 0; }
+    .solved strong { color: #157a54; }
+
+    /* Datos de la cuenta */
+    .acct { background: var(--card); border: 1px solid var(--line); border-top: 3px solid var(--brand2); border-radius: var(--radius); padding: 26px 26px; box-shadow: var(--shadow-sm); margin-bottom: 16px; }
+    .acct__head { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 12px; flex-wrap: wrap; }
+    .acct__head h2 { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--text); margin: 0; }
+    .copy-all { border: 1px solid var(--brand2); background: var(--brand3); color: var(--brand-ink); border-radius: 8px; padding: 7px 14px; font-size: 12px; font-weight: 700; cursor: pointer; font-family: var(--font); transition: all .2s; }
+    .copy-all:hover { background: var(--brand2); color: #fff; }
+    .copy-all.done { background: #34d399; border-color: #34d399; color: #fff; }
+    .arow { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 11px 0; border-bottom: 1px solid rgba(0,0,0,0.05); }
+    .arow:last-of-type { border-bottom: none; }
+    .arow .k { font-size: 12px; font-weight: 600; letter-spacing: .5px; text-transform: uppercase; color: #3a3a3a; }
+    .arow .v { font-size: 15px; font-weight: 600; color: #141414; text-align: right; display: inline-flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+    .arow .v.big { font-size: 18px; font-family: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace; font-weight: 700; letter-spacing: 1px; }
+    .arow .opt { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; color: #6b6b6b; background: #f1f1f1; border-radius: 6px; padding: 3px 8px; }
+    .copy-btn { border: 1px solid var(--line); background: transparent; color: #3a3a3a; border-radius: 8px; padding: 4px 10px; font-size: 11px; font-weight: 600; cursor: pointer; font-family: var(--font); transition: all .2s; }
+    .copy-btn:hover { border-color: var(--brand-ink); color: var(--brand-ink); }
+    .copy-btn.done { color: #34d399; border-color: #34d399; }
+
+    /* Selector de banco (comprobantes) */
+    .banks { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 18px; }
+    .bank-chip { border: 1px solid var(--line); background: var(--card); color: #2d2d2d; border-radius: 100px; padding: 9px 16px; font-size: 13.5px; font-weight: 600; cursor: pointer; font-family: var(--font); transition: all .18s; }
+    .bank-chip:hover { border-color: var(--brand2); color: var(--brand-ink); }
+    .bank-chip[aria-selected="true"] { background: var(--brand-ink); border-color: var(--brand-ink); color: #fff; }
+    .bank-panel { display: none; background: rgba(229,181,46,0.07); border: 1px solid rgba(229,181,46,0.3); border-radius: 12px; padding: 18px 20px; }
+    .bank-panel.on { display: block; animation: fadeUp .35s ease both; }
+    .bank-panel h3 { font-size: 15.5px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+    .bank-panel p { font-size: 14.5px; color: #242424; line-height: 1.65; margin: 0; }
+    .bank-panel .path { display: inline-block; font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 13.5px; background: #fff; border: 1px solid var(--line); border-radius: 7px; padding: 4px 9px; margin-top: 8px; color: #141414; }
+
+    .must { margin-top: 16px; background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; }
+    .must h3 { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+
+    .fix-cta { max-width: 760px; margin: 0 auto clamp(40px,6vw,72px); text-align: center; background: linear-gradient(180deg, var(--brand3) 0%, var(--card) 60%); border: 1px solid rgba(229,181,46,0.25); border-radius: var(--radius); padding: 34px 30px; box-shadow: var(--shadow-sm); }
+    .fix-cta h2 { font-family: 'Playfair Display', serif; font-size: 23px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+    .fix-cta p { color: #242424; font-size: 15px; margin-bottom: 20px; }
+    .wa-icon { width: 18px; height: 18px; }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+    .fix, .acct { animation: fadeUp .45s ease both; }
+  </style>
+</head>
+
+<body data-page="trabajos">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <div class="scroll-progress" aria-hidden="true"><div class="scroll-progress__bar" id="scrollProgress"></div></div>
+
+  <svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" focusable="false">
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 22s7-4.5 7-12a7 7 0 0 0-14 0c0 7.5 7 12 7 12z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 11.2a2.2 2.2 0 1 0 0-4.4 2.2 2.2 0 0 0 0 4.4z" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+    <symbol id="i-whatsapp" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" fill="currentColor"/></symbol>
+    <symbol id="i-facebook" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" fill="currentColor"/></symbol>
+    <symbol id="i-tiktok" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.84 1.55V6.79a4.85 4.85 0 0 1-1.07-.1z" fill="currentColor"/></symbol>
+    <symbol id="i-instagram" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></symbol>
+  </svg>
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="container topbar__inner">
+      <div class="topbar__left">
+        <span class="dot" aria-hidden="true"></span>
+        <span class="topbar__text">Atención por WhatsApp • <span data-bind="location">Santiago, Chile</span></span>
+      </div>
+      <div class="topbar__right">
+        <div class="social-links">
+          <a class="social-link" data-href="facebookUrl" href="#" target="_blank" rel="noopener" aria-label="Facebook"><svg class="i i--sm" aria-hidden="true"><use href="#i-facebook"></use></svg></a>
+          <a class="social-link" data-href="tiktokUrl" href="#" target="_blank" rel="noopener" aria-label="TikTok"><svg class="i i--sm" aria-hidden="true"><use href="#i-tiktok"></use></svg></a>
+          <a class="social-link" data-href="instagramUrl" href="#" target="_blank" rel="noopener" aria-label="Instagram"><svg class="i i--sm" aria-hidden="true"><use href="#i-instagram"></use></svg></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVBAR -->
+  <header class="nav" id="top">
+    <div class="container nav__inner">
+      <a class="brand" href="/" aria-label="Ir al inicio">
+        <img src="/NUEVO LOGO TAREAPP.png" width="40" height="40" alt="Logo de Tareapp" decoding="async" style="border-radius:10px" />
+        <span class="brand__text"><strong data-bind="brand">Tareapp</strong><small>Soluciones Académicas</small></span>
+      </a>
+      <div class="page-switcher" aria-label="Tipo de servicio">
+        <a class="page-switcher__tab page-switcher__tab--active" href="/">Trabajos</a>
+        <a class="page-switcher__tab" href="/tesis/">Tesis</a>
+      </div>
+      <nav class="nav__links" aria-label="Navegación principal" id="navLinks">
+        <a href="/#servicios-trabajos">Servicios</a>
+        <a href="/procedimiento/">Proceso</a>
+        <a href="/precios-trabajos/">Precios Trabajos</a>
+        <a href="/precios/">Precios Tesis</a>
+        <a href="/referencias/">Referencias</a>
+        <a href="/faq/">Preguntas</a>
+        <a href="/pago/">Pago</a>
+        <a href="/blog/">Blog</a>
+        <a href="/nosotros/">Nosotros</a>
+        <a data-wa-message="Hola, tengo un problema para transferir. ¿Me ayudan por favor?" href="#" class="nav__cta">Escribir</a>
+      </nav>
+      <div class="nav__actions">
+        <a class="btn btn--ghost btn--sm hide-sm" data-wa-message="Hola, tengo un problema para transferir. ¿Me ayudan por favor?" href="#" rel="noopener">
+          <svg class="i" aria-hidden="true"><use href="#i-whatsapp"></use></svg>
+          <span class="btn__hint" data-bind="whatsappDisplay">+56 9 7147 8131</span>
+        </a>
+        <button class="nav__burger" type="button" id="menuBtn" aria-label="Abrir menú" aria-controls="mobileMenu" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+    <div class="mobile-menu" id="mobileMenu" hidden>
+      <div class="mobile-menu__inner container">
+        <div class="page-switcher page-switcher--mobile" aria-label="Tipo de servicio">
+          <a class="page-switcher__tab page-switcher__tab--active" href="/">Trabajos</a>
+          <a class="page-switcher__tab" href="/tesis/">Tesis</a>
+        </div>
+        <a href="/#servicios-trabajos">Servicios</a>
+        <a href="/procedimiento/">Proceso</a>
+        <a href="/precios-trabajos/">Precios Trabajos</a>
+        <a href="/precios/">Precios Tesis</a>
+        <a href="/referencias/">Referencias</a>
+        <a href="/faq/">Preguntas</a>
+        <a href="/pago/">Pago</a>
+        <a href="/blog/">Blog</a>
+        <a href="/nosotros/">Nosotros</a>
+        <a data-wa-message="Hola, tengo un problema para transferir. ¿Me ayudan?" href="#" class="btn btn--primary btn--block">Escribir por WhatsApp</a>
+        <div class="mobile-menu__meta"><span class="muted"><svg class="i i--sm" aria-hidden="true"><use href="#i-pin"></use></svg> <span data-bind="location">Santiago, Chile</span></span></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main id="contenido">
+    <div class="container">
+      <div class="fix-hero">
+        <div class="badge">Problemas con el pago</div>
+        <h1>Tu banco te arroja error</h1>
+        <p>No eres el único y casi siempre se arregla en un minuto. Estos son los avisos que más nos reportan y cómo se solucionan.</p>
+      </div>
+
+      <div class="fix-wrap">
+
+        <!-- 1. EL CORREO (el más frecuente) -->
+        <section class="fix fix--top">
+          <div class="fix__lead">El más frecuente</div>
+          <div class="fix__q">
+            <span class="ic">📧</span>
+            <h2>"El correo me arroja error" o "el correo no es válido"</h2>
+          </div>
+          <p>Ese campo es <strong>solo para que el banco mande el aviso</strong> de la transferencia. No es parte de la cuenta y <strong>no lo necesitamos</strong> para recibir tu pago.</p>
+          <ul>
+            <li>Si tu banco lo rechaza, escribe <strong>tu propio correo</strong>.</li>
+            <li>O déjalo <strong>en blanco</strong>, si el banco te lo permite.</li>
+            <li>Sigue adelante con la transferencia sin ese dato.</li>
+          </ul>
+          <div class="solved">
+            <span class="ic">✅</span>
+            <p><strong>El dinero llega igual.</strong> Validamos tu pago con el comprobante que nos envías por WhatsApp, no con el correo.</p>
+          </div>
+        </section>
+
+        <!-- 2. DATOS INCORRECTOS -->
+        <section class="fix">
+          <div class="fix__q">
+            <span class="ic">🧾</span>
+            <h2>"No me deja continuar" o "los datos no coinciden"</h2>
+          </div>
+          <p>Casi siempre es el <strong>tipo de cuenta</strong> o el formato del RUT. Revisa que hayas puesto exactamente esto:</p>
+          <ul>
+            <li>Tipo de cuenta: <strong>Cuenta Vista</strong>. No es Cuenta Corriente, no es Cuenta de Ahorro y no es CuentaRUT.</li>
+            <li>El titular es una empresa: <strong>Tareapp Spa</strong>, tal cual, sin agregar nada.</li>
+            <li>Si el RUT te da error con puntos, escríbelo <strong>78096018-3</strong>, sin puntos y con guion.</li>
+            <li>El número de cuenta va seguido, sin puntos ni guiones: <strong>35571603096</strong>.</li>
+          </ul>
+        </section>
+
+        <!-- DATOS DE LA CUENTA -->
+        <section class="acct">
+          <div class="acct__head">
+            <h2>Datos para transferir</h2>
+            <button class="copy-all" data-copy="Tareapp Spa&#10;RUT 78.096.018-3&#10;BancoEstado - Cuenta Vista&#10;N° de cuenta 35571603096&#10;tareappchile@gmail.com" type="button">📋 Copiar todo</button>
+          </div>
+          <div class="arow"><span class="k">Titular</span><span class="v"><span class="vtext">Tareapp Spa</span><button class="copy-btn" data-copy="Tareapp Spa" type="button" aria-label="Copiar titular">Copiar</button></span></div>
+          <div class="arow"><span class="k">RUT</span><span class="v"><span class="vtext">78.096.018-3</span><button class="copy-btn" data-copy="78.096.018-3" type="button" aria-label="Copiar RUT">Copiar</button></span></div>
+          <div class="arow"><span class="k">Banco</span><span class="v"><span class="vtext">BancoEstado</span><button class="copy-btn" data-copy="BancoEstado" type="button" aria-label="Copiar banco">Copiar</button></span></div>
+          <div class="arow"><span class="k">Tipo de cuenta</span><span class="v"><span class="vtext">Cuenta Vista</span><button class="copy-btn" data-copy="Cuenta Vista" type="button" aria-label="Copiar tipo de cuenta">Copiar</button></span></div>
+          <div class="arow"><span class="k">N° de cuenta</span><span class="v big"><span class="vtext">35571603096</span><button class="copy-btn" data-copy="35571603096" type="button" aria-label="Copiar número de cuenta">Copiar</button></span></div>
+          <div class="arow"><span class="k">Correo</span><span class="v"><span class="opt">Opcional</span><span class="vtext">tareappchile@gmail.com</span><button class="copy-btn" data-copy="tareappchile@gmail.com" type="button" aria-label="Copiar correo">Copiar</button></span></div>
+        </section>
+
+        <!-- 3. LÍMITE -->
+        <section class="fix">
+          <div class="fix__q">
+            <span class="ic">🚧</span>
+            <h2>"Supera el monto máximo" o "excede tu límite"</h2>
+          </div>
+          <p>Tu cuenta tiene un <strong>límite diario de transferencia</strong> y el monto lo pasa. Tienes tres salidas:</p>
+          <ul>
+            <li>Sube el límite en tu app, en la sección de seguridad o de límites de transferencia.</li>
+            <li>Divide el pago en <strong>dos transferencias</strong> más pequeñas y nos mandas los dos comprobantes.</li>
+            <li>Que transfiera un familiar o un amigo. Solo cuéntanos <strong>a nombre de quién</strong> viene el pago, así lo asociamos a tu trabajo.</li>
+          </ul>
+        </section>
+
+        <!-- 4. BANCO CAÍDO -->
+        <section class="fix">
+          <div class="fix__q">
+            <span class="ic">📴</span>
+            <h2>"El banco está caído" o la app no carga</h2>
+          </div>
+          <p>Pasa, y no es culpa tuya. Antes de insistir media hora:</p>
+          <ul>
+            <li>Prueba por el <strong>otro canal</strong> del mismo banco: si estás en la app, intenta desde la página web, y al revés.</li>
+            <li>Si tienes cuenta en otro banco, transfiere desde ahí.</li>
+            <li>Espera un rato y vuelve a intentar. Estas caídas suelen durar poco.</li>
+          </ul>
+          <div class="solved">
+            <span class="ic">💬</span>
+            <p><strong>Avísanos por WhatsApp.</strong> Si el banco está caído nos lo dices y coordinamos contigo, no pierdes tu lugar.</p>
+          </div>
+        </section>
+
+        <!-- 5. PRIMERA VEZ -->
+        <section class="fix">
+          <div class="fix__q">
+            <span class="ic">🔐</span>
+            <h2>Es tu primera transferencia a esta cuenta</h2>
+          </div>
+          <p>Cuando agregas un destinatario nuevo, la mayoría de los bancos pide una <strong>confirmación extra</strong>: clave dinámica, código por SMS, tarjeta de coordenadas o la huella en la app.</p>
+          <p>Si no te llega el código, revisa que tu número esté actualizado en el banco y vuelve a pedirlo. Algunos bancos además dejan el destinatario nuevo <strong>en espera unos minutos</strong> antes de habilitarlo.</p>
+        </section>
+
+        <!-- 6. COMPROBANTE POR BANCO -->
+        <section class="fix">
+          <div class="fix__q">
+            <span class="ic">📄</span>
+            <h2>¿Dónde saco el comprobante para enviarlo?</h2>
+          </div>
+          <p>Elige tu banco y te decimos dónde está:</p>
+
+          <div class="banks" role="tablist" aria-label="Elige tu banco">
+            <button class="bank-chip" role="tab" aria-selected="true" data-bank="estado" type="button">BancoEstado</button>
+            <button class="bank-chip" role="tab" aria-selected="false" data-bank="rut" type="button">CuentaRUT</button>
+            <button class="bank-chip" role="tab" aria-selected="false" data-bank="chile" type="button">Banco de Chile</button>
+            <button class="bank-chip" role="tab" aria-selected="false" data-bank="falabella" type="button">Banco Falabella</button>
+            <button class="bank-chip" role="tab" aria-selected="false" data-bank="santander" type="button">Santander</button>
+            <button class="bank-chip" role="tab" aria-selected="false" data-bank="scotiabank" type="button">Scotiabank</button>
+            <button class="bank-chip" role="tab" aria-selected="false" data-bank="itau" type="button">Itaú</button>
+            <button class="bank-chip" role="tab" aria-selected="false" data-bank="bci" type="button">Bci</button>
+            <button class="bank-chip" role="tab" aria-selected="false" data-bank="mp" type="button">Mercado Pago</button>
+          </div>
+
+          <div class="bank-panel on" data-panel="estado">
+            <h3>BancoEstado</h3>
+            <p>Apenas termina la transferencia aparece el comprobante con la opción de compartir o descargar. Si ya cerraste esa pantalla, entra a tus movimientos y ábrelo desde la transferencia.</p>
+            <span class="path">Transferir → Comprobante → Compartir</span>
+          </div>
+          <div class="bank-panel" data-panel="rut">
+            <h3>CuentaRUT</h3>
+            <p>La CuentaRUT se maneja desde la misma app de BancoEstado. El comprobante sale al terminar la transferencia y también queda guardado en el historial de movimientos.</p>
+            <span class="path">Movimientos → toca la transferencia → Compartir</span>
+          </div>
+          <div class="bank-panel" data-panel="chile">
+            <h3>Banco de Chile</h3>
+            <p>Al confirmar la transferencia el banco muestra el comprobante y te deja descargarlo en PDF o compartirlo directo a WhatsApp.</p>
+            <span class="path">Transferencias → Comprobantes → Descargar</span>
+          </div>
+          <div class="bank-panel" data-panel="falabella">
+            <h3>Banco Falabella</h3>
+            <p>El comprobante queda disponible al final de la transferencia y en el detalle del movimiento dentro de la app.</p>
+            <span class="path">Transferencias → Historial → Ver comprobante</span>
+          </div>
+          <div class="bank-panel" data-panel="santander">
+            <h3>Santander</h3>
+            <p>Al terminar aparece el comprobante con el número de operación. Puedes descargarlo o compartirlo desde ahí mismo.</p>
+            <span class="path">Transferencias → Comprobante → Compartir</span>
+          </div>
+          <div class="bank-panel" data-panel="scotiabank">
+            <h3>Scotiabank</h3>
+            <p>El comprobante se muestra al confirmar y queda guardado en el detalle de la transferencia dentro de tus movimientos.</p>
+            <span class="path">Movimientos → toca la transferencia → Comprobante</span>
+          </div>
+          <div class="bank-panel" data-panel="itau">
+            <h3>Itaú</h3>
+            <p>Después de confirmar, el comprobante se puede descargar en PDF o compartir. También está en el historial de transferencias.</p>
+            <span class="path">Transferencias → Historial → Comprobante</span>
+          </div>
+          <div class="bank-panel" data-panel="bci">
+            <h3>Bci</h3>
+            <p>El comprobante aparece al finalizar la transferencia, con opción de descargar o enviar. Queda en el detalle del movimiento.</p>
+            <span class="path">Transferencias → Comprobante → Compartir</span>
+          </div>
+          <div class="bank-panel" data-panel="mp">
+            <h3>Mercado Pago</h3>
+            <p>Entra a tu actividad, abre el movimiento de la transferencia y usa la opción de ver o compartir el comprobante.</p>
+            <span class="path">Actividad → toca el movimiento → Compartir comprobante</span>
+          </div>
+
+          <div class="must">
+            <h3>El comprobante tiene que mostrar</h3>
+            <ul>
+              <li><strong>Monto</strong> transferido.</li>
+              <li><strong>Fecha y hora</strong>.</li>
+              <li><strong>Número de operación</strong>. Es lo que nos deja confirmarlo.</li>
+              <li><strong>A quién le transferiste</strong>: el nombre o los últimos dígitos de la cuenta.</li>
+            </ul>
+            <h3 style="margin-top:12px">Y por favor evita</h3>
+            <ul class="x">
+              <li>Fotos de la pantalla del computador o de otro celular. Salen borrosas y no las podemos validar.</li>
+              <li>Capturas recortadas donde no se lee el monto o el número de operación.</li>
+            </ul>
+            <p style="font-size:14.5px;color:#242424;line-height:1.65;margin:0">Lo ideal es la <strong>captura o el PDF que genera tu propia app del banco</strong>.</p>
+          </div>
+        </section>
+
+      </div>
+
+      <div class="fix-cta">
+        <h2>Si nada de esto resulta, escríbenos</h2>
+        <p>Cuéntanos qué mensaje exacto te muestra el banco y lo resolvemos contigo por WhatsApp.</p>
+        <a class="btn btn--primary" href="https://wa.me/56971478131?text=Hola,%20tengo%20un%20problema%20para%20transferir.%20El%20banco%20me%20muestra%20este%20mensaje:%20" target="_blank" rel="noopener">
+          <svg class="wa-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884z"/></svg>
+          Escribir por WhatsApp
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <div class="footer-wave" aria-hidden="true">
+    <svg viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,30 C360,90 720,0 1080,50 C1260,75 1380,20 1440,30 L1440,90 L0,90 Z" fill="#FAFAFA"/></svg>
+  </div>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <img src="/NUEVO LOGO TAREAPP.png" width="56" height="56" alt="Logo de Tareapp" loading="lazy" decoding="async" style="border-radius:12px" />
+        <div><strong data-bind="brand">Tareapp</strong><p class="muted">Soluciones Académicas</p></div>
+      </div>
+      <div class="footer__cols">
+        <div>
+          <h4>Secciones</h4>
+          <a href="/">Trabajos</a>
+          <a href="/precios/">Precios</a>
+          <a href="/referencias/">Referencias</a>
+          <a href="/procedimiento/">Cómo trabajamos</a>
+          <a href="/faq/">Preguntas frecuentes</a>
+          <a href="/pago/">Cómo pagar</a>
+          <a href="/pago/problemas/">Problemas con el pago</a>
+          <a href="/blog/">Blog</a>
+          <a href="/nosotros/">Nosotros</a>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <a href="/privacy/">Privacidad</a>
+          <a href="/terms/">Términos</a>
+        </div>
+        <div>
+          <h4>Contacto</h4>
+          <a data-wa-message="Hola, quiero información. ¿Me orientan?" href="#" rel="noopener"><svg class="i i--sm" aria-hidden="true"><use href="#i-whatsapp"></use></svg> WhatsApp</a>
+          <a data-href="facebookUrl" href="#" target="_blank" rel="noopener"><svg class="i i--sm" aria-hidden="true"><use href="#i-facebook"></use></svg> Facebook</a>
+          <a data-href="tiktokUrl" href="#" target="_blank" rel="noopener"><svg class="i i--sm" aria-hidden="true"><use href="#i-tiktok"></use></svg> TikTok</a>
+          <a data-href="instagramUrl" href="#" target="_blank" rel="noopener"><svg class="i i--sm" aria-hidden="true"><use href="#i-instagram"></use></svg> Instagram</a>
+          <span class="muted"><svg class="i i--sm" aria-hidden="true"><use href="#i-pin"></use></svg> <span data-bind="location">Santiago, Chile</span></span>
+        </div>
+      </div>
+    </div>
+    <div class="container footer__bottom">
+      <span class="muted">© <span id="year"></span> <span data-bind="brand">Tareapp</span>. Todos los derechos reservados.</span>
+    </div>
+  </footer>
+
+  <button class="to-top" id="toTop" type="button" aria-label="Volver arriba">↑</button>
+
+  <script src="/app.js"></script>
+  <script>
+    /* Copiar al portapapeles (mismo helper que /pago/) */
+    function agsCopy(text){
+      if (navigator.clipboard && window.isSecureContext) {
+        return navigator.clipboard.writeText(text);
+      }
+      return new Promise(function(resolve, reject){
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.top = '0';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.focus(); ta.select();
+        ta.setSelectionRange(0, text.length); // iOS
+        try { document.execCommand('copy'); resolve(); } catch(e) { reject(e); }
+        document.body.removeChild(ta);
+      });
+    }
+    document.querySelectorAll('[data-copy]').forEach(function(b){
+      b.addEventListener('click', function(){
+        agsCopy(b.getAttribute('data-copy')).then(function(){
+          var o = b.textContent;
+          b.textContent = b.classList.contains('copy-all') ? '✓ Copiado' : '✓';
+          b.classList.add('done');
+          setTimeout(function(){ b.textContent = o; b.classList.remove('done'); }, 1500);
+        }).catch(function(){});
+      });
+    });
+
+    /* Selector de banco para el comprobante */
+    var chips = document.querySelectorAll('.bank-chip');
+    var panels = document.querySelectorAll('.bank-panel');
+    chips.forEach(function(chip){
+      chip.addEventListener('click', function(){
+        var b = chip.getAttribute('data-bank');
+        chips.forEach(function(c){ c.setAttribute('aria-selected', c === chip ? 'true' : 'false'); });
+        panels.forEach(function(p){ p.classList.toggle('on', p.getAttribute('data-panel') === b); });
+      });
+    });
+  </script>
+</body>
+</html>
