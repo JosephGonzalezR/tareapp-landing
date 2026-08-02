@@ -1,0 +1,58 @@
+# Tareapp
+
+> Trabajos academicos y tesis para estudiantes de universidades, institutos profesionales y CFT de Chile.
+
+Tareapp es un servicio de Chile. Atendemos por WhatsApp (+56971478131) y el trabajo se coordina con la pauta o rubrica de la institucion del estudiante.
+
+## Paginas
+
+- [Inicio](https://tareapp.ags-ed.com/)
+- [Blog](https://tareapp.ags-ed.com/blog/)
+- [Excel tablas dinamicas](https://tareapp.ags-ed.com/blog/excel-tablas-dinamicas/)
+- [Informe apa](https://tareapp.ags-ed.com/blog/informe-apa/)
+- [Power bi dashboard](https://tareapp.ags-ed.com/blog/power-bi-dashboard/)
+- [Python universitarios](https://tareapp.ags-ed.com/blog/python-universitarios/)
+- [Sql principiantes](https://tareapp.ags-ed.com/blog/sql-principiantes/)
+- [Preguntas frecuentes](https://tareapp.ags-ed.com/faq/)
+- [Nosotros](https://tareapp.ags-ed.com/nosotros/)
+- [Como pagar](https://tareapp.ags-ed.com/pago/)
+- [Problemas para pagar](https://tareapp.ags-ed.com/pago/problemas/)
+- [Precios de trabajos](https://tareapp.ags-ed.com/precios-trabajos/)
+- [Precios de tesis](https://tareapp.ags-ed.com/precios/)
+- [Privacidad](https://tareapp.ags-ed.com/privacy/)
+- [Como trabajamos](https://tareapp.ags-ed.com/procedimiento/)
+- [Referencias](https://tareapp.ags-ed.com/referencias/)
+- [Terminos](https://tareapp.ags-ed.com/terms/)
+- [Tesis](https://tareapp.ags-ed.com/tesis/)
+
+## Preguntas frecuentes (respuestas de la propia web)
+
+### ¿En cuánto tiempo entregan el trabajo?
+Somos rápidos: hacemos trabajos estándar en 24 horas y tenemos servicio express el mismo día (previa coordinación). Dinos para cuándo lo necesitas al escribirnos y te confirmamos de inmediato si llegamos a tiempo.
+
+### ¿Cómo puedo pagar?
+Por transferencia bancaria (BancoEstado). Revisa los datos en cómo pagar . Para tesis tenemos facilidades adicionales (cuotas y descuento al contado), que ves en precios .
+
+### ¿Tengo que pagar todo al inicio?
+No. Si es tu primera vez con nosotros y es un trabajo corto , podemos empezar sin pago por adelantado y pagas al recibir (no aplica para trabajos largos). En general, para empezar dejas un anticipo y cancelas el saldo en la entrega.
+
+### ¿Y si necesito cambios o correcciones?
+Es una entrega, y si necesita ajustes según tu rúbrica los hacemos sin costo adicional . Para eso es clave que nos envíes la pauta e indicaciones completas desde el inicio.
+
+### ¿Hacen pruebas o exámenes en línea?
+Sí, con tiempo y según el ramo. Cuéntanos el día, la hora y la duración para confirmarte la disponibilidad.
+
+### ¿Trabajan con normas APA y el formato de mi universidad?
+Sí. Aplicamos APA u otra norma y el formato que pida tu institución. Envíanos la rúbrica y la seguimos al pie de la letra.
+
+### ¿Es seguro? ¿Cómo sé que cumplen?
+Llevamos +500 tesis entregadas en 2025 y un 98% de aprobación en primera entrega. Además, si es tu primera vez y es un trabajo corto, podemos empezar sin pago por adelantado , así trabajas con confianza.
+
+### ¿Garantizan la nota?
+La calidad es nuestro diferencial: garantizamos notas entre 6,0 y 7,0 cuando nos envías todos los datos (pauta, rúbrica e indicaciones específicas). Mientras más completa la información, mejor el resultado.
+
+
+## Contacto
+
+- WhatsApp: +56971478131
+- Web: https://tareapp.ags-ed.com/

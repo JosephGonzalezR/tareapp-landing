@@ -95,6 +95,63 @@
     @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     .bank-card, .opt-card { animation: fadeUp .5s ease both; }
   </style>
+  <!-- AGS-GEO (Dev Central) — no editar a mano: lo genera herramientas/geo_webs.py -->
+  <link rel="canonical" href="https://tareapp.ags-ed.com/pago/" />
+  <meta property="og:url" content="https://tareapp.ags-ed.com/pago/" />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://tareapp.ags-ed.com/#organizacion",
+      "name": "Tareapp",
+      "url": "https://tareapp.ags-ed.com/",
+      "logo": "https://tareapp.ags-ed.com/NUEVO%20LOGO%20TAREAPP.png",
+      "image": "https://tareapp.ags-ed.com/NUEVO%20LOGO%20TAREAPP.png",
+      "description": "Trabajos academicos y tesis para estudiantes de universidades, institutos profesionales y CFT de Chile.",
+      "areaServed": { "@type": "Country", "name": "Chile" },
+      "availableLanguage": "es",
+      "sameAs": ["https://www.instagram.com/tareappchile/", "https://www.tiktok.com/@tareapp_", "https://www.facebook.com/profile.php?id=61558060587570"],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "telephone": "+56971478131",
+        "availableLanguage": ["es"],
+        "areaServed": "CL"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://tareapp.ags-ed.com/#web",
+      "url": "https://tareapp.ags-ed.com/",
+      "name": "Tareapp",
+      "inLanguage": "es",
+      "publisher": { "@id": "https://tareapp.ags-ed.com/#organizacion" }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://tareapp.ags-ed.com/pago/#pagina",
+      "url": "https://tareapp.ags-ed.com/pago/",
+      "name": "Cómo pagar | Tareapp",
+      "description": "Datos para transferencia (BancoEstado), pago en hasta 4 cuotas sin interés o 20% de descuento al contado. Si tu banco te da error, revisa la guía de problemas con el pago.",
+      "inLanguage": "es",
+      "isPartOf": { "@id": "https://tareapp.ags-ed.com/#web" },
+      "about": { "@id": "https://tareapp.ags-ed.com/#organizacion" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://tareapp.ags-ed.com/pago/#miga",
+      "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://tareapp.ags-ed.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Como pagar", "item": "https://tareapp.ags-ed.com/pago/" }
+      ]
+    }
+    ]
+  }
+  </script>
+  <!-- /AGS-GEO -->
 </head>
 
 <body data-page="trabajos">
@@ -312,5 +369,8 @@
       });
     });
   </script>
+  <!-- AGS-ANALYTICS -->
+  <script defer src="/assets/ags-analytics.js" data-sitio="tareapp"></script>
+  <!-- /AGS-ANALYTICS -->
 </body>
 </html>
