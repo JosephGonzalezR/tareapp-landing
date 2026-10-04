@@ -14,7 +14,7 @@
   <meta property="og:type" content="website" />
   <link rel="preload" href="assets/fonts/archivo-vf.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="assets/fonts/instrument-serif-italic.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="stylesheet" href="assets/css/v2.css?v=20261004m" />
+  <link rel="stylesheet" href="assets/css/v2.css?v=20261004s" />
   <script>document.documentElement.classList.add("js");</script>
 </head>
 <body>
@@ -29,6 +29,7 @@
     <nav class="barra__nav" aria-label="Principal">
       <a href="#historia">Cómo funciona</a>
       <a href="#servicios">Servicios</a>
+      <a href="#muestras">Muestras</a>
       <a href="/tesis/">Tesis</a>
       <a href="/precios-trabajos/">Precios</a>
       <a href="#preguntas">Preguntas</a>
@@ -46,6 +47,7 @@
     <nav aria-label="Menú">
       <a href="#historia">Cómo funciona</a>
       <a href="#servicios">Servicios</a>
+      <a href="#muestras">Muestras</a>
       <a href="/tesis/">Tesis</a>
       <a href="/precios-trabajos/">Precios</a>
       <a href="#preguntas">Preguntas</a>
@@ -351,6 +353,101 @@
       </div>
     </section>
 
+    <!-- MUESTRAS:INICIO -->
+    <!-- MUESTRAS (4-oct-2026): desplegable, imagenes con marca de agua, sin nombres ni datos de estudiantes -->
+    <section class="seccion seccion--clara muestras" id="muestras" data-fondo="#16120E" data-hud-txt="MUESTRAS" aria-labelledby="t-muestras">
+      <div class="seccion__cab">
+        <p class="etiqueta" data-revuelto>Muestras</p>
+        <h2 id="t-muestras"><span class="xl" data-partir>Mira cómo quedan</span> <em class="serif">nuestros trabajos</em></h2>
+        <p>Fragmentos reales de trabajos que entregamos: planos, simulaciones, salidas de software, códigos y presentaciones. Sin nombres ni datos de los estudiantes.</p>
+      </div>
+      <div class="muestras__accion">
+        <button class="boton boton--amarillo muestras__abrir" type="button" aria-expanded="false" aria-controls="muestras-panel" data-muestras-abrir>
+          <span data-txt>Ver muestras</span><span class="muestras__mas" aria-hidden="true">+</span>
+        </button>
+        <p class="muestras__cuenta">35 muestras · 6 áreas · 51 programas</p>
+      </div>
+      <div class="muestras__cinta" aria-hidden="true"><div class="cinta__pista"><span>ATLAS.ti</span><span>SPSS</span><span>R y RStudio</span><span>jamovi</span><span>InfoStat</span><span>Power BI</span><span>Excel avanzado</span><span>SQL Server</span><span>MS Project</span><span>Visio</span><span>Evaluación de proyectos</span><span>Investigación de operaciones</span><span>JaamSim</span><span>AutoCAD</span><span>Revit</span><span>FreeCAD</span><span>Blender</span><span>LTspice</span><span>KiCad</span><span>Arduino</span><span>Verilog y VHDL</span><span>DIALux</span><span>Sistemas de potencia</span><span>Radiofrecuencia</span><span>FluidSIM</span><span>Automation Studio</span><span>CADe SIMU</span><span>PLC y LADDER</span><span>CoppeliaSim</span><span>Control automático</span><span>Packet Tracer</span><span>Subnetting y VLSM</span><span>Criptografía</span><span>HEC-RAS</span><span>EPANET</span><span>SWMM</span><span>MODFLOW</span><span>QGIS</span><span>Análisis estructural</span><span>Geotecnia</span><span>Octave y Scilab</span><span>Maxima</span><span>DWSIM</span><span>Transferencia de calor</span><span>Python</span><span>Java</span><span>JavaScript</span><span>PSeInt</span><span>Word, Excel y PowerPoint</span><span>Photoshop</span><span>Premiere Pro y After Effects</span><span>ATLAS.ti</span><span>SPSS</span><span>R y RStudio</span><span>jamovi</span><span>InfoStat</span><span>Power BI</span><span>Excel avanzado</span><span>SQL Server</span><span>MS Project</span><span>Visio</span><span>Evaluación de proyectos</span><span>Investigación de operaciones</span><span>JaamSim</span><span>AutoCAD</span><span>Revit</span><span>FreeCAD</span><span>Blender</span><span>LTspice</span><span>KiCad</span><span>Arduino</span><span>Verilog y VHDL</span><span>DIALux</span><span>Sistemas de potencia</span><span>Radiofrecuencia</span><span>FluidSIM</span><span>Automation Studio</span><span>CADe SIMU</span><span>PLC y LADDER</span><span>CoppeliaSim</span><span>Control automático</span><span>Packet Tracer</span><span>Subnetting y VLSM</span><span>Criptografía</span><span>HEC-RAS</span><span>EPANET</span><span>SWMM</span><span>MODFLOW</span><span>QGIS</span><span>Análisis estructural</span><span>Geotecnia</span><span>Octave y Scilab</span><span>Maxima</span><span>DWSIM</span><span>Transferencia de calor</span><span>Python</span><span>Java</span><span>JavaScript</span><span>PSeInt</span><span>Word, Excel y PowerPoint</span><span>Photoshop</span><span>Premiere Pro y After Effects</span></div></div>
+      <div class="muestras__panel" id="muestras-panel" data-muestras-panel hidden>
+        <div class="muestras__tabs" role="tablist" aria-label="Áreas de las muestras">
+          <button class="muestras__tab" type="button" role="tab" id="tab-ingenieria" aria-controls="grilla-ingenieria" aria-selected="true" tabindex="0">Ingeniería y CAD<small>5</small></button>
+          <button class="muestras__tab" type="button" role="tab" id="tab-electrica" aria-controls="grilla-electrica" aria-selected="false" tabindex="-1">Eléctrica y automatización<small>6</small></button>
+          <button class="muestras__tab" type="button" role="tab" id="tab-datos" aria-controls="grilla-datos" aria-selected="false" tabindex="-1">Datos y estadística<small>7</small></button>
+          <button class="muestras__tab" type="button" role="tab" id="tab-gestion" aria-controls="grilla-gestion" aria-selected="false" tabindex="-1">Gestión y proyectos<small>7</small></button>
+          <button class="muestras__tab" type="button" role="tab" id="tab-programacion" aria-controls="grilla-programacion" aria-selected="false" tabindex="-1">Programación y sistemas<small>6</small></button>
+          <button class="muestras__tab" type="button" role="tab" id="tab-presentaciones" aria-controls="grilla-presentaciones" aria-selected="false" tabindex="-1">Informes y presentaciones<small>4</small></button>
+        </div>
+        <div class="muestras__grilla" role="tabpanel" id="grilla-ingenieria" aria-labelledby="tab-ingenieria">
+          <button class="muestra" type="button" aria-label="Ampliar muestra: Perfil longitudinal de un camino con cubicación"><span class="muestra__img" aria-hidden="true" style="background-color:#212830" data-m="assets/img/muestras/perfil-longitudinal-m.webp" data-g="assets/img/muestras/perfil-longitudinal.webp" data-w="1283" data-h="921" data-titulo="Perfil longitudinal de un camino con cubicación" data-soft="AutoCAD"></span><span class="muestra__txt"><b>Perfil longitudinal de un camino con cubicación</b><span class="muestra__soft">AutoCAD</span></span></button>
+          <button class="muestra" type="button" aria-label="Ampliar muestra: Perfil transversal con cálculo de áreas"><span class="muestra__img" aria-hidden="true" style="background-color:#212830" data-m="assets/img/muestras/perfil-transversal-m.webp" data-g="assets/img/muestras/perfil-transversal.webp" data-w="1283" data-h="921" data-titulo="Perfil transversal con cálculo de áreas" data-soft="AutoCAD"></span><span class="muestra__txt"><b>Perfil transversal con cálculo de áreas</b><span class="muestra__soft">AutoCAD</span></span></button>
+          <button class="muestra" type="button" aria-label="Ampliar muestra: Modelo BIM de instalaciones de una vivienda"><span class="muestra__img" aria-hidden="true" style="background-color:#ffffff" data-m="assets/img/muestras/revit-mep-m.webp" data-g="assets/img/muestras/revit-mep.webp" data-w="2278" data-h="1352" data-titulo="Modelo BIM de instalaciones de una vivienda" data-soft="Revit"></span><span class="muestra__txt"><b>Modelo BIM de instalaciones de una vivienda</b><span class="muestra__soft">Revit</span></span></button>
+          <button class="muestra" type="button" aria-label="Ampliar muestra: Cálculo de iluminación de un local en 3D"><span class="muestra__img" aria-hidden="true" style="background-color:#ffffff" data-m="assets/img/muestras/dialux-local-m.webp" data-g="assets/img/muestras/dialux-local.webp" data-w="1755" data-h="1187" data-titulo="Cálculo de iluminación de un local en 3D" data-soft="DIALux"></span><span class="muestra__txt"><b>Cálculo de iluminación de un local en 3D</b><span class="muestra__soft">DIALux</span></span></button>
+          <button class="muestra" type="button" aria-label="Ampliar muestra: Diagrama unilineal de una vivienda según el RIC"><span class="muestra__img" aria-hidden="true" style="background-color:#ffffff" data-m="assets/img/muestras/unilineal-ric-m.webp" data-g="assets/img/muestras/unilineal-ric.webp" data-w="2600" data-h="1374" data-titulo="Diagrama unilineal de una vivienda según el RIC" data-soft="AutoCAD"></span><span class="muestra__txt"><b>Diagrama unilineal de una vivienda según el RIC</b><span class="muestra__soft">AutoCAD</span></span></button>
+        </div>
+        <div class="muestras__grilla" role="tabpanel" id="grilla-electrica" aria-labelledby="tab-electrica" hidden>
+          <button class="muestra" type="button" aria-label="Ampliar muestra: Formas de onda de un circuito RL en paralelo"><span class="muestra__img" aria-hidden="true" style="background-color:#ffffff" data-m="assets/img/muestras/ondas-rl-m.webp" data-g="assets/img/muestras/ondas-rl.webp" data-w="2000" data-h="1389" data-titulo="Formas de onda de un circuito RL en paralelo" data-soft="Python"></span><span class="muestra__txt"><b>Formas de onda de un circuito RL en paralelo</b><span class="muestra__soft">Python</span></span></button>
+          <button class="muestra" type="button" aria-label="Ampliar muestra: Programa LADDER para el control de un estanque"><span class="muestra__img" aria-hidden="true" style="background-color:#fefefe" data-m="assets/img/muestras/ladder-plc-m.webp" data-g="assets/img/muestras/ladder-plc.webp" data-w="1600" data-h="1233" data-titulo="Programa LADDER para el control de un estanque" data-soft="PLC y LADDER"></span><span class="muestra__txt"><b>Programa LADDER para el control de un estanque</b><span class="muestra__soft">PLC y LADDER</span></span></button>
+          <button class="muestra" type="button" aria-label="Ampliar muestra: Esquema de un circuito monofásico RL"><span class="muestra__img" aria-hidden="true" style="background-color:#fdfdfd" data-m="assets/img/muestras/circuito-rl-m.webp" data-g="assets/img/muestras/circuito-rl.webp" data-w="1600" data-h="883" data-titulo="Esquema de un circuito monofásico RL" data-soft="Python"></span><span class="muestra__txt"><b>Esquema de un circuito monofásico RL</b><span class="muestra__soft">Python</span></span></button>
+          <button class="muestra" type="button" aria-label="Ampliar muestra: Diagrama fasorial de corrientes"><span class="muestra__img" aria-hidden="true" style="background-color:#fefefe" data-m="assets/img/muestras/fasorial-m.webp" data-g="assets/img/muestras/fasorial.webp" data-w="1600" data-h="1238" data-titulo="Diagrama fasorial de corrientes" data-soft="Python"></span><span class="muestra__txt"><b>Diagrama fasorial de corrientes</b><span class="muestra__soft">Python</span></span></button>
+          <button class="muestra" type="button" aria-label="Ampliar muestra: Sistema digital transmisor y receptor multiplexado"><span class="muestra__img" aria-hidden="true" style="background-color:#ffffff" data-m="assets/img/muestras/digital-tx-rx-m.webp" data-g="assets/img/muestras/digital-tx-rx.webp" data-w="1198" data-h="860" data-titulo="Sistema digital transmisor y receptor multiplexado" data-soft="Electrónica digital"></span><span class="muestra__txt"><b>Sistema digital transmisor y receptor multiplexado</b><span class="muestra__soft">Electrónica digital</span></span></button>
+          <button class="muestra" type="button" aria-label="Ampliar muestra: Circuito electroneumático de una prensa"><span class="muestra__img" aria-hidden="true" style="background-color:#ffffff" data-m="assets/img/muestras/fluidsim-prensa-m.webp" data-g="assets/img/muestras/fluidsim-prensa.webp" data-w="2200" data-h="2053" data-titulo="Circuito electroneumático de una prensa" data-soft="FluidSIM"></span><span class="muestra__txt"><b>Circuito electroneumático de una prensa</b><span class="muestra__soft">FluidSIM</span></span></button>
+        </div>
+        <div class="muestras__grilla" role="tabpanel" id="grilla-datos" aria-labelledby="tab-datos" hidden>
+          <button class="muestra" type="button" aria-label="Ampliar muestra: Normalidad y prueba t para muestras emparejadas"><span class="muestra__img" aria-hidden="true" style="background-color:#ffffff" data-m="assets/img/muestras/spss-t-pareada-m.webp" data-g="assets/img/muestras/spss-t-pareada.webp" data-w="1835" data-h="1177" data-titulo="Normalidad y prueba t para muestras emparejadas" data-soft="SPSS"></span><span class="muestra__txt"><b>Normalidad y prueba t para muestras emparejadas</b><span class="muestra__soft">SPSS</span></span></button>
+          <button class="muestra" type="button" aria-label="Ampliar muestra: Diseño factorial: Pareto de efectos estandarizados"><span class="muestra__img" aria-hidden="true" style="background-color:#e6e6e6" data-m="assets/img/muestras/minitab-pareto-m.webp" data-g="assets/img/muestras/minitab-pareto.webp" data-w="1600" data-h="1067" data-titulo="Diseño factorial: Pareto de efectos estandarizados" data-soft="Minitab"></span><span class="muestra__txt"><b>Diseño factorial: Pareto de efectos estandarizados</b><span class="muestra__soft">Minitab</span></span></button>
+          <button class="muestra" type="button" aria-label="Ampliar muestra: Tabla de frecuencias con salida del programa"><span class="muestra__img" aria-hidden="true" style="background-color:#dce3ed" data-m="assets/img/muestras/infostat-frecuencias-m.webp" data-g="assets/img/muestras/infostat-frecuencias.webp" data-w="1000" data-h="400" data-titulo="Tabla de frecuencias con salida del programa" data-soft="InfoStat"></span><span class="muestra__txt"><b>Tabla de frecuencias con salida del programa</b><span class="muestra__soft">InfoStat</span></span></button>
+          <button class="muestra" type="button" aria-label="Ampliar muestra: Regresión lineal con banda de confianza al 95 %"><span class="muestra__img" aria-hidden="true" style="background-color:#ffffff" data-m="assets/img/muestras/regresion-banda-m.webp" data-g="assets/img/muestras/regresion-banda.webp" data-w="2000" data-h="1386" data-titulo="Regresión lineal con banda de confianza al 95 %" data-soft="Python"></span><span class="muestra__txt"><b>Regresión lineal con banda de confianza al 95 %</b><span class="muestra__soft">Python</span></span></button>
+          <button class="muestra" type="button" aria-label="Ampliar muestra: Dashboard logístico con KPI"><span class="muestra__img" aria-hidden="true" style="background-color:#ffffff" data-m="assets/img/muestras/dashboard-excel-m.webp" data-g="assets/img/muestras/dashboard-excel.webp" data-w="2032" data-h="1607" data-titulo="Dashboard logístico con KPI" data-soft="Excel"></span><span class="muestra__txt"><b>Dashboard logístico con KPI</b><span class="muestra__soft">Excel</span></span></button>
+          <button class="muestra" type="button" aria-label="Ampliar muestra: Diagrama de caja con sus cálculos"><span class="muestra__img" aria-hidden="true" style="background-color:#ffffff" data-m="assets/img/muestras/boxplot-m.webp" data-g="assets/img/muestras/boxplot.webp" data-w="1600" data-h="901" data-titulo="Diagrama de caja con sus cálculos" data-soft="Python"></span><span class="muestra__txt"><b>Diagrama de caja con sus cálculos</b><span class="muestra__soft">Python</span></span></button>
+          <button class="muestra" type="button" aria-label="Ampliar muestra: Análisis de datos en R"><span class="muestra__img" aria-hidden="true" style="background-color:#f4f8f9" data-m="assets/img/muestras/rstudio-m.webp" data-g="assets/img/muestras/rstudio.webp" data-w="1380" data-h="682" data-titulo="Análisis de datos en R" data-soft="R y RStudio"></span><span class="muestra__txt"><b>Análisis de datos en R</b><span class="muestra__soft">R y RStudio</span></span></button>
+        </div>
+        <div class="muestras__grilla" role="tabpanel" id="grilla-gestion" aria-labelledby="tab-gestion" hidden>
+          <button class="muestra" type="button" aria-label="Ampliar muestra: Cronograma de obra con ruta crítica"><span class="muestra__img" aria-hidden="true" style="background-color:#ffffff" data-m="assets/img/muestras/msproject-obra-m.webp" data-g="assets/img/muestras/msproject-obra.webp" data-w="2600" data-h="1266" data-titulo="Cronograma de obra con ruta crítica" data-soft="MS Project"></span><span class="muestra__txt"><b>Cronograma de obra con ruta crítica</b><span class="muestra__soft">MS Project</span></span></button>
+          <button class="muestra" type="button" aria-label="Ampliar muestra: Carta Gantt de un proyecto con hitos de control"><span class="muestra__img" aria-hidden="true" style="background-color:#ffffff" data-m="assets/img/muestras/gantt-hitos-m.webp" data-g="assets/img/muestras/gantt-hitos.webp" data-w="2400" data-h="1203" data-titulo="Carta Gantt de un proyecto con hitos de control" data-soft="Python"></span><span class="muestra__txt"><b>Carta Gantt de un proyecto con hitos de control</b><span class="muestra__soft">Python</span></span></button>
+          <button class="muestra" type="button" aria-label="Ampliar muestra: Carta Gantt por fases con ruta crítica"><span class="muestra__img" aria-hidden="true" style="background-color:#ffffff" data-m="assets/img/muestras/gantt-excel-m.webp" data-g="assets/img/muestras/gantt-excel.webp" data-w="2000" data-h="1836" data-titulo="Carta Gantt por fases con ruta crítica" data-soft="Excel"></span><span class="muestra__txt"><b>Carta Gantt por fases con ruta crítica</b><span class="muestra__soft">Excel</span></span></button>
+          <button class="muestra" type="button" aria-label="Ampliar muestra: Proceso de despacho en BPMN con carriles"><span class="muestra__img" aria-hidden="true" style="background-color:#ffffff" data-m="assets/img/muestras/bpmn-visio-m.webp" data-g="assets/img/muestras/bpmn-visio.webp" data-w="2200" data-h="1317" data-titulo="Proceso de despacho en BPMN con carriles" data-soft="Visio"></span><span class="muestra__txt"><b>Proceso de despacho en BPMN con carriles</b><span class="muestra__soft">Visio</span></span></button>
+          <button class="muestra" type="button" aria-label="Ampliar muestra: Programación lineal: método gráfico"><span class="muestra__img" aria-hidden="true" style="background-color:#ffffff" data-m="assets/img/muestras/programacion-lineal-m.webp" data-g="assets/img/muestras/programacion-lineal.webp" data-w="1600" data-h="1170" data-titulo="Programación lineal: método gráfico" data-soft="Python"></span><span class="muestra__txt"><b>Programación lineal: método gráfico</b><span class="muestra__soft">Python</span></span></button>
+          <button class="muestra" type="button" aria-label="Ampliar muestra: Perfil del VAN y TIR de dos proyectos"><span class="muestra__img" aria-hidden="true" style="background-color:#ffffff" data-m="assets/img/muestras/perfil-van-m.webp" data-g="assets/img/muestras/perfil-van.webp" data-w="1600" data-h="756" data-titulo="Perfil del VAN y TIR de dos proyectos" data-soft="Python"></span><span class="muestra__txt"><b>Perfil del VAN y TIR de dos proyectos</b><span class="muestra__soft">Python</span></span></button>
+          <button class="muestra" type="button" aria-label="Ampliar muestra: Diagrama de Ishikawa de una planta"><span class="muestra__img" aria-hidden="true" style="background-color:#fefefe" data-m="assets/img/muestras/ishikawa-m.webp" data-g="assets/img/muestras/ishikawa.webp" data-w="1600" data-h="930" data-titulo="Diagrama de Ishikawa de una planta" data-soft="Python"></span><span class="muestra__txt"><b>Diagrama de Ishikawa de una planta</b><span class="muestra__soft">Python</span></span></button>
+        </div>
+        <div class="muestras__grilla" role="tabpanel" id="grilla-programacion" aria-labelledby="tab-programacion" hidden>
+          <button class="muestra" type="button" aria-label="Ampliar muestra: Sistema web de inventario: panel de análisis"><span class="muestra__img" aria-hidden="true" style="background-color:#173d3e" data-m="assets/img/muestras/web-panel-m.webp" data-g="assets/img/muestras/web-panel.webp" data-w="2200" data-h="1451" data-titulo="Sistema web de inventario: panel de análisis" data-soft="JavaScript (Node.js)"></span><span class="muestra__txt"><b>Sistema web de inventario: panel de análisis</b><span class="muestra__soft">JavaScript (Node.js)</span></span></button>
+          <button class="muestra" type="button" aria-label="Ampliar muestra: Sistema web de inventario: catálogo de productos"><span class="muestra__img" aria-hidden="true" style="background-color:#173d3e" data-m="assets/img/muestras/web-catalogo-m.webp" data-g="assets/img/muestras/web-catalogo.webp" data-w="2200" data-h="1496" data-titulo="Sistema web de inventario: catálogo de productos" data-soft="JavaScript (Node.js)"></span><span class="muestra__txt"><b>Sistema web de inventario: catálogo de productos</b><span class="muestra__soft">JavaScript (Node.js)</span></span></button>
+          <button class="muestra" type="button" aria-label="Ampliar muestra: Algoritmo ejecutado en consola"><span class="muestra__img" aria-hidden="true" style="background-color:#0c0c0c" data-m="assets/img/muestras/pseint-consola-m.webp" data-g="assets/img/muestras/pseint-consola.webp" data-w="612" data-h="582" data-titulo="Algoritmo ejecutado en consola" data-soft="PSeInt"></span><span class="muestra__txt"><b>Algoritmo ejecutado en consola</b><span class="muestra__soft">PSeInt</span></span></button>
+          <button class="muestra" type="button" aria-label="Ampliar muestra: Modelo de optimización programado en Python"><span class="muestra__img" aria-hidden="true" style="background-color:#f2f3f3" data-m="assets/img/muestras/python-optimizacion-m.webp" data-g="assets/img/muestras/python-optimizacion.webp" data-w="990" data-h="650" data-titulo="Modelo de optimización programado en Python" data-soft="Python"></span><span class="muestra__txt"><b>Modelo de optimización programado en Python</b><span class="muestra__soft">Python</span></span></button>
+          <button class="muestra" type="button" aria-label="Ampliar muestra: Diagrama de clases UML"><span class="muestra__img" aria-hidden="true" style="background-color:#fefefe" data-m="assets/img/muestras/uml-clases-m.webp" data-g="assets/img/muestras/uml-clases.webp" data-w="1489" data-h="1976" data-titulo="Diagrama de clases UML" data-soft="UML"></span><span class="muestra__txt"><b>Diagrama de clases UML</b><span class="muestra__soft">UML</span></span></button>
+          <button class="muestra" type="button" aria-label="Ampliar muestra: Diagrama de secuencia UML"><span class="muestra__img" aria-hidden="true" style="background-color:#fefefe" data-m="assets/img/muestras/uml-secuencia-m.webp" data-g="assets/img/muestras/uml-secuencia.webp" data-w="1600" data-h="1181" data-titulo="Diagrama de secuencia UML" data-soft="UML"></span><span class="muestra__txt"><b>Diagrama de secuencia UML</b><span class="muestra__soft">UML</span></span></button>
+        </div>
+        <div class="muestras__grilla" role="tabpanel" id="grilla-presentaciones" aria-labelledby="tab-presentaciones" hidden>
+          <button class="muestra" type="button" aria-label="Ampliar muestra: Página de un informe técnico con su plano"><span class="muestra__img" aria-hidden="true" style="background-color:#ffffff" data-m="assets/img/muestras/informe-unifilar-m.webp" data-g="assets/img/muestras/informe-unifilar.webp" data-w="1088" data-h="1618" data-titulo="Página de un informe técnico con su plano" data-soft="Word"></span><span class="muestra__txt"><b>Página de un informe técnico con su plano</b><span class="muestra__soft">Word</span></span></button>
+          <button class="muestra" type="button" aria-label="Ampliar muestra: Lámina de presentación: financiamiento"><span class="muestra__img" aria-hidden="true" style="background-color:#ffffff" data-m="assets/img/muestras/ppt-financiamiento-m.webp" data-g="assets/img/muestras/ppt-financiamiento.webp" data-w="1309" data-h="748" data-titulo="Lámina de presentación: financiamiento" data-soft="PowerPoint"></span><span class="muestra__txt"><b>Lámina de presentación: financiamiento</b><span class="muestra__soft">PowerPoint</span></span></button>
+          <button class="muestra" type="button" aria-label="Ampliar muestra: Lámina de presentación: marco teórico"><span class="muestra__img" aria-hidden="true" style="background-color:#ffffff" data-m="assets/img/muestras/ppt-pilares-m.webp" data-g="assets/img/muestras/ppt-pilares.webp" data-w="1536" data-h="864" data-titulo="Lámina de presentación: marco teórico" data-soft="PowerPoint"></span><span class="muestra__txt"><b>Lámina de presentación: marco teórico</b><span class="muestra__soft">PowerPoint</span></span></button>
+          <button class="muestra" type="button" aria-label="Ampliar muestra: Lámina de presentación: aplicaciones"><span class="muestra__img" aria-hidden="true" style="background-color:#ffffff" data-m="assets/img/muestras/ppt-practica-m.webp" data-g="assets/img/muestras/ppt-practica.webp" data-w="1536" data-h="864" data-titulo="Lámina de presentación: aplicaciones" data-soft="PowerPoint"></span><span class="muestra__txt"><b>Lámina de presentación: aplicaciones</b><span class="muestra__soft">PowerPoint</span></span></button>
+        </div>
+        <p class="muestras__nota">Son imágenes de muestra con marca de agua. Ocultamos nombres, instituciones y cualquier dato que permita reconocer al estudiante. Cada trabajo se hace a la medida de tu pauta.</p>
+        <div class="programas">
+          <h3>Programas que manejamos</h3>
+          <p>Trabajamos con el programa que pide tu ramo y, si la pauta lo exige, te entregamos también el archivo del programa.</p>
+          <div class="programas__grilla">
+            <div class="area"><h4>Análisis cualitativo</h4><ul><li>ATLAS.ti</li></ul></div>
+            <div class="area"><h4>Estadística</h4><ul><li>SPSS</li><li>R y RStudio</li><li>jamovi</li><li>InfoStat</li></ul></div>
+            <div class="area"><h4>Datos, dashboards y bases de datos</h4><ul><li>Power BI</li><li>Excel avanzado</li><li>SQL Server</li></ul></div>
+            <div class="area"><h4>Proyectos, procesos y finanzas</h4><ul><li>MS Project</li><li>Visio</li><li>Evaluación de proyectos</li><li>Investigación de operaciones</li><li>JaamSim</li></ul></div>
+            <div class="area"><h4>Dibujo, CAD y BIM</h4><ul><li>AutoCAD</li><li>Revit</li><li>FreeCAD</li><li>Blender</li></ul></div>
+            <div class="area"><h4>Eléctrica, electrónica e iluminación</h4><ul><li>LTspice</li><li>KiCad</li><li>Arduino</li><li>Verilog y VHDL</li><li>DIALux</li><li>Sistemas de potencia</li><li>Radiofrecuencia</li></ul></div>
+            <div class="area"><h4>Automatización, neumática, robótica y control</h4><ul><li>FluidSIM</li><li>Automation Studio</li><li>CADe SIMU</li><li>PLC y LADDER</li><li>CoppeliaSim</li><li>Control automático</li></ul></div>
+            <div class="area"><h4>Redes y seguridad</h4><ul><li>Packet Tracer</li><li>Subnetting y VLSM</li><li>Criptografía</li></ul></div>
+            <div class="area"><h4>Hidráulica, estructuras, geotecnia y SIG</h4><ul><li>HEC-RAS</li><li>EPANET</li><li>SWMM</li><li>MODFLOW</li><li>QGIS</li><li>Análisis estructural</li><li>Geotecnia</li></ul></div>
+            <div class="area"><h4>Matemática, ciencias e ingeniería de procesos</h4><ul><li>Octave y Scilab</li><li>Maxima</li><li>DWSIM</li><li>Transferencia de calor</li></ul></div>
+            <div class="area"><h4>Programación</h4><ul><li>Python</li><li>Java</li><li>JavaScript</li><li>PSeInt</li></ul></div>
+            <div class="area"><h4>Office, diseño y video</h4><ul><li>Word, Excel y PowerPoint</li><li>Photoshop</li><li>Premiere Pro y After Effects</li></ul></div>
+          </div>
+          <p class="muestras__nota">¿No ves el programa de tu ramo? <a data-wa="Hola, quiero consultar si trabajan con un programa" href="#">Escríbenos por WhatsApp</a> y lo revisamos.</p>
+        </div>
+      </div>
+    </section>
+    <!-- MUESTRAS:FIN -->
+
     <!-- NUMEROS -->
     <section class="seccion numeros" data-fondo="#F7C948" data-hud-txt="EN NÚMEROS" aria-labelledby="t-num">
       <h2 id="t-num" class="sr">Tareapp en números</h2>
@@ -465,6 +562,22 @@
   <a class="wa-flotante" data-wa="Hola, quiero cotizar un trabajo" href="#" aria-label="Escribir por WhatsApp">
     <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-wa"/></svg>
   </a>
+  <!-- VISOR:INICIO -->
+  <div class="visor" data-visor role="dialog" aria-modal="true" aria-label="Muestra ampliada" data-lenis-prevent hidden>
+    <div class="visor__barra">
+      <p class="visor__titulo"><small data-visor-soft></small><b data-visor-titulo></b></p>
+      <button class="visor__btn" type="button" data-visor-ampliar aria-pressed="false">Ampliar</button>
+      <button class="visor__btn" type="button" data-visor-cerrar aria-label="Cerrar">✕</button>
+    </div>
+    <div class="visor__marco" data-visor-marco><div class="visor__lienzo" data-visor-lienzo role="img" aria-label=""></div></div>
+    <div class="visor__pie">
+      <button class="visor__btn" type="button" data-visor-ant aria-label="Muestra anterior">←</button>
+      <span data-visor-cuenta>1 / 1</span>
+      <button class="visor__btn" type="button" data-visor-sig aria-label="Muestra siguiente">→</button>
+    </div>
+    <p class="visor__marca">Muestra con marca de agua. Sin nombres ni datos del estudiante.</p>
+  </div>
+  <!-- VISOR:FIN -->
   <canvas class="confeti" data-confeti aria-hidden="true"></canvas>
 
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -482,7 +595,8 @@
   <script src="assets/js/vendor/SplitText.min.js"></script>
   <script src="assets/js/vendor/ScrambleTextPlugin.min.js"></script>
   <script src="assets/js/vendor/lenis.min.js"></script>
-  <script src="assets/js/estudiante.js?v=20261004m"></script>
-  <script src="assets/js/v2.js?v=20261004m"></script>
+  <script src="assets/js/estudiante.js?v=20261004s"></script>
+  <script src="assets/js/muestras.js?v=20261004s" defer></script>
+  <script src="assets/js/v2.js?v=20261004s"></script>
 </body>
 </html>
