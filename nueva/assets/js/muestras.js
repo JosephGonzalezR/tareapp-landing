@@ -1,7 +1,8 @@
-/* Muestras de trabajos (desplegable). Orden de Joseph 4-oct-2026: muestras en IMAGEN, no descargables,
-   sin nombres de alumnos y solo a la vista cuando el estudiante las quiera ver.
-   Las imagenes van como fondo (no hay <img> que guardar o arrastrar), se cargan recien al abrir y traen
-   la marca de agua en los pixeles: un pantallazo siempre es posible, por eso la marca. */
+/* Muestras de trabajos (desplegable). Orden de Joseph 4-oct-2026: muestras en IMAGEN, no descargables, sin nombres de
+   alumnos, solo a la vista cuando el estudiante las quiera ver (01:24) y abiertas en un VISOR TIPO PDF con el informe
+   COMPLETO y los datos personales tachados (02:19).
+   Las paginas van como fondo (no hay <img> que guardar o arrastrar), se cargan recien al acercarse y traen la marca de
+   agua en los pixeles: un pantallazo siempre es posible, por eso la marca. */
 (function () {
   "use strict";
   const sec = document.getElementById("muestras");
@@ -30,8 +31,8 @@
 
   function entrar(grilla) {
     if (reducido || !window.gsap) return;
-    window.gsap.fromTo($$(".muestra", grilla), { y: 34, opacity: 0 },
-      { y: 0, opacity: 1, duration: 0.7, ease: "expo.out", stagger: 0.05, overwrite: true });
+    window.gsap.fromTo($$(".informe, .muestra", grilla), { y: 34, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.7, ease: "expo.out", stagger: 0.04, overwrite: true });
   }
 
   const visible = () => grillas.find((g) => !g.hidden) || grillas[0];
@@ -79,87 +80,129 @@
     });
   });
 
-  /* ---------- visor ---------- */
-  const lienzo = $("[data-visor-lienzo]", visor);
-  const marco = $("[data-visor-marco]", visor);
+  /* ---------- visor tipo PDF ---------- */
+  const hojas = $("[data-visor-hojas]", visor);
   const titulo = $("[data-visor-titulo]", visor);
   const prog = $("[data-visor-soft]", visor);
-  const cuenta = $("[data-visor-cuenta]", visor);
-  const btnAmpliar = $("[data-visor-ampliar]", visor);
-  let lista = [], idx = 0, origen = null, ampliado = false;
+  const cuenta = $("[data-visor-pag]", visor);
+  const pctTxt = $("[data-visor-zoom]", visor);
+  let paginas = [], zoom = 1, origen = null, obs = null;
+  const ZOOMS = [0.5, 0.67, 0.8, 1, 1.25, 1.5, 2, 2.5, 3];
 
-  function ajustar() {
-    const d = lista[idx];
-    if (!d) return;
-    const w = +d.dataset.w, h = +d.dataset.h;
-    if (ampliado) {
-      const ancho = Math.max(w, marco.clientWidth * 1.6);
-      lienzo.style.width = Math.round(ancho) + "px";
-      lienzo.style.height = Math.round(ancho * h / w) + "px";
-    } else {
-      lienzo.style.width = "";
-      lienzo.style.height = "";
-    }
+  function anchoBase() {
+    // "ajustar": la pagina mas ancha cabe en el visor, sin pasar de 920 px (como el visor de PDF)
+    return Math.min(hojas.clientWidth - 28, 920);
   }
 
-  function mostrar(i) {
-    idx = (i + lista.length) % lista.length;
-    const d = lista[idx];
-    ampliado = false;
-    marco.classList.remove("ampliado");
-    btnAmpliar.setAttribute("aria-pressed", "false");
-    lienzo.style.backgroundImage = 'url("' + d.dataset.g + '")';
-    lienzo.setAttribute("aria-label", d.dataset.titulo);
-    titulo.textContent = d.dataset.titulo;
-    prog.textContent = d.dataset.soft;
-    cuenta.textContent = (idx + 1) + " / " + lista.length;
-    marco.scrollTo(0, 0);
-    ajustar();
-    [idx + 1, idx - 1].forEach((k) => {
-      const v = lista[(k + lista.length) % lista.length];
-      if (v) { const im = new Image(); im.src = v.dataset.g; }
+  function aplicarZoom() {
+    const w = Math.round(anchoBase() * zoom) + "px";
+    paginas.forEach((p) => { p.el.style.width = w; });
+    if (pctTxt) pctTxt.textContent = Math.round(zoom * 100) + " %";
+  }
+
+  function cargarHoja(p) {
+    if (!p.cargada) { p.el.style.backgroundImage = 'url("' + p.src + '")'; p.cargada = true; }
+  }
+
+  function paginaActual() {
+    const medio = hojas.scrollTop + hojas.clientHeight * 0.35;
+    let k = 0;
+    paginas.forEach((p, i) => { if (p.el.offsetTop <= medio) k = i; });
+    return k;
+  }
+
+  function actualizarCuenta() {
+    cuenta.textContent = "Página " + (paginaActual() + 1) + " de " + paginas.length;
+  }
+
+  function irA(k) {
+    k = Math.max(0, Math.min(paginas.length - 1, k));
+    hojas.scrollTo({ top: paginas[k].el.offsetTop - 14, behavior: reducido ? "auto" : "smooth" });
+  }
+
+  function abrirDoc(datos, desde) {
+    origen = desde;
+    hojas.innerHTML = "";
+    const pila = document.createElement("div");
+    pila.className = "visor__pila";
+    hojas.appendChild(pila);
+    paginas = datos.paginas.map((p, i) => {
+      const el = document.createElement("div");
+      el.className = "hoja";
+      el.setAttribute("role", "img");
+      el.setAttribute("aria-label", datos.titulo + ", página " + (i + 1));
+      el.style.aspectRatio = p.w + " / " + p.h;
+      pila.appendChild(el);
+      return { el, src: p.src, w: p.w, h: p.h, cargada: false };
     });
-  }
-
-  function abrirVisor(card) {
-    const g = card.closest('[role="tabpanel"]');
-    lista = $$("[data-g]", g);
-    origen = card;
+    titulo.textContent = datos.titulo;
+    prog.textContent = datos.soft || "";
+    zoom = 1;
     visor.hidden = false;
     document.documentElement.classList.add("visor-abierto");
     if (window.__lenis) window.__lenis.stop();
-    mostrar(lista.indexOf($("[data-g]", card)));
+    hojas.scrollTop = 0;
+    aplicarZoom();
+    actualizarCuenta();
+    if (obs) obs.disconnect();
+    if ("IntersectionObserver" in window) {
+      obs = new IntersectionObserver((ents) => ents.forEach((en) => {
+        if (en.isIntersecting) { const p = paginas.find((q) => q.el === en.target); if (p) cargarHoja(p); }
+      }), { root: hojas, rootMargin: "900px 0px" });
+      paginas.forEach((p) => obs.observe(p.el));
+    } else {
+      paginas.forEach(cargarHoja);
+    }
     $("[data-visor-cerrar]", visor).focus();
-    if (!reducido && window.gsap) window.gsap.fromTo(lienzo, { scale: 0.94, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.45, ease: "expo.out" });
+    if (!reducido && window.gsap) window.gsap.fromTo(hojas, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.45, ease: "expo.out" });
   }
 
   function cerrarVisor() {
     visor.hidden = true;
     document.documentElement.classList.remove("visor-abierto");
-    lienzo.style.backgroundImage = "";
+    if (obs) obs.disconnect();
+    hojas.innerHTML = "";
+    paginas = [];
     if (window.__lenis) window.__lenis.start();
     if (origen) origen.focus();
   }
 
-  $$(".muestra", sec).forEach((c) => c.addEventListener("click", () => abrirVisor(c)));
+  function datosDe(card) {
+    if (card.dataset.doc) {
+      const tam = JSON.parse(card.dataset.paginas);
+      return {
+        titulo: card.dataset.titulo, soft: card.dataset.soft,
+        paginas: tam.map((t, i) => ({ src: card.dataset.doc + "p" + String(i + 1).padStart(2, "0") + ".webp", w: t[0], h: t[1] })),
+      };
+    }
+    const g = $("[data-g]", card);
+    return { titulo: g.dataset.titulo, soft: g.dataset.soft, paginas: [{ src: g.dataset.g, w: +g.dataset.w, h: +g.dataset.h }] };
+  }
+
+  $$(".informe, .muestra", sec).forEach((c) => c.addEventListener("click", () => abrirDoc(datosDe(c), c)));
   $("[data-visor-cerrar]", visor).addEventListener("click", cerrarVisor);
-  $("[data-visor-ant]", visor).addEventListener("click", () => mostrar(idx - 1));
-  $("[data-visor-sig]", visor).addEventListener("click", () => mostrar(idx + 1));
-  btnAmpliar.addEventListener("click", () => {
-    ampliado = !ampliado;
-    marco.classList.toggle("ampliado", ampliado);
-    btnAmpliar.setAttribute("aria-pressed", String(ampliado));
-    ajustar();
-    if (ampliado) marco.scrollTo((marco.scrollWidth - marco.clientWidth) / 2, 0);
+  $("[data-visor-mas]", visor).addEventListener("click", () => {
+    const k = paginaActual();
+    zoom = ZOOMS.find((z) => z > zoom + 0.01) || zoom;
+    aplicarZoom(); irA(k);
   });
-  marco.addEventListener("click", (e) => { if (e.target === marco && !ampliado) cerrarVisor(); });
-  window.addEventListener("resize", () => { if (!visor.hidden) ajustar(); });
+  $("[data-visor-menos]", visor).addEventListener("click", () => {
+    const k = paginaActual();
+    zoom = [...ZOOMS].reverse().find((z) => z < zoom - 0.01) || zoom;
+    aplicarZoom(); irA(k);
+  });
+  $("[data-visor-ajustar]", visor).addEventListener("click", () => { const k = paginaActual(); zoom = 1; aplicarZoom(); irA(k); });
+  hojas.addEventListener("scroll", () => { if (!visor.hidden) actualizarCuenta(); }, { passive: true });
+  window.addEventListener("resize", () => { if (!visor.hidden) aplicarZoom(); });
   document.addEventListener("keydown", (e) => {
     if (visor.hidden) return;
+    const k = paginaActual();
     if (e.key === "Escape") cerrarVisor();
-    if (e.key === "ArrowRight") mostrar(idx + 1);
-    if (e.key === "ArrowLeft") mostrar(idx - 1);
-    if (e.key === "Tab") {
+    else if (e.key === "ArrowRight" || e.key === "PageDown") { e.preventDefault(); irA(k + 1); }
+    else if (e.key === "ArrowLeft" || e.key === "PageUp") { e.preventDefault(); irA(k - 1); }
+    else if (e.key === "+" || e.key === "=") $("[data-visor-mas]", visor).click();
+    else if (e.key === "-") $("[data-visor-menos]", visor).click();
+    else if (e.key === "Tab") {
       const f = $$("button", visor).filter((b) => b.offsetParent !== null);
       const i = f.indexOf(document.activeElement);
       if (e.shiftKey && i <= 0) { e.preventDefault(); f[f.length - 1].focus(); }
@@ -167,19 +210,9 @@
     }
   });
 
-  // deslizar con el dedo para pasar de una muestra a otra (solo sin ampliar)
-  let x0 = null, y0 = null;
-  marco.addEventListener("touchstart", (e) => { if (!ampliado && e.touches.length === 1) { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; } }, { passive: true });
-  marco.addEventListener("touchend", (e) => {
-    if (x0 === null) return;
-    const dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
-    x0 = null;
-    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.3) mostrar(idx + (dx < 0 ? 1 : -1));
-  }, { passive: true });
-
   // sin menu de "guardar imagen", sin arrastrar y sin seleccionar
   ["contextmenu", "dragstart", "selectstart"].forEach((ev) => {
-    panel.addEventListener(ev, (e) => { if (e.target.closest(".muestra")) e.preventDefault(); });
+    panel.addEventListener(ev, (e) => { if (e.target.closest(".muestra, .informe")) e.preventDefault(); });
     visor.addEventListener(ev, (e) => e.preventDefault());
   });
 
