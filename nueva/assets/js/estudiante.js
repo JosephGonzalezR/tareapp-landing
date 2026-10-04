@@ -100,18 +100,18 @@
   const P = (o) => Object.assign({}, B, o);
   const POSES = {
     parado: P({ mDx: 8, mDy: 62, mTx: -2, mTy: 62, ojos: "normal", boca: "sonrisa", objeto: "" }),
-    saludo: P({ tor: -2, cab: -4, mDx: 36, mDy: -46, mTx: -2, mTy: 62, ojos: "feliz", boca: "abierta", objeto: "" }),
-    sentadoEstres: P({ pelX: -14, pelY: -58, tor: 8, cab: 14, mDx: 4, mDy: -24, mTx: 44, mTy: 14, signoD: 1, pDx: 30, pTx: 18, ojos: "preocupado", boca: "ondulada", objeto: "", sudor: 1 }),
+    saludo: P({ tor: -2, cab: -4, mDx: 50, mDy: -36, signoD: 1, mTx: -2, mTy: 62, ojos: "feliz", boca: "abierta", objeto: "" }),
+    sentadoEstres: P({ pelX: -14, pelY: -58, tor: 8, cab: 14, mDx: 63, mDy: 6, mTx: 14, mTy: -58, signoD: 1, manoTArriba: 1, pDx: 30, pTx: 18, ojos: "preocupado", boca: "ondulada", objeto: "", sudor: 1 }),
     sentadoTeclea: P({ pelX: -14, pelY: -58, tor: 10, cab: 12, mDx: 52, mDy: 10, mTx: 44, mTy: 14, pDx: 30, pTx: 18, ojos: "abajo", boca: "plana", objeto: "" }),
     celular: P({ tor: -3, cab: 8, mDx: 14, mDy: 6, mTx: 10, mTy: 16, ojos: "abajo", boca: "sonrisa", objeto: "celular" }),
     pulgar: P({ tor: -2, cab: -2, mDx: 22, mDy: 0, mTx: -2, mTy: 62, ojos: "feliz", boca: "abierta", objeto: "pulgar" }),
-    lee: P({ tor: -2, cab: 10, mDx: 16, mDy: 4, mTx: 30, mTy: 8, ojos: "abajo", boca: "sonrisa", objeto: "hoja" }),
+    lee: P({ tor: -2, cab: 10, mDx: 26, mDy: 14, mTx: -4, mTy: 60, ojos: "abajo", boca: "sonrisa", objeto: "hoja" }),
     presenta: P({ tor: -4, cab: -6, mDx: 56, mDy: -30, mTx: 14, mTy: 30, pDx: 16, pTx: -10, ojos: "normal", boca: "abierta", objeto: "puntero" }),
-    salto: P({ pelY: -150, tor: -4, cab: -8, mDx: 30, mDy: -58, mTx: -26, mTy: -56, pDx: 22, pDy: -46, pTx: -14, pTy: -40, ojos: "feliz", boca: "abierta", cola: 18, objeto: "" }),
+    salto: P({ pelY: -150, tor: -4, cab: -8, mDx: 56, mDy: -42, signoD: 1, mTx: -56, mTy: -34, pDx: 22, pDy: -46, pTx: -14, pTy: -40, ojos: "feliz", boca: "abierta", cola: 18, objeto: "" }),
     flota: P({ pelY: -100, tor: 3, cab: -6, mDx: 34, mDy: 16, mTx: 6, mTy: -62, signoT: -1, pDx: 12, pDy: -6, pTx: -9, pTy: 4, ojos: "feliz", boca: "abierta", cola: 60, objeto: "paraguas", paraguas: 1 }),
-    celebra: P({ tor: -3, cab: -8, mDx: 34, mDy: -48, mTx: -26, mTy: -54, ojos: "feliz", boca: "abierta", objeto: "diploma", gorro: 1 }),
+    celebra: P({ tor: -3, cab: -8, mDx: 54, mDy: -40, signoD: 1, mTx: -54, mTy: -34, ojos: "feliz", boca: "abierta", objeto: "diploma", gorro: 1 }),
     profeSentado: P({ pelX: -14, pelY: -58, tor: 2, mDx: 30, mDy: 28, mTx: 22, mTy: 32, pDx: 30, pTx: 18, ojos: "normal", boca: "plana", objeto: "carpeta" }),
-    profeNota: P({ tor: -2, cab: -4, mDx: 24, mDy: -56, mTx: 2, mTy: 40, ojos: "feliz", boca: "sonrisa", objeto: "nota" }),
+    profeNota: P({ tor: -2, cab: -4, mDx: 56, mDy: -42, signoD: 1, mTx: 2, mTy: 40, ojos: "feliz", boca: "sonrisa", objeto: "nota" }),
   };
 
   /* Mano en coordenadas de la mano: el antebrazo llega por -x y los dedos apuntan a +x; el pulgar va por -y. */
@@ -426,8 +426,9 @@
         mano.g.setAttribute("transform", `translate(${r.tx.toFixed(2)},${r.ty.toFixed(2)}) rotate(${ang.toFixed(2)}) translate(-3,0)`);
         return r;
       };
-      const sD = p.signoD || (p.mDy < -20 ? -1 : 1);
-      const sT = p.signoT || (p.mTy < -20 ? -1 : 1);
+      // el signo del codo no se interpola: en una mezcla de poses vale el lado que ya tiene
+      const sD = p.signoD ? (p.signoD > 0 ? 1 : -1) : (p.mDy < -20 ? -1 : 1);
+      const sT = p.signoT ? (p.signoT > 0 ? 1 : -1) : (p.mTy < -20 ? -1 : 1);
       const rT = ikBrazo(hombroT, p.mTx, p.mTy, this.brazoT, this.manoT, sT);
       const rD = ikBrazo(hombroD, p.mDx, p.mDy, this.brazoD, this.manoD, sD);
       const ux = rD.tx - rD.jx, uy = rD.ty - rD.jy, ul = Math.hypot(ux, uy) || 1;
@@ -445,7 +446,7 @@
       this.pulgar.setAttribute("d", ob === "pulgar" ? `M${(rD.tx - 4).toFixed(2)},${(rD.ty - 4).toFixed(2)} q-2,-16 5,-17 q6,0 4,8 l-2,9 z` : "");
       this.manoD.pulgar.setAttribute("opacity", ob === "pulgar" ? 0 : 1);
       this.gorro.setAttribute("opacity", p.gorro ? Math.min(1, p.gorro).toFixed(2) : 0);
-      const arriba = ob === "hoja";
+      const arriba = (p.manoTArriba || 0) > 0.5;
       if (arriba !== this._manoArriba) {
         if (arriba) this.cuerpo.appendChild(this.manoT.g); else this.cuerpo.insertBefore(this.manoT.g, this.objetoT.nextSibling);
         this._manoArriba = arriba;

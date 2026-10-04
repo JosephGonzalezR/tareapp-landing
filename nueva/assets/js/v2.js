@@ -435,6 +435,7 @@
         profe5Avance = lerp(profe5Avance, nota5 ? 1 : 0, 0.08);
         const pose5 = mezclar(POSES.parado, POSES.profeNota, suave(profe5Avance));
         pose5.bob = Math.sin(t * 2) * 0.8;
+        pose5.objeto = profe5Avance > 0.8 ? "nota" : ""; // el cartel aparece con el brazo ya arriba (no tapa la cara)
         profe5.p.pose = pose5; profe5.p.render();
       }
       if (profe4.p && cerca(4)) {
