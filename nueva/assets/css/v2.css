@@ -20,6 +20,7 @@
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{overflow-x:hidden}
 body{margin:0;font-family:var(--f-disp);font-size:clamp(16px,1.05vw,18px);line-height:1.6;color:var(--tinta);background:var(--amarillo);font-stretch:100%;font-weight:430;overflow-x:clip}
+main{overflow-x:clip}
 img,svg,canvas{display:block;max-width:100%}
 a{color:inherit}
 h1,h2,h3,h4,p,ul,ol{margin:0}
@@ -108,9 +109,9 @@ h2 .serif{font-size:.72em;margin-top:.12em}
 .anillo__giro{position:absolute;left:0;top:0;transform-style:preserve-3d;transform:rotateX(-14deg) rotateZ(-7deg) rotateY(var(--giro,0deg))}
 .anillo__giro--b{transform:translateY(calc(var(--s) * 70px)) rotateX(-20deg) rotateZ(9deg) rotateY(calc(var(--giro,0deg) * -1.3))}
 .anillo__giro span{position:absolute;left:0;top:0;font-family:var(--f-disp);font-weight:900;font-stretch:125%;font-size:var(--fz,44px);line-height:1;white-space:pre;backface-visibility:hidden;-webkit-backface-visibility:hidden;transform-origin:0 0}
-.anillo__giro span.atras{color:transparent;-webkit-text-stroke:1.5px rgba(22,18,14,.55)}
+.anillo__giro span.atras{color:transparent;-webkit-text-stroke:1.5px rgba(22,18,14,.38)}
 .anillo__giro--b span{font-family:var(--f-serif);font-style:italic;font-weight:400;font-stretch:100%;color:var(--azul)}
-.anillo__giro--b span.atras{-webkit-text-stroke:1px rgba(43,60,255,.5);color:transparent}
+.anillo__giro--b span.atras{-webkit-text-stroke:1px rgba(43,60,255,.36);color:transparent}
 
 /* ---------- historia ---------- */
 .historia{position:relative}
@@ -136,7 +137,7 @@ h2 .serif{font-size:.72em;margin-top:.12em}
 .tui small{font-family:var(--f-mono);font-size:.7rem;color:#7a7266}
 
 /* telefono estacion 2 */
-.telefono{position:absolute;right:3%;bottom:5%;width:clamp(200px,19vw,262px);aspect-ratio:9/18.5;background:#ECE5DD;border:3px solid var(--tinta);border-radius:34px;box-shadow:8px 8px 0 rgba(22,18,14,.35),inset 0 0 0 7px #16120E;overflow:hidden;z-index:2;display:flex;flex-direction:column}
+.telefono{position:absolute;right:3%;bottom:5%;width:clamp(200px,19vw,262px);height:calc(clamp(200px,19vw,262px) * 2.0556);background:#ECE5DD;border:3px solid var(--tinta);border-radius:34px;box-shadow:8px 8px 0 rgba(22,18,14,.35),inset 0 0 0 7px #16120E;overflow:hidden;z-index:2;display:flex;flex-direction:column}
 .telefono__isla{position:absolute;left:50%;top:12px;width:72px;height:20px;border-radius:12px;background:#16120E;transform:translateX(-50%);z-index:3}
 .telefono__cab{display:flex;align-items:center;gap:8px;padding:40px 16px 10px;background:#075E54;color:#fff}
 .telefono__cab img{width:26px;height:auto;background:#fff;border-radius:50%;padding:3px}
@@ -155,8 +156,8 @@ h2 .serif{font-size:.72em;margin-top:.12em}
 .flotante{position:absolute;z-index:3;background:var(--crema);color:var(--tinta);border:var(--borde);border-radius:16px;padding:10px 14px;box-shadow:4px 4px 0 var(--tinta);display:flex;flex-direction:column;line-height:1.2}
 .flotante b{font-weight:900;font-stretch:115%;font-size:.98rem}
 .flotante small{font-family:var(--f-mono);font-size:.66rem}
-.flotante--a{right:calc(3% + clamp(200px,19vw,262px) - 30px);top:14%;transform:rotate(-5deg)}
-.flotante--b{right:-1%;top:6%;transform:rotate(6deg);background:var(--lima)}
+.flotante--a{right:calc(3% + clamp(200px,19vw,262px) + 14px);top:16%;transform:rotate(-5deg)}
+.flotante--b{right:calc(3% + clamp(200px,19vw,262px) + 36px);top:33%;transform:rotate(6deg);background:var(--lima)}
 
 /* documento estacion 3 */
 .documento{position:absolute;right:4%;bottom:6%;width:clamp(210px,21vw,290px);z-index:2}
@@ -169,13 +170,13 @@ h2 .serif{font-size:.72em;margin-top:.12em}
 .doc-grafico{flex:1;display:flex;align-items:flex-end;gap:8px;padding:8px;border:2px dashed #DAD2C2;border-radius:8px;min-height:70px}
 .doc-grafico i{flex:1;height:var(--h);border-radius:4px 4px 0 0;background:var(--coral);border:2px solid var(--tinta);transform-origin:bottom}
 .doc-grafico i:nth-child(2n){background:var(--azul)}
-.progreso{position:absolute;left:-36px;top:-30px;width:86px;height:86px;background:var(--crema);border:var(--borde);border-radius:50%;display:grid;place-items:center;box-shadow:4px 4px 0 var(--tinta)}
+.progreso{position:absolute;right:-30px;top:-34px;width:86px;height:86px;background:var(--crema);border:var(--borde);border-radius:50%;display:grid;place-items:center;box-shadow:4px 4px 0 var(--tinta)}
 .progreso svg{position:absolute;inset:4px;width:calc(100% - 8px);height:calc(100% - 8px);transform:rotate(-90deg)}
 .progreso circle{fill:none;stroke-width:7}
 .progreso__fondo{stroke:#EADFC8}
 .progreso__barra{stroke:#1DB954;stroke-linecap:round;stroke-dasharray:201;stroke-dashoffset:201}
 .progreso b{position:relative;font-weight:900;font-stretch:115%;font-size:1rem}
-.checks{position:absolute;right:calc(4% + clamp(210px,21vw,290px) - 20px);top:6%;z-index:3;display:flex;flex-direction:column;gap:8px;align-items:flex-end}
+.checks{position:absolute;right:calc(4% + clamp(210px,21vw,290px) + 18px);top:6%;z-index:3;display:flex;flex-direction:column;gap:8px;align-items:flex-end}
 .checks li{background:var(--crema);border:var(--borde);border-radius:99px;padding:6px 12px;font-weight:750;font-size:.86rem;box-shadow:3px 3px 0 var(--tinta);display:flex;gap:8px;align-items:center;white-space:nowrap}
 .checks span{display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#1DB954;color:#fff;font-size:.72rem;font-weight:900}
 
@@ -274,34 +275,59 @@ h2 .serif{font-size:.72em;margin-top:.12em}
   .barra__cta+.barra__menu{margin-left:0}
   .bento{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
+/* Pantallas medianas: tres tarjetas en la escena 1, mas chicas y sin taparse */
+@media (min-width:861px) and (max-width:1280px){
+  .tui{min-width:0;max-width:175px;font-size:.8rem;padding:8px 12px}
+  .tui:nth-child(1){--x:62%!important;--y:22%!important}
+  .tui:nth-child(2){--x:0%!important;--y:4%!important}
+  .tui:nth-child(3){--x:34%!important;--y:-16%!important}
+  .tui:nth-child(4){display:none}
+}
+/* Celular y tablet vertical: el texto va arriba y la escena abajo. Cada escena reserva su franja de arriba
+   para que el estudiante baje con el paraguas sin pasar por el texto; los adornos van a la derecha. */
 @media (max-width:860px){
-  .heroe{display:flex;flex-direction:column;align-items:stretch;padding-top:96px;gap:0;min-height:auto}
+  .hud{display:none}
+  .wa-flotante{right:14px;bottom:calc(14px + env(safe-area-inset-bottom));width:54px;height:54px}
+  .heroe{display:flex;flex-direction:column;align-items:stretch;padding-top:96px;padding-bottom:64px;gap:0;min-height:auto}
   .heroe__texto{display:contents}
-  .heroe .etiqueta{order:1;align-self:flex-start;margin-bottom:1rem;font-size:.66rem}
+  .heroe .etiqueta{order:1;align-self:flex-start;margin-bottom:1rem;font-size:.7rem;line-height:1.35;border-radius:18px}
   .heroe__titulo{order:2;margin-bottom:0}
-  .heroe__escenario{order:3;height:44svh;min-height:320px;margin:-6px 0 10px}
+  .heroe__escenario{order:3;height:calc(var(--s) * 410px);min-height:250px;margin:0 0 calc(var(--s) * 44px)}
   .heroe__bajada{order:4}
   .heroe__acciones{order:5}
   .chips{order:6}
   .heroe__pista{display:none}
-  .estacion{grid-template-columns:1fr;min-height:auto;padding:12vh var(--pad) 8vh;gap:4vh}
-  .estacion__escena{height:auto;min-height:calc(var(--s) * 560px)}
-  .telefono{width:min(46vw,200px)}
-  .flotante--a{right:auto;left:2%;top:2%}
-  .flotante--b{top:auto;bottom:78%;right:2%}
-  .documento{width:min(44vw,190px)}
-  .progreso{width:64px;height:64px;left:-22px;top:-24px}
+  .anillo__giro span.atras{-webkit-text-stroke-color:rgba(22,18,14,.16)}
+  .anillo__giro--b{display:none}
+  .estacion{grid-template-columns:1fr;min-height:auto;padding:12vh var(--pad) 8vh;gap:3vh}
+  .estacion__escena{height:auto;min-height:calc(var(--s) * 560px + 110px)}
+  .estacion--nota .estacion__escena{min-height:calc(var(--s) * 560px + 230px)}
+  /* escena 1: tarjetas en columna a la derecha, sobre el calendario */
+  .tarjetas-ui{top:0;right:0;left:auto;height:auto;display:flex;flex-direction:column;align-items:flex-end;gap:15px}
+  .tui{position:relative;left:auto;top:auto;min-width:0;max-width:172px;font-size:.76rem;padding:7px 11px}
+  .tui:nth-child(2){margin-right:26px}
+  .tui:nth-child(3){margin-right:8px}
+  .tui:nth-child(4){display:none}
+  /* escena 2: telefono mas chico y las dos notas arriba de el */
+  .historia>.estacion:nth-child(2) .estacion__escena{min-height:calc(var(--s) * 560px + 150px)}
+  .telefono{width:min(38vw,156px);height:calc(min(38vw,156px) * 2.0556)}
+  .flotante--a{left:auto;right:0;top:0}
+  .flotante--b{left:auto;right:34px;top:92px;bottom:auto}
+  /* escena 3: checks en columna arriba a la derecha, documento abajo */
+  .historia>.estacion:nth-child(3) .estacion__escena{min-height:calc(var(--s) * 560px + 170px)}
+  .documento{width:min(42vw,172px)}
+  .progreso{width:64px;height:64px;right:auto;left:-22px;top:-24px}
   .progreso b{font-size:.8rem}
-  .checks{right:0;left:0;top:0;flex-direction:row;flex-wrap:wrap;align-items:flex-start;gap:6px}
+  .checks{right:0;left:auto;top:0;flex-direction:column;align-items:flex-end;gap:6px}
   .checks li{font-size:.72rem;padding:4px 9px;box-shadow:2px 2px 0 var(--tinta)}
   .checks span{width:16px;height:16px;font-size:.6rem}
-  .tarjetas-ui{top:0;height:46%}
-  .tui{min-width:150px;font-size:.78rem;padding:8px 11px}
+  /* escena 4: se corre a la derecha para que el profesor no quede cortado ni pegado al estudiante */
+  .historia>.estacion:nth-child(4) .escena{left:calc(var(--s) * 46px)}
   .cifras{grid-template-columns:1fr;gap:34px}
   .pasos{grid-template-columns:1fr}
   .pie{grid-template-columns:1fr 1fr}
   .pie__marca{grid-column:1/-1}
-  .hud__txt--ib{display:none}
+  .pie__col a span{white-space:nowrap}
 }
 @media (max-width:560px){
   .barra{height:56px;top:10px;padding-left:14px}
@@ -312,8 +338,6 @@ h2 .serif{font-size:.72em;margin-top:.12em}
   .carta{min-height:0;padding-bottom:70px}
   .heroe__acciones{gap:16px}
   .boton--grande{font-size:1rem}
-  .hud__esq--ia,.hud__esq--da{top:78px}
-  .tui:nth-child(4){display:none}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}

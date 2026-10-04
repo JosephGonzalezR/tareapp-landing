@@ -27,9 +27,10 @@
   }
 
   /* ---------- escala del personaje ---------- */
-  let S = 1, ESC_HEROE = 1.3;
+  let S = 1, ESC_HEROE = 1.3, MOVIL = false;
   function calcularEscala() {
     const vw = window.innerWidth;
+    MOVIL = vw <= 860;
     S = vw > 860 ? clamp(vw / 1400, 0.72, 1.05) : clamp((vw - 40) / 520, 0.56, 0.8);
     ESC_HEROE = vw > 860 ? 1.32 : 1.08;
     document.documentElement.style.setProperty("--s", S.toFixed(4));
@@ -71,10 +72,11 @@
     }
     window.addEventListener("resize", ajustar); ajustar();
     return {
-      disparar(x, y, n) {
+      disparar(x, y, n, fuerza) {
         if (reducido) return;
+        const f = fuerza || 1;
         for (let i = 0; i < (n || 140); i++) {
-          const a = -Math.PI / 2 + (Math.random() - 0.5) * 2.2, v = 7 + Math.random() * 11;
+          const a = -Math.PI / 2 + (Math.random() - 0.5) * 2.2, v = (7 + Math.random() * 11) * f;
           piezas.push({ x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v, r: Math.random() * 6, vr: (Math.random() - 0.5) * 0.4, w: 6 + Math.random() * 7, h: 9 + Math.random() * 9, c: colores[(Math.random() * colores.length) | 0], vida: 120 + Math.random() * 80 });
         }
         if (!activo) { activo = true; requestAnimationFrame(paso); }
@@ -93,7 +95,10 @@
         g.innerHTML = "";
         const texto = g.getAttribute("data-anillo-giro");
         const serif = g.classList.contains("anillo__giro--b");
-        const radio = (serif ? 245 : 205) * S * ESC_HEROE;
+        // el anillo entra completo en la pantalla: su radio no pasa del espacio libre a cada lado del estudiante
+        const esc = cont.parentElement.getBoundingClientRect(), cxv = esc.left + esc.width / 2;
+        const tope = (Math.min(cxv, document.documentElement.clientWidth - cxv) - 20) / 1.16;
+        const radio = Math.min((serif ? 245 : 205) * S * ESC_HEROE, serif ? tope : tope * 0.84);
         medidor.font = serif ? `italic 400 100px "Instrument Serif"` : `900 100px Archivo`;
         if ("fontStretch" in medidor) medidor.fontStretch = serif ? "normal" : "expanded";
         const base = Array.from(texto).map((ch) => medidor.measureText(ch).width || 30);
@@ -159,12 +164,14 @@
       dpr = Math.min(window.devicePixelRatio || 1, 1.6);
       W = sec.clientWidth; H = sec.clientHeight;
       cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
-      const movil = window.innerWidth < 861;
+      const movil = MOVIL;
       N = movil ? 900 : 1700;
-      const escena = $(".estacion__escena", sec).getBoundingClientRect(), sr = sec.getBoundingClientRect();
-      const cx = movil ? W / 2 : escena.left - sr.left + escena.width * 0.52;
-      const cy = movil ? escena.top - sr.top + escena.height * 0.42 : H * 0.42;
-      const alto = movil ? Math.min(W * 0.5, 230) : Math.min(escena.width * 0.62, H * 0.42, 420);
+      const caja = $(".estacion__escena", sec), escena = caja.getBoundingClientRect(), sr = sec.getBoundingClientRect();
+      // celular: el 7,0 va arriba de la escena y los personajes abajo; el estudiante baja recien bajo el 7,0
+      const alto = movil ? Math.min(escena.width * 0.44, escena.height * 0.27, 210) : Math.min(escena.width * 0.62, H * 0.42, 420);
+      const cx = movil ? escena.left - sr.left + escena.width / 2 : escena.left - sr.left + escena.width * 0.52;
+      const cy = movil ? escena.top - sr.top + alto * 0.42 + 6 : H * 0.42;
+      caja.dataset.techo = movil ? Math.round(alto * 0.84 + 18) : 0;
       const obj = objetivos(cx, cy, alto);
       const R = alto * 0.62;
       pts = [];
@@ -291,6 +298,47 @@
         const er = anilloCtl.el.parentElement.getBoundingClientRect();
         anilloCtl.centrar(P[0].x - (er.left - vr.left), P[0].y - (er.top - vr.top) - 150 * S * ESC_HEROE);
       }
+      // Celular: el texto va encima de cada escena, asi que el estudiante NO viaja cruzandolo.
+      // Sale caminando por la izquierda y en la escena siguiente baja con el paraguas desde el borde de arriba de su caja.
+      M = [];
+      if (MOVIL) {
+        const fig = 372 * S;
+        M = P.map((p, i) => {
+          const caja = escenas[i].parentElement, cr = caja.getBoundingClientRect();
+          const techo = parseFloat(caja.dataset.techo || "0") || 0;
+          const base = top + p.y;
+          if (i === 0) return { e0: -1e9, e1: -1e9, s0: base - 0.3 * vh, s1: base - 0.06 * vh, yIni: p.y };
+          const cajaTop = cr.top - vr.top;
+          return {
+            e0: top + cajaTop + techo - 0.92 * vh,
+            e1: base - 0.7 * vh,
+            s0: base - 0.36 * vh,
+            s1: base - 0.12 * vh,
+            yIni: Math.min(p.y - 30 * S, cajaTop + techo + fig + 4),
+          };
+        });
+        for (let i = 1; i < M.length; i++) {
+          const a = M[i - 1], b = M[i];
+          b.e0 = Math.max(b.e0, a.s1 + 8);
+          b.e1 = Math.max(b.e1, b.e0 + 0.18 * vh);
+          b.s0 = Math.max(b.s0, b.e1 + 0.1 * vh);
+          b.s1 = Math.max(b.s1, b.s0 + 0.12 * vh);
+        }
+      }
+      window.__M = M;
+    }
+    let M = [];
+
+    function estadoMovil(sy) {
+      for (let i = M.length - 1; i >= 0; i--) {
+        const w = M[i];
+        if (sy < w.e0) continue;
+        if (sy < w.e1) return { tipo: "entra", i, g: clamp((sy - w.e0) / Math.max(1, w.e1 - w.e0), 0, 1) };
+        if (sy < w.s0 || i === M.length - 1) return { tipo: "estacion", i, q: clamp((sy - w.e1) / Math.max(1, w.s0 - w.e1), 0, 1) };
+        if (sy < w.s1) return { tipo: "sale", i, v: clamp((sy - w.s0) / Math.max(1, w.s1 - w.s0), 0, 1) };
+        return { tipo: "fuera", i };
+      }
+      return { tipo: "estacion", i: 0, q: 0 };
     }
 
     let parpadeoHasta = 0, proximoParpadeo = 2;
@@ -329,10 +377,80 @@
       return pose;
     }
 
+    let oculto = false;
+    function ticMovil(sy, t) {
+      const e = estadoMovil(sy);
+      window.__E = e;
+      const p = P[e.i], w = M[e.i];
+      let x = p.x, y = p.y, pose, mira = 1, k = 1, ver = true;
+      if (e.tipo === "estacion") {
+        pose = poseEstacion(e.i, e.q, t);
+        mira = pose.mira;
+        if (e.i === 0) k = ESC_HEROE;
+        const c = CONF[e.i];
+        if (c.confeti && e.q > 0.02 && !disparados.has(e.i)) {
+          disparados.add(e.i);
+          const r = capa.getBoundingClientRect();
+          Confeti.disparar(r.left + r.width / 2, r.top + r.height * 0.55, 70, 0.72);
+        }
+      } else if (e.tipo === "entra") {
+        const g = e.g, baja = suave(clamp(g / 0.86, 0, 1));
+        y = lerp(w.yIni, p.y, baja);
+        x = p.x + Math.sin(t * 1.6) * 6 * S * (1 - baja);
+        const flota = Object.assign({}, POSES.flota);
+        flota.paraguas = clamp((1 - g) / 0.16, 0, 1);
+        flota.pDx += Math.sin(t * 3.1) * 5; flota.pTx += Math.sin(t * 3.1 + 1.4) * 5;
+        flota.pDy += Math.cos(t * 3.1) * 3; flota.mTy += Math.sin(t * 2.3) * 4;
+        flota.tor += Math.sin(t * 1.6) * 3;
+        flota.sinSombra = g < 0.8 ? 1 : 0;
+        const aterriza = suave(clamp((g - 0.8) / 0.2, 0, 1));
+        pose = aterriza > 0 ? mezclar(flota, poseEstacion(e.i, 0, t), aterriza) : flota;
+        mira = aterriza > 0.6 ? (CONF[e.i].mira || 1) : 1;
+      } else if (e.tipo === "sale") {
+        k = e.i === 0 ? ESC_HEROE : 1;
+        const xF = -95 * S * k - 14;
+        x = lerp(p.x, xF, sinIO(e.v));
+        pose = mezclar(poseEstacion(e.i, 1, t), pj.caminar(Math.abs(x - p.x) / (60 * S * k)), clamp(e.v * 4, 0, 1));
+        mira = -1;
+      } else {
+        ver = false;
+        x = -400 * S; pose = POSES.parado;
+      }
+      disparados.forEach((i) => { if (sy < M[i].e1 - 40) disparados.delete(i); });
+      if (ver === oculto) { oculto = !ver; capa.style.visibility = ver ? "" : "hidden"; }
+      if (t > proximoParpadeo) { parpadeoHasta = t + 0.12; proximoParpadeo = t + 2.2 + Math.random() * 3; }
+      pj.parpadeo = t < parpadeoHasta ? 1 : 0;
+      pj.mira = mira;
+      pj.pose = pose;
+      const pantallaY = viajeTop + y - sy;
+      if (ver && pantallaY > -600 && pantallaY < vh + 700) pj.render();
+      capa.style.transformOrigin = `${(-VB.x * S).toFixed(1)}px ${(-VB.y * S).toFixed(1)}px`;
+      capa.style.transform = `translate3d(${(x + VB.x * S).toFixed(1)}px, ${(y + VB.y * S).toFixed(1)}px, 0) scale(${k.toFixed(3)})`;
+      profesores(e, e.i > 5 || (e.i === 5 && (e.tipo !== "entra" || e.g > 0.7)), sy, t);
+    }
+
+    function profesores(e, nota5, sy, t) {
+      const cerca = (k) => P[k] && Math.abs(P[k].docY - sy - vh * 0.5) < vh * 1.6;
+      if (profe5.p && cerca(5)) {
+        profe5Avance = lerp(profe5Avance, nota5 ? 1 : 0, 0.08);
+        const pose5 = mezclar(POSES.parado, POSES.profeNota, suave(profe5Avance));
+        pose5.bob = Math.sin(t * 2) * 0.8;
+        profe5.p.pose = pose5; profe5.p.render();
+      }
+      if (profe4.p && cerca(4)) {
+        const pose4 = Object.assign({}, POSES.profeSentado);
+        pose4.cab = Math.sin(t * 0.9) * 3; pose4.mDy += Math.sin(t * 1.3) * 2;
+        profe4.p.pose = pose4; profe4.p.render();
+      }
+    }
+
     function tic(t) {
       if (!P.length) return;
       const sy = window.__lenis ? window.__lenis.scroll : scrollY;
+      if (MOVIL && M.length) { ticMovil(sy, t); return; }
+      if (oculto) { oculto = false; capa.style.visibility = ""; }
       const e = estado(sy, t);
+      window.__E = e;
       let x, y, pose, mira = 1;
       if (e.tipo === "estacion") {
         x = e.x; y = e.y;
@@ -385,21 +503,7 @@
       else if (e.tipo === "viaje" && e.i === 0) k = lerp(ESC_HEROE, 1, suave(clamp(e.u / 0.3, 0, 1)));
       capa.style.transformOrigin = `${(-VB.x * S).toFixed(1)}px ${(-VB.y * S).toFixed(1)}px`;
       capa.style.transform = `translate3d(${(x + VB.x * S).toFixed(1)}px, ${(y + VB.y * S).toFixed(1)}px, 0) scale(${k.toFixed(3)})`;
-
-      const cerca = (k) => P[k] && Math.abs(P[k].docY - sy - vh * 0.5) < vh * 1.6;
-      if (profe5.p && cerca(5)) {
-        const d5 = e;
-        const obj = d5.i >= 5 ? 1 : 0;
-        profe5Avance = lerp(profe5Avance, obj, 0.08);
-        const pose5 = mezclar(POSES.parado, POSES.profeNota, suave(profe5Avance));
-        pose5.bob = Math.sin(t * 2) * 0.8;
-        profe5.p.pose = pose5; profe5.p.render();
-      }
-      if (profe4.p && cerca(4)) {
-        const pose4 = Object.assign({}, POSES.profeSentado);
-        pose4.cab = Math.sin(t * 0.9) * 3; pose4.mDy += Math.sin(t * 1.3) * 2;
-        profe4.p.pose = pose4; profe4.p.render();
-      }
+      profesores(e, e.i >= 5, sy, t);
     }
 
     return { medir, tic, pj };
@@ -563,6 +667,14 @@
 
   /* ---------- version sin movimiento ---------- */
   function estatico() {
+    // la posicion se recalcula cuando el diseno ya quedo estable (antes de eso el SVG puede medir otro ancho)
+    const ubicar = (ub, svg) => {
+      ub();
+      window.addEventListener("resize", ub);
+      window.addEventListener("load", ub);
+      if (document.fonts) document.fonts.ready.then(ub);
+      if ("ResizeObserver" in window) new ResizeObserver(() => ub()).observe(svg);
+    };
     const escenasSvg = $$("[data-escena]").sort((a, b) => +a.dataset.escena - +b.dataset.escena);
     const poses = ["saludo", "sentadoEstres", "pulgar", "lee", "presenta", "salto", "celebra"];
     const VB = Personaje.VB;
@@ -575,7 +687,7 @@
         d.style.width = VB.w * k + "px"; d.style.height = VB.h * k + "px"; d.style.left = "0px"; d.style.top = "0px";
         d.style.transform = `translate(${r.left - cr.left - vb.x * k + VB.x * k}px, ${r.top - cr.top - vb.y * k + VB.y * k}px)`;
       };
-      ub(); window.addEventListener("resize", ub);
+      ubicar(ub, svg);
     });
     const profes = [[4, -150, "profeSentado", 1], [5, 196, "profeNota", -1]];
     profes.forEach(([i, dx, pose, mira]) => {
@@ -589,7 +701,7 @@
         d.style.width = VB.w * k + "px"; d.style.height = VB.h * k + "px"; d.style.left = "0px"; d.style.top = "0px";
         d.style.transform = `translate(${r.left - cr.left + (dx - vb.x) * k + VB.x * k}px, ${r.top - cr.top - vb.y * k + VB.y * k}px)`;
       };
-      ub(); window.addEventListener("resize", ub);
+      ubicar(ub, svg);
     });
     $$("[data-fondo]").forEach((sec) => {
       const c = sec.getAttribute("data-fondo");
