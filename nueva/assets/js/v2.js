@@ -519,23 +519,34 @@
     const e1 = sec[0];
     if (e1) {
       const pilas = $$(".e1-pila", e1);
-      const altos = [10, 14, 8], xs = [156, 192, 226];
+      // pilas de libros y hojas (libro = tapa de color con lomo; hoja = papel con un leve desorden fijo)
+      const recetas = [["L#2B3CFF", "L#FF5A4E", "h", "h", "h", "h", "h"], ["L#C8F03C", "L#7A4DFF", "L#F7C948", "h", "h", "h", "h", "h"], ["L#FF5A4E", "h", "h", "h", "h", "h"]];
+      const xs = [156, 192, 226], desorden = [0.6, -1.8, 1.2, -0.4, 2.1, -1.3, 0.9, -2.2, 1.6];
       const hojas = [];
+      const nodo = (tag, at, padre) => { const n = document.createElementNS(NSV, tag); for (const k in at) n.setAttribute(k, at[k]); if (padre) padre.appendChild(n); return n; };
       pilas.forEach((g, k) => {
-        for (let i = 0; i < altos[k]; i++) {
-          const r = document.createElementNS(NSV, "rect");
-          r.setAttribute("x", xs[k] - 15 + (Math.random() - 0.5) * 5);
-          r.setAttribute("y", -106 - i * 4.4);
-          r.setAttribute("width", 30); r.setAttribute("height", 4.4); r.setAttribute("rx", 1);
-          r.setAttribute("fill", i % 5 === 4 ? "#FFE7A3" : "#FFFFFF");
-          r.setAttribute("stroke", "#16120E"); r.setAttribute("stroke-width", 1.5);
-          g.appendChild(r); hojas.push(r);
-        }
+        let y = -104;
+        recetas[k].forEach((tipo, i) => {
+          const dx = desorden[(i + k * 3) % desorden.length];
+          const item = nodo("g", {}, g);
+          if (tipo[0] === "L") {
+            const alto = 8, x = xs[k] - 17 + dx * 0.6;
+            y -= alto;
+            nodo("path", { d: `M${x + 2},${y} h30 q2,0 2,2 v${alto - 4} q0,2 -2,2 h-30 q-2,0 -2,-2 v-${alto - 4} q0,-2 2,-2 z`, fill: tipo.slice(1), stroke: "#16120E", "stroke-width": 1.8 }, item);
+            nodo("path", { d: `M${x + 4},${y + alto - 2.6} h26`, stroke: "#FFFAF0", "stroke-width": 1.6, "stroke-linecap": "round", opacity: 0.85 }, item);
+            nodo("path", { d: `M${x + 7},${y + 0.9} v${alto - 1.8}`, stroke: "#16120E", "stroke-width": 1.2, opacity: 0.5 }, item);
+          } else {
+            const alto = 4.2, x = xs[k] - 15 + dx;
+            y -= alto;
+            nodo("path", { d: `M${x},${y} h30 v${alto} h-30 z`, fill: i % 4 === 3 ? "#FFE7A3" : "#FFFFFF", stroke: "#16120E", "stroke-width": 1.4, "stroke-linejoin": "round" }, item);
+          }
+          hojas.push(item);
+        });
       });
       gsap.set(hojas, { transformBox: "fill-box", transformOrigin: "50% 100%" });
       const t1 = tl(e1);
-      t1.from(hojas, { y: -60, opacity: 0, stagger: 0.04, ease: "back.out(2)", duration: 0.4 }, 0)
-        .fromTo($$(".tui", e1), { opacity: 0, y: 30, scale: 0.8 }, { opacity: 1, y: 0, scale: 1, stagger: 0.18, duration: 0.5, ease: "back.out(2)" }, 0.1)
+      t1.from(hojas, { y: -60, opacity: 0, stagger: 0.04, ease: "back.out(1.3)", duration: 0.4 }, 0)
+        .fromTo($$(".tui", e1), { opacity: 0, y: 30, scale: 0.92 }, { opacity: 1, y: 0, scale: 1, stagger: 0.18, duration: 0.5, ease: "expo.out" }, 0.1)
         .fromTo($(".e1-aguja-m", e1), { rotation: 0 }, { rotation: 1080, svgOrigin: "-108 -246", ease: "none", duration: 1.6 }, 0)
         .fromTo($(".e1-aguja-h", e1), { rotation: 0 }, { rotation: 90, svgOrigin: "-108 -246", ease: "none", duration: 1.6 }, 0)
         .fromTo($(".e1-circulo", e1), { strokeDasharray: 70, strokeDashoffset: 70 }, { strokeDashoffset: 0, duration: 0.4 }, 0.5);
@@ -549,8 +560,8 @@
     if (e2) {
       const msjs = $$("[data-msj]", e2), estado = $("[data-escribiendo]", e2);
       const t2 = tl(e2, { start: "top 70%", end: "bottom 75%", onUpdate: (st) => { if (estado) estado.textContent = st.progress > 0.32 && st.progress < 0.5 ? "escribiendo…" : "en línea"; } });
-      msjs.forEach((m, i) => t2.to(m, { opacity: 1, y: 0, scale: 1, duration: 0.3, ease: "back.out(2)" }, i * 0.4 + (i >= 2 ? 0.25 : 0)));
-      t2.fromTo($$(".flotante", e2), { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, stagger: 0.3, duration: 0.3, ease: "back.out(2)" }, 0.6);
+      msjs.forEach((m, i) => t2.to(m, { opacity: 1, y: 0, scale: 1, duration: 0.3, ease: "expo.out" }, i * 0.4 + (i >= 2 ? 0.25 : 0)));
+      t2.fromTo($$(".flotante", e2), { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, stagger: 0.3, duration: 0.3, ease: "expo.out" }, 0.6);
       $$(".flotante", e2).forEach((f, i) => gsap.to(f, { yPercent: i ? -14 : 14, repeat: -1, yoyo: true, duration: 2.2 + i * 0.4, ease: "sine.inOut" }));
       gsap.fromTo($(".telefono", e2), { rotation: 4, y: 40 }, { rotation: -3, y: -20, ease: "none", scrollTrigger: { trigger: e2, start: "top bottom", end: "bottom top", scrub: true } });
     }
@@ -564,9 +575,9 @@
       t3.from($(".doc-titulo", e3), { scaleX: 0, transformOrigin: "left", duration: 0.3 }, 0)
         .from($(".doc-sub", e3), { scaleX: 0, transformOrigin: "left", duration: 0.3 }, 0.1)
         .from($$(".doc-lineas i", e3), { scaleX: 0, transformOrigin: "left", stagger: 0.06, duration: 0.25 }, 0.2)
-        .from($$(".doc-grafico i", e3), { scaleY: 0, stagger: 0.08, duration: 0.3, ease: "back.out(2)" }, 0.5)
+        .from($$(".doc-grafico i", e3), { scaleY: 0, stagger: 0.08, duration: 0.3, ease: "back.out(1.3)" }, 0.5)
         .to(obj, { v: 100, duration: 1.2, ease: "none", onUpdate: () => { const v = Math.round(obj.v); if (num) num.textContent = v + "%"; if (barra) barra.style.strokeDashoffset = 201 - 2.01 * v; } }, 0)
-        .fromTo($$(".checks li", e3), { opacity: 0, x: 40, scale: 0.7 }, { opacity: 1, x: 0, scale: 1, stagger: 0.18, duration: 0.3, ease: "back.out(2)" }, 0.15);
+        .fromTo($$(".checks li", e3), { opacity: 0, x: 40, scale: 0.92 }, { opacity: 1, x: 0, scale: 1, stagger: 0.18, duration: 0.3, ease: "expo.out" }, 0.15);
       gsap.fromTo($(".documento", e3), { rotation: 6, y: 50 }, { rotation: -2, y: -30, ease: "none", scrollTrigger: { trigger: e3, start: "top bottom", end: "bottom top", scrub: true } });
     }
 
@@ -577,9 +588,9 @@
       gsap.set(barras, { transformBox: "fill-box", transformOrigin: "50% 100%" });
       const largo = linea ? linea.getTotalLength() : 0;
       const t4 = tl(e4, { start: "top 65%", end: "center 40%" });
-      t4.from(barras, { scaleY: 0, stagger: 0.12, duration: 0.4, ease: "back.out(1.6)" }, 0)
+      t4.from(barras, { scaleY: 0, stagger: 0.12, duration: 0.4, ease: "back.out(1.2)" }, 0)
         .fromTo(linea, { strokeDasharray: largo, strokeDashoffset: largo }, { strokeDashoffset: 0, duration: 0.5 }, 0.45)
-        .from(punto, { scale: 0, transformBox: "fill-box", transformOrigin: "50% 50%", duration: 0.2, ease: "back.out(3)" }, 0.9);
+        .from(punto, { scale: 0, svgOrigin: "252 -192", duration: 0.2, ease: "back.out(1.7)" }, 0.9);
     }
 
     // E5 particulas
@@ -606,10 +617,6 @@
         });
       });
     }
-    $$("[data-revuelto]").forEach((el) => {
-      const txt = el.textContent;
-      ScrollTrigger.create({ trigger: el, start: "top 88%", once: true, onEnter: () => gsap.to(el, { duration: 0.9, scrambleText: { text: txt, chars: "01/·ABCDEFGHIJKLMNOPQRSTUVWXYZ", speed: 0.5 } }) });
-    });
   }
 
   /* ---------- fondo de color y HUD ---------- */
@@ -620,7 +627,7 @@
       const ir = () => {
         gsap.to(fondo, { backgroundColor: color, duration: 0.55, ease: "power2.out", overwrite: true });
         if (meta) meta.setAttribute("content", color);
-        if (hud && hud.dataset.actual !== txt) { hud.dataset.actual = txt; gsap.to(hud, { duration: 0.6, scrambleText: { text: txt, chars: "0123456789/·", speed: 0.6 } }); }
+        if (hud && hud.dataset.actual !== txt) { hud.dataset.actual = txt; gsap.to(hud, { duration: 0.6, scrambleText: { text: txt, chars: "ABCDEFGHIJKLMNOPQRSTUVWXYZ", speed: 0.6 } }); }
       };
       ScrollTrigger.create({ trigger: s, start: "top 58%", end: "bottom 58%", onEnter: ir, onEnterBack: ir });
     });
@@ -633,9 +640,8 @@
       el.textContent = "0" + suf;
       ScrollTrigger.create({ trigger: el, start: "top 85%", once: true, onEnter: () => gsap.to(o, { v: fin, duration: 2, ease: "power3.out", onUpdate: () => { el.textContent = fmt.format(Math.round(o.v)) + suf; } }) });
     });
-    $$("[data-cinta] .cinta__pista").forEach((p) => {
-      Array.from(p.children).forEach((n) => { const c = n.cloneNode(true); c.setAttribute("aria-hidden", "true"); c.alt = ""; p.appendChild(c); });
-    });
+    const logos = $$(".logos li");
+    if (logos.length) gsap.from(logos, { y: 18, opacity: 0, stagger: 0.035, duration: 0.7, ease: "expo.out", scrollTrigger: { trigger: ".logos", start: "top 88%", once: true } });
     if (!tactil) {
       $$("[data-inclinar]").forEach((c) => {
         const rx = gsap.quickTo(c, "rotationX", { duration: 0.5, ease: "power3" }), ry = gsap.quickTo(c, "rotationY", { duration: 0.5, ease: "power3" });
@@ -651,8 +657,9 @@
     }
     $$(".carta").forEach((c) => gsap.from(c, { y: 70, opacity: 0, rotation: (Math.random() - 0.5) * 6, duration: 0.9, ease: "expo.out", scrollTrigger: { trigger: c, start: "top 92%", once: true } }));
     $$(".paso").forEach((c, i) => gsap.from(c, { y: 60, opacity: 0, duration: 0.8, delay: i * 0.08, ease: "expo.out", scrollTrigger: { trigger: c, start: "top 90%", once: true } }));
-    $$(".burbujas li").forEach((c, i) => gsap.from(c, { y: 24, opacity: 0, scale: 0.9, duration: 0.6, delay: (i % 4) * 0.12, ease: "back.out(2)", scrollTrigger: { trigger: c, start: "top 92%", once: true } }));
-    gsap.fromTo(".marquesina__pista", { xPercent: 0 }, { xPercent: -12, ease: "none", scrollTrigger: { trigger: ".final", start: "top bottom", end: "bottom top", scrub: true } });
+    $$(".burbujas li").forEach((c, i) => gsap.from(c, { y: 24, opacity: 0, scale: 0.96, duration: 0.6, delay: (i % 4) * 0.12, ease: "expo.out", scrollTrigger: { trigger: c, start: "top 92%", once: true } }));
+    gsap.fromTo(".marquesina__pista", { xPercent: 0 }, { xPercent: -18, ease: "none", scrollTrigger: { trigger: ".final", start: "top bottom", end: "bottom top", scrub: true } });
+    if ($(".muestras__cinta")) gsap.fromTo(".muestras__cinta .cinta__pista", { xPercent: 0 }, { xPercent: -14, ease: "none", scrollTrigger: { trigger: ".muestras__cinta", start: "top bottom", end: "bottom top", scrub: true } });
 
     const barra = $("[data-barra]"), wa = $(".wa-flotante");
     let ultimo = 0;
@@ -761,7 +768,7 @@
     (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => { rearmar(); });
     window.addEventListener("load", () => setTimeout(rearmar, 60));
 
-    if (his) gsap.from(his.pj.svg, { scale: 0.4, opacity: 0, transformOrigin: "50% 92%", duration: 1, ease: "elastic.out(1,0.5)", delay: 0.35 });
+    if (his) gsap.from(his.pj.svg, { y: 36, scale: 0.9, opacity: 0, transformOrigin: "50% 92%", duration: 1.1, ease: "expo.out", delay: 0.35 });
     let previo = performance.now();
     gsap.ticker.add(() => {
       const ahora = performance.now(), t = ahora / 1000, dt = Math.min(0.05, (ahora - previo) / 1000);
