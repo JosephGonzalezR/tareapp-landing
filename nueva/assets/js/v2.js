@@ -167,11 +167,18 @@
       const movil = MOVIL;
       N = movil ? 900 : 1700;
       const caja = $(".estacion__escena", sec), escena = caja.getBoundingClientRect(), sr = sec.getBoundingClientRect();
-      // celular: el 7,0 va arriba de la escena y los personajes abajo; el estudiante baja recien bajo el 7,0
+      // celular: el 7,0 va centrado en el espacio libre entre el borde de arriba de la escena y los personajes (Joseph 4-oct:
+      // "el 7 mas centrado"); el estudiante baja recien bajo el 7,0
       const alto = movil ? Math.min(escena.width * 0.44, escena.height * 0.27, 210) : Math.min(escena.width * 0.62, H * 0.42, 420);
       const cx = movil ? escena.left - sr.left + escena.width / 2 : escena.left - sr.left + escena.width * 0.52;
-      const cy = movil ? escena.top - sr.top + alto * 0.42 + 6 : H * 0.42;
-      caja.dataset.techo = movil ? Math.round(alto * 0.84 + 18) : 0;
+      let cy = H * 0.42;
+      if (movil) {
+        const svg = $("[data-escena]", caja), vr = svg ? svg.getBoundingClientRect() : escena;
+        const k = svg ? Math.min(vr.width / 470, vr.height / 330) : 0;
+        const libreTop = escena.top - sr.top, libreBot = (svg ? vr.top + (vr.height - 330 * k) / 2 + 10 * k : escena.bottom) - sr.top;
+        cy = Math.max(libreTop + alto * 0.42 + 6, (libreTop + libreBot) / 2 - alto * 0.1);
+        caja.dataset.techo = Math.round(cy - libreTop + alto * 0.42 + 12);
+      } else caja.dataset.techo = 0;
       const obj = objetivos(cx, cy, alto);
       const R = alto * 0.62;
       pts = [];
