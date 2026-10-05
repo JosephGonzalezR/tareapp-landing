@@ -510,6 +510,14 @@
     return { medir, tic, pj };
   }
 
+  /* Chat del telefono de la escena 2: cuanto sube para que el mensaje i quede entero sobre el marco de abajo.
+     En el celular la conversacion no cabe entera y sube como en WhatsApp; en escritorio cabe y queda en 0. */
+  function subidaChat(sec, i) {
+    const tel = $(".telefono", sec), chat = $(".telefono__chat", sec), m = $$("[data-msj]", sec)[i];
+    if (!tel || !chat || !m) return 0;
+    return -Math.max(0, chat.offsetTop + m.offsetTop + m.offsetHeight - (tel.clientHeight - 18));
+  }
+
   /* ---------- escenas animadas con el scroll ---------- */
   function escenas(partic) {
     const NSV = "http://www.w3.org/2000/svg";
@@ -559,9 +567,13 @@
     // E2
     const e2 = sec[1];
     if (e2) {
-      const msjs = $$("[data-msj]", e2), estado = $("[data-escribiendo]", e2);
-      const t2 = tl(e2, { start: "top 70%", end: "bottom 75%", onUpdate: (st) => { if (estado) estado.textContent = st.progress > 0.32 && st.progress < 0.5 ? "escribiendo…" : "en línea"; } });
-      msjs.forEach((m, i) => t2.to(m, { opacity: 1, y: 0, scale: 1, duration: 0.3, ease: "expo.out" }, i * 0.4 + (i >= 2 ? 0.25 : 0)));
+      const msjs = $$("[data-msj]", e2), estado = $("[data-escribiendo]", e2), chat = $(".telefono__chat", e2);
+      const t2 = tl(e2, { start: "top 70%", end: "bottom 75%", invalidateOnRefresh: true, onUpdate: (st) => { if (estado) estado.textContent = st.progress > 0.32 && st.progress < 0.5 ? "escribiendo…" : "en línea"; } });
+      msjs.forEach((m, i) => {
+        const t = i * 0.4 + (i >= 2 ? 0.25 : 0);
+        t2.to(m, { opacity: 1, y: 0, scale: 1, duration: 0.3, ease: "expo.out" }, t);
+        if (chat) t2.to(chat, { y: () => subidaChat(e2, i), duration: 0.3, ease: "expo.out" }, t);
+      });
       t2.fromTo($$(".flotante", e2), { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, stagger: 0.3, duration: 0.3, ease: "expo.out" }, 0.6);
       $$(".flotante", e2).forEach((f, i) => gsap.to(f, { yPercent: i ? -14 : 14, repeat: -1, yoyo: true, duration: 2.2 + i * 0.4, ease: "sine.inOut" }));
       gsap.fromTo($(".telefono", e2), { rotation: 4, y: 40 }, { rotation: -3, y: -20, ease: "none", scrollTrigger: { trigger: e2, start: "top bottom", end: "bottom top", scrub: true } });
@@ -697,6 +709,8 @@
       };
       ubicar(ub, svg);
     });
+    const e2 = $$(".estacion")[1], chat = e2 && $(".telefono__chat", e2);
+    if (chat) ubicar(() => { chat.style.transform = `translateY(${subidaChat(e2, $$("[data-msj]", e2).length - 1)}px)`; }, chat);
     const profes = [[4, -150, "profeSentado", 1], [5, 196, "profeNota", -1]];
     profes.forEach(([i, dx, pose, mira]) => {
       const svg = escenasSvg[i];
