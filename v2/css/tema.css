@@ -1,0 +1,129 @@
+/* TEMA v2 PARA LAS PAGINAS INTERNAS (12-oct-2026, Joseph por DEV 4: "Adaptar la letra y todo ... del nuevo estilo a todo").
+   Se carga al FINAL de cada pagina interna (despues de styles.css y de su <style>): la letra, los colores, los bordes y las
+   sombras de la portada nueva (/v2/css/v2.css), sin tocar la estructura ni app.js. Los nombres viejos de letra ("Playfair
+   Display", "Plus Jakarta Sans") apuntan a las letras nuevas: asi cambian tambien los estilos escritos dentro de cada pagina. */
+
+@font-face{font-family:"Archivo";src:url("/v2/fonts/archivo-vf.woff2") format("woff2");font-weight:100 900;font-stretch:62% 125%;font-display:swap}
+@font-face{font-family:"Instrument Serif";src:url("/v2/fonts/instrument-serif-italic.woff2") format("woff2");font-style:italic;font-weight:400;font-display:swap}
+@font-face{font-family:"Instrument Serif";src:url("/v2/fonts/instrument-serif.woff2") format("woff2");font-style:normal;font-weight:400;font-display:swap}
+@font-face{font-family:"JetBrains Mono";src:url("/v2/fonts/jetbrains-mono-vf.woff2") format("woff2");font-weight:100 800;font-display:swap}
+@font-face{font-family:"Playfair Display";src:url("/v2/fonts/archivo-vf.woff2") format("woff2");font-weight:100 900;font-stretch:62% 125%;font-style:normal;font-display:swap}
+@font-face{font-family:"Playfair Display";src:url("/v2/fonts/instrument-serif-italic.woff2") format("woff2");font-weight:100 900;font-style:italic;font-display:swap}
+@font-face{font-family:"Plus Jakarta Sans";src:url("/v2/fonts/archivo-vf.woff2") format("woff2");font-weight:100 900;font-stretch:62% 125%;font-display:swap}
+
+:root{
+  --amarillo:#F7C948;--tinta:#16120E;--crema:#FFF3D6;--papel:#FFFAF0;--azul:#2B3CFF;--coral:#FF5A4E;--lima:#C8F03C;--violeta:#7A4DFF;
+  --t-borde:2.5px solid var(--tinta);
+  --font:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --bg:var(--crema);--bg2:var(--papel);--surface:var(--papel);--card:var(--papel);
+  --text:var(--tinta);--muted:rgba(22,18,14,.74);--line:rgba(22,18,14,.2);
+  --brand:var(--amarillo);--brand2:#E9B730;--brand-ink:var(--tinta);--brand3:var(--crema);
+  --shadow-sm:3px 3px 0 var(--tinta);--shadow:5px 5px 0 var(--tinta);--shadow-lg:7px 7px 0 var(--tinta);
+  --radius:22px;--radius-sm:16px;--ring:rgba(43,60,255,.35);--grad:none;
+}
+html{scrollbar-color:var(--tinta) transparent}
+body{background:var(--crema)!important;color:var(--tinta);font-family:var(--font);font-weight:430;font-stretch:100%}
+::selection{background:var(--tinta);color:var(--amarillo)}
+:focus-visible{outline:3px solid var(--azul)!important;outline-offset:3px}
+a{color:inherit}
+.muted,.fineprint{color:var(--muted)}
+
+/* ── titulos: los de la portada (Archivo negra y ancha, en mayusculas; el acento en serif italica) ── */
+h1,h2,.hero__title,.section__head h2{font-family:"Archivo",sans-serif!important;font-weight:900!important;font-stretch:125%;
+  text-transform:uppercase;letter-spacing:-.012em;line-height:.95!important;color:var(--tinta)}
+h1{font-size:clamp(2.3rem,6.2vw,5rem)!important}
+/* el tamano grande solo en los titulos de seccion: un h2 dentro de un recuadro conserva el de su pagina */
+.section__head h2,main>section>.container>h2,main>section>h2{font-size:clamp(1.7rem,4vw,3.2rem)!important}
+h1 em,h2 em,h1 i,h2 i,.hero__title em,.serif{font-family:"Instrument Serif",Georgia,serif!important;font-style:italic;font-weight:400!important;
+  font-stretch:100%;text-transform:none;letter-spacing:0}
+h3,h4{font-family:"Archivo",sans-serif!important;font-weight:800!important;font-stretch:100%;letter-spacing:-.01em;color:var(--tinta)}
+
+/* ── barra de arriba y menu ── */
+.topbar{background:var(--tinta)!important;border-bottom:0!important;backdrop-filter:none}
+.topbar,.topbar__text,.topbar__link,.topbar a{color:rgba(255,243,214,.9)!important;font-family:"JetBrains Mono",ui-monospace,monospace;font-size:12px}
+.topbar .dot{background:var(--amarillo);box-shadow:0 0 0 5px rgba(247,201,72,.25)}
+.nav{background:var(--crema)!important;border-bottom:var(--t-borde)!important;backdrop-filter:none}
+.brand img{border-radius:0!important}
+.brand .marca-v2{height:25px;width:auto}
+.nav__links a{color:var(--tinta)!important;font-weight:650;border-radius:999px}
+.nav__links a:hover,.nav__links a.active{background:var(--amarillo)!important}
+.nav__links a[aria-current="page"]{box-shadow:inset 0 0 0 2px var(--tinta)}
+.nav__cta,.nav__links a.nav__cta{background:var(--tinta)!important;color:var(--crema)!important;border:var(--t-borde)!important;box-shadow:3px 3px 0 rgba(22,18,14,.35)}
+.page-switcher{background:var(--papel)!important;border:var(--t-borde)!important;box-shadow:none!important}
+.page-switcher__tab{color:var(--tinta)!important;font-weight:750}
+.page-switcher__tab--active{background:var(--amarillo)!important;box-shadow:inset 0 0 0 2px var(--tinta)!important}
+.nav__burger{background:var(--papel)!important;border:var(--t-borde)!important;border-radius:999px!important}
+.nav__burger span{background:var(--tinta)!important}
+.mobile-menu{background:var(--crema)!important;border-top:var(--t-borde)!important}
+.mobile-menu a{background:var(--papel)!important;border:var(--t-borde)!important;border-radius:16px!important;color:var(--tinta)}
+.scroll-progress{background:rgba(22,18,14,.12)!important}
+.scroll-progress__bar{background:var(--tinta)!important;box-shadow:none!important}
+
+/* ── botones: los de la portada (pildora, borde de tinta y sombra dura) ── */
+.btn{border-radius:999px!important;border:var(--t-borde)!important;box-shadow:4px 4px 0 var(--tinta)!important;font-family:"Archivo",sans-serif;
+  font-weight:800;transition:transform .15s var(--ease-out,ease),box-shadow .15s ease}
+.btn::after{display:none!important}
+.btn:hover{transform:translate(-1px,-1px)!important;box-shadow:5px 5px 0 var(--tinta)!important}
+.btn:active{transform:translate(2px,2px)!important;box-shadow:2px 2px 0 var(--tinta)!important}
+.btn--primary{background:var(--tinta)!important;color:var(--crema)!important}
+.btn--primary .btn__hint{color:rgba(255,243,214,.8)!important}
+.btn--soft,.btn--ghost,.btn--outline,.btn--secondary{background:var(--papel)!important;color:var(--tinta)!important}
+.btn--ghost .btn__hint{color:var(--tinta)!important}
+.copy-btn{border:2px solid var(--tinta)!important;border-radius:999px!important;background:var(--amarillo)!important;color:var(--tinta)!important;box-shadow:none!important}
+
+/* ── etiquetas, chips y pildoras ── */
+.pill,.badge,.chip,.career-chip,.section-label,.hero__pill .pill,[class*="eyebrow"],[class*="kicker"],[class*="-tag"],[class*="__tag"],[class*="label"]:not(label):not(.sr-only){
+  font-family:"JetBrains Mono",ui-monospace,monospace!important}
+.pill,.badge,.chip,.career-chip{background:var(--papel)!important;border:2px solid var(--tinta)!important;color:var(--tinta)!important;box-shadow:none!important}
+.pill--soft{background:var(--amarillo)!important}
+
+/* ── tarjetas y bloques ── */
+.card,.mini-card,.blog-card,.step__body,.bank-card,.stat,.team-card,.about-member,.about-value,.accordion,.accordion__item,.bank-panel,.mockup,.work-price,
+.modality,.faq details,.faq-item,details.qa,.ev-item,.final-cta__inner,.cta-band__inner{
+  background:var(--papel)!important;border:var(--t-borde)!important;border-radius:var(--radius)!important;box-shadow:5px 5px 0 var(--tinta)!important}
+.accordion summary,.accordion button,details summary{font-family:"Archivo",sans-serif;font-weight:750;color:var(--tinta)}
+.section--alt{background:transparent!important}
+.hero__bg,.hero-decor,.footer-wave{display:none!important}
+.final-cta,.cta-band,.urgente-band{background:var(--amarillo)!important;border-top:var(--t-borde);border-bottom:var(--t-borde)}
+table{border-collapse:separate;border-spacing:0}
+th,td{border-color:rgba(22,18,14,.25)!important}
+input,select,textarea{border:2px solid var(--tinta)!important;border-radius:14px!important;background:var(--papel)!important;color:var(--tinta)!important;font-family:var(--font)}
+
+/* ── pie: el de la portada (tinta con letra crema) ── */
+.footer{background:var(--tinta)!important;color:var(--crema)!important;border-top:0!important}
+.footer a,.footer h4,.footer strong,.footer .muted,.footer span,.footer p{color:var(--crema)!important}
+.footer .muted,.footer__bottom .muted{color:rgba(255,243,214,.72)!important}
+.footer h4{font-family:"JetBrains Mono",ui-monospace,monospace!important;font-size:12px!important;letter-spacing:.08em;text-transform:uppercase;opacity:.8}
+.footer a:hover{color:var(--amarillo)!important}
+.footer__brand img{border-radius:0!important}
+.footer__brand .marca-v2{height:32px;width:auto}
+.to-top{background:var(--tinta)!important;color:var(--crema)!important;border:2px solid var(--crema)!important}
+
+/* ── ajustes despues de mirar las paginas (12-oct) ── */
+/* titulo y cifras con degradado de la hoja vieja: en tinta, como en la portada */
+.hero__title,.stat__val{background:none!important;-webkit-background-clip:border-box!important;background-clip:border-box!important;
+  -webkit-text-fill-color:var(--tinta)!important;color:var(--tinta)!important}
+/* el heroe de Tesis: amarillo, como el de la portada */
+.hero{background:var(--amarillo)!important;border-bottom:var(--t-borde)}
+/* un titulo grande dentro de una tarjeta no puede salirse de ella */
+main :is([class*="card"],[class*="panel"],[class*="box"],[class*="__body"]) h2{font-size:clamp(1.15rem,2.3vw,1.6rem)!important;line-height:1!important}
+/* los pasos: numero en circulo de tinta y la linea que los une en tinta */
+.step__num{background:var(--amarillo)!important;color:var(--tinta)!important;border:var(--t-borde)!important;box-shadow:3px 3px 0 var(--tinta)!important;
+  font-family:"Archivo",sans-serif!important;font-weight:900!important}
+.steps::before{background:var(--tinta)!important;opacity:.35}
+/* el menu entra en 1280-1440 px con la letra nueva (un poco mas ancha que la anterior) */
+@media (min-width:901px){.nav__links{gap:2px!important}.nav__links a{font-size:13.5px!important;padding:8px 9px!important}}
+/* el boton de WhatsApp del menu: solo el icono hasta 1500 px (con el numero no entraba y se partia en 4 lineas) */
+@media (max-width:1500px){.nav__actions .btn__hint{display:none!important}.nav__actions .btn{padding:10px 12px!important}}
+.nav__actions .btn__hint{white-space:nowrap}
+/* la fila de cada paso no lleva marco: la tarjeta es su cuerpo */
+.steps>.step{background:none!important;border:0!important;box-shadow:none!important}
+.footer__brand{gap:14px!important}
+/* menu del celular: el boton de WhatsApp en tinta (con el fondo papel de los enlaces quedaba letra clara sobre claro) */
+.mobile-menu a.btn--primary{background:var(--tinta)!important;color:var(--crema)!important}
+/* celular: la letra nueva es mas ancha; los titulos bajan un poco y el encabezado de las entradas del blog lleva margen */
+@media (max-width:560px){h1{font-size:clamp(1.9rem,8.6vw,2.5rem)!important}}
+@media (max-width:900px){.article-hero__content{padding-left:20px!important;padding-right:20px!important}}
+/* heroe de Tesis (amarillo): la palabra que se escribe sola y el enlace, en tinta (en amarillo no se leian) */
+.hero #typedTarget,.hero #typedTarget *,.hero a:not(.btn){color:var(--tinta)!important;-webkit-text-fill-color:var(--tinta)!important}
+.hero #typedTarget{font-weight:800;text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:3px}
