@@ -439,3 +439,21 @@ h2 .serif{font-size:.72em;margin-top:.12em}
   .js [data-msj],.js .tui,.js .flotante,.js .checks li{opacity:1;transform:none}
   .wa-flotante{transform:none;opacity:1;pointer-events:auto}
 }
+
+/* 12-oct-2026: la mascara que revela las palabras (SplitText mask) recortaba las tildes de las mayusculas (GUÍA, CÓMO, ASÍ, MÁS): mas aire arriba sin mover la linea */
+.pal-mask{padding-top:.22em;margin-top:-.22em}
+
+/* 13-oct-2026 PRECIOS-DOS: el menu lleva "Precios de trabajos" y "Precios de tesis" (Joseph: "que no solo este precios").
+   Con ocho rotulos la barra entra en una linea desde 1241 px; hasta ahi, el menu del celular. Tareapp Peru (sin tesis) no lleva la clase. */
+.barra__nav a{white-space:nowrap}
+@media (min-width:1101px) and (max-width:1240px){
+  .barra--larga .barra__nav{display:none}
+  .barra--larga .barra__menu{display:block}
+  .barra--larga .barra__cta{margin-left:auto}
+  .barra--larga .barra__cta+.barra__menu{margin-left:0}
+}
+/* El menu del celular entra en la pantalla aunque sea baja (la letra se ajusta al alto) y, si aun asi no entra, se desliza */
+.menu-movil{overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.menu-movil nav a{font-size:clamp(1.25rem,min(8vw,3.8vh),3rem);font-size:clamp(1.25rem,min(8vw,3.8dvh),3rem)}
+.menu-movil>.boton{flex:none;margin-top:18px}
+@media (max-height:720px){.menu-movil{padding-top:88px;padding-bottom:24px}}
