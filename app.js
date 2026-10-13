@@ -1,3 +1,68 @@
+/* AGS-ORIGEN inicio (13-oct-2026). El saludo de cada enlace de WhatsApp de la web dice de donde llega la persona:
+   "Hola, vengo de TikTok." / Instagram / Facebook / Google, o "Hola, vengo de la página web." Bloque generado: no editar a mano. */
+window.AGS_ORIGEN = window.AGS_ORIGEN || (function () {
+  var CLAVE = "ags_origen";
+  var POR_URL = { tiktok: "TikTok", instagram: "Instagram", facebook: "Facebook", google: "Google" };
+  function deLaVisita() {
+    var o = "";
+    try { o = window.sessionStorage.getItem(CLAVE) || ""; } catch (e) {}
+    if (o) return o;
+    var ua = navigator.userAgent || "", ref = "", interno = false;
+    var par = (((location.search || "").match(/[?&]o=([a-z]+)/i) || [])[1] || "").toLowerCase();
+    try { ref = document.referrer ? new URL(document.referrer).hostname.toLowerCase() : ""; } catch (e) {}
+    if (ref === location.hostname) ref = "";
+    function de(dom) { return ref === dom || ref.slice(-(dom.length + 1)) === "." + dom; }
+    if (POR_URL[par]) o = POR_URL[par];
+    else if (/musical_ly|trill_|Bytedance|TikTok/i.test(ua)) { o = "TikTok"; interno = true; }
+    else if (/Instagram/i.test(ua)) { o = "Instagram"; interno = true; }
+    else if (/FBAN|FBAV|FB_IAB/i.test(ua)) { o = "Facebook"; interno = true; }
+    else if (de("tiktok.com")) o = "TikTok";
+    else if (de("instagram.com")) o = "Instagram";
+    else if (de("facebook.com") || de("fb.com") || de("fb.me")) o = "Facebook";
+    else if (/(^|\.)google\.[a-z]{2,3}(\.[a-z]{2})?$/.test(ref)) o = "Google";
+    else o = "la página web";
+    try { window.sessionStorage.setItem(CLAVE, o); } catch (e) {}
+    // Dentro del navegador de una red, la red queda en la direccion (?o=): si la persona elige "Abrir en el navegador", no se pierde.
+    if (interno) {
+      try {
+        window.history.replaceState(window.history.state, "", location.pathname + (location.search ? location.search + "&" : "?") +
+          "o=" + o.toLowerCase() + (location.hash || ""));
+      } catch (e) {}
+    }
+    return o;
+  }
+  // Solo se toca un mensaje vacio o que empieza con un saludo. Quien escribe por un pago ya es cliente: su mensaje queda igual.
+  var SALUDO = /^\s*(¡\s*)?(hola|buen(os)?\s+d[ií]as?|buenas(\s+(tardes|noches))?)(?![a-záéíóúñ])\s*[!,.:;]*\s*/i;
+  function saludo(mensaje) {
+    var m = String(mensaje == null ? "" : mensaje);
+    if (/vengo de /i.test(m)) return m;
+    if (/pago|pagar|transferi|comprobante/i.test(m)) return m;
+    if (m.replace(/\s/g, "") && !SALUDO.test(m)) return m;
+    var resto = m.replace(SALUDO, "");
+    var ini = "Hola, vengo de " + deLaVisita() + ".";
+    if (!resto.replace(/\s/g, "")) return ini + " Quiero hacer una consulta.";
+    return ini + " " + resto.charAt(0).toUpperCase() + resto.slice(1);
+  }
+  // Enlaces de WhatsApp escritos a mano en la pagina (no pasan por el armador de enlaces)
+  function repasar() {
+    var as = document.querySelectorAll('a[href*="wa.me/"], a[href*="api.whatsapp.com/send"]');
+    for (var i = 0; i < as.length; i++) {
+      try {
+        var u = new URL(as[i].href);
+        var t = u.searchParams.get("text") || "";
+        var n = saludo(t);
+        if (n === t) continue;
+        u.searchParams.delete("text");
+        var q = u.searchParams.toString();
+        as[i].href = u.origin + u.pathname + "?" + (q ? q + "&" : "") + "text=" + encodeURIComponent(n);
+      } catch (e) {}
+    }
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", repasar);
+  else repasar();
+  return { deLaVisita: deLaVisita, saludo: saludo, repasar: repasar };
+})();
+/* AGS-ORIGEN fin */
 /**
  * Tareapp Landing v6 (2026 Futurista)
  * Edita CONFIG para personalizar: WhatsApp, ubicación, enlaces, etc.
@@ -46,7 +111,7 @@ function getPage() {
 
 function buildWhatsAppUrl(message) {
   const base = `https://wa.me/${CONFIG.whatsappNumber}`;
-  const text = encodeURIComponent(message || "");
+  const text = encodeURIComponent(window.AGS_ORIGEN ? window.AGS_ORIGEN.saludo(message || "") : (message || ""));
   return `${base}?text=${text}`;
 }
 
