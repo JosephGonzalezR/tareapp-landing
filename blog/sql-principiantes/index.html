@@ -4,8 +4,8 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="color-scheme" content="light" />
-  <title>SQL para principiantes: Consultas basicas para Bases de Datos | Tareapp Blog</title>
-  <meta name="description" content="Aprende SQL desde cero con este tutorial completo. SELECT, WHERE, JOIN, funciones de agregacion y mas. Ideal para trabajos universitarios de bases de datos." />
+  <title>SQL para principiantes: Consultas básicas para Bases de Datos | Tareapp Blog</title>
+  <meta name="description" content="Aprende SQL desde cero con este tutorial completo. SELECT, WHERE, JOIN, funciones de agregación y más. Ideal para trabajos universitarios de bases de datos." />
   <meta name="author" content="Tareapp" />
   <meta name="theme-color" content="#F7C948" />
   <link rel="icon" href="/NUEVO LOGO TAREAPP.png" />
@@ -94,12 +94,12 @@
         <img src="/v2/img/tareapp-pin.png" width="30" height="36" alt="" />
         <img class="marca-v2" src="/v2/img/tareapp-marca.png" width="108" height="25" alt="Tareapp" />
       </a>
-      <nav class="nav__links" aria-label="Navegacion principal">
+      <nav class="nav__links" aria-label="Navegación principal">
         <a href="/#servicios">Servicios</a>
         <a href="/procedimiento/">Proceso</a>
         <a href="/precios-trabajos/">Precios Trabajos</a>
         <a href="/precios/">Precios Tesis</a>
-        <a href="/referencias/">Referencias</a>
+        <a href="/referencias/">Evidencias</a>
         <a href="/faq/">Preguntas</a>
         <a href="/pago/">Pago</a>
         <a href="/blog/">Blog</a>
@@ -118,7 +118,7 @@
     <!-- ARTICLE HERO -->
     <section class="article-hero">
       <div class="article-hero__img">
-        <img src="/Imagenes/imagen 14.webp" alt="Monitor con codigo SQL en pantalla" width="1400" height="480" decoding="async" />
+        <img src="/Imagenes/imagen 14.webp" alt="Monitor con código SQL en pantalla" width="1400" height="480" decoding="async" />
       </div>
       <div class="article-hero__overlay"></div>
       <div class="article-hero__content container">
@@ -129,7 +129,7 @@
           <span>/</span>
           <span>SQL</span>
         </nav>
-        <h1>SQL para principiantes: Consultas basicas para Bases de Datos</h1>
+        <h1>SQL para principiantes: Consultas básicas para Bases de Datos</h1>
         <div class="article-meta">
           <span class="article-meta__badge" style="background:#E34C26;color:#fff">SQL</span>
           <span class="article-meta__sep"></span>
@@ -146,20 +146,20 @@
       <!-- MAIN CONTENT -->
       <article class="article-content">
 
-        <h2 id="que-es-sql">Que es SQL y para que se usa</h2>
+        <h2 id="que-es-sql">Qué es SQL y para qué se usa</h2>
 
-        <p>SQL (Structured Query Language, o Lenguaje de Consulta Estructurado) es el lenguaje estandar para interactuar con bases de datos relacionales. Si estas cursando Ingenieria en Informatica, Ingenieria Civil Industrial, Administracion o cualquier carrera que tenga un ramo de bases de datos, SQL es una de las herramientas mas importantes que vas a aprender.</p>
+        <p>SQL (Structured Query Language, o Lenguaje de Consulta Estructurado) es el lenguaje estándar para interactuar con bases de datos relacionales. Si estás cursando Ingeniería en Informática, Ingeniería Civil Industrial, Administración o cualquier carrera que tenga un ramo de bases de datos, SQL es una de las herramientas más importantes que vas a aprender.</p>
 
         <p>Con SQL puedes hacer cuatro operaciones fundamentales sobre los datos, conocidas como <strong>CRUD</strong>:</p>
 
         <ul>
           <li><strong>Create (Crear):</strong> insertar nuevos registros en una tabla.</li>
-          <li><strong>Read (Leer):</strong> consultar y extraer datos de una o mas tablas.</li>
+          <li><strong>Read (Leer):</strong> consultar y extraer datos de una o más tablas.</li>
           <li><strong>Update (Actualizar):</strong> modificar registros existentes.</li>
           <li><strong>Delete (Eliminar):</strong> borrar registros de una tabla.</li>
         </ul>
 
-        <p>SQL se usa en practicamente todas las aplicaciones que manejan datos: sistemas bancarios, tiendas online, redes sociales, sistemas de salud, ERP empresariales, y por supuesto, en los trabajos y proyectos de la universidad. Saber SQL te abre puertas tanto en el mundo academico como profesional.</p>
+        <p>SQL se usa en prácticamente todas las aplicaciones que manejan datos: sistemas bancarios, tiendas online, redes sociales, sistemas de salud, ERP empresariales, y por supuesto, en los trabajos y proyectos de la universidad. Saber SQL te abre puertas tanto en el mundo académico como profesional.</p>
 
         <div class="article-tip article-tip--info">
           <div class="article-tip__icon">
@@ -167,31 +167,31 @@
           </div>
           <div class="article-tip__text">
             <strong>Dato importante</strong>
-            SQL es un lenguaje declarativo: tu le dices a la base de datos <em>que</em> quieres obtener, no <em>como</em> obtenerlo. Esto lo hace diferente a lenguajes como Python o Java, donde escribes instrucciones paso a paso. Por eso SQL es relativamente facil de aprender.
+            SQL es un lenguaje declarativo: tu le dices a la base de datos <em>que</em> quieres obtener, no <em>como</em> obtenerlo. Esto lo hace diferente a lenguajes como Python o Java, donde escribes instrucciones paso a paso. Por eso SQL es relativamente fácil de aprender.
           </div>
         </div>
 
         <h2 id="configurar-entorno">Configurar tu entorno (MySQL, PostgreSQL o SQLite)</h2>
 
-        <p>Para practicar SQL necesitas un motor de base de datos. Estas son las tres opciones mas populares para estudiantes:</p>
+        <p>Para practicar SQL necesitas un motor de base de datos. Estas son las tres opciones más populares para estudiantes:</p>
 
         <ul>
-          <li><strong>MySQL:</strong> el mas usado en el mundo. Descarga MySQL Community Server y MySQL Workbench (interfaz grafica). Es gratuito y es lo que la mayoria de profesores piden.</li>
-          <li><strong>PostgreSQL:</strong> mas robusto y con mejor soporte para funciones avanzadas. Descargalo con pgAdmin como interfaz grafica. Tambien gratuito.</li>
-          <li><strong>SQLite:</strong> el mas simple. No necesita instalacion de servidor; funciona como un archivo. Ideal para practicar rapido. Puedes usar DB Browser for SQLite como interfaz.</li>
+          <li><strong>MySQL:</strong> el más usado en el mundo. Descarga MySQL Community Server y MySQL Workbench (interfaz gráfica). Es gratuito y es lo que la mayoría de profesores piden.</li>
+          <li><strong>PostgreSQL:</strong> más robusto y con mejor soporte para funciones avanzadas. Descargalo con pgAdmin como interfaz gráfica. También gratuito.</li>
+          <li><strong>SQLite:</strong> el más simple. No necesita instalación de servidor; funciona como un archivo. Ideal para practicar rápido. Puedes usar DB Browser for SQLite como interfaz.</li>
         </ul>
 
         <div class="article-steps">
           <div class="article-step">
             <div class="article-step__body">
-              <h4>Opcion rapida: SQL online</h4>
+              <h4>Opción rápida: SQL online</h4>
               <p>Si no quieres instalar nada, puedes practicar en <strong>SQLiteOnline.com</strong> o <strong>db-fiddle.com</strong>. Solo abre el navegador y empieza a escribir consultas. Perfecto para empezar.</p>
             </div>
           </div>
           <div class="article-step">
             <div class="article-step__body">
-              <h4>Crear una base de datos de practica</h4>
-              <p>Vamos a crear una base de datos sencilla para los ejemplos de esta guia. Copia y ejecuta el siguiente codigo:</p>
+              <h4>Crear una base de datos de práctica</h4>
+              <p>Vamos a crear una base de datos sencilla para los ejemplos de esta guía. Copia y ejecuta el siguiente código:</p>
             </div>
           </div>
         </div>
@@ -257,12 +257,12 @@ INSERT INTO inscripciones (estudiante_id, curso_id, nota, semestre) VALUES
 
         <h2 id="select-consulta">SELECT: tu primera consulta</h2>
 
-        <p>La sentencia <code>SELECT</code> es la base de todo en SQL. Con ella puedes obtener datos de una tabla. La sintaxis basica es:</p>
+        <p>La sentencia <code>SELECT</code> es la base de todo en SQL. Con ella puedes obtener datos de una tabla. La sintaxis básica es:</p>
 
         <pre><code>SELECT columna1, columna2, columna3
 FROM nombre_tabla;</code></pre>
 
-        <p>Veamos ejemplos con nuestra base de datos de practica:</p>
+        <p>Veamos ejemplos con nuestra base de datos de práctica:</p>
 
         <pre><code>-- Obtener todos los datos de todos los estudiantes
 SELECT * FROM estudiantes;
@@ -277,11 +277,11 @@ SELECT nombre AS "Nombre del Estudiante",
        promedio AS "Promedio Acumulado"
 FROM estudiantes;</code></pre>
 
-        <p>El asterisco <code>*</code> significa "todas las columnas". Es util para explorar datos, pero en consultas de produccion es mejor especificar las columnas que necesitas para mejorar el rendimiento.</p>
+        <p>El asterisco <code>*</code> significa "todas las columnas". Es útil para explorar datos, pero en consultas de producción es mejor especificar las columnas que necesitas para mejorar el rendimiento.</p>
 
         <h2 id="where-filtrar">WHERE: filtrar resultados</h2>
 
-        <p>La clausula <code>WHERE</code> te permite filtrar las filas que cumplan una condicion. Es como decir "dame solo los registros que cumplan con esto".</p>
+        <p>La cláusula <code>WHERE</code> te permite filtrar las filas que cumplan una condición. Es como decir "dame solo los registros que cumplan con esto".</p>
 
         <pre><code>-- Estudiantes de Ingenieria Comercial
 SELECT nombre, apellido, promedio
@@ -325,13 +325,13 @@ WHERE promedio BETWEEN 5.0 AND 6.0;</code></pre>
           </div>
           <div class="article-tip__text">
             <strong>Cuidado con NULL</strong>
-            En SQL, <code>NULL</code> no es igual a nada, ni siquiera a si mismo. No puedes usar <code>WHERE columna = NULL</code>. Debes usar <code>WHERE columna IS NULL</code> o <code>WHERE columna IS NOT NULL</code>. Este es uno de los errores mas comunes en pruebas de bases de datos.
+            En SQL, <code>NULL</code> no es igual a nada, ni siquiera a si mismo. No puedes usar <code>WHERE columna = NULL</code>. Debes usar <code>WHERE columna IS NULL</code> o <code>WHERE columna IS NOT NULL</code>. Este es uno de los errores más comunes en pruebas de bases de datos.
           </div>
         </div>
 
         <h2 id="order-limit">ORDER BY y LIMIT</h2>
 
-        <p><code>ORDER BY</code> ordena los resultados y <code>LIMIT</code> restringe cuantas filas se devuelven. Son muy utiles para rankings y top-N:</p>
+        <p><code>ORDER BY</code> ordena los resultados y <code>LIMIT</code> restringe cuántas filas se devuelven. Son muy útiles para rankings y top-N:</p>
 
         <pre><code>-- Ordenar por promedio de mayor a menor
 SELECT nombre, apellido, promedio
@@ -361,13 +361,13 @@ ORDER BY nombre ASC;</code></pre>
           </div>
           <div class="article-tip__text">
             <strong>Nota sobre LIMIT</strong>
-            <code>LIMIT</code> es la sintaxis de MySQL y PostgreSQL. En SQL Server se usa <code>TOP</code>: <code>SELECT TOP 3 * FROM estudiantes</code>. En Oracle se usa <code>FETCH FIRST 3 ROWS ONLY</code>. Consulta cual usa tu profesor.
+            <code>LIMIT</code> es la sintaxis de MySQL y PostgreSQL. En SQL Server se usa <code>TOP</code>: <code>SELECT TOP 3 * FROM estudiantes</code>. En Oracle se usa <code>FETCH FIRST 3 ROWS ONLY</code>. Consulta cuál usa tu profesor.
           </div>
         </div>
 
-        <h2 id="funciones-agregacion">Funciones de agregacion (COUNT, SUM, AVG)</h2>
+        <h2 id="funciones-agregacion">Funciones de agregación (COUNT, SUM, AVG)</h2>
 
-        <p>Las funciones de agregacion calculan un unico valor a partir de un conjunto de filas. Son fundamentales para reportes y analisis:</p>
+        <p>Las funciones de agregación calculan un único valor a partir de un conjunto de filas. Son fundamentales para reportes y análisis:</p>
 
         <pre><code>-- Contar cuantos estudiantes hay
 SELECT COUNT(*) AS total_estudiantes
@@ -406,13 +406,13 @@ ORDER BY promedio_carrera DESC;</code></pre>
           </div>
           <div class="article-tip__text">
             <strong>WHERE vs HAVING</strong>
-            <code>WHERE</code> filtra filas individuales ANTES de agrupar. <code>HAVING</code> filtra grupos DESPUES de agrupar. Si quieres filtrar por una columna normal, usa WHERE. Si quieres filtrar por el resultado de una funcion de agregacion (COUNT, AVG, SUM), usa HAVING.
+            <code>WHERE</code> filtra filas individuales ANTES de agrupar. <code>HAVING</code> filtra grupos DESPUÉS de agrupar. Si quieres filtrar por una columna normal, usa WHERE. Si quieres filtrar por el resultado de una función de agregación (COUNT, AVG, SUM), usa HAVING.
           </div>
         </div>
 
         <h2 id="join-combinar">JOIN: combinar tablas</h2>
 
-        <p>En una base de datos relacional, los datos estan distribuidos en multiples tablas. <code>JOIN</code> te permite combinar filas de dos o mas tablas basandose en una columna comun (generalmente una clave foranea).</p>
+        <p>En una base de datos relacional, los datos están distribuidos en múltiples tablas. <code>JOIN</code> te permite combinar filas de dos o más tablas basándose en una columna común (generalmente una clave foránea).</p>
 
         <pre><code>-- INNER JOIN: obtener estudiantes con sus cursos e inscripciones
 SELECT e.nombre,
@@ -455,7 +455,7 @@ ORDER BY promedio_notas DESC;</code></pre>
 
         <h2 id="insert-update-delete">INSERT, UPDATE y DELETE</h2>
 
-        <p>Ademas de leer datos, necesitas saber como modificarlos:</p>
+        <p>Además de leer datos, necesitas saber cómo modificarlos:</p>
 
         <pre><code>-- INSERT: agregar un nuevo estudiante
 INSERT INTO estudiantes (nombre, apellido, carrera, semestre, promedio, fecha_ingreso)
@@ -482,13 +482,13 @@ WHERE id = 10;</code></pre>
           </div>
           <div class="article-tip__text">
             <strong>NUNCA hagas UPDATE o DELETE sin WHERE</strong>
-            Si ejecutas <code>DELETE FROM estudiantes;</code> sin clausula WHERE, borraras TODOS los registros de la tabla. Lo mismo con UPDATE: si no especificas WHERE, actualizaras todas las filas. Siempre verifica tu WHERE con un SELECT antes de ejecutar UPDATE o DELETE.
+            Si ejecutas <code>DELETE FROM estudiantes;</code> sin cláusula WHERE, borrarás TODOS los registros de la tabla. Lo mismo con UPDATE: si no especificas WHERE, actualizarás todas las filas. Siempre verifica tu WHERE con un SELECT antes de ejecutar UPDATE o DELETE.
           </div>
         </div>
 
-        <h2 id="subconsultas">Subconsultas basicas</h2>
+        <h2 id="subconsultas">Subconsultas básicas</h2>
 
-        <p>Una subconsulta es un SELECT dentro de otro SELECT. Son muy utiles para consultas complejas:</p>
+        <p>Una subconsulta es un SELECT dentro de otro SELECT. Son muy útiles para consultas complejas:</p>
 
         <pre><code>-- Estudiantes con promedio superior al promedio general
 SELECT nombre, apellido, promedio
@@ -515,14 +515,14 @@ WHERE i.curso_id = (SELECT id FROM cursos WHERE nombre = 'Bases de Datos')
 ORDER BY i.nota DESC
 LIMIT 1;</code></pre>
 
-        <h2 id="ejercicios">Ejercicios practicos</h2>
+        <h2 id="ejercicios">Ejercicios prácticos</h2>
 
         <p>Practica con estos ejercicios usando la base de datos que creamos al principio. Intenta resolverlos antes de ver las respuestas:</p>
 
         <ol>
-          <li><strong>Facil:</strong> Lista todos los estudiantes de Psicologia ordenados por promedio de mayor a menor.</li>
-          <li><strong>Facil:</strong> Cuenta cuantos cursos tiene cada profesor.</li>
-          <li><strong>Medio:</strong> Muestra el nombre de cada estudiante junto con la cantidad de cursos en los que esta inscrito.</li>
+          <li><strong>Fácil:</strong> Lista todos los estudiantes de Psicología ordenados por promedio de mayor a menor.</li>
+          <li><strong>Fácil:</strong> Cuenta cuántos cursos tiene cada profesor.</li>
+          <li><strong>Medio:</strong> Muestra el nombre de cada estudiante junto con la cantidad de cursos en los que está inscrito.</li>
           <li><strong>Medio:</strong> Encuentra los estudiantes que tienen al menos una nota inferior a 5.0.</li>
           <li><strong>Avanzado:</strong> Para cada carrera, muestra el estudiante con mejor promedio.</li>
         </ol>
@@ -562,9 +562,9 @@ WHERE e.promedio = (
 )
 ORDER BY e.carrera;</code></pre>
 
-        <p>Si pudiste resolver la mayoria de estos ejercicios, ya tienes una base solida de SQL. Para seguir avanzando, te recomiendo practicar en plataformas como <strong>HackerRank</strong>, <strong>LeetCode</strong> o <strong>SQLZoo</strong>, que tienen cientos de ejercicios ordenados por dificultad.</p>
+        <p>Si pudiste resolver la mayoría de estos ejercicios, ya tienes una base sólida de SQL. Para seguir avanzando, te recomiendo practicar en plataformas como <strong>HackerRank</strong>, <strong>LeetCode</strong> o <strong>SQLZoo</strong>, que tienen cientos de ejercicios ordenados por dificultad.</p>
 
-        <p>Si necesitas ayuda con un trabajo de bases de datos, ya sea crear un modelo entidad-relacion, escribir consultas SQL complejas o desarrollar un sistema completo, en Tareapp tenemos experiencia con MySQL, PostgreSQL, SQL Server y Oracle. Escribenos y te ayudamos.</p>
+        <p>Si necesitas ayuda con un trabajo de bases de datos, ya sea crear un modelo entidad-relacion, escribir consultas SQL complejas o desarrollar un sistema completo, en Tareapp tenemos experiencia con MySQL, PostgreSQL, SQL Server y Oracle. Escríbenos y te ayudamos.</p>
 
         <!-- Share -->
         <div class="article-share">
@@ -579,18 +579,18 @@ ORDER BY e.carrera;</code></pre>
       <!-- SIDEBAR -->
       <aside class="article-sidebar">
         <nav class="article-toc">
-          <p class="article-toc__title">En este articulo</p>
+          <p class="article-toc__title">En este artículo</p>
           <ol class="article-toc__list">
-            <li><a href="#que-es-sql">Que es SQL y para que se usa</a></li>
+            <li><a href="#que-es-sql">Qué es SQL y para qué se usa</a></li>
             <li><a href="#configurar-entorno">Configurar tu entorno</a></li>
             <li><a href="#select-consulta">SELECT: tu primera consulta</a></li>
             <li><a href="#where-filtrar">WHERE: filtrar resultados</a></li>
             <li><a href="#order-limit">ORDER BY y LIMIT</a></li>
-            <li><a href="#funciones-agregacion">Funciones de agregacion</a></li>
+            <li><a href="#funciones-agregacion">Funciones de agregación</a></li>
             <li><a href="#join-combinar">JOIN: combinar tablas</a></li>
             <li><a href="#insert-update-delete">INSERT, UPDATE y DELETE</a></li>
-            <li><a href="#subconsultas">Subconsultas basicas</a></li>
-            <li><a href="#ejercicios">Ejercicios practicos</a></li>
+            <li><a href="#subconsultas">Subconsultas básicas</a></li>
+            <li><a href="#ejercicios">Ejercicios prácticos</a></li>
           </ol>
         </nav>
 
@@ -608,16 +608,16 @@ ORDER BY e.carrera;</code></pre>
     <!-- RELATED ARTICLES -->
     <section class="article-related">
       <div class="container">
-        <h2>Articulos relacionados</h2>
+        <h2>Artículos relacionados</h2>
         <div class="blog-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))">
           <article class="blog-card">
             <div class="blog-card__img">
               <img src="/Imagenes/imagen 15.webp" alt="Python para universitarios" loading="lazy" width="400" height="250" decoding="async">
             </div>
             <div class="blog-card__body">
-              <span class="blog-card__badge" style="--badge-color: #3776AB">Programacion</span>
+              <span class="blog-card__badge" style="--badge-color: #3776AB">Programación</span>
               <h3><a href="/blog/python-universitarios/">Python para universitarios: Tu primer programa paso a paso</a></h3>
-              <p class="muted">Guia de inicio en Python para estudiantes universitarios.</p>
+              <p class="muted">Guía de inicio en Python para estudiantes universitarios.</p>
             </div>
           </article>
           <article class="blog-card">
@@ -626,7 +626,7 @@ ORDER BY e.carrera;</code></pre>
             </div>
             <div class="blog-card__body">
               <span class="blog-card__badge" style="--badge-color: #F7C948">Power BI</span>
-              <h3><a href="/blog/power-bi-dashboard/">Como hacer un Dashboard en Power BI: Guia paso a paso</a></h3>
+              <h3><a href="/blog/power-bi-dashboard/">Cómo hacer un Dashboard en Power BI: Guía paso a paso</a></h3>
               <p class="muted">Aprende a crear dashboards interactivos en Power BI desde cero.</p>
             </div>
           </article>
@@ -639,7 +639,7 @@ ORDER BY e.carrera;</code></pre>
       <div class="container final-cta__inner">
         <div>
           <h2>¿Necesitas que hagamos tu trabajo?</h2>
-          <p class="muted">Escribenos con los requisitos y te cotizamos al instante.</p>
+          <p class="muted">Escríbenos con los requisitos y te cotizamos al instante.</p>
         </div>
         <div class="final-cta__actions">
           <a class="btn btn--primary" data-wa-message="Hola, necesito cotizar un trabajo academico." href="#" rel="noopener">

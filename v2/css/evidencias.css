@@ -1,0 +1,50 @@
+/* EVIDENCIAS (13-oct-2026, Joseph: "donde dice referencias mejor usemos evidencias ... y aqui subamos varios trabajos ...
+   con mas figuras graficos"). Pagina /referencias/ de Tareapp Ecuador, Mexico y Panama: trabajos completos en un visor tipo
+   PDF (el mismo de las muestras de la portada), con los datos de cada estudiante tachados y la marca de agua en cada hoja.
+   Se carga despues de tema.css: usa sus colores (--tinta, --crema, --papel, --amarillo, --azul). */
+.ev-obras{max-width:1080px;margin:0 auto clamp(44px,6vw,72px)}
+.obras{display:grid;grid-template-columns:repeat(auto-fill,minmax(205px,1fr));gap:22px;margin-top:6px}
+.obra{display:flex;flex-direction:column;width:100%;margin:0;padding:0;text-align:left;font:inherit;color:var(--tinta);background:var(--papel);border:2.5px solid var(--tinta);border-radius:16px;box-shadow:5px 5px 0 var(--amarillo);overflow:hidden;cursor:pointer;transition:transform .2s cubic-bezier(.23,1,.32,1),box-shadow .2s cubic-bezier(.23,1,.32,1);-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+@media (hover:hover){.obra:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 var(--amarillo)}}
+.obra:focus-visible{outline:3px solid var(--azul);outline-offset:4px}
+.obra__portada{position:relative;display:block;aspect-ratio:3/4;background:#fff top center/cover no-repeat;border-bottom:2.5px solid var(--tinta);pointer-events:none}
+.obra__portada--horizontal{background-size:contain;background-position:center;background-color:#e9e5dc}
+.obra__pags{position:absolute;top:10px;right:10px;font:700 .74rem/1 "JetBrains Mono",ui-monospace,Consolas,monospace;letter-spacing:.04em;background:var(--tinta);color:var(--crema);padding:.45em .65em;border-radius:99px}
+.obra__abrir{position:absolute;left:10px;bottom:10px;font:700 .74rem/1 "JetBrains Mono",ui-monospace,Consolas,monospace;letter-spacing:.06em;text-transform:uppercase;background:var(--amarillo);color:var(--tinta);border:1.6px solid var(--tinta);padding:.45em .7em;border-radius:99px}
+.obra__txt{display:flex;flex-direction:column;align-items:flex-start;gap:7px;padding:12px 14px 15px}
+.obra__area{font:700 .7rem/1.2 "JetBrains Mono",ui-monospace,Consolas,monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(22,18,14,.72)}
+.obra__txt b{font-weight:800;font-stretch:104%;font-size:.95rem;line-height:1.3}
+.obra__soft{display:flex;flex-wrap:wrap;gap:5px}
+.obra__soft span{font-size:.74rem;font-weight:700;letter-spacing:.01em;line-height:1.3;padding:.22em .6em;border-radius:99px;background:var(--crema);border:1.4px solid var(--tinta)}
+.ev-nota{max-width:760px;margin:20px auto 0;text-align:center;font:600 .8rem/1.5 "JetBrains Mono",ui-monospace,Consolas,monospace;letter-spacing:.02em;color:rgba(22,18,14,.72)}
+
+/* visor tipo PDF: barra arriba y las paginas en columna (igual que en la portada) */
+.visor{position:fixed;inset:0;z-index:9998;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) auto;background:#3c3d40;color:#f1f1f1;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.visor[hidden]{display:none}
+.visor-abierto,.visor-abierto body{overflow:hidden}
+.visor__barra{display:flex;align-items:center;gap:12px;padding:9px 12px 9px 16px;background:#202124;box-shadow:0 2px 10px rgba(0,0,0,.45);position:relative;z-index:1}
+.visor__titulo{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;margin:0}
+.visor__titulo b{font-weight:700;font-size:.98rem;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#f1f1f1}
+.visor__titulo small{font-size:.78rem;font-weight:700;letter-spacing:.01em;color:var(--amarillo);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.visor__herr{display:flex;align-items:center;gap:4px;flex:none}
+.visor__pag{font:.78rem "JetBrains Mono",ui-monospace,Consolas,monospace;font-variant-numeric:tabular-nums;color:#e6e6e6;margin-right:8px;white-space:nowrap}
+.visor__zoom{font:.78rem "JetBrains Mono",ui-monospace,Consolas,monospace;font-variant-numeric:tabular-nums;min-width:3.8em;text-align:center;color:#e6e6e6}
+.visor__btn{flex:none;min-width:38px;height:38px;padding:0 10px;border-radius:99px;border:0;background:transparent;color:#f1f1f1;font:700 1.08rem/1 "Archivo",system-ui,sans-serif;cursor:pointer;display:inline-grid;place-items:center;box-shadow:none}
+@media (hover:hover){.visor__btn:hover{background:rgba(255,255,255,.13)}}
+.visor__btn--texto{font-size:.8rem;font-weight:700;border:1.5px solid rgba(255,255,255,.35)}
+.visor__btn--cerrar{margin-left:6px;background:rgba(255,255,255,.1)}
+.visor__hojas{position:relative;min-width:0;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.visor__pila{display:flex;flex-direction:column;align-items:center;gap:14px;width:max-content;min-width:100%;padding:16px 14px 48px;box-sizing:border-box}
+.hoja{flex:none;background:#fff center/100% 100% no-repeat;box-shadow:0 2px 12px rgba(0,0,0,.5);pointer-events:none}
+.visor__marca{margin:0;font:.75rem "JetBrains Mono",ui-monospace,Consolas,monospace;color:#cfcfcf;text-align:center;padding:7px 14px calc(8px + env(safe-area-inset-bottom));background:#202124}
+
+@media (max-width:560px){
+  .obras{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+  .obra__txt{padding:10px 11px 12px}
+  .obra__txt b{font-size:.86rem}
+  .obra__area{font-size:.64rem}
+  .obra__abrir{font-size:.66rem}
+  .visor__pag,.visor__zoom,.visor__esc{display:none}
+  .visor__btn{min-width:34px;height:34px;padding:0 8px}
+  .visor__titulo b{font-size:.88rem}
+}
