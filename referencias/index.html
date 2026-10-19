@@ -137,6 +137,11 @@
     .nt-tag { display:inline-block; padding:3px 10px; border-radius:999px; background:var(--brand3); color:var(--brand-ink); border:1px solid rgba(229,181,46,.25); font-weight:700; font-size:12px; }
   </style>
   <!-- NOTAS-CSS:FIN -->
+  <!-- OPINIONES-AL-FINAL-CSS:INICIO (19-oct-2026: las opiniones van al final, tras las garantias) -->
+  <style>
+    .cards + .op-wrap, .cards + .nt-wrap { margin-top:clamp(44px,6vw,72px); }
+  </style>
+  <!-- OPINIONES-AL-FINAL-CSS:FIN -->
 </head>
 
 <body data-page="trabajos">
@@ -229,22 +234,6 @@
         <h1>Evidencias de nuestro trabajo</h1>
       </div>
       <!-- EVIDENCIAS-CABECERA:FIN -->
-      <!-- NOTAS:INICIO (18-oct-2026: citas TAL CUAL de clientes de Chile que nos contaron su nota; fuente y codigos en _scratch\evidencias_sin_logos_20261018\notas_evidencias.py) -->
-      <section class="nt-wrap" aria-labelledby="nt-titulo">
-        <div class="nt-cab"><h2 id="nt-titulo">Notas que nos contaron</h2></div>
-        <div class="nt-grid">
-          <figure class="nt-card" data-reveal><p class="nt-nota"><span>Nota</span><b>7,0</b></p><blockquote class="nt-text"><p>Nos sacamos un 7,0</p><p>En la grabación del podcast de geología</p><p>Muchas gracias</p></blockquote><figcaption class="nt-meta"><span class="nt-fecha">agosto de 2026</span><span class="nt-tag">Podcast de geología</span></figcaption></figure>
-          <figure class="nt-card" data-reveal><p class="nt-nota"><span>Nota</span><b>6,5</b></p><blockquote class="nt-text"><p>Hola, buenos días</p><p>Espero que estés bien, ayer recibí mi nota y tuve un 6.5</p><p>Muchas gracias</p></blockquote><figcaption class="nt-meta"><span class="nt-fecha">agosto de 2026</span><span class="nt-tag">Evaluación sumativa de Derecho laboral</span></figcaption></figure>
-          <figure class="nt-card" data-reveal><p class="nt-nota"><span>Nota</span><b>7,0</b></p><blockquote class="nt-text"><p>Holaa</p><p>Quisiera darte las gracias</p><p>Y pedirte disculpas</p><p>Por creer que era estafa</p><p>Me saqué un 7 en el trabajo</p><p>Espero poder seguir contando contigo para herramientas tecnológicas II</p></blockquote><figcaption class="nt-meta"><span class="nt-fecha">octubre de 2025</span><span class="nt-tag">Trabajo final en Excel</span></figcaption></figure>
-          <figure class="nt-card" data-reveal><p class="nt-nota"><span>Nota</span><b>6,3</b></p><blockquote class="nt-text"><p>Me saque un 6.3 en el primer avance lo encontraron bien</p></blockquote><figcaption class="nt-meta"><span class="nt-fecha">octubre de 2025</span><span class="nt-tag">Proyecto de salud, primer avance</span></figcaption></figure>
-          <figure class="nt-card" data-reveal><p class="nt-nota"><span>Nota</span><b>7,0</b></p><blockquote class="nt-text"><p>Hola buenos días, quería comentarles que el profesor nos evaluó con nota 7</p><p>El trabajo que realizaron es sobresaliente</p><p>Muchas gracias y lo más probable que a futuro les siga pidiendo ayuda</p><p>100% recomendable</p></blockquote><figcaption class="nt-meta"><span class="nt-fecha">agosto de 2025</span><span class="nt-tag">Avance de tesis: introducción y marco teórico</span></figcaption></figure>
-          <figure class="nt-card" data-reveal><p class="nt-nota"><span>Nota</span><b>6,5</b></p><blockquote class="nt-text"><p>Muchas gracias por el trabajo realizado lo calificaron con nota 6,5✌️</p><p>Pronto estaré solicitando sus servicios</p></blockquote><figcaption class="nt-meta"><span class="nt-fecha">julio de 2025</span><span class="nt-tag">Introducción a la minería</span></figcaption></figure>
-          <figure class="nt-card" data-reveal><p class="nt-nota"><span>Nota</span><b>6,7</b></p><blockquote class="nt-text"><p>Me saqué un 6.7</p><p>Muchas gracias</p></blockquote><figcaption class="nt-meta"><span class="nt-fecha">julio de 2025</span><span class="nt-tag">Ensayo académico</span></figcaption></figure>
-          <figure class="nt-card" data-reveal><p class="nt-nota"><span>Nota</span><b>7,0</b></p><blockquote class="nt-text"><p>Hola! Quería agradecerte. Hoy me subieron la nota y me saque un 7 ☺️</p></blockquote><figcaption class="nt-meta"><span class="nt-fecha">diciembre de 2024</span><span class="nt-tag">Investigación cualitativa de mercados</span></figcaption></figure>
-          <figure class="nt-card" data-reveal><p class="nt-nota"><span>Nota</span><b>7,0</b></p><blockquote class="nt-text"><p>Holaa me entregaron la nota de portafolio y me fue súper Nota 7, muchas gracias</p></blockquote><figcaption class="nt-meta"><span class="nt-fecha">julio de 2024</span><span class="nt-tag">Portafolio de filosofía</span></figcaption></figure>
-        </div>
-      </section>
-      <!-- NOTAS:FIN -->
 
       <div class="ref-meses">
         <h2 class="ref-anio">2026</h2>
@@ -772,6 +761,23 @@
       </div>
 
       <!-- EVIDENCIAS-OBRAS:FIN -->
+
+      <!-- NOTAS:INICIO (18-oct-2026: citas TAL CUAL de clientes de Chile que nos contaron su nota; fuente y codigos en _scratch\evidencias_sin_logos_20261018\notas_evidencias.py) -->
+      <section class="nt-wrap" aria-labelledby="nt-titulo">
+        <div class="nt-cab"><h2 id="nt-titulo">Notas que nos contaron</h2></div>
+        <div class="nt-grid">
+          <figure class="nt-card" data-reveal><p class="nt-nota"><span>Nota</span><b>7,0</b></p><blockquote class="nt-text"><p>Nos sacamos un 7,0</p><p>En la grabación del podcast de geología</p><p>Muchas gracias</p></blockquote><figcaption class="nt-meta"><span class="nt-fecha">agosto de 2026</span><span class="nt-tag">Podcast de geología</span></figcaption></figure>
+          <figure class="nt-card" data-reveal><p class="nt-nota"><span>Nota</span><b>6,5</b></p><blockquote class="nt-text"><p>Hola, buenos días</p><p>Espero que estés bien, ayer recibí mi nota y tuve un 6.5</p><p>Muchas gracias</p></blockquote><figcaption class="nt-meta"><span class="nt-fecha">agosto de 2026</span><span class="nt-tag">Evaluación sumativa de Derecho laboral</span></figcaption></figure>
+          <figure class="nt-card" data-reveal><p class="nt-nota"><span>Nota</span><b>7,0</b></p><blockquote class="nt-text"><p>Holaa</p><p>Quisiera darte las gracias</p><p>Y pedirte disculpas</p><p>Por creer que era estafa</p><p>Me saqué un 7 en el trabajo</p><p>Espero poder seguir contando contigo para herramientas tecnológicas II</p></blockquote><figcaption class="nt-meta"><span class="nt-fecha">octubre de 2025</span><span class="nt-tag">Trabajo final en Excel</span></figcaption></figure>
+          <figure class="nt-card" data-reveal><p class="nt-nota"><span>Nota</span><b>6,3</b></p><blockquote class="nt-text"><p>Me saque un 6.3 en el primer avance lo encontraron bien</p></blockquote><figcaption class="nt-meta"><span class="nt-fecha">octubre de 2025</span><span class="nt-tag">Proyecto de salud, primer avance</span></figcaption></figure>
+          <figure class="nt-card" data-reveal><p class="nt-nota"><span>Nota</span><b>7,0</b></p><blockquote class="nt-text"><p>Hola buenos días, quería comentarles que el profesor nos evaluó con nota 7</p><p>El trabajo que realizaron es sobresaliente</p><p>Muchas gracias y lo más probable que a futuro les siga pidiendo ayuda</p><p>100% recomendable</p></blockquote><figcaption class="nt-meta"><span class="nt-fecha">agosto de 2025</span><span class="nt-tag">Avance de tesis: introducción y marco teórico</span></figcaption></figure>
+          <figure class="nt-card" data-reveal><p class="nt-nota"><span>Nota</span><b>6,5</b></p><blockquote class="nt-text"><p>Muchas gracias por el trabajo realizado lo calificaron con nota 6,5✌️</p><p>Pronto estaré solicitando sus servicios</p></blockquote><figcaption class="nt-meta"><span class="nt-fecha">julio de 2025</span><span class="nt-tag">Introducción a la minería</span></figcaption></figure>
+          <figure class="nt-card" data-reveal><p class="nt-nota"><span>Nota</span><b>6,7</b></p><blockquote class="nt-text"><p>Me saqué un 6.7</p><p>Muchas gracias</p></blockquote><figcaption class="nt-meta"><span class="nt-fecha">julio de 2025</span><span class="nt-tag">Ensayo académico</span></figcaption></figure>
+          <figure class="nt-card" data-reveal><p class="nt-nota"><span>Nota</span><b>7,0</b></p><blockquote class="nt-text"><p>Hola! Quería agradecerte. Hoy me subieron la nota y me saque un 7 ☺️</p></blockquote><figcaption class="nt-meta"><span class="nt-fecha">diciembre de 2024</span><span class="nt-tag">Investigación cualitativa de mercados</span></figcaption></figure>
+          <figure class="nt-card" data-reveal><p class="nt-nota"><span>Nota</span><b>7,0</b></p><blockquote class="nt-text"><p>Holaa me entregaron la nota de portafolio y me fue súper Nota 7, muchas gracias</p></blockquote><figcaption class="nt-meta"><span class="nt-fecha">julio de 2024</span><span class="nt-tag">Portafolio de filosofía</span></figcaption></figure>
+        </div>
+      </section>
+      <!-- NOTAS:FIN -->
 
       <div class="ref-cta">
         <h2>¿Quieres ser el próximo?</h2>
