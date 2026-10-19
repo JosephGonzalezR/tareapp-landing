@@ -32,7 +32,7 @@
   const prog = $("[data-visor-soft]", visor);
   const cuenta = $("[data-visor-pag]", visor);
   const pctTxt = $("[data-visor-zoom]", visor);
-  let paginas = [], zoom = 1, origen = null, obs = null;
+  let paginas = [], zoom = 1, origen = null, obs = null, lugar = null;
   const ZOOMS = [0.5, 0.67, 0.8, 1, 1.25, 1.5, 2, 2.5, 3];
 
   function anchoBase() {
@@ -67,6 +67,7 @@
 
   function abrirDoc(datos, desde) {
     origen = desde;
+    if (visor.hidden) lugar = [window.scrollX, window.scrollY];
     hojas.innerHTML = "";
     const pila = document.createElement("div");
     pila.className = "visor__pila";
@@ -100,13 +101,30 @@
     $("[data-visor-cerrar]", visor).focus();
   }
 
+  // al cerrar, la pagina vuelve a donde estaba (19-oct-2026): con el fondo bloqueado el navegador la deja arriba.
+  // La barra de arriba cambia de alto al volver a bajar (nav--scrolled): se repite en el cuadro siguiente si se corrio.
+  function volverAlLugar() {
+    if (!lugar) return;
+    const [x, y] = lugar, raiz = document.documentElement;
+    const ir = () => {
+      const suave = raiz.style.scrollBehavior;
+      raiz.style.scrollBehavior = "auto";
+      window.scrollTo(x, y);
+      raiz.style.scrollBehavior = suave;
+    };
+    ir();
+    requestAnimationFrame(() => requestAnimationFrame(() => { if (Math.abs(window.scrollY - y) > 1) ir(); }));
+    lugar = null;
+  }
+
   function cerrarVisor() {
     visor.hidden = true;
     document.documentElement.classList.remove("visor-abierto");
     if (obs) obs.disconnect();
     hojas.innerHTML = "";
     paginas = [];
-    if (origen) origen.focus();
+    volverAlLugar();
+    if (origen) origen.focus({ preventScroll: true });
   }
 
   function datosDe(card) {
