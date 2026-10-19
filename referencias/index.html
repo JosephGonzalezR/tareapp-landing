@@ -119,6 +119,24 @@
 <!-- TEMA-V2 (12-oct-2026): letra y colores de la portada nueva -->
   <link rel="stylesheet" href="/v2/css/tema.css?v=20261012" />
   <link rel="stylesheet" href="/v2/css/evidencias.css?v=20261013" />
+<!-- NOTAS-CSS:INICIO (18-oct-2026, notas que nos contaron los clientes) -->
+  <style>
+    .nt-wrap { max-width:1080px; margin:0 auto clamp(40px,6vw,64px); }
+    .nt-cab { text-align:center; margin:0 auto clamp(14px,2vw,20px); }
+    .nt-cab h2 { font-size:26px; margin:0; color:var(--text); }
+    .nt-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:18px; max-width:980px; margin:6px auto 0; }
+    .nt-card { position:relative; margin:0; padding:20px 22px 18px; border-radius:var(--radius); background:var(--card); border:1px solid var(--line); box-shadow:var(--shadow-sm); display:flex; flex-direction:column; gap:14px; }
+    .nt-card::before { content:"\201C"; position:absolute; top:6px; right:18px; font-family:'Playfair Display',serif; font-size:60px; line-height:1; color:var(--brand2); opacity:.45; pointer-events:none; }
+    .nt-nota { align-self:flex-start; display:inline-flex; align-items:baseline; gap:7px; margin:0; padding:7px 14px 6px; border-radius:999px; background:var(--brand); color:var(--text); border:2px solid var(--text); line-height:1; }
+    .nt-nota b { font-size:22px; font-weight:900; letter-spacing:-.01em; }
+    .nt-nota span { font-size:12px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; }
+    .nt-text { margin:0; padding-right:28px; font-size:16px; line-height:1.6; color:var(--text); }
+    .nt-text p { margin:0 0 6px; }
+    .nt-text p:last-child { margin-bottom:0; }
+    .nt-meta { display:flex; flex-wrap:wrap; align-items:center; gap:6px 10px; margin-top:auto; font-size:13px; color:var(--muted); }
+    .nt-tag { display:inline-block; padding:3px 10px; border-radius:999px; background:var(--brand3); color:var(--brand-ink); border:1px solid rgba(229,181,46,.25); font-weight:700; font-size:12px; }
+  </style>
+  <!-- NOTAS-CSS:FIN -->
 </head>
 
 <body data-page="trabajos">
@@ -209,9 +227,24 @@
       <div class="ref-hero">
         <div class="badge">Evidencias</div>
         <h1>Evidencias de nuestro trabajo</h1>
-        <p>Comprobantes de pago reales de estudiantes que confiaron en Tareapp, mes a mes desde junio de 2025, y trabajos completos que entregamos, página por página. Toca un mes para abrirlo y cualquier imagen para verla en grande.</p>
       </div>
       <!-- EVIDENCIAS-CABECERA:FIN -->
+      <!-- NOTAS:INICIO (18-oct-2026: citas TAL CUAL de clientes de Chile que nos contaron su nota; fuente y codigos en _scratch\evidencias_sin_logos_20261018\notas_evidencias.py) -->
+      <section class="nt-wrap" aria-labelledby="nt-titulo">
+        <div class="nt-cab"><h2 id="nt-titulo">Notas que nos contaron</h2></div>
+        <div class="nt-grid">
+          <figure class="nt-card" data-reveal><p class="nt-nota"><span>Nota</span><b>7,0</b></p><blockquote class="nt-text"><p>Nos sacamos un 7,0</p><p>En la grabación del podcast de geología</p><p>Muchas gracias</p></blockquote><figcaption class="nt-meta"><span class="nt-fecha">agosto de 2026</span><span class="nt-tag">Podcast de geología</span></figcaption></figure>
+          <figure class="nt-card" data-reveal><p class="nt-nota"><span>Nota</span><b>6,5</b></p><blockquote class="nt-text"><p>Hola, buenos días</p><p>Espero que estés bien, ayer recibí mi nota y tuve un 6.5</p><p>Muchas gracias</p></blockquote><figcaption class="nt-meta"><span class="nt-fecha">agosto de 2026</span><span class="nt-tag">Evaluación sumativa de Derecho laboral</span></figcaption></figure>
+          <figure class="nt-card" data-reveal><p class="nt-nota"><span>Nota</span><b>7,0</b></p><blockquote class="nt-text"><p>Holaa</p><p>Quisiera darte las gracias</p><p>Y pedirte disculpas</p><p>Por creer que era estafa</p><p>Me saqué un 7 en el trabajo</p><p>Espero poder seguir contando contigo para herramientas tecnológicas II</p></blockquote><figcaption class="nt-meta"><span class="nt-fecha">octubre de 2025</span><span class="nt-tag">Trabajo final en Excel</span></figcaption></figure>
+          <figure class="nt-card" data-reveal><p class="nt-nota"><span>Nota</span><b>6,3</b></p><blockquote class="nt-text"><p>Me saque un 6.3 en el primer avance lo encontraron bien</p></blockquote><figcaption class="nt-meta"><span class="nt-fecha">octubre de 2025</span><span class="nt-tag">Proyecto de salud, primer avance</span></figcaption></figure>
+          <figure class="nt-card" data-reveal><p class="nt-nota"><span>Nota</span><b>7,0</b></p><blockquote class="nt-text"><p>Hola buenos días, quería comentarles que el profesor nos evaluó con nota 7</p><p>El trabajo que realizaron es sobresaliente</p><p>Muchas gracias y lo más probable que a futuro les siga pidiendo ayuda</p><p>100% recomendable</p></blockquote><figcaption class="nt-meta"><span class="nt-fecha">agosto de 2025</span><span class="nt-tag">Avance de tesis: introducción y marco teórico</span></figcaption></figure>
+          <figure class="nt-card" data-reveal><p class="nt-nota"><span>Nota</span><b>6,5</b></p><blockquote class="nt-text"><p>Muchas gracias por el trabajo realizado lo calificaron con nota 6,5✌️</p><p>Pronto estaré solicitando sus servicios</p></blockquote><figcaption class="nt-meta"><span class="nt-fecha">julio de 2025</span><span class="nt-tag">Introducción a la minería</span></figcaption></figure>
+          <figure class="nt-card" data-reveal><p class="nt-nota"><span>Nota</span><b>6,7</b></p><blockquote class="nt-text"><p>Me saqué un 6.7</p><p>Muchas gracias</p></blockquote><figcaption class="nt-meta"><span class="nt-fecha">julio de 2025</span><span class="nt-tag">Ensayo académico</span></figcaption></figure>
+          <figure class="nt-card" data-reveal><p class="nt-nota"><span>Nota</span><b>7,0</b></p><blockquote class="nt-text"><p>Hola! Quería agradecerte. Hoy me subieron la nota y me saque un 7 ☺️</p></blockquote><figcaption class="nt-meta"><span class="nt-fecha">diciembre de 2024</span><span class="nt-tag">Investigación cualitativa de mercados</span></figcaption></figure>
+          <figure class="nt-card" data-reveal><p class="nt-nota"><span>Nota</span><b>7,0</b></p><blockquote class="nt-text"><p>Holaa me entregaron la nota de portafolio y me fue súper Nota 7, muchas gracias</p></blockquote><figcaption class="nt-meta"><span class="nt-fecha">julio de 2024</span><span class="nt-tag">Portafolio de filosofía</span></figcaption></figure>
+        </div>
+      </section>
+      <!-- NOTAS:FIN -->
 
       <div class="ref-meses">
         <h2 class="ref-anio">2026</h2>
@@ -646,7 +679,6 @@
       <section class="ev-obras" id="trabajos" aria-labelledby="t-trabajos">
         <div class="ref-pagos">
           <h2 id="t-trabajos">Trabajos que entregamos</h2>
-          <p>Informes completos con sus gráficos, figuras, planos y salidas de software, de distintas carreras. Tachamos los datos de cada estudiante y cada página lleva nuestra marca de agua.</p>
         </div>
         <div class="obras">
           <button class="obra" type="button" data-doc="/v2/img/informes/iluminacion-sala-reuniones/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Alumbrado normal y de emergencia de una sala de reuniones" data-soft="Python · Word">
@@ -706,7 +738,6 @@
             <span class="obra__txt"><span class="obra__area">Salud</span><b>Estrés académico en estudiantes de carreras de la salud</b><span class="obra__soft"><span>PowerPoint</span><span>Word</span></span></span>
           </button>
         </div>
-        <p class="ev-nota">Toca una portada para ver el trabajo completo, página por página.</p>
       </section>
 
       <div class="ref-pagos">
