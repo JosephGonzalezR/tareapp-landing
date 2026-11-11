@@ -12,6 +12,7 @@
   <link rel="icon" href="/v2/img/tareapp-pin.png" />
   <link rel="apple-touch-icon" href="/v2/img/tareapp-pin.png" />
   <link rel="preload" href="/v2/fonts/archivo-vf.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/v2/fonts/instrument-serif-italic.woff2" as="font" type="font/woff2" crossorigin />
   <meta property="og:title" content="Tareapp Chile" />
   <meta property="og:description" content="Redactamos tus investigaciones. WhatsApp +56 9 7147 8131, web y redes de Tareapp Chile." />
   <meta property="og:type" content="website" />
@@ -25,106 +26,132 @@
     menu del celular, que lo abre fuera de la red. En TikTok del iPhone va directo a esa hoja, como Linktree.
   -->
   <style>
-    @font-face { font-family: "Archivo"; src: url("/v2/fonts/archivo-vf.woff2") format("woff2"); font-weight: 100 900;
-                 font-display: swap; }
-    :root { --amarillo: #F7C948; --amarillo2: #F1B726; --tinta: #1B1B1F; --tinta2: #4A4536; --crema: #FFF4CF;
-            --verde: #25D366; --borde: 2px; --sombra: 0 4px 0 var(--tinta); }
+    /* PREMIUM 11-nov-2026 (Joseph: "si procede. con links"): el mismo lenguaje de la portada y de las paginas internas.
+       Letra ancha en el nombre, bajada en serif italica, botones con borde de tinta y sombra dura, el pie como una loma de
+       tinta y la estudiante que baja con el paraguas y saluda sobre ella. Los botones, sus tamanos, los enlaces y la hoja
+       "Manten presionado" funcionan igual que el 9-nov. */
+    @font-face { font-family: "Archivo"; src: url("/v2/fonts/archivo-vf.woff2") format("woff2"); font-weight: 100 900; font-stretch: 62% 125%; font-display: swap; }
+    @font-face { font-family: "Instrument Serif"; src: url("/v2/fonts/instrument-serif-italic.woff2") format("woff2"); font-style: italic; font-weight: 400; font-display: swap; }
+    :root { --amarillo: #F7C948; --tinta: #16120E; --tinta2: rgba(22, 18, 14, .84); --crema: #FFF3D6; --papel: #FFFAF0; --verde: #25D366; --lima: #C8F03C;
+            --borde: 2.5px; --sombra: 4px 4px 0 var(--tinta); --loma: clamp(34px, 9vw, 60px); --suave: cubic-bezier(.16, 1, .3, 1); }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { height: 100%; -webkit-text-size-adjust: 100%; }
-    body { min-height: 100%; font-family: "Archivo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-           color: var(--tinta); background: var(--amarillo);
-           background-image: radial-gradient(120% 70% at 50% -10%, #FFE48A 0%, rgba(255, 228, 138, 0) 60%),
-                             linear-gradient(180deg, var(--amarillo) 0%, var(--amarillo2) 100%);
-           background-attachment: fixed; overflow-x: hidden; }
+    body { min-height: 100%; display: flex; flex-direction: column; font-family: "Archivo", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+           color: var(--tinta); background: var(--amarillo); overflow-x: hidden; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
     html.con-hoja, html.con-hoja body { overflow: hidden; }
     a { color: inherit; }
-    .pag { width: 100%; max-width: 480px; margin: 0 auto; padding: calc(44px + env(safe-area-inset-top)) 16px
-           calc(28px + env(safe-area-inset-bottom)); display: flex; flex-direction: column; align-items: center; }
-    .avatar { width: 104px; height: 104px; border-radius: 50%; background: #fff; display: grid; place-items: center;
-              border: var(--borde) solid var(--tinta); box-shadow: var(--sombra); }
+    .pag { position: relative; isolation: isolate; flex: 1 0 auto; width: 100%; max-width: 480px; margin: 0 auto; padding: calc(40px + env(safe-area-inset-top)) 16px 0;
+           display: flex; flex-direction: column; align-items: center; }
+    /* destellos tenues, como los de la portada (detras de todo) */
+    .chispa { position: absolute; z-index: -1; color: var(--tinta); opacity: .13; pointer-events: none; }
+    .chispa.c1 { left: 5%; top: 46px; width: 26px; height: 26px; transform: rotate(-14deg); }
+    .chispa.c2 { right: 7%; top: 96px; width: 18px; height: 18px; transform: rotate(18deg); }
+    .chispa.c3 { left: 13%; top: 178px; width: 15px; height: 15px; }
+    .chispa.c4 { right: 15%; top: 28px; width: 14px; height: 14px; }
+    .chispa.c5 { left: 9%; bottom: calc(var(--loma) + 120px); width: 20px; height: 20px; transform: rotate(24deg); }
+    .chispa.c6 { left: 44%; bottom: calc(var(--loma) + 150px); width: 13px; height: 13px; }
+    .grano { position: fixed; z-index: 5; left: 0; top: 0; width: 100%; height: 120%; pointer-events: none; opacity: .34; background-repeat: repeat; }
+    .avatar { width: 104px; height: 104px; border-radius: 50%; background: var(--papel); display: grid; place-items: center; border: var(--borde) solid var(--tinta);
+              box-shadow: var(--sombra); }
     .avatar img { width: 54px; height: 64px; display: block; }
-    h1 { margin-top: 18px; font-size: 28px; line-height: 1.15; font-weight: 850; letter-spacing: -0.01em; text-align: center; }
-    .tag { margin-top: 6px; font-size: 16px; line-height: 1.4; color: var(--tinta2); text-align: center; font-weight: 500; }
-    .enlaces { width: 100%; margin-top: 26px; display: flex; flex-direction: column; gap: 14px; }
-    .btn { position: relative; display: flex; align-items: center; gap: 12px; width: 100%; min-height: 60px;
-           padding: 9px 18px 9px 9px; border-radius: 999px; background: #fff; border: var(--borde) solid var(--tinta);
-           box-shadow: var(--sombra); text-decoration: none; -webkit-tap-highlight-color: transparent;
-           transition: transform .08s ease, box-shadow .08s ease; }
-    .btn:active, .btn.abriendo { transform: translateY(3px); box-shadow: 0 1px 0 var(--tinta); }
+    h1 { margin-top: 20px; font-size: clamp(25px, 7.4vw, 32px); line-height: .95; font-weight: 900; font-stretch: 125%; text-transform: uppercase;
+         letter-spacing: -0.012em; text-align: center; text-wrap: balance; }
+    .tag { margin-top: 10px; font-family: "Instrument Serif", Georgia, serif; font-style: italic; font-weight: 400; font-size: 21px; line-height: 1.15;
+           color: var(--tinta2); text-align: center; }
+    .enlaces { width: 100%; margin-top: 26px; margin-bottom: calc(var(--loma) + 150px); display: flex; flex-direction: column; gap: 14px; }
+    .btn { position: relative; display: flex; align-items: center; gap: 12px; width: 100%; min-height: 60px; padding: 9px 18px 9px 9px;
+           border-radius: 999px; background: var(--papel); border: var(--borde) solid var(--tinta); box-shadow: var(--sombra); text-decoration: none;
+           -webkit-tap-highlight-color: transparent; transition: transform .12s ease, box-shadow .12s ease; }
+    .btn:active, .btn.abriendo { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--tinta); }
     .btn:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
-    .ico { flex: 0 0 40px; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center;
-           background: var(--crema); color: var(--tinta); }
-    .ico svg { width: 22px; height: 22px; }
-    .txt { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; align-items: center; padding-right: 30px;
-           text-align: center; }
-    .l1 { font-size: 16.5px; font-weight: 750; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-          max-width: 100%; }
-    .l2 { margin-top: 2px; font-size: 13.5px; font-weight: 600; line-height: 1.2; white-space: nowrap; opacity: .78; }
-    .btn.wa { background: var(--tinta); color: #fff; min-height: 66px; }
-    .btn.wa .ico { background: var(--verde); color: #fff; }
-    .btn.wa .ico svg { width: 25px; height: 25px; }
+    .ico { flex: 0 0 40px; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--amarillo); color: var(--tinta);
+           border: 2px solid var(--tinta); }
+    .ico svg { width: 21px; height: 21px; }
+    .txt { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; align-items: center; padding-right: 30px; text-align: center; }
+    .l1 { font-size: 16.5px; font-weight: 800; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+    .l2 { margin-top: 2px; font-size: 13.5px; font-weight: 600; line-height: 1.2; white-space: nowrap; opacity: .82; }
+    .btn.wa { background: var(--tinta); color: var(--crema); min-height: 66px; box-shadow: 4px 4px 0 rgba(22, 18, 14, .32); }
+    .btn.wa:active, .btn.wa.abriendo { box-shadow: 1px 1px 0 rgba(22, 18, 14, .32); }
+    .btn.wa .ico { background: var(--verde); color: #fff; border-color: var(--crema); }
+    .btn.wa .ico svg { width: 24px; height: 24px; }
     .btn.wa .l1 { font-size: 17px; }
-    @media (max-width: 374px) {               /* iPhone SE y celulares angostos: el texto sigue en una linea */
+    @media (max-width: 374px) {
+      /* iPhone SE y celulares angostos: el texto sigue en una linea */
       .btn { gap: 10px; padding-right: 12px; }
       .txt { padding-right: 4px; }
       .l1, .btn.wa .l1 { font-size: 15px; }
-      h1 { font-size: 25px; }
+      h1 { font-size: 24px; }
+      .tag { font-size: 19px; }
     }
-    .pie { margin-top: 30px; text-align: center; font-size: 13.5px; color: var(--tinta2); line-height: 1.5; }
-    .pie a { font-weight: 700; text-decoration: none; border-bottom: 1.5px solid currentColor; }
+    /* el pie: entra como una loma de tinta, de lado a lado; sobre ella se para la estudiante */
+    .pie { position: relative; align-self: stretch; margin: auto calc(50% - 50vw) 0; padding: 10px 16px calc(22px + env(safe-area-inset-bottom)); background: var(--tinta);
+           text-align: center; font-size: 13.5px; color: rgba(255, 243, 214, .84); line-height: 1.5; }
+    .pie::before { content: ""; position: absolute; left: 0; right: 0; bottom: calc(100% - 1px); height: var(--loma); background: var(--tinta);
+                   clip-path: ellipse(75% 392% at 50% 392%); pointer-events: none; }
+    .pie a { color: var(--amarillo); font-weight: 700; text-decoration: none; border-bottom: 1.5px solid currentColor; }
+    .amiga { position: absolute; right: max(8px, calc(50% - 232px)); bottom: 100%; width: 120px; aspect-ratio: 320 / 395; pointer-events: none; }
+    .amiga svg { display: block; width: 100%; height: 100%; overflow: visible; }
     [hidden] { display: none !important; }
+    /* la entrada: todo sube en cascada (si no hay animaciones, queda a la vista tal cual) */
+    @keyframes sube { from { opacity: 0; transform: translateY(18px); } }
+    @keyframes cae { from { opacity: 0; transform: translateY(-24px) scale(.9); } }
+    @media (prefers-reduced-motion: no-preference) {
+      .avatar { animation: cae .8s var(--suave) backwards; }
+      h1 { animation: sube .8s var(--suave) .08s backwards; }
+      .tag { animation: sube .8s var(--suave) .14s backwards; }
+      .enlaces .btn { animation: sube .8s var(--suave) .2s backwards; }
+      .enlaces .btn:nth-child(2) { animation-delay: .26s; }
+      .enlaces .btn:nth-child(3) { animation-delay: .32s; }
+      .enlaces .btn:nth-child(4) { animation-delay: .38s; }
+      .enlaces .btn:nth-child(5) { animation-delay: .44s; }
+    }
 
     /* hoja "Manten presionado para abrir" */
-    .velo { position: fixed; inset: 0; background: rgba(27, 27, 31, .55); opacity: 0; transition: opacity .25s ease; z-index: 10; }
+    .velo { position: fixed; inset: 0; background: rgba(22, 18, 14, .58); opacity: 0; transition: opacity .25s ease; z-index: 10; }
     .velo.ver { opacity: 1; }
-    .hoja { position: fixed; left: 0; right: 0; bottom: 0; z-index: 11; width: 100%; max-width: 520px; margin: 0 auto;
-            background: #fff; border-radius: 28px 28px 0 0; padding: 62px 20px calc(24px + env(safe-area-inset-bottom));
-            transform: translateY(105%); transition: transform .3s cubic-bezier(.2, .8, .2, 1); text-align: center;
-            outline: none; max-height: calc(100% - 24px); }
+    .hoja { position: fixed; left: 0; right: 0; bottom: 0; z-index: 11; width: 100%; max-width: 520px; margin: 0 auto; background: var(--papel);
+            border: var(--borde) solid var(--tinta); border-bottom: 0; border-radius: 28px 28px 0 0; padding: 62px 20px calc(24px + env(safe-area-inset-bottom));
+            transform: translateY(105%); transition: transform .34s var(--suave); text-align: center; outline: none; max-height: calc(100% - 24px); }
     .hoja.ver { transform: translateY(0); }
-    .hoja-av { position: absolute; left: 50%; top: -46px; transform: translateX(-50%); width: 92px; height: 92px; border-radius: 50%;
-               background: #fff; border: var(--borde) solid var(--tinta); display: grid; place-items: center; }
+    .hoja-av { position: absolute; left: 50%; top: -46px; transform: translateX(-50%); width: 92px; height: 92px; border-radius: 50%; background: var(--papel);
+               border: var(--borde) solid var(--tinta); display: grid; place-items: center; }
     .hoja-av img { width: 46px; height: 55px; display: block; }
-    .insignia { position: absolute; right: -6px; bottom: -4px; width: 34px; height: 34px; border-radius: 50%; background: var(--verde);
-                border: 3px solid #fff; display: grid; place-items: center; color: #fff; }
+    .insignia { position: absolute; right: -6px; bottom: -4px; width: 34px; height: 34px; border-radius: 50%; background: var(--verde); border: 3px solid var(--papel);
+                display: grid; place-items: center; color: #fff; }
     .insignia svg { width: 18px; height: 18px; }
-    .cerrar { position: absolute; top: 14px; right: 14px; width: 40px; height: 40px; border-radius: 50%; background: #fff;
-              border: var(--borde) solid var(--tinta); display: grid; place-items: center; cursor: pointer; color: var(--tinta); }
+    .cerrar { position: absolute; top: 14px; right: 14px; width: 40px; height: 40px; border-radius: 50%; background: var(--amarillo); border: var(--borde) solid var(--tinta);
+              display: grid; place-items: center; cursor: pointer; color: var(--tinta); }
     .cerrar svg { width: 18px; height: 18px; }
-    .ceja { font-size: 14px; color: #6B6658; font-weight: 600; }
-    .hoja h2 { margin-top: 6px; font-size: 24px; line-height: 1.2; font-weight: 850; letter-spacing: -0.01em; }
+    .ceja { font-size: 14px; color: rgba(22, 18, 14, .7); font-weight: 600; }
+    .hoja h2 { margin-top: 6px; font-size: 24px; line-height: 1.12; font-weight: 900; letter-spacing: -0.01em; }
     .zona { position: relative; margin-top: 46px; }
     .hoja.android .zona { margin-top: 26px; }
     .mantener .ico-wa { display: none; }
     .hoja.android .mantener .ico-mano { display: none; }
     .hoja.android .mantener .ico-wa { display: block; width: 24px; height: 24px; }
-    .mantener { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; min-height: 62px;
-                padding: 12px 18px; border-radius: 999px; background: var(--tinta); color: #fff; text-decoration: none;
-                font-size: clamp(15px, 4.4vw, 17.5px); font-weight: 750; white-space: nowrap;
-                -webkit-touch-callout: default; -webkit-user-select: none; user-select: none;
-                -webkit-tap-highlight-color: transparent; transition: transform .12s ease, background .12s ease; }
+    .mantener { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; min-height: 62px; padding: 12px 18px;
+                border-radius: 999px; background: var(--tinta); color: var(--crema); text-decoration: none; font-size: clamp(15px, 4.4vw, 17.5px); font-weight: 800;
+                white-space: nowrap; -webkit-touch-callout: default; -webkit-user-select: none; user-select: none; -webkit-tap-highlight-color: transparent;
+                box-shadow: 4px 4px 0 rgba(22, 18, 14, .28); transition: transform .12s ease, background .12s ease; }
     .mantener svg { width: 22px; height: 22px; flex-shrink: 0; }
     .mantener.presionando { transform: scale(.97); background: #000; }
     .mantener.sacudir { animation: sacudir .42s ease; }
-    @keyframes sacudir { 0%, 100% { translate: 0 0; } 20% { translate: -7px 0; } 40% { translate: 6px 0; } 60% { translate: -4px 0; }
-                         80% { translate: 3px 0; } }
-    .flecha { position: absolute; top: -44px; width: 46px; height: 46px; color: var(--tinta); pointer-events: none;
-              animation: bajar 1.1s ease-in-out infinite; }
+    @keyframes sacudir { 0%, 100% { translate: 0 0; } 20% { translate: -7px 0; } 40% { translate: 6px 0; } 60% { translate: -4px 0; } 80% { translate: 3px 0; } }
+    .flecha { position: absolute; top: -44px; width: 46px; height: 46px; color: var(--tinta); pointer-events: none; animation: bajar 1.1s ease-in-out infinite; }
     .flecha.izq { left: 4px; }
     .flecha.der { right: 4px; transform: scaleX(-1); animation-name: bajar-der; }
     @keyframes bajar { 0%, 100% { translate: 0 0; } 50% { translate: 5px 7px; } }
     @keyframes bajar-der { 0%, 100% { translate: 0 0; } 50% { translate: -5px 7px; } }
     .paso { margin-top: 16px; font-size: 15px; line-height: 1.45; color: var(--tinta2); }
-    .alterno { margin-top: 10px; font-size: 14px; line-height: 1.45; color: #6B6658; }
-    .copia { margin-top: 18px; padding-top: 16px; border-top: 1px solid #ECE6D3; display: flex; align-items: center;
-             justify-content: center; gap: 10px; flex-wrap: wrap; font-size: 14.5px; color: var(--tinta2); }
+    .alterno { margin-top: 10px; font-size: 14px; line-height: 1.45; color: rgba(22, 18, 14, .7); }
+    .copia { margin-top: 18px; padding-top: 16px; border-top: 2px dashed rgba(22, 18, 14, .22); display: flex; align-items: center; justify-content: center; gap: 10px;
+             flex-wrap: wrap; font-size: 14.5px; color: var(--tinta2); }
     .copia b { color: var(--tinta); white-space: nowrap; }
-    .copia button { min-height: 38px; padding: 0 16px; border-radius: 999px; border: var(--borde) solid var(--tinta);
-                    background: #fff; color: var(--tinta); font: inherit; font-weight: 750; cursor: pointer; white-space: nowrap; }
-    .copia button.hecho { background: #E3F8EC; border-color: #1E8A4C; color: #146C3B; }
-    .a-mano { margin: 12px auto 0; display: block; width: 100%; max-width: 280px; min-height: 40px; padding: 0 12px;
-              border-radius: 12px; border: var(--borde) solid var(--tinta); font: inherit; font-weight: 750; text-align: center;
-              color: var(--tinta); background: var(--crema); }
+    .copia button { min-height: 38px; padding: 0 16px; border-radius: 999px; border: 2px solid var(--tinta); background: var(--amarillo); color: var(--tinta);
+                    font: inherit; font-weight: 800; cursor: pointer; white-space: nowrap; }
+    .copia button.hecho { background: var(--lima); border-color: var(--tinta); color: var(--tinta); }
+    .a-mano { margin: 12px auto 0; display: block; width: 100%; max-width: 280px; min-height: 40px; padding: 0 12px; border-radius: 12px;
+              border: 2px solid var(--tinta); font: inherit; font-weight: 750; text-align: center; color: var(--tinta); background: var(--crema); }
     @media (prefers-reduced-motion: reduce) {
       .flecha { animation: none; }
       .hoja, .velo, .btn, .mantener { transition: none; }
@@ -133,6 +160,12 @@
 </head>
 <body>
   <main class="pag">
+    <svg class="chispa c1" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 0c1.2 6.8 5.2 10.8 12 12-6.8 1.2-10.8 5.2-12 12-1.2-6.8-5.2-10.8-12-12 6.8-1.2 10.8-5.2 12-12z"/></svg>
+    <svg class="chispa c2" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.4" fill="none" stroke="currentColor" stroke-width="3.4"/></svg>
+    <svg class="chispa c3" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3v18M3 12h18" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round"/></svg>
+    <svg class="chispa c4" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 0c1.2 6.8 5.2 10.8 12 12-6.8 1.2-10.8 5.2-12 12-1.2-6.8-5.2-10.8-12-12 6.8-1.2 10.8-5.2 12-12z"/></svg>
+    <svg class="chispa c5" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3v18M3 12h18" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round"/></svg>
+    <svg class="chispa c6" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.4" fill="none" stroke="currentColor" stroke-width="3.4"/></svg>
     <header>
       <div class="avatar"><img src="/v2/img/tareapp-pin.png" alt="" width="54" height="64" /></div>
     </header>
@@ -310,6 +343,103 @@
       // vista previa de la hoja (pruebas y capturas): ?hoja=ios o ?hoja=android
       var forzar = ((location.search.match(/[?&]hoja=(ios|android)/) || [])[1] || "");
       if (forzar) abrirHoja(forzar);
+    })();
+  </script>
+  <script>
+    /* Adorno (11-nov-2026): el grano de impresion de la portada y la estudiante, que baja con el paraguas y saluda parada
+       sobre la loma del pie. No toca los enlaces ni la hoja: si algo falla aqui, la pagina queda igual. */
+    (function () {
+      try {
+        var menos = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+        var pie = document.querySelector(".pie");
+        var grano = function () {
+          var n = 168, c = document.createElement("canvas");
+          c.width = c.height = n;
+          var x = c.getContext("2d"), im = x.createImageData(n, n), d = im.data, s = 20261110;
+          var azar = function () { s = (Math.imul(s, 1664525) + 1013904223) | 0; return ((s >>> 9) & 0xffff) / 65535; };
+          for (var i = 0; i < d.length; i += 4) {
+            var v = azar();
+            d[i] = d[i + 1] = d[i + 2] = v > 0.5 ? 255 : 0;
+            d[i + 3] = Math.round(Math.abs(v - 0.5) * 2 * 30);
+          }
+          x.putImageData(im, 0, 0);
+          var g = document.createElement("div");
+          g.className = "grano";
+          g.setAttribute("aria-hidden", "true");
+          g.style.backgroundImage = "url(" + c.toDataURL("image/png") + ")";
+          g.style.backgroundSize = Math.round(n / Math.min(2, window.devicePixelRatio || 1)) + "px";
+          document.body.appendChild(g);
+        };
+        var amiga = function () {
+          if (!pie) return;
+          if (!window.AGS_V2) window.AGS_V2 = { nota: " " };   // el dibujo trae una tarjeta con la nota (aqui no se usa)
+          var s = document.createElement("script");
+          s.src = "/v2/js/estudiante.js?v=20261012";
+          s.async = true;
+          s.onload = function () {
+            try {
+              var P = window.Personaje;
+              if (!P) return;
+              var POSES = P.POSES, caja = document.createElement("div");
+              caja.className = "amiga";
+              caja.setAttribute("aria-hidden", "true");
+              var p = new P({ piel: "estudiante" });
+              p.pose = Object.assign({}, POSES.saludo); p.mira = -1; p.render();
+              caja.appendChild(p.svg);
+              pie.appendChild(caja);
+              var colocar = function () {
+                var w = pie.clientWidth || 1, hC = caja.offsetHeight;
+                var dx = (caja.offsetLeft + caja.offsetWidth / 2) / w - 0.5;
+                var hz = Math.max(34, Math.min(60, 0.09 * window.innerWidth));
+                var loma = hz * (3.92 * Math.sqrt(Math.max(0, 1 - (dx / 0.75) * (dx / 0.75))) - 2.92);
+                caja.style.bottom = Math.round(pie.offsetHeight + loma - hC * (25 / 395) - 3) + "px";
+              };
+              colocar();
+              window.addEventListener("resize", colocar);
+              if (menos) return;
+              var visible = true, t0 = performance.now() / 1000, dur = 1.9, llego = false, guino = 0, prox = 2.4, cuadro = 0;
+              if ("IntersectionObserver" in window) new IntersectionObserver(function (es) { visible = es[0].isIntersecting; }).observe(caja);
+              var alto = 112;      // baja dentro del hueco que hay bajo los botones: no pasa por delante de ninguno
+              var tic = function (ms) {
+                var t = ms / 1000, pose;
+                if (!llego) {
+                  var u = (t - t0) / dur;
+                  if (u >= 1) { llego = true; caja.style.transform = ""; }
+                  else {
+                    var g = Math.max(0, Math.min(1, u / 0.8)), baja = 1 - Math.pow(1 - g, 3);
+                    var flota = Object.assign({}, POSES.flota);
+                    flota.paraguas = Math.max(0, Math.min(1, (0.94 - u) / 0.1));
+                    flota.pDx += Math.sin(t * 3.1) * 5; flota.pTx += Math.sin(t * 3.1 + 1.4) * 5;
+                    flota.pDy += Math.cos(t * 3.1) * 3; flota.mTy += Math.sin(t * 2.3) * 4;
+                    flota.cola = 60 + (1 - baja) * 18;
+                    flota.sinSombra = g < 0.86 ? 1 : 0;
+                    var at = Math.max(0, Math.min(1, (u - 0.78) / 0.22)); at = at * at * (3 - 2 * at);
+                    pose = at > 0 ? P.mezclar(flota, POSES.saludo, at) : flota;
+                    caja.style.transform = "translateY(" + (-(1 - baja) * alto).toFixed(1) + "px) rotate(" + (Math.sin(t * 2.2) * 3 * (1 - baja)).toFixed(2) + "deg)";
+                    p.mira = at > 0.6 ? -1 : 1; p.pose = pose; p.render();
+                    requestAnimationFrame(tic);
+                    return;
+                  }
+                }
+                if (visible && !(cuadro++ & 1)) {
+                  pose = Object.assign({}, POSES.saludo);
+                  pose.mDx += Math.sin(t * 9) * 9; pose.mDy += Math.cos(t * 9) * 4;
+                  pose.bob = Math.sin(t * 2.2) * 0.8;
+                  if (t > prox) { guino = t + 0.12; prox = t + 2.4 + Math.random() * 3; }
+                  p.parpadeo = t < guino ? 1 : 0;
+                  p.mira = -1; p.pose = pose; p.render();
+                }
+                requestAnimationFrame(tic);
+              };
+              requestAnimationFrame(tic);
+            } catch (e) { /* sin la estudiante la pagina queda igual */ }
+          };
+          document.head.appendChild(s);
+        };
+        var ir = function () { try { grano(); } catch (e) {} try { amiga(); } catch (e) {} };
+        if (document.readyState === "complete") setTimeout(ir, 80);
+        else window.addEventListener("load", function () { setTimeout(ir, 80); });
+      } catch (e) { /* nada */ }
     })();
   </script>
 <script defer src="/assets/ags-analytics.js" data-sitio="tareapp"></script>
