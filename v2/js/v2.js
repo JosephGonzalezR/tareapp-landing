@@ -82,6 +82,23 @@ window.AGS_ORIGEN = window.AGS_ORIGEN || (function () {
   const sinIO = (t) => 0.5 - 0.5 * Math.cos(Math.PI * t);
   const reducido = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const tactil = window.matchMedia("(hover: none)").matches;
+  const raiz = document.documentElement;
+
+  /* Velocidad del scroll en px/s, suavizada. Sirve igual con Lenis (escritorio) y con el scroll del celular. */
+  const Vel = (function () {
+    let ultY = 0, ultT = 0, v = 0;
+    return {
+      tic(sy, ahora) {
+        if (ultT) {
+          const dt = Math.max(1, ahora - ultT) / 1000;
+          v += ((sy - ultY) / dt - v) * Math.min(1, dt * 9);
+          if (Math.abs(v) < 0.5) v = 0;
+        }
+        ultY = sy; ultT = ahora;
+        return v;
+      },
+    };
+  })();
 
   /* ---------- WhatsApp ---------- */
   function enlacesWA() {
@@ -109,14 +126,35 @@ window.AGS_ORIGEN = window.AGS_ORIGEN || (function () {
   function menu() {
     const b = $("[data-menu]"), m = $("#menu-movil");
     if (!b || !m) return;
-    const cerrar = () => { b.setAttribute("aria-expanded", "false"); m.hidden = true; document.body.style.overflow = ""; };
+    // El panel se abre como un circulo que sale del boton y se cierra volviendo a el (antes aparecia de golpe).
+    const animar = !reducido && !!window.gsap;
+    const centro = () => { const r = b.getBoundingClientRect(); return Math.round(r.left + r.width / 2) + "px " + Math.round(r.top + r.height / 2) + "px"; };
+    let cerrando = null;
+    const cerrar = () => {
+      b.setAttribute("aria-expanded", "false"); document.body.style.overflow = "";
+      if (m.hidden || cerrando) return;
+      if (!animar) { m.hidden = true; return; }
+      const c = centro();
+      gsap.killTweensOf(m);
+      cerrando = gsap.fromTo(m, { clipPath: "circle(150% at " + c + ")" }, {
+        clipPath: "circle(0% at " + c + ")", duration: 0.32, ease: "power3.out",
+        onComplete: () => { m.hidden = true; gsap.set(m, { clearProps: "clipPath" }); cerrando = null; },
+      });
+    };
     b.addEventListener("click", () => {
       const abierto = b.getAttribute("aria-expanded") === "true";
       if (abierto) { cerrar(); return; }
+      if (cerrando) { cerrando.kill(); cerrando = null; }
       b.setAttribute("aria-expanded", "true"); m.hidden = false; document.body.style.overflow = "hidden";
-      if (!reducido) gsap.from(m.querySelectorAll("nav a"), { yPercent: 60, opacity: 0, stagger: 0.04, duration: 0.5, ease: "power3.out" });
+      if (!animar) return;
+      const c = centro();
+      gsap.fromTo(m, { clipPath: "circle(0% at " + c + ")" }, { clipPath: "circle(150% at " + c + ")", duration: 0.62, ease: "expo.out", onComplete: () => gsap.set(m, { clearProps: "clipPath" }) });
+      gsap.fromTo(m.querySelectorAll("nav a"), { yPercent: 70, opacity: 0 }, { yPercent: 0, opacity: 1, stagger: 0.035, duration: 0.55, ease: "expo.out", delay: 0.1, overwrite: true });
+      const cta = m.querySelector(".boton");
+      if (cta) gsap.fromTo(cta, { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "expo.out", delay: 0.3, overwrite: true, clearProps: "transform,opacity" });
     });
     m.addEventListener("click", (e) => { if (e.target.closest("a")) cerrar(); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape" && b.getAttribute("aria-expanded") === "true") { cerrar(); b.focus(); } });
   }
 
   /* ---------- confeti ---------- */
@@ -194,18 +232,105 @@ window.AGS_ORIGEN = window.AGS_ORIGEN || (function () {
     }
     let giro = 0, vel = 0, enVista = true;
     if ("IntersectionObserver" in window) new IntersectionObserver((es) => { enVista = es[0].isIntersecting; }).observe(cont.parentElement);
+    // El anillo se inclina con el puntero (escritorio), aparece cuando la estudiante aterriza y se abre y se
+    // desvanece cuando ella sale de el al bajar (antes quedaba girando alrededor de nada).
+    let ix = 0, iz = 0, mx = 0, mz = 0, suelta = 0;
+    const ent = { v: 0 };
+    const heroe = cont.closest(".heroe");
+    const piso = heroe && heroe.querySelector(".escena--heroe"); // su sombra en el suelo se va con ella
+    cont.style.opacity = "0";
+    if (heroe && !tactil) {
+      heroe.addEventListener("pointermove", (e) => {
+        const r = heroe.getBoundingClientRect();
+        mx = ((e.clientY - r.top) / r.height - 0.5) * -9; mz = ((e.clientX - r.left) / r.width - 0.5) * 6;
+      });
+      heroe.addEventListener("pointerleave", () => { mx = mz = 0; });
+    }
     return {
       armar,
-      tic(dt, impulso) {
+      tic(dt, impulso, sy) {
         if (!enVista) return;
         vel = lerp(vel, impulso, 0.08);
         giro = (giro + dt * (18 + vel)) % 360;
         giros.forEach((g) => g.style.setProperty("--giro", giro.toFixed(2) + "deg"));
+        ix += (mx - ix) * Math.min(1, dt * 5); iz += (mz - iz) * Math.min(1, dt * 5);
+        suelta += (clamp((sy || 0) / (innerHeight * 0.3), 0, 1) - suelta) * Math.min(1, dt * 12);
+        const s = suave(suelta);
+        cont.style.setProperty("--ix", ix.toFixed(2) + "deg");
+        cont.style.setProperty("--iz", iz.toFixed(2) + "deg");
+        cont.style.opacity = (ent.v * (1 - s)).toFixed(3);
+        cont.style.visibility = s > 0.985 ? "hidden" : "";
+        cont.style.transform = "scale(" + (lerp(0.7, 1, ent.v) * (1 + 0.14 * s)).toFixed(4) + ")";
+        if (piso) piso.style.opacity = (1 - s).toFixed(3);
       },
+      entrar(espera) { gsap.to(ent, { v: 1, duration: 1.2, ease: "expo.out", delay: espera || 0 }); },
       centrar(x, y) { cont.style.left = x + "px"; cont.style.top = y + "px"; },
       el: cont,
     };
   }
+
+  /* ---------- aire: rachas de viento mientras baja con el paraguas y polvo cuando aterriza ---------- */
+  const Aire = (function () {
+    let cv = null, ctx = null, dpr = 1, W = 0, H = 0, ps = [], activo = false, ult = 0;
+    const TINTA = "22,18,14", CREMA = "255,243,214";
+    function ajustar() {
+      dpr = Math.min(window.devicePixelRatio || 1, 2); W = innerWidth; H = innerHeight;
+      cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    }
+    function asegurar() {
+      if (cv) return true;
+      if (reducido) return false;
+      cv = document.createElement("canvas");
+      cv.className = "aire"; cv.setAttribute("aria-hidden", "true");
+      document.body.appendChild(cv);
+      ctx = cv.getContext("2d");
+      ajustar();
+      window.addEventListener("resize", ajustar);
+      return true;
+    }
+    function paso(ahora) {
+      const dt = Math.min(0.05, (ahora - ult) / 1000); ult = ahora;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, W, H);
+      ps = ps.filter((p) => p.t < p.dur);
+      ctx.lineCap = "round";
+      for (const p of ps) {
+        p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt;
+        const u = p.t / p.dur, a = p.a * Math.min(1, u / 0.18) * (1 - u) * (1 - u);
+        if (a <= 0.004) continue;
+        if (p.racha) {
+          ctx.strokeStyle = "rgba(" + p.c + "," + a.toFixed(3) + ")"; ctx.lineWidth = p.g;
+          ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p.x, p.y + p.l); ctx.stroke();
+        } else {
+          p.vx *= 0.94; p.vy *= 0.94;
+          ctx.fillStyle = "rgba(" + p.c + "," + a.toFixed(3) + ")";
+          ctx.beginPath(); ctx.arc(p.x, p.y, p.g * (0.6 + 1.5 * u), 0, 6.2832); ctx.fill();
+        }
+      }
+      if (ps.length) requestAnimationFrame(paso); else { activo = false; ctx.clearRect(0, 0, W, H); }
+    }
+    function arrancar() { if (!activo) { activo = true; ult = performance.now(); requestAnimationFrame(paso); } }
+    return {
+      // x, y = pies de la estudiante en la pantalla; vel = velocidad del scroll; clara = va sobre un fondo oscuro o saturado
+      racha(x, y, vel, clara, s) {
+        if (!asegurar() || ps.length > 46) return;
+        const m = Math.abs(vel), dir = vel > 0 ? -1 : 1;
+        ps.push({ racha: 1, x: x + (Math.random() - 0.5) * 340 * s, y: y - (30 + Math.random() * 340) * s, vx: 0, vy: dir * (150 + m * 0.4),
+          l: clamp(m * 0.034, 14, 64) * (0.6 + Math.random() * 0.7), g: 2 + Math.random() * 1.8, c: clara ? CREMA : TINTA,
+          a: clara ? 0.66 : 0.36, t: 0, dur: 0.4 + Math.random() * 0.36 });
+        arrancar();
+      },
+      polvo(x, y, clara, s) {
+        if (!asegurar()) return;
+        for (let i = 0; i < 9; i++) {
+          const lado = i % 2 ? 1 : -1;
+          ps.push({ x: x + lado * (8 + Math.random() * 26) * s, y: y - Math.random() * 4, vx: lado * (60 + Math.random() * 150) * s, vy: -(8 + Math.random() * 46) * s,
+            g: (3 + Math.random() * 4.5) * s, c: clara ? CREMA : TINTA, a: clara ? 0.6 : 0.3, t: 0, dur: 0.42 + Math.random() * 0.3 });
+        }
+        arrancar();
+      },
+    };
+  })();
 
   /* ---------- particulas 7,0 ---------- */
   function particulas() {
@@ -345,7 +470,7 @@ window.AGS_ORIGEN = window.AGS_ORIGEN || (function () {
       };
     }
 
-    let P = [], vh = innerHeight, A = 0.74, viajeTop = 0;
+    let P = [], vh = innerHeight, A = 0.74, viajeTop = 0, viajeIzq = 0;
     function medir() {
       vh = innerHeight;
       const movil = innerWidth < 861;
@@ -353,10 +478,12 @@ window.AGS_ORIGEN = window.AGS_ORIGEN || (function () {
       const vr = viaje.getBoundingClientRect();
       const top = vr.top + scrollY;
       viajeTop = top;
+      viajeIzq = vr.left + scrollX;
       P = escenas.map((svg, i) => {
         const o = origen(svg, vr);
         const docY = top + o.y;
-        const p = { x: o.x, y: o.y, docY };
+        const est = svg.closest(".estacion");
+        const p = { x: o.x, y: o.y, docY, secTop: est ? est.getBoundingClientRect().top + scrollY : 0, clara: !!(est && est.classList.contains("estacion--clara")) };
         if (i === 0) { p.S = 0; p.din = 0; p.dout = 0.05 * vh; }
         else { p.S = docY - A * vh; p.din = 0.16 * vh; p.dout = (movil ? 0.34 : 0.3) * vh; }
         return p;
@@ -423,6 +550,61 @@ window.AGS_ORIGEN = window.AGS_ORIGEN || (function () {
       return { tipo: "estacion", i: 0, q: 0 };
     }
 
+    /* Como baja (10-nov-2026): al cargar entra flotando con el paraguas; mientras viaja cuelga del paraguas como un
+       pendulo y el viento le mueve la cola y el cuerpo segun la velocidad del scroll; al tocar el suelo se aplasta un
+       instante (resorte) y levanta polvo. */
+    const PIVOTE = 318; // altura del paraguas sobre los pies, en unidades del dibujo
+    const intro = { activo: false, t0: 0, dur: 1.45, cayo: false };
+    let golpeT = -9, faseAnt = "", gAnt = 0, viento = 0;
+    const golpe = (t) => { const d = t - golpeT; return d < 0 || d > 0.7 ? 0 : Math.exp(-7 * d) * Math.cos(d * 17); };
+    function aterrizar(t, i, x, y, sy) {
+      golpeT = t;
+      Aire.polvo(viajeIzq + x, viajeTop + y - sy, !!(P[i] && P[i].clara), S);
+    }
+    function ubicar(x, y, k, t, pendulo) {
+      const g = golpe(t);
+      let tr = `translate3d(${(x + VB.x * S).toFixed(1)}px, ${(y + VB.y * S).toFixed(1)}px, 0) scale(${k.toFixed(3)})`;
+      if (g) tr += ` scale(${(1 + 0.06 * g).toFixed(4)}, ${(1 - 0.1 * g).toFixed(4)})`;
+      if (pendulo) tr += ` translate(0px, ${(-PIVOTE * S).toFixed(1)}px) rotate(${pendulo.toFixed(2)}deg) translate(0px, ${(PIVOTE * S).toFixed(1)}px)`;
+      capa.style.transformOrigin = `${(-VB.x * S).toFixed(1)}px ${(-VB.y * S).toFixed(1)}px`;
+      capa.style.transform = tr;
+    }
+    // v = avance del tramo flotando (0 a 1). Devuelve el giro del pendulo en grados.
+    function soplar(pose, v, t) {
+      pose.cola = (pose.cola || 0) + viento * 20;
+      pose.tor += viento * 4; pose.cab -= viento * 3;
+      pose.pDy -= Math.max(0, viento) * 5; pose.pTy -= Math.max(0, viento) * 4;
+      const borde = Math.min(clamp(v / 0.08, 0, 1), clamp((1 - v) / 0.08, 0, 1));
+      return (Math.sin(t * 1.6) * 2.6 - viento * 4.5) * borde;
+    }
+    function rachas(x, y, sy, vel, i, j) {
+      const m = Math.abs(vel);
+      if (m < 240 || Math.random() > Math.min(0.75, m / 1800)) return;
+      const cuerpo = viajeTop + y - 170 * S;
+      Aire.racha(viajeIzq + x, viajeTop + y - sy, vel, cuerpo >= P[j].secTop ? P[j].clara : P[i].clara, S);
+    }
+    function entrada(t, sy, x0, y0, base) {
+      const u = (t - intro.t0) / intro.dur;
+      if (u >= 1 || sy > vh * 0.12) { intro.activo = false; capa.style.opacity = ""; return null; }
+      const g = clamp(u / 0.8, 0, 1), baja = 1 - Math.pow(1 - g, 3);
+      const alto = MOVIL ? 130 * S : Math.min(0.62 * vh, 580);
+      const flota = Object.assign({}, POSES.flota);
+      flota.paraguas = clamp((0.92 - u) / 0.1, 0, 1);
+      flota.pDx += Math.sin(t * 3.1) * 5; flota.pTx += Math.sin(t * 3.1 + 1.4) * 5;
+      flota.pDy += Math.cos(t * 3.1) * 3; flota.mTy += Math.sin(t * 2.3) * 4;
+      flota.cola = 60 + (1 - baja) * 18;
+      flota.sinSombra = g < 0.86 ? 1 : 0;
+      const aterriza = suave(clamp((u - 0.78) / 0.22, 0, 1));
+      if (!intro.cayo && u >= 0.8) { intro.cayo = true; aterrizar(t, 0, x0, y0, sy); }
+      capa.style.opacity = clamp(u / 0.16, 0, 1).toFixed(3);
+      return {
+        x: x0 + Math.sin(t * 1.6) * 5 * S * (1 - baja), y: y0 - (1 - baja) * alto,
+        pose: aterriza > 0 ? mezclar(flota, base, aterriza) : flota,
+        mira: aterriza > 0.6 ? base.mira : 1,
+        pendulo: Math.sin(t * 2.2) * 3 * (1 - baja),
+      };
+    }
+
     let parpadeoHasta = 0, proximoParpadeo = 2;
     const disparados = new Set();
     let ultimoX = null, distancia = 0;
@@ -460,15 +642,19 @@ window.AGS_ORIGEN = window.AGS_ORIGEN || (function () {
     }
 
     let oculto = false;
-    function ticMovil(sy, t) {
+    function ticMovil(sy, t, vel) {
       const e = estadoMovil(sy);
       window.__E = e;
       const p = P[e.i], w = M[e.i];
-      let x = p.x, y = p.y, pose, mira = 1, k = 1, ver = true;
+      let x = p.x, y = p.y, pose, mira = 1, k = 1, ver = true, pendulo = 0;
       if (e.tipo === "estacion") {
         pose = poseEstacion(e.i, e.q, t);
         mira = pose.mira;
         if (e.i === 0) k = ESC_HEROE;
+        if (e.i === 0 && intro.activo) {
+          const r = entrada(t, sy, x, y, pose);
+          if (r) { x = r.x; y = r.y; pose = r.pose; mira = r.mira; pendulo = r.pendulo; }
+        }
         const c = CONF[e.i];
         if (c.confeti && e.q > 0.02 && !disparados.has(e.i)) {
           disparados.add(e.i);
@@ -485,6 +671,10 @@ window.AGS_ORIGEN = window.AGS_ORIGEN || (function () {
         flota.pDy += Math.cos(t * 3.1) * 3; flota.mTy += Math.sin(t * 2.3) * 4;
         flota.tor += Math.sin(t * 1.6) * 3;
         flota.sinSombra = g < 0.8 ? 1 : 0;
+        pendulo = soplar(flota, clamp(g / 0.8, 0, 1), t) * 0.8;
+        rachas(x, y, sy, vel, e.i, e.i);
+        if (g >= 0.8 && faseAnt === "entra" && gAnt < 0.8) aterrizar(t, e.i, p.x, p.y, sy);
+        gAnt = g;
         const aterriza = suave(clamp((g - 0.8) / 0.2, 0, 1));
         pose = aterriza > 0 ? mezclar(flota, poseEstacion(e.i, 0, t), aterriza) : flota;
         mira = aterriza > 0.6 ? (CONF[e.i].mira || 1) : 1;
@@ -506,8 +696,8 @@ window.AGS_ORIGEN = window.AGS_ORIGEN || (function () {
       pj.pose = pose;
       const pantallaY = viajeTop + y - sy;
       if (ver && pantallaY > -600 && pantallaY < vh + 700) pj.render();
-      capa.style.transformOrigin = `${(-VB.x * S).toFixed(1)}px ${(-VB.y * S).toFixed(1)}px`;
-      capa.style.transform = `translate3d(${(x + VB.x * S).toFixed(1)}px, ${(y + VB.y * S).toFixed(1)}px, 0) scale(${k.toFixed(3)})`;
+      ubicar(x, y, k, t, pendulo);
+      faseAnt = e.tipo;
       profesores(e, e.i > 5 || (e.i === 5 && (e.tipo !== "entra" || e.g > 0.7)), sy, t);
     }
 
@@ -527,18 +717,24 @@ window.AGS_ORIGEN = window.AGS_ORIGEN || (function () {
       }
     }
 
-    function tic(t) {
+    function tic(t, syDado, vel) {
       if (!P.length) return;
-      const sy = window.__lenis ? window.__lenis.scroll : scrollY;
-      if (MOVIL && M.length) { ticMovil(sy, t); return; }
+      const sy = syDado != null ? syDado : (window.__lenis ? window.__lenis.scroll : scrollY);
+      vel = vel || 0;
+      viento += (clamp(vel / 2400, -1, 1) - viento) * 0.12;
+      if (MOVIL && M.length) { ticMovil(sy, t, vel); return; }
       if (oculto) { oculto = false; capa.style.visibility = ""; }
       const e = estado(sy, t);
       window.__E = e;
-      let x, y, pose, mira = 1;
+      let x, y, pose, mira = 1, pendulo = 0, fase = e.tipo;
       if (e.tipo === "estacion") {
         x = e.x; y = e.y;
         pose = poseEstacion(e.i, e.q, t);
         mira = pose.mira;
+        if (e.i === 0 && intro.activo) {
+          const r = entrada(t, sy, x, y, pose);
+          if (r) { x = r.x; y = r.y; pose = r.pose; mira = r.mira; pendulo = r.pendulo; }
+        }
         const c = CONF[e.i];
         if (c.confeti && e.q > 0.02 && !disparados.has(e.i)) {
           disparados.add(e.i);
@@ -550,18 +746,22 @@ window.AGS_ORIGEN = window.AGS_ORIGEN || (function () {
         const bordeX = a.x - 95 * S, llegaX = b.x - 95 * S;
         if (u < UW) {
           const v = u / UW;
+          fase = "sale";
           x = lerp(a.x, bordeX, sinIO(v)); y = a.y;
           pose = mezclar(poseEstacion(e.i, 1, t), pj.caminar(Math.abs(x - a.x) / (60 * S)), clamp(v * 3, 0, 1));
           mira = -1;
         } else if (u > 1 - UW) {
           const v = (u - (1 - UW)) / UW;
+          fase = "llega";
           x = lerp(llegaX, b.x, sinIO(v)); y = b.y;
+          if (faseAnt === "flota") aterrizar(t, e.j, x, y, sy);
           const cam = pj.caminar(Math.abs(b.x - x) / (60 * S));
           if (v < 0.25) cam.bob = (cam.bob || 0) + (1 - v / 0.25) * 6;
           pose = mezclar(cam, poseEstacion(e.j, 0, t), suave(clamp((v - 0.55) / 0.45, 0, 1)));
           mira = v > 0.8 ? (CONF[e.j].mira || 1) : 1;
         } else {
           const v = (u - UW) / (1 - 2 * UW);
+          fase = "flota";
           x = lerp(bordeX, llegaX, sinIO(v)) + Math.sin(t * 1.6) * 7 * S * Math.sin(Math.PI * v);
           y = lerp(a.y, b.y, v) - 34 * S * Math.sin(Math.PI * Math.min(1, v * 2)) * (1 - v);
           pose = Object.assign({}, POSES.flota);
@@ -570,6 +770,8 @@ window.AGS_ORIGEN = window.AGS_ORIGEN || (function () {
           pose.pDy += Math.cos(t * 3.1) * 3; pose.mTy += Math.sin(t * 2.3) * 4;
           pose.tor += Math.sin(t * 1.6) * 3;
           pose.sinSombra = 1;
+          pendulo = soplar(pose, v, t);
+          rachas(x, y, sy, vel, e.i, e.j);
           if (v < 0.04 || v > 0.96) { pose = mezclar(pj.caminar(0), pose, v < 0.5 ? v / 0.04 : (1 - v) / 0.04); }
           mira = v < 0.45 ? -1 : 1;
         }
@@ -584,12 +786,16 @@ window.AGS_ORIGEN = window.AGS_ORIGEN || (function () {
       let k = 1;
       if (e.tipo === "estacion" && e.i === 0) k = ESC_HEROE;
       else if (e.tipo === "viaje" && e.i === 0) k = lerp(ESC_HEROE, 1, suave(clamp(e.u / 0.3, 0, 1)));
-      capa.style.transformOrigin = `${(-VB.x * S).toFixed(1)}px ${(-VB.y * S).toFixed(1)}px`;
-      capa.style.transform = `translate3d(${(x + VB.x * S).toFixed(1)}px, ${(y + VB.y * S).toFixed(1)}px, 0) scale(${k.toFixed(3)})`;
+      ubicar(x, y, k, t, pendulo);
+      faseAnt = fase;
       profesores(e, e.i >= 5, sy, t);
     }
 
-    return { medir, tic, pj };
+    return {
+      medir, tic, pj,
+      // la entrada del inicio: baja flotando con el paraguas, aterriza y saluda (solo si la pagina abre arriba)
+      entrar() { intro.activo = true; intro.cayo = false; intro.t0 = performance.now() / 1000; capa.style.opacity = "0"; },
+    };
   }
 
   /* Chat del telefono de la escena 2: cuanto sube para que el mensaje i quede entero sobre el marco de abajo.
@@ -697,17 +903,23 @@ window.AGS_ORIGEN = window.AGS_ORIGEN || (function () {
   }
 
   /* ---------- textos ---------- */
+  // El titulo del inicio espera a la entrada (que arranca con la letra ya cargada); los demas suben al llegar a ellos.
+  const tituloInicio = { listo: false, tweens: [] };
   function textos() {
     if (window.SplitText) {
+      let n = 0;
       $$("[data-partir]").forEach((el) => {
-        const heroe = !!el.closest(".heroe");
+        const heroe = !!el.closest(".heroe"), orden = heroe ? n++ : 0;
         SplitText.create(el, {
           type: "words,chars", mask: "words", autoSplit: true, wordsClass: "pal", charsClass: "car",
           onSplit(self) {
-            return gsap.from(self.chars, {
-              yPercent: 110, rotation: 6, duration: 0.9, ease: "expo.out", stagger: 0.022, delay: heroe ? 0.15 : 0,
-              scrollTrigger: heroe ? undefined : { trigger: el, start: "top 85%", once: true },
+            const tw = gsap.from(self.chars, {
+              yPercent: 110, rotation: 6, duration: 0.9, ease: "expo.out", stagger: 0.022, delay: heroe ? 0.05 + orden * 0.14 : 0,
+              paused: heroe && !tituloInicio.listo,
+              scrollTrigger: heroe ? undefined : { trigger: el, start: "top 90%", once: true },
             });
+            if (heroe) tituloInicio.tweens[orden] = tw;
+            return tw;
           },
         });
       });
@@ -720,12 +932,17 @@ window.AGS_ORIGEN = window.AGS_ORIGEN || (function () {
     $$("[data-fondo]").forEach((s) => {
       const color = s.getAttribute("data-fondo"), txt = s.getAttribute("data-hud-txt") || "";
       const ir = () => {
-        gsap.to(fondo, { backgroundColor: color, duration: 0.55, ease: "power2.out", overwrite: true });
+        // 10-nov-2026: cada seccion pinta su color (mundos); este fondo fijo solo se ve al rebotar arriba o abajo, asi que
+        // cambia de una vez (animarlo repintaba la pantalla entera en cada cuadro)
+        if (fondo) fondo.style.backgroundColor = color;
         if (meta) meta.setAttribute("content", color);
         if (hud && hud.dataset.actual !== txt) { hud.dataset.actual = txt; gsap.to(hud, { duration: 0.6, scrambleText: { text: txt, chars: "ABCDEFGHIJKLMNOPQRSTUVWXYZ", speed: 0.6 } }); }
       };
       ScrollTrigger.create({ trigger: s, start: "top 58%", end: "bottom 58%", onEnter: ir, onEnterBack: ir });
     });
+    // al llegar al pie, el fondo fijo queda en tinta: si la pagina rebota abajo, no asoma el amarillo del cierre
+    const pie = $(".pie");
+    if (pie && fondo) ScrollTrigger.create({ trigger: pie, start: "top 70%", onEnter: () => { fondo.style.backgroundColor = "#16120E"; } });
   }
 
   /* ---------- detalles ---------- */
@@ -755,6 +972,13 @@ window.AGS_ORIGEN = window.AGS_ORIGEN || (function () {
     $$(".burbujas li").forEach((c, i) => gsap.from(c, { y: 24, opacity: 0, scale: 0.96, duration: 0.6, delay: (i % 4) * 0.12, ease: "expo.out", scrollTrigger: { trigger: c, start: "top 92%", once: true } }));
     gsap.fromTo(".marquesina__pista", { xPercent: 0 }, { xPercent: -18, ease: "none", scrollTrigger: { trigger: ".final", start: "top bottom", end: "bottom top", scrub: true } });
     if ($(".muestras__cinta")) gsap.fromTo(".muestras__cinta .cinta__pista", { xPercent: 0 }, { xPercent: -14, ease: "none", scrollTrigger: { trigger: ".muestras__cinta", start: "top bottom", end: "bottom top", scrub: true } });
+    // cifras: la linea se traza y cada cifra sube; preguntas: entran en cascada
+    const cifras = $(".cifras");
+    if (cifras) {
+      ScrollTrigger.create({ trigger: cifras, start: "top 86%", once: true, onEnter: () => cifras.classList.add("vista") });
+      gsap.from($$(".cifra", cifras), { y: 34, opacity: 0, stagger: 0.1, duration: 0.9, ease: "expo.out", scrollTrigger: { trigger: cifras, start: "top 86%", once: true } });
+    }
+    if ($(".faq")) gsap.from(".faq details", { y: 26, opacity: 0, stagger: 0.07, duration: 0.8, ease: "expo.out", clearProps: "transform,opacity", scrollTrigger: { trigger: ".faq", start: "top 86%", once: true } });
 
     const barra = $("[data-barra]"), wa = $(".wa-flotante");
     let ultimo = 0;
@@ -765,6 +989,263 @@ window.AGS_ORIGEN = window.AGS_ORIGEN || (function () {
       if (wa) wa.classList.toggle("visible", y > innerHeight * 0.85);
       ultimo = y;
     } });
+  }
+
+  /* ---------- mundos (10-nov-2026): cada seccion pinta su propio color y la que sigue entra por abajo como un
+     horizonte curvo y elastico (se hincha al bajar rapido y se aplana al llegar arriba). Antes el color de TODA la
+     pantalla cambiaba de golpe con lo anterior todavia a la vista. El fondo lo pone el CSS; aqui solo el horizonte. ---------- */
+  function mundos() {
+    const lista = [];
+    let vh = innerHeight;
+    const crear = (sec, color) => {
+      const hz = document.createElement("span");
+      hz.className = "hz";
+      hz.setAttribute("aria-hidden", "true");
+      hz.style.backgroundColor = color;
+      sec.insertBefore(hz, sec.firstChild);
+      lista.push({ el: hz, sec, top: 0, k: 0.62, vivo: false });
+    };
+    $$("[data-fondo]").forEach((s, i) => {
+      const color = s.getAttribute("data-fondo");
+      s.style.setProperty("--fondo", color);
+      if (i > 0) crear(s, color);
+    });
+    const pie = $(".pie");
+    if (pie) crear(pie, "#16120E");
+    raiz.classList.add("mundos");
+    const poner = (h) => { h.el.style.transform = "translateY(-25.5%) scaleY(" + h.k.toFixed(4) + ")"; };
+    function medir() {
+      vh = innerHeight;
+      const sy = window.scrollY || 0;
+      lista.forEach((h) => { h.top = h.sec.getBoundingClientRect().top + sy; });
+    }
+    if ("ResizeObserver" in window) {
+      let tm = 0;
+      const main = $("main");
+      if (main) new ResizeObserver(() => { clearTimeout(tm); tm = setTimeout(medir, 60); }).observe(main);
+    }
+    medir();
+    lista.forEach(poner);
+    return {
+      medir,
+      tic(sy, vel, dt) {
+        for (const h of lista) {
+          const y = h.top - sy; // la linea del horizonte, en la pantalla
+          if (y < -0.25 * vh || y > 1.3 * vh) {
+            if (h.vivo) { h.vivo = false; h.el.style.willChange = ""; }
+            continue;
+          }
+          if (!h.vivo) { h.vivo = true; h.el.style.willChange = "transform"; }
+          const p = clamp(1 - y / vh, 0, 1);
+          const meta = clamp(lerp(1, 0.14, Math.pow(p, 1.2)) + clamp(vel / 2800, -0.45, 0.55), 0.02, 1.45);
+          h.k += (meta - h.k) * Math.min(1, dt * 7);
+          poner(h);
+        }
+      },
+    };
+  }
+
+  /* ---------- grano de impresion sobre toda la pagina (el mismo espiritu que el del dibujo) ---------- */
+  function grano() {
+    try {
+      const n = 168, c = document.createElement("canvas");
+      c.width = c.height = n;
+      const x = c.getContext("2d"), im = x.createImageData(n, n), d = im.data;
+      let s = 20261110;
+      const azar = () => { s = (Math.imul(s, 1664525) + 1013904223) | 0; return ((s >>> 9) & 0xffff) / 65535; };
+      for (let i = 0; i < d.length; i += 4) {
+        const v = azar();
+        d[i] = d[i + 1] = d[i + 2] = v > 0.5 ? 255 : 0;
+        d[i + 3] = Math.round(Math.abs(v - 0.5) * 2 * 30);
+      }
+      x.putImageData(im, 0, 0);
+      const g = document.createElement("div");
+      g.className = "grano";
+      g.setAttribute("aria-hidden", "true");
+      g.style.backgroundImage = "url(" + c.toDataURL("image/png") + ")";
+      g.style.backgroundSize = Math.round(n / Math.min(2, window.devicePixelRatio || 1)) + "px";
+      document.body.appendChild(g);
+    } catch (e) { /* sin grano no pasa nada */ }
+  }
+
+  /* ---------- despedida: la estudiante vuelve en el cierre y saluda junto al boton ---------- */
+  function despedida(quieta) {
+    const fin = $(".final");
+    if (!fin || !window.Personaje) return null;
+    const POSES = Personaje.POSES;
+    const caja = document.createElement("div");
+    caja.className = "final__amiga";
+    caja.setAttribute("aria-hidden", "true");
+    const p = new Personaje({ piel: "estudiante" });
+    p.poner(POSES.saludo); p.mira = -1; p.render();
+    caja.appendChild(p.svg);
+    fin.appendChild(caja);
+    if (quieta) return null;
+    let visible = !("IntersectionObserver" in window), guino = 0, prox = 2;
+    if ("IntersectionObserver" in window) new IntersectionObserver((es) => { visible = es[0].isIntersecting; }).observe(caja);
+    return {
+      tic(t) {
+        if (!visible) return;
+        const pose = Object.assign({}, POSES.saludo);
+        pose.mDx += Math.sin(t * 9) * 9; pose.mDy += Math.cos(t * 9) * 4;
+        pose.bob = Math.sin(t * 2.2) * 0.8;
+        if (t > prox) { guino = t + 0.12; prox = t + 2.4 + Math.random() * 3; }
+        p.parpadeo = t < guino ? 1 : 0;
+        p.mira = -1; p.pose = pose; p.render();
+      },
+    };
+  }
+
+  /* ---------- preguntas: se abren y se cierran con el alto animado (antes saltaban) ---------- */
+  function acordeon() {
+    // Sin ScrollTrigger.refresh() al terminar: mueve el scroll un instante y hacia reaparecer la barra. Lo que cambia
+    // de lugar (el cierre y el pie) lo vuelve a medir mundos() con su ResizeObserver, y Lenis mide solo.
+    $$(".faq details").forEach((d) => {
+      const s = $("summary", d);
+      if (!s) return;
+      let anim = null;
+      s.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (anim) anim.kill();
+        const abrir = !d.open || d.classList.contains("cerrando");
+        const desde = d.offsetHeight;
+        const fin = () => { d.style.height = ""; d.classList.remove("cerrando"); anim = null; };
+        if (abrir) {
+          d.classList.remove("cerrando");
+          d.open = true;
+          d.style.height = "auto";
+          const hasta = d.offsetHeight;
+          d.style.height = desde + "px";
+          anim = gsap.to(d, { height: hasta, duration: 0.5, ease: "expo.out", onComplete: fin });
+          const cuerpo = $$(":scope > :not(summary)", d);
+          if (cuerpo.length) gsap.fromTo(cuerpo, { opacity: 0, y: -8 }, { opacity: 1, y: 0, duration: 0.45, delay: 0.06, ease: "expo.out", overwrite: true });
+        } else {
+          d.classList.add("cerrando");
+          const hasta = s.offsetHeight + (d.offsetHeight - d.clientHeight);
+          anim = gsap.to(d, { height: hasta, duration: 0.3, ease: "power3.out", onComplete: () => { d.open = false; fin(); } });
+        }
+      });
+    });
+  }
+
+  /* ---------- proceso: la linea avanza con el scroll y cada paso se enciende (el numero pasa de contorno a lleno) ---------- */
+  function procesoVivo() {
+    const lista = $(".pasos");
+    if (!lista) return;
+    const pasos = $$(".paso", lista), n = pasos.length || 1;
+    lista.classList.add("pasos--vivo");
+    ScrollTrigger.create({
+      trigger: lista, start: "top 80%", end: "bottom 58%",
+      onUpdate: (st) => {
+        lista.style.setProperty("--avance", st.progress.toFixed(3));
+        pasos.forEach((p, i) => p.classList.toggle("activo", st.progress >= (i + 0.22) / n));
+      },
+    });
+  }
+
+  /* ---------- menu de arriba: marca la seccion en la que se esta ---------- */
+  function espia() {
+    $$('.barra__nav a[href^="#"]').forEach((a) => {
+      const id = a.getAttribute("href");
+      const dest = id.length > 1 ? $(id) : null;
+      if (!dest) return;
+      ScrollTrigger.create({ trigger: dest, start: "top 55%", end: "bottom 55%", onToggle: (st) => a.classList.toggle("actual", st.isActive) });
+    });
+  }
+
+  /* ---------- muestras: el panel se descubre de arriba hacia abajo al abrirlo ---------- */
+  function panelMuestras() {
+    const panel = $("[data-muestras-panel]");
+    if (!panel || !("MutationObserver" in window)) return;
+    new MutationObserver(() => {
+      if (panel.hidden) return;
+      gsap.fromTo(panel, { clipPath: "inset(-24px -24px 100% -24px)" }, { clipPath: "inset(-24px -24px 0% -24px)", duration: 0.9, ease: "expo.out", clearProps: "clipPath" });
+    }).observe(panel, { attributes: true, attributeFilter: ["hidden"] });
+  }
+
+  /* ---------- muestras: un sello redondo que tambien las abre (escritorio; el boton de siempre sigue igual) ---------- */
+  function sello() {
+    const sec = $("#muestras"), boton = sec && $("[data-muestras-abrir]", sec);
+    if (!boton) return;
+    const rotulo = () => (($("[data-txt]", boton) || boton).textContent || "").trim().toUpperCase();
+    const b = document.createElement("button");
+    b.type = "button";
+    b.className = "sello";
+    b.tabIndex = -1;
+    b.setAttribute("aria-hidden", "true");
+    b.innerHTML = '<svg viewBox="0 0 200 200"><defs><path id="sello-c" d="M100,100 m-76,0 a76,76 0 1,1 152,0 a76,76 0 1,1 -152,0"/></defs>' +
+      '<text class="sello__txt"><textPath href="#sello-c" textLength="470" lengthAdjust="spacing"></textPath></text></svg><span class="sello__mas"></span>';
+    const tp = b.querySelector("textPath"), svg = b.querySelector("svg");
+    const poner = () => {
+      const t = rotulo() + " ✦ ", dos = t + t; // el rotulo del boton, dos veces alrededor
+      tp.textContent = dos;
+      tp.parentNode.style.fontSize = clamp(430 / (dos.length * 0.84), 11, 17).toFixed(1) + "px";
+      b.classList.toggle("abierto", boton.getAttribute("aria-expanded") === "true");
+    };
+    poner();
+    if ("MutationObserver" in window) new MutationObserver(poner).observe(boton, { attributes: true, attributeFilter: ["aria-expanded"], childList: true, subtree: true, characterData: true });
+    b.addEventListener("click", () => boton.click());
+    sec.appendChild(b);
+    if (!reducido) gsap.fromTo(svg, { rotation: -40 }, { rotation: 200, ease: "none", transformOrigin: "50% 50%", scrollTrigger: { trigger: sec, start: "top bottom", end: "bottom top", scrub: 0.6 } });
+  }
+
+  /* ---------- cielo: destellos tenues al fondo de cada mundo, a dos velocidades (dan profundidad a la bajada) ---------- */
+  function cielo() {
+    const FORMAS = [
+      '<path d="M12 0c1.2 6.8 5.2 10.8 12 12-6.8 1.2-10.8 5.2-12 12-1.2-6.8-5.2-10.8-12-12 6.8-1.2 10.8-5.2 12-12z"/>',
+      '<circle cx="12" cy="12" r="8.4" fill="none" stroke="currentColor" stroke-width="3.4"/>',
+      '<path d="M12 3v18M3 12h18" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round"/>',
+      '<circle cx="12" cy="12" r="5"/>',
+    ];
+    let s = 20261110;
+    const azar = () => { s = (Math.imul(s, 1103515245) + 12345) | 0; return ((s >>> 8) & 0xffff) / 65535; };
+    const cielos = [];
+    $$(".estacion").forEach((est) => {
+      const caja = document.createElement("div");
+      caja.className = "cielo";
+      caja.setAttribute("aria-hidden", "true");
+      const formas = [];
+      // Cada destello se mueve solo (un dibujo chico) y no una capa del tamano de la seccion: medido el 10-nov, las
+      // capas grandes le costaban cuadros a la pagina.
+      [0.07, 0.15].forEach((vel, capa) => {
+        const n = capa ? 5 : 6;
+        for (let i = 0; i < n; i++) {
+          const tam = (capa ? 13 : 22) + azar() * (capa ? 13 : 24), x = 5 + azar() * 90, y = 6 + azar() * 76, rot = Math.round(azar() * 70 - 35);
+          caja.insertAdjacentHTML("beforeend", `<svg viewBox="0 0 24 24" width="${tam.toFixed(0)}" height="${tam.toFixed(0)}" style="left:${x.toFixed(1)}%;top:${y.toFixed(1)}%;transform:rotate(${rot}deg)">${FORMAS[(azar() * FORMAS.length) | 0]}</svg>`);
+          formas.push({ el: caja.lastElementChild, x: x / 100, y: y / 100, tam, vel, rot, oculta: false });
+        }
+      });
+      est.insertBefore(caja, est.firstChild);
+      cielos.push({ caja, formas, texto: $(".estacion__texto", est), top: 0, alto: 0 });
+    });
+    return {
+      // Ningun destello queda detras de un texto: los que caen sobre el bloque de texto se apagan (se mide al armar la pagina).
+      despejar() {
+        const sy = window.scrollY || 0;
+        cielos.forEach((c) => {
+          const r = c.caja.getBoundingClientRect();
+          c.top = r.top + sy; c.alto = r.height;
+          if (!c.texto) return;
+          const t = c.texto.getBoundingClientRect(), aire = 0.09 * r.height + 26;
+          c.formas.forEach((f) => {
+            const cx = r.left + f.x * r.width + f.tam / 2, cy = r.top + f.y * r.height + f.tam / 2;
+            f.oculta = cx > t.left - 30 - f.tam && cx < t.right + 30 + f.tam && cy > t.top - aire && cy < t.bottom + aire;
+            f.el.style.visibility = f.oculta ? "hidden" : "";
+          });
+        });
+      },
+      // el paralaje: cada destello se corre unos px segun cuanto le falta a su mundo para estar al medio de la pantalla
+      tic(sy, vh) {
+        for (const c of cielos) {
+          const y = c.top - sy;
+          if (y > vh || y + c.alto < 0) continue;
+          const centro = y + c.alto / 2 - vh / 2;
+          for (const f of c.formas) {
+            if (!f.oculta) f.el.style.transform = "translate3d(0," + (centro * f.vel).toFixed(1) + "px,0) rotate(" + f.rot + "deg)";
+          }
+        }
+      },
+    };
   }
 
   /* ---------- version sin movimiento ---------- */
@@ -807,11 +1288,11 @@ window.AGS_ORIGEN = window.AGS_ORIGEN || (function () {
       };
       ubicar(ub, svg);
     });
-    $$("[data-fondo]").forEach((sec) => {
-      const c = sec.getAttribute("data-fondo");
-      sec.style.backgroundColor = c; sec.style.boxShadow = "0 0 0 100vmax " + c; sec.style.clipPath = "inset(0 -100vmax)";
-    });
+    // el color de cada seccion ya lo pinta mundos() (10-nov-2026), con el horizonte quieto
     $$("[data-contar]").forEach((el) => { el.textContent = new Intl.NumberFormat("es-CL").format(+el.dataset.contar) + (el.dataset.sufijo || ""); });
+    const cifras = $(".cifras");
+    if (cifras) cifras.classList.add("vista");
+    $$(".paso").forEach((p) => p.classList.add("activo"));
   }
 
   /* ---------- arranque ---------- */
@@ -819,34 +1300,61 @@ window.AGS_ORIGEN = window.AGS_ORIGEN || (function () {
     enlacesWA();
     calcularEscala();
     menu();
-    if (!window.gsap) return;
+    if (!window.gsap) { raiz.classList.add("listo"); return; }
     gsap.registerPlugin(ScrollTrigger, ScrambleTextPlugin, SplitText);
-    if (reducido) { estatico(); return; }
+    // Si la pagina todavia no se pinto (carga rapida), el texto y el boton del inicio tambien entran en cascada; si ya
+    // se pinto, quedan como estan: nadie los ve desaparecer para volver a entrar.
+    const sinPintar = !reducido && (window.scrollY || 0) < 40 &&
+      !(window.performance && performance.getEntriesByType && performance.getEntriesByType("paint").length);
+    if (sinPintar) raiz.classList.add("entrando");
+    grano();
+    const mun = mundos();
+    if (reducido) {
+      estatico(); despedida(true); sello();
+      const quieto = cielo();
+      const asentar = () => { mun.medir(); quieto.despejar(); };
+      asentar();
+      window.addEventListener("load", asentar);
+      window.addEventListener("resize", asentar);
+      raiz.classList.add("listo");
+      return;
+    }
 
     let lenis = null;
+    const alAncla = (ir) => $$('a[href^="#"]').forEach((a) => a.addEventListener("click", (e) => {
+      const id = a.getAttribute("href");
+      if (id.length < 2) return;
+      const dest = $(id);
+      if (!dest) return;
+      e.preventDefault();
+      ir(dest);
+    }));
     if (window.Lenis && !tactil) {
       lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
       window.__lenis = lenis;
       lenis.on("scroll", ScrollTrigger.update);
       gsap.ticker.add((t) => lenis.raf(t * 1000));
       gsap.ticker.lagSmoothing(0);
-      $$('a[href^="#"]').forEach((a) => a.addEventListener("click", (e) => {
-        const id = a.getAttribute("href");
-        if (id.length < 2) return;
-        const dest = $(id);
-        if (!dest) return;
-        e.preventDefault();
-        lenis.scrollTo(dest, { offset: -70, duration: 1.6 });
-      }));
+      alAncla((dest) => lenis.scrollTo(dest, { offset: -70, duration: 1.6 }));
+    } else {
+      // celular: los enlaces a una seccion bajan con suavidad (antes saltaban de golpe)
+      alAncla((dest) => window.scrollTo({ top: dest.getBoundingClientRect().top + window.scrollY - 70, behavior: "smooth" }));
     }
 
     const an = anillo();
     const part = particulas();
     const his = historia(an);
+    const desp = despedida(false);
     textos();
     fondoYhud();
     escenas(part);
     detalles();
+    acordeon();
+    procesoVivo();
+    espia();
+    panelMuestras();
+    sello();
+    const cie = cielo();
 
     const rearmar = () => {
       calcularEscala();
@@ -854,8 +1362,10 @@ window.AGS_ORIGEN = window.AGS_ORIGEN || (function () {
       if (part) part.armar();
       ScrollTrigger.refresh();
       if (his) his.medir();
+      mun.medir();
+      cie.despejar();
     };
-    ScrollTrigger.addEventListener("refresh", () => { if (his) his.medir(); });
+    ScrollTrigger.addEventListener("refresh", () => { if (his) his.medir(); mun.medir(); cie.despejar(); });
     let ancho = innerWidth, alto = innerHeight, tm = 0;
     window.addEventListener("resize", () => {
       if (innerWidth === ancho && Math.abs(innerHeight - alto) < 140) return;
@@ -865,13 +1375,46 @@ window.AGS_ORIGEN = window.AGS_ORIGEN || (function () {
     (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => { rearmar(); });
     window.addEventListener("load", () => setTimeout(rearmar, 60));
 
-    if (his) gsap.from(his.pj.svg, { y: 36, scale: 0.9, opacity: 0, transformOrigin: "50% 92%", duration: 1.1, ease: "expo.out", delay: 0.35 });
+    /* La entrada (10-nov-2026): con la letra ya cargada (o a los 0,7 s), el titulo sube letra por letra, la estudiante
+       baja flotando con el paraguas, aterriza y saluda, y el anillo se abre a su alrededor. Si la pagina abre a media
+       altura (un ancla, volver atras) no hay entrada: todo queda puesto. */
+    let entro = false;
+    const entrar = () => {
+      if (entro) return;
+      entro = true;
+      const arriba = (window.scrollY || 0) < 40;
+      tituloInicio.listo = true;
+      raiz.classList.add("listo");
+      if (!arriba) {
+        tituloInicio.tweens.forEach((tw) => tw && tw.progress(1));
+        if (an) an.entrar(0);
+        return;
+      }
+      tituloInicio.tweens.forEach((tw) => tw && tw.play());
+      if (his) { his.medir(); his.entrar(); }
+      if (an) an.entrar(1.05);
+      if (raiz.classList.contains("entrando")) {
+        gsap.timeline({ defaults: { ease: "expo.out" } })
+          .from(".heroe__bajada", { y: 26, opacity: 0, duration: 0.9 }, 0.45)
+          .from(".heroe__acciones", { y: 22, opacity: 0, duration: 0.9 }, 0.58)
+          .from(".chips li", { y: 14, opacity: 0, duration: 0.7, stagger: 0.06 }, 0.74)
+          .from(".heroe__pista", { opacity: 0, duration: 0.8 }, 1.35);
+      }
+    };
+    (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => requestAnimationFrame(entrar));
+    setTimeout(entrar, 700);
+
     let previo = performance.now();
     gsap.ticker.add(() => {
       const ahora = performance.now(), t = ahora / 1000, dt = Math.min(0.05, (ahora - previo) / 1000);
       previo = ahora;
-      if (his) his.tic(t);
-      if (an) an.tic(dt, Math.min(260, Math.abs(lenis ? lenis.velocity * 6 : 0)));
+      const sy = lenis ? lenis.scroll : (window.scrollY || 0);
+      const vel = Vel.tic(sy, ahora);
+      if (his) his.tic(t, sy, vel);
+      if (an) an.tic(dt, Math.min(260, Math.abs(vel) * 0.1), sy);
+      mun.tic(sy, vel, dt);
+      if (!tactil) cie.tic(sy, window.innerHeight); // en el celular los destellos quedan quietos: ahi cada cuadro cuenta
+      if (desp) desp.tic(t);
     });
   }
 

@@ -457,3 +457,144 @@ h2 .serif{font-size:.72em;margin-top:.12em}
 .menu-movil nav a{font-size:clamp(1.25rem,min(8vw,3.8vh),3rem);font-size:clamp(1.25rem,min(8vw,3.8dvh),3rem)}
 .menu-movil>.boton{flex:none;margin-top:18px}
 @media (max-height:720px){.menu-movil{padding-top:88px;padding-bottom:24px}}
+
+/* ==========================================================================================================
+   PREMIUM 10-nov-2026. Joseph: "mejora el diseño de nuestra pagina web ... revisa como baja mejora las
+   transiciones ... como una pagina de 100 mil dolares". Todo lo de esa orden vive en este bloque (y en v2.js,
+   en lo marcado 10-nov-2026). Vuelta atras: v2.css.BAK_20261110_premium y v2.js.BAK_20261110_premium.
+   ========================================================================================================== */
+:root{--ease-io:cubic-bezier(.77,0,.175,1);--hz-b:clamp(34px,7vw,112px)}
+body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+h1,h2,h3{text-wrap:balance}
+p{text-wrap:pretty}
+.seccion[id],.historia[id]{scroll-margin-top:84px}
+
+/* ---------- mundos: cada seccion pinta su color (antes lo cambiaba toda la pantalla de golpe) ---------- */
+[data-fondo]{--fondo:transparent}
+[data-fondo="#F7C948"]{--fondo:#F7C948}
+[data-fondo="#FFF3D6"]{--fondo:#FFF3D6}
+[data-fondo="#2B3CFF"]{--fondo:#2B3CFF}
+[data-fondo="#FF5A4E"]{--fondo:#FF5A4E}
+[data-fondo="#C8F03C"]{--fondo:#C8F03C}
+[data-fondo="#7A4DFF"]{--fondo:#7A4DFF}
+[data-fondo="#16120E"]{--fondo:#16120E}
+[data-fondo]::before{content:"";position:absolute;z-index:-1;top:0;bottom:0;left:50%;width:100vw;margin-left:-50vw;background:var(--fondo);pointer-events:none}
+.estacion--nota,.final{overflow:visible}
+/* el pie esta fuera de <main>: recorta su horizonte a lo ancho (si no, el celular achica toda la pagina para que entre) */
+.pie{position:relative;overflow-x:clip}
+@supports not (overflow:clip){.hz{width:100vw!important;margin-left:-50vw!important}}
+/* el horizonte: la seccion que sigue asoma por abajo como una loma; v2.js la hincha y la aplana con el scroll */
+.hz{position:absolute;z-index:-1;left:50%;top:0;width:150vw;margin-left:-75vw;height:calc(var(--hz-b) * 3.92);border-radius:50% 50% 0 0/100% 100% 0 0;
+  transform-origin:50% 25.5%;transform:translateY(-25.5%) scaleY(.62);pointer-events:none;-webkit-backface-visibility:hidden;backface-visibility:hidden}
+/* grano de impresion sobre toda la pagina y el aire alrededor de la estudiante cuando baja */
+.grano{position:fixed;z-index:39;left:0;top:0;width:100%;height:120vh;pointer-events:none;opacity:.36;background-repeat:repeat}
+.aire{position:fixed;z-index:1;left:0;top:0;width:100%;height:100%;pointer-events:none}
+
+/* ---------- la entrada: nada salta. El titulo y la barra esperan ocultos a v2.js (si no llega, aparecen solos a los 3 s).
+   El texto y el boton de cotizar se ven desde el primer instante; solo cuando v2.js arranca ANTES de que la pagina se
+   haya pintado (clase .entrando) entran tambien ellos en cascada, porque ahi nadie alcanzo a verlos puestos. ---------- */
+.js:not(.listo) .heroe__titulo,.entrando:not(.listo) .heroe__bajada,.entrando:not(.listo) .heroe__acciones,.entrando:not(.listo) .chips,.entrando:not(.listo) .heroe__pista{opacity:0;animation:ags-rescate .5s 3.2s both}
+@keyframes ags-rescate{from{opacity:0}to{opacity:1}}
+.js:not(.listo) .barra{transform:translate(-50%,-130px);animation:ags-rescate-barra .5s 3.2s both}
+@keyframes ags-rescate-barra{from{transform:translate(-50%,-130px)}to{transform:translateX(-50%)}}
+
+/* ---------- heroe ---------- */
+.heroe__titulo{font-size:clamp(3.1rem,min(8.9vw,14vh),10rem)}
+@media (min-width:861px) and (max-height:800px){.heroe{padding-top:104px}}
+.heroe__escenario::before{content:"";position:absolute;left:50%;top:50%;width:min(124%,780px);aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;
+  background:radial-gradient(closest-side,rgba(255,250,240,.62),rgba(255,250,240,.26) 52%,rgba(255,250,240,0) 100%);pointer-events:none}
+.anillo{will-change:transform,opacity}
+.anillo__giro span.atras{-webkit-text-stroke-color:rgba(22,18,14,.2)}
+.anillo__giro--b span.atras{-webkit-text-stroke-color:rgba(43,60,255,.22)}
+.anillo__giro{transform:rotateX(calc(-14deg + var(--ix,0deg))) rotateZ(calc(-7deg + var(--iz,0deg))) rotateY(var(--giro,0deg))}
+.anillo__giro--b{transform:translateY(calc(var(--s) * 70px)) rotateX(calc(-20deg + var(--ix,0deg))) rotateZ(calc(9deg + var(--iz,0deg))) rotateY(calc(var(--giro,0deg) * -1.3))}
+
+/* ---------- barra: la seccion en la que se esta ---------- */
+.barra__nav a{transition:background .2s,box-shadow .2s}
+.barra__nav a.actual{background:var(--amarillo);box-shadow:inset 0 0 0 1.6px rgba(22,18,14,.6)}
+
+/* ---------- botones y tarjetas: respuesta al pasar el puntero ---------- */
+.boton .ico{transition:transform .3s var(--ease-out)}
+.carta__ico{transition:transform .35s var(--ease-out)}
+@media (hover:hover) and (pointer:fine){
+  .boton:hover .ico{transform:rotate(-10deg) scale(1.12)}
+  .carta:hover{box-shadow:9px 9px 0 var(--tinta)}
+  .carta--tinta:hover{box-shadow:9px 9px 0 rgba(22,18,14,.35)}
+  .carta:hover .carta__ico{transform:translateY(-3px) rotate(-6deg)}
+  .logos img{transition:opacity .2s,transform .3s var(--ease-out)}
+  .logos img:hover{opacity:1;transform:scale(1.06)}
+}
+/* la flecha de las tarjetas: dibujada (antes, un signo de la letra) */
+.carta__ir{font-size:0}
+.carta__ir::before{content:"";width:19px;height:19px;background:currentColor;
+  -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 12h15.5M13 5.5 19.5 12 13 18.5' fill='none' stroke='%23000' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;
+  mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 12h15.5M13 5.5 19.5 12 13 18.5' fill='none' stroke='%23000' stroke-width='2.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat}
+
+/* ---------- cielo: destellos tenues al fondo de cada mundo (v2.js los pone y los mueve a dos velocidades) ---------- */
+.cielo{position:absolute;z-index:0;top:0;bottom:0;left:50%;width:100vw;margin-left:-50vw;overflow:hidden;pointer-events:none;color:var(--tinta);opacity:.1}
+.estacion--clara .cielo{color:var(--crema);opacity:.16}
+.cielo svg{position:absolute;fill:currentColor}
+
+/* ---------- muestras: el sello redondo que tambien las abre ---------- */
+.sello{position:absolute;right:clamp(28px,7vw,124px);top:clamp(96px,15vh,150px);width:clamp(150px,13vw,196px);aspect-ratio:1;border-radius:50%;padding:0;
+  background:var(--amarillo);color:var(--tinta);border:var(--borde);box-shadow:6px 6px 0 var(--crema);cursor:pointer;display:grid;place-items:center;
+  transition:transform .25s var(--ease-out),box-shadow .25s var(--ease-out)}
+.sello svg{position:absolute;inset:0;width:100%;height:100%}
+.sello__txt{font-family:var(--f-disp);font-weight:900;font-stretch:125%;font-size:17px;fill:currentColor}
+.sello__mas{position:relative;width:36%;aspect-ratio:1;border-radius:50%;transition:transform .35s var(--ease-out);
+  background:linear-gradient(var(--amarillo),var(--amarillo)) center/44% 9% no-repeat,linear-gradient(var(--amarillo),var(--amarillo)) center/9% 44% no-repeat,var(--tinta)}
+.sello.abierto .sello__mas{transform:rotate(45deg)}
+.sello:active{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--crema)}
+@media (hover:hover) and (pointer:fine){.sello:hover{transform:translate(-2px,-2px);box-shadow:9px 9px 0 var(--crema)}}
+@media (max-width:1000px){.sello{display:none}}
+
+/* ---------- cifras: la linea se traza al llegar ---------- */
+.mundos .cifras{position:relative;border-top-color:transparent}
+.mundos .cifras::before{content:"";position:absolute;left:0;right:0;top:-3px;height:3px;background:var(--tinta);transform:scaleX(0);transform-origin:0 50%;transition:transform 1.2s var(--ease-io)}
+.mundos .cifras.vista::before{transform:scaleX(1)}
+
+/* ---------- proceso: la linea avanza con el scroll y cada paso se enciende ---------- */
+.pasos--vivo{position:relative}
+.pasos--vivo::before,.pasos--vivo::after{content:"";position:absolute;left:0;right:0;top:-30px;height:3px;border-radius:3px;background:rgba(255,243,214,.26)}
+.pasos--vivo::after{background:var(--amarillo);transform:scaleX(var(--avance,0));transform-origin:0 50%}
+.pasos--vivo .paso{transition:background .5s var(--ease-out),border-color .5s var(--ease-out)}
+.pasos--vivo .paso:not(.activo){border-color:rgba(255,243,214,.36)}
+.pasos--vivo .paso.activo{background:rgba(255,255,255,.13)}
+.pasos--vivo .paso__n{transition:color .55s var(--ease-out)}
+.pasos--vivo .paso.activo .paso__n{color:var(--crema)}
+
+/* ---------- preguntas: el mas dibujado, respuesta al puntero y cierre animado ---------- */
+.faq summary{transition:background .2s}
+.faq summary::after{content:"";background:linear-gradient(var(--tinta),var(--tinta)) center/12px 2.6px no-repeat,linear-gradient(var(--tinta),var(--tinta)) center/2.6px 12px no-repeat,var(--amarillo)}
+.faq details.cerrando summary::after{transform:none}
+@media (hover:hover) and (pointer:fine){.faq summary:hover{background:rgba(247,201,72,.2)}}
+
+/* ---------- cierre: la estudiante vuelve y saluda; pie con subrayado que se traza ---------- */
+.final__amiga{position:absolute;right:max(3%,calc(50% - 590px));bottom:10vh;width:calc(320px * var(--s) * .92);height:calc(395px * var(--s) * .92);pointer-events:none}
+.final__amiga svg{width:100%;height:100%;overflow:visible}
+.pie__col a{position:relative;align-self:flex-start}
+.pie__col a::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:2px;background:var(--amarillo);transform:scaleX(0);transform-origin:0 50%;transition:transform .3s var(--ease-out)}
+@media (hover:hover) and (pointer:fine){.pie__col a:hover::after{transform:scaleX(1)}}
+
+@media (max-width:860px){
+  .pasos--vivo{padding-left:22px}
+  .pasos--vivo::before,.pasos--vivo::after{left:0;right:auto;top:0;bottom:0;width:3px;height:auto}
+  .pasos--vivo::after{transform:scaleY(var(--avance,0));transform-origin:50% 0}
+  .final{padding-bottom:calc(var(--s) * 395px * .8 + 12vh)}
+  .final__amiga{right:auto;left:50%;margin-left:calc(var(--s) * -128px);bottom:7vh;width:calc(320px * var(--s) * .8);height:calc(395px * var(--s) * .8)}
+}
+
+/* ---------- de una pagina a otra: se funden (en los navegadores que lo permiten) ---------- */
+@view-transition{navigation:auto}
+::view-transition-old(root){animation:ags-vt-sale .2s var(--ease-out) both}
+::view-transition-new(root){animation:ags-vt-entra .45s var(--ease-out) both}
+@keyframes ags-vt-sale{to{opacity:0;transform:translateY(-12px)}}
+@keyframes ags-vt-entra{from{opacity:0;transform:translateY(16px)}}
+
+@media (prefers-reduced-motion:reduce){
+  .js:not(.listo) .heroe__titulo{opacity:1;animation:none}
+  .js:not(.listo) .barra{transform:translateX(-50%);animation:none}
+  .mundos .cifras::before{transform:scaleX(1)}
+  ::view-transition-old(root),::view-transition-new(root){animation:none}
+}
+/* PREMIUM 10-nov-2026: fin */
