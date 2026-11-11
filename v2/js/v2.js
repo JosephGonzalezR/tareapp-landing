@@ -238,7 +238,7 @@ window.AGS_ORIGEN = window.AGS_ORIGEN || (function () {
     const ent = { v: 0 };
     const heroe = cont.closest(".heroe");
     const piso = heroe && heroe.querySelector(".escena--heroe"); // su sombra en el suelo se va con ella
-    cont.style.opacity = "0";
+    cont.style.visibility = "hidden";
     if (heroe && !tactil) {
       heroe.addEventListener("pointermove", (e) => {
         const r = heroe.getBoundingClientRect();
@@ -258,12 +258,16 @@ window.AGS_ORIGEN = window.AGS_ORIGEN || (function () {
         const s = suave(suelta);
         cont.style.setProperty("--ix", ix.toFixed(2) + "deg");
         cont.style.setProperty("--iz", iz.toFixed(2) + "deg");
-        cont.style.opacity = (ent.v * (1 - s)).toFixed(3);
-        cont.style.visibility = s > 0.985 ? "hidden" : "";
-        cont.style.transform = "scale(" + (lerp(0.7, 1, ent.v) * (1 + 0.14 * s)).toFixed(4) + ")";
-        if (piso) piso.style.opacity = (1 - s).toFixed(3);
+        // En reposo el anillo queda sin opacidad ni escala puestas, igual que antes del 10-nov (asi se ve bien en el
+        // Safari del iPhone, que es delicado con el 3D); solo las lleva mientras entra o mientras se suelta.
+        // Al entrar no se funde: sale de atras de ella y se abre (solo escala). La opacidad solo se usa al soltarse.
+        const quieto = ent.v > 0.999 && s < 0.001;
+        cont.style.opacity = s < 0.001 ? "" : (1 - s).toFixed(3);
+        cont.style.visibility = ent.v < 0.001 || s > 0.985 ? "hidden" : "";
+        cont.style.transform = quieto ? "" : "scale(" + (lerp(0.18, 1, ent.v) * (1 + 0.14 * s)).toFixed(4) + ")";
+        if (piso) piso.style.opacity = s < 0.001 ? "" : (1 - s).toFixed(3);
       },
-      entrar(espera) { gsap.to(ent, { v: 1, duration: 1.2, ease: "expo.out", delay: espera || 0 }); },
+      entrar(espera) { gsap.to(ent, { v: 1, duration: 1.1, ease: "expo.out", delay: espera || 0 }); },
       centrar(x, y) { cont.style.left = x + "px"; cont.style.top = y + "px"; },
       el: cont,
     };
@@ -1392,7 +1396,7 @@ window.AGS_ORIGEN = window.AGS_ORIGEN || (function () {
       }
       tituloInicio.tweens.forEach((tw) => tw && tw.play());
       if (his) { his.medir(); his.entrar(); }
-      if (an) an.entrar(1.05);
+      if (an) an.entrar(1.12); // el anillo sale de atras de ella justo cuando toca el suelo
       if (raiz.classList.contains("entrando")) {
         gsap.timeline({ defaults: { ease: "expo.out" } })
           .from(".heroe__bajada", { y: 26, opacity: 0, duration: 0.9 }, 0.45)
