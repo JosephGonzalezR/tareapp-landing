@@ -131,16 +131,12 @@ main :is([class*="card"],[class*="panel"],[class*="box"],[class*="__body"]) h2{f
 
 /* ==========================================================================================================
    PREMIUM 10-nov-2026 (Joseph: "mejora el diseño de nuestra pagina web ... mejora las transiciones").
-   Paginas internas: el paso de una pagina a otra se funde (en los navegadores que lo permiten; en los demas,
-   igual que antes), la letra se dibuja mas fina y los titulos reparten sus lineas parejo.
+   Paginas internas: la letra se dibuja mas fina y los titulos reparten sus lineas parejo.
+   El fundido de una pagina a otra (@view-transition) se QUITO el 11-nov a la 01:10: en la prueba, al pasar de la
+   portada a /tesis/ por un clic la pagina de destino quedaba sin dibujar ni responder. No volver a ponerlo sin
+   probarlo con un clic (pruebas\fundido2.py del kit webs_premium_20261110).
    Vuelta atras: tema.css.BAK_20261110_premium.
    ========================================================================================================== */
-@view-transition{navigation:auto}
-::view-transition-old(root){animation:ags-vt-sale .2s cubic-bezier(.23,1,.32,1) both}
-::view-transition-new(root){animation:ags-vt-entra .45s cubic-bezier(.23,1,.32,1) both}
-@keyframes ags-vt-sale{to{opacity:0;transform:translateY(-12px)}}
-@keyframes ags-vt-entra{from{opacity:0;transform:translateY(16px)}}
-@media (prefers-reduced-motion:reduce){::view-transition-old(root),::view-transition-new(root){animation:none}}
 body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 h1,h2,h3{text-wrap:balance}
 /* PREMIUM 10-nov-2026: fin */
