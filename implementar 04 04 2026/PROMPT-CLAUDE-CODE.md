@@ -23,7 +23,7 @@ Necesito que crees **2 nuevas páginas** (o integres en la existente de tesis) c
 - El diseño debe ser **mobile-first** y completamente responsive.
 
 ### WhatsApp
-- El número de WhatsApp del negocio es: **+56 9 5307 8288** (formato para wa.me: `56953078288`)
+- El número de WhatsApp del negocio es: **+56 2 3399 0000** (formato para wa.me: `56233990000`)
 - Todos los botones de acción deben abrir WhatsApp con un mensaje pre-llenado contextual.
 
 ---
@@ -82,7 +82,7 @@ Necesito que crees **2 nuevas páginas** (o integres en la existente de tesis) c
 ### Botones de cada tarjeta
 Cada botón de plan debe ser un **enlace a WhatsApp** con el ícono de WhatsApp y un mensaje pre-llenado. Ejemplo:
 ```
-https://wa.me/56953078288?text=Hola%2C%20necesito%20una%20tesis%20de%20CFT%2C%20plan%20Est%C3%A1ndar%20(%2460.000).%20Me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n.
+https://wa.me/56233990000?text=Hola%2C%20necesito%20una%20tesis%20de%20CFT%2C%20plan%20Est%C3%A1ndar%20(%2460.000).%20Me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n.
 ```
 El mensaje debe incluir: tipo de institución, nombre del plan y precio.
 
@@ -202,7 +202,7 @@ Usa estos como referencia de funcionalidad y lógica, pero **adapta completament
 - [ ] Misma paleta de colores, tipografías y estilo que el sitio actual
 - [ ] Navbar y footer idénticos al resto del sitio
 - [ ] Mobile-first y responsive
-- [ ] Botones de planes abren WhatsApp con mensaje contextual al +56 9 5307 8288
+- [ ] Botones de planes abren WhatsApp con mensaje contextual al +56 2 3399 0000
 - [ ] Tabs funcionan correctamente cambiando precios por institución
 - [ ] CTA parcial enlaza al cotizador
 - [ ] Cotizador usa API de Anthropic (Claude Sonnet) sin API key
