@@ -734,159 +734,213 @@
         <!-- EVIDENCIAS-PROGRAMAS:INICIO -->
         <style>
           .ev-prog{margin-top:clamp(40px,6vw,64px)}
+          .ev-esps{display:flex;flex-direction:column;gap:12px;margin-top:6px}
+          .ev-esp{background:var(--papel,#FFFAF0);border:2.5px solid var(--tinta,#16120E);border-radius:22px;box-shadow:4px 4px 0 var(--tinta,#16120E);transition:transform .35s var(--ease-out,ease),box-shadow .35s var(--ease-out,ease)}
+          .ev-esp>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:14px;padding:16px 20px;color:var(--tinta,#16120E);-webkit-tap-highlight-color:transparent}
+          .ev-esp>summary::-webkit-details-marker{display:none}
+          .ev-esp>summary::after{content:"+";flex:none;display:flex;align-items:center;justify-content:center;width:34px;height:34px;box-sizing:border-box;border:2px solid var(--tinta,#16120E);border-radius:50%;background:var(--amarillo,#F7C948);font-size:20px;font-weight:800;line-height:1;transition:background .3s,transform .45s var(--ease-out,ease)}
+          .ev-esp[open]>summary::after{content:"\2212";background:var(--lima,#C8F03C);transform:rotate(180deg)}
+          .ev-esp>summary:focus-visible{outline:3px solid var(--azul,#2B3CFF);outline-offset:3px;border-radius:20px}
+          .ev-esp__cab{flex:1;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:5px}
+          .ev-esp__n{font:700 .7rem/1.2 "JetBrains Mono",ui-monospace,Consolas,monospace;letter-spacing:.08em;text-transform:uppercase;color:rgba(22,18,14,.72)}
+          .ev-esp__cab b{font-weight:800;font-size:clamp(1.05rem,1.7vw,1.28rem);line-height:1.2}
+          .ev-esp__progs{font-size:.88rem;font-weight:600;line-height:1.45;color:rgba(22,18,14,.8)}
+          .ev-esp__progs span{white-space:nowrap}
+          .ev-esp .obras--prog{margin:4px 20px 22px}
           .obras--prog{grid-template-columns:repeat(auto-fill,minmax(178px,1fr))}
           .obras--prog .obra__portada{aspect-ratio:4/3;background-size:cover;background-position:center}
           .obras--prog .obra__soft span:first-child{background:var(--amarillo)}
-          @media (max-width:560px){.obras--prog{grid-template-columns:repeat(2,minmax(0,1fr))}}
+          @media (hover:hover) and (pointer:fine){.ev-esp:not([open]):hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--tinta,#16120E)}}
+          @media (max-width:560px){.obras--prog{grid-template-columns:repeat(2,minmax(0,1fr))}.ev-esp>summary{padding:14px 14px;gap:10px}.ev-esp__cab b{font-size:1.02rem}.ev-esp__progs{font-size:.8rem}.ev-esp__n{font-size:.62rem}.ev-esp .obras--prog{margin:2px 12px 16px}}
         </style>
         <div class="ref-pagos ev-prog">
-          <h2 id="t-programas">Un trabajo por programa</h2>
+          <h2 id="t-programas">Programas que usamos</h2>
         </div>
-        <div class="obras obras--prog">
-          <button class="obra" type="button" data-doc="/v2/img/informes/android-app-vendedores/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Aplicación Android para los vendedores de una tienda" data-soft="Android Studio · Kotlin">
-            <span class="obra__portada" data-m="/v2/img/informes/android-app-vendedores/portada.webp"><span class="obra__pags">7 págs.</span><span class="obra__abrir">Ver completo</span></span>
-            <span class="obra__txt"><span class="obra__area">Redes e informática</span><b>Aplicación Android para los vendedores de una tienda</b><span class="obra__soft"><span>Android Studio</span><span>Kotlin</span></span></span>
-          </button>
-          <button class="obra" type="button" data-doc="/v2/img/informes/archicad-vivienda-estructural/" data-paginas='[[1400,990],[1400,990],[1400,990],[1400,990],[1400,990]]' data-titulo="Proyecto estructural de una vivienda" data-soft="Archicad">
-            <span class="obra__portada" data-m="/v2/img/informes/archicad-vivienda-estructural/portada.webp"><span class="obra__pags">5 págs.</span><span class="obra__abrir">Ver completo</span></span>
-            <span class="obra__txt"><span class="obra__area">Construcción</span><b>Proyecto estructural de una vivienda</b><span class="obra__soft"><span>Archicad</span></span></span>
-          </button>
-          <button class="obra" type="button" data-doc="/v2/img/informes/arduino-sensores/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Sensores de fuerza y temperatura con Arduino" data-soft="Arduino · Tinkercad">
-            <span class="obra__portada" data-m="/v2/img/informes/arduino-sensores/portada.webp"><span class="obra__pags">9 págs.</span><span class="obra__abrir">Ver completo</span></span>
-            <span class="obra__txt"><span class="obra__area">Electrónica</span><b>Sensores de fuerza y temperatura con Arduino</b><span class="obra__soft"><span>Arduino</span><span>Tinkercad</span></span></span>
-          </button>
-          <button class="obra" type="button" data-doc="/v2/img/informes/atlasti-teletrabajo/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Análisis temático del teletrabajo" data-soft="ATLAS.ti">
-            <span class="obra__portada" data-m="/v2/img/informes/atlasti-teletrabajo/portada.webp"><span class="obra__pags">6 págs.</span><span class="obra__abrir">Ver completo</span></span>
-            <span class="obra__txt"><span class="obra__area">Investigación</span><b>Análisis temático del teletrabajo</b><span class="obra__soft"><span>ATLAS.ti</span></span></span>
-          </button>
-          <button class="obra" type="button" data-doc="/v2/img/informes/automation-studio-circuito-rl/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Circuito RL serie en corriente alterna" data-soft="Automation Studio">
-            <span class="obra__portada" data-m="/v2/img/informes/automation-studio-circuito-rl/portada.webp"><span class="obra__pags">9 págs.</span><span class="obra__abrir">Ver completo</span></span>
-            <span class="obra__txt"><span class="obra__area">Eléctrica</span><b>Circuito RL serie en corriente alterna</b><span class="obra__soft"><span>Automation Studio</span></span></span>
-          </button>
-          <button class="obra" type="button" data-doc="/v2/img/informes/autosim-expendedor-neumatico/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Expendedor de premios con dos cilindros neumáticos" data-soft="Autosim 200">
-            <span class="obra__portada" data-m="/v2/img/informes/autosim-expendedor-neumatico/portada.webp"><span class="obra__pags">5 págs.</span><span class="obra__abrir">Ver completo</span></span>
-            <span class="obra__txt"><span class="obra__area">Automatización y control</span><b>Expendedor de premios con dos cilindros neumáticos</b><span class="obra__soft"><span>Autosim 200</span></span></span>
-          </button>
-          <button class="obra" type="button" data-doc="/v2/img/informes/bizagi-servicio-urgencias/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Modelamiento y simulación de un servicio de urgencias" data-soft="Bizagi">
-            <span class="obra__portada" data-m="/v2/img/informes/bizagi-servicio-urgencias/portada.webp"><span class="obra__pags">9 págs.</span><span class="obra__abrir">Ver completo</span></span>
-            <span class="obra__txt"><span class="obra__area">Gestión</span><b>Modelamiento y simulación de un servicio de urgencias</b><span class="obra__soft"><span>Bizagi</span></span></span>
-          </button>
-          <button class="obra" type="button" data-doc="/v2/img/informes/cadesimu-estrella-triangulo/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Partida estrella triángulo con paso manual y automático" data-soft="CADe SIMU">
-            <span class="obra__portada" data-m="/v2/img/informes/cadesimu-estrella-triangulo/portada.webp"><span class="obra__pags">9 págs.</span><span class="obra__abrir">Ver completo</span></span>
-            <span class="obra__txt"><span class="obra__area">Eléctrica</span><b>Partida estrella triángulo con paso manual y automático</b><span class="obra__soft"><span>CADe SIMU</span></span></span>
-          </button>
-          <button class="obra" type="button" data-doc="/v2/img/informes/codesys-linea-bebidas/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Secuencia de una línea de bebidas con un PLC" data-soft="CODESYS">
-            <span class="obra__portada" data-m="/v2/img/informes/codesys-linea-bebidas/portada.webp"><span class="obra__pags">5 págs.</span><span class="obra__abrir">Ver completo</span></span>
-            <span class="obra__txt"><span class="obra__area">Automatización y control</span><b>Secuencia de una línea de bebidas con un PLC</b><span class="obra__soft"><span>CODESYS</span></span></span>
-          </button>
-          <button class="obra" type="button" data-doc="/v2/img/informes/dialux-sala-reuniones/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Diseño de iluminación de una sala de reuniones" data-soft="DIALux evo">
-            <span class="obra__portada" data-m="/v2/img/informes/dialux-sala-reuniones/portada.webp"><span class="obra__pags">24 págs.</span><span class="obra__abrir">Ver completo</span></span>
-            <span class="obra__txt"><span class="obra__area">Eléctrica</span><b>Diseño de iluminación de una sala de reuniones</b><span class="obra__soft"><span>DIALux evo</span></span></span>
-          </button>
-          <button class="obra" type="button" data-doc="/v2/img/informes/epanet-bombeo-minera/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Sistema de bombeo de agua potable para una minera" data-soft="EPANET">
-            <span class="obra__portada" data-m="/v2/img/informes/epanet-bombeo-minera/portada.webp"><span class="obra__pags">25 págs.</span><span class="obra__abrir">Ver completo</span></span>
-            <span class="obra__txt"><span class="obra__area">Construcción</span><b>Sistema de bombeo de agua potable para una minera</b><span class="obra__soft"><span>EPANET</span></span></span>
-          </button>
-          <button class="obra" type="button" data-doc="/v2/img/informes/flexsim-recepcion-proveedores/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Agendamiento de proveedores en un centro de distribución" data-soft="FlexSim">
-            <span class="obra__portada" data-m="/v2/img/informes/flexsim-recepcion-proveedores/portada.webp"><span class="obra__pags">26 págs.</span><span class="obra__abrir">Ver completo</span></span>
-            <span class="obra__txt"><span class="obra__area">Industrial y logística</span><b>Agendamiento de proveedores en un centro de distribución</b><span class="obra__soft"><span>FlexSim</span></span></span>
-          </button>
-          <button class="obra" type="button" data-doc="/v2/img/informes/fluidsim-prensa-plc/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Prensa electroneumática controlada por PLC" data-soft="FluidSIM">
-            <span class="obra__portada" data-m="/v2/img/informes/fluidsim-prensa-plc/portada.webp"><span class="obra__pags">14 págs.</span><span class="obra__abrir">Ver completo</span></span>
-            <span class="obra__txt"><span class="obra__area">Automatización y control</span><b>Prensa electroneumática controlada por PLC</b><span class="obra__soft"><span>FluidSIM</span></span></span>
-          </button>
-          <button class="obra" type="button" data-doc="/v2/img/informes/geogebra-problemas-calculo/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Problemas geométricos de cálculo" data-soft="GeoGebra · WolframAlpha">
-            <span class="obra__portada" data-m="/v2/img/informes/geogebra-problemas-calculo/portada.webp"><span class="obra__pags">11 págs.</span><span class="obra__abrir">Ver completo</span></span>
-            <span class="obra__txt"><span class="obra__area">Matemática</span><b>Problemas geométricos de cálculo</b><span class="obra__soft"><span>GeoGebra</span><span>WolframAlpha</span></span></span>
-          </button>
-          <button class="obra" type="button" data-doc="/v2/img/informes/infostat-ventas-diarias/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Estadística descriptiva de las ventas diarias de una empresa" data-soft="InfoStat">
-            <span class="obra__portada" data-m="/v2/img/informes/infostat-ventas-diarias/portada.webp"><span class="obra__pags">7 págs.</span><span class="obra__abrir">Ver completo</span></span>
-            <span class="obra__txt"><span class="obra__area">Datos y finanzas</span><b>Estadística descriptiva de las ventas diarias de una empresa</b><span class="obra__soft"><span>InfoStat</span></span></span>
-          </button>
-          <button class="obra" type="button" data-doc="/v2/img/informes/ipi2win-malla-tierra/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Malla a tierra con sondeo eléctrico vertical" data-soft="IPI2WIN">
-            <span class="obra__portada" data-m="/v2/img/informes/ipi2win-malla-tierra/portada.webp"><span class="obra__pags">8 págs.</span><span class="obra__abrir">Ver completo</span></span>
-            <span class="obra__txt"><span class="obra__area">Eléctrica</span><b>Malla a tierra con sondeo eléctrico vertical</b><span class="obra__soft"><span>IPI2WIN</span></span></span>
-          </button>
-          <button class="obra" type="button" data-doc="/v2/img/informes/msproject-mantencion-planta/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1400,1082],[1400,1082],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Programación y control de la mantención de una planta" data-soft="MS Project · Excel">
-            <span class="obra__portada" data-m="/v2/img/informes/msproject-mantencion-planta/portada.webp"><span class="obra__pags">15 págs.</span><span class="obra__abrir">Ver completo</span></span>
-            <span class="obra__txt"><span class="obra__area">Gestión</span><b>Programación y control de la mantención de una planta</b><span class="obra__soft"><span>MS Project</span><span>Excel</span></span></span>
-          </button>
-          <button class="obra" type="button" data-doc="/v2/img/informes/multisim-circuitos-rc-rl/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Circuitos RC y RL en corriente alterna y motores trifásicos" data-soft="Multisim">
-            <span class="obra__portada" data-m="/v2/img/informes/multisim-circuitos-rc-rl/portada.webp"><span class="obra__pags">17 págs.</span><span class="obra__abrir">Ver completo</span></span>
-            <span class="obra__txt"><span class="obra__area">Electrónica</span><b>Circuitos RC y RL en corriente alterna y motores trifásicos</b><span class="obra__soft"><span>Multisim</span></span></span>
-          </button>
-          <button class="obra" type="button" data-doc="/v2/img/informes/octave-motor-cc/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Regulación de velocidad de un motor de corriente continua" data-soft="Octave">
-            <span class="obra__portada" data-m="/v2/img/informes/octave-motor-cc/portada.webp"><span class="obra__pags">19 págs.</span><span class="obra__abrir">Ver completo</span></span>
-            <span class="obra__txt"><span class="obra__area">Automatización y control</span><b>Regulación de velocidad de un motor de corriente continua</b><span class="obra__soft"><span>Octave</span></span></span>
-          </button>
-          <button class="obra" type="button" data-doc="/v2/img/informes/packet-tracer-bodegas/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Red de datos entre bodegas automatizadas" data-soft="Packet Tracer">
-            <span class="obra__portada" data-m="/v2/img/informes/packet-tracer-bodegas/portada.webp"><span class="obra__pags">9 págs.</span><span class="obra__abrir">Ver completo</span></span>
-            <span class="obra__txt"><span class="obra__area">Redes e informática</span><b>Red de datos entre bodegas automatizadas</b><span class="obra__soft"><span>Packet Tracer</span></span></span>
-          </button>
-          <button class="obra" type="button" data-doc="/v2/img/informes/powerbi-eficiencia-personal/" data-paginas='[[1400,1082],[1400,1082],[1400,1082],[1400,1082],[1400,1082],[1400,1082],[1400,1082],[1400,1082]]' data-titulo="Tablero de eficiencia del personal" data-soft="Power BI">
-            <span class="obra__portada" data-m="/v2/img/informes/powerbi-eficiencia-personal/portada.webp"><span class="obra__pags">8 págs.</span><span class="obra__abrir">Ver completo</span></span>
-            <span class="obra__txt"><span class="obra__area">Datos y finanzas</span><b>Tablero de eficiencia del personal</b><span class="obra__soft"><span>Power BI</span></span></span>
-          </button>
-          <button class="obra" type="button" data-doc="/v2/img/informes/powerfactory-respaldo-fotovoltaico/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Vivienda con respaldo fotovoltaico y barras AC y DC" data-soft="PowerFactory">
-            <span class="obra__portada" data-m="/v2/img/informes/powerfactory-respaldo-fotovoltaico/portada.webp"><span class="obra__pags">18 págs.</span><span class="obra__abrir">Ver completo</span></span>
-            <span class="obra__txt"><span class="obra__area">Eléctrica</span><b>Vivienda con respaldo fotovoltaico y barras AC y DC</b><span class="obra__soft"><span>PowerFactory</span></span></span>
-          </button>
-          <button class="obra" type="button" data-doc="/v2/img/informes/powerworld-cinco-barras/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Flujo de potencia en un sistema de cinco barras" data-soft="PowerWorld">
-            <span class="obra__portada" data-m="/v2/img/informes/powerworld-cinco-barras/portada.webp"><span class="obra__pags">9 págs.</span><span class="obra__abrir">Ver completo</span></span>
-            <span class="obra__txt"><span class="obra__area">Eléctrica</span><b>Flujo de potencia en un sistema de cinco barras</b><span class="obra__soft"><span>PowerWorld</span></span></span>
-          </button>
-          <button class="obra" type="button" data-doc="/v2/img/informes/proteus-red-kirchhoff/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Red de corriente continua con las leyes de Kirchhoff" data-soft="Proteus">
-            <span class="obra__portada" data-m="/v2/img/informes/proteus-red-kirchhoff/portada.webp"><span class="obra__pags">6 págs.</span><span class="obra__abrir">Ver completo</span></span>
-            <span class="obra__txt"><span class="obra__area">Electrónica</span><b>Red de corriente continua con las leyes de Kirchhoff</b><span class="obra__soft"><span>Proteus</span></span></span>
-          </button>
-          <button class="obra" type="button" data-doc="/v2/img/informes/pseint-app-transporte/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Algoritmos de una aplicación de transporte" data-soft="PSeInt">
-            <span class="obra__portada" data-m="/v2/img/informes/pseint-app-transporte/portada.webp"><span class="obra__pags">5 págs.</span><span class="obra__abrir">Ver completo</span></span>
-            <span class="obra__txt"><span class="obra__area">Redes e informática</span><b>Algoritmos de una aplicación de transporte</b><span class="obra__soft"><span>PSeInt</span></span></span>
-          </button>
-          <button class="obra" type="button" data-doc="/v2/img/informes/qgis-geologia-minera/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Estructuras geológicas de una zona minera" data-soft="QGIS">
-            <span class="obra__portada" data-m="/v2/img/informes/qgis-geologia-minera/portada.webp"><span class="obra__pags">7 págs.</span><span class="obra__abrir">Ver completo</span></span>
-            <span class="obra__txt"><span class="obra__area">Geología y minería</span><b>Estructuras geológicas de una zona minera</b><span class="obra__soft"><span>QGIS</span></span></span>
-          </button>
-          <button class="obra" type="button" data-doc="/v2/img/informes/revit-coordinacion-bim/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Coordinación BIM de una vivienda de un piso" data-soft="Revit · Navisworks">
-            <span class="obra__portada" data-m="/v2/img/informes/revit-coordinacion-bim/portada.webp"><span class="obra__pags">12 págs.</span><span class="obra__abrir">Ver completo</span></span>
-            <span class="obra__txt"><span class="obra__area">Construcción</span><b>Coordinación BIM de una vivienda de un piso</b><span class="obra__soft"><span>Revit</span><span>Navisworks</span></span></span>
-          </button>
-          <button class="obra" type="button" data-doc="/v2/img/informes/robodk-estacion-kuka/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Estación robotizada con dos robots KUKA" data-soft="RoboDK">
-            <span class="obra__portada" data-m="/v2/img/informes/robodk-estacion-kuka/portada.webp"><span class="obra__pags">7 págs.</span><span class="obra__abrir">Ver completo</span></span>
-            <span class="obra__txt"><span class="obra__area">Automatización y control</span><b>Estación robotizada con dos robots KUKA</b><span class="obra__soft"><span>RoboDK</span></span></span>
-          </button>
-          <button class="obra" type="button" data-doc="/v2/img/informes/xcos-camara-refrigerada/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Control de temperatura de una cámara refrigerada" data-soft="Scilab Xcos">
-            <span class="obra__portada" data-m="/v2/img/informes/xcos-camara-refrigerada/portada.webp"><span class="obra__pags">9 págs.</span><span class="obra__abrir">Ver completo</span></span>
-            <span class="obra__txt"><span class="obra__area">Automatización y control</span><b>Control de temperatura de una cámara refrigerada</b><span class="obra__soft"><span>Scilab Xcos</span></span></span>
-          </button>
-          <button class="obra" type="button" data-doc="/v2/img/informes/simio-taller-sillas/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Simulación de un taller de sillas de madera" data-soft="Simio">
-            <span class="obra__portada" data-m="/v2/img/informes/simio-taller-sillas/portada.webp"><span class="obra__pags">7 págs.</span><span class="obra__abrir">Ver completo</span></span>
-            <span class="obra__txt"><span class="obra__area">Industrial y logística</span><b>Simulación de un taller de sillas de madera</b><span class="obra__soft"><span>Simio</span></span></span>
-          </button>
-          <button class="obra" type="button" data-doc="/v2/img/informes/simulide-corriente-continua/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Circuito de corriente continua resuelto y simulado" data-soft="SimulIDE">
-            <span class="obra__portada" data-m="/v2/img/informes/simulide-corriente-continua/portada.webp"><span class="obra__pags">8 págs.</span><span class="obra__abrir">Ver completo</span></span>
-            <span class="obra__txt"><span class="obra__area">Electrónica</span><b>Circuito de corriente continua resuelto y simulado</b><span class="obra__soft"><span>SimulIDE</span></span></span>
-          </button>
-          <button class="obra" type="button" data-doc="/v2/img/informes/sketchup-vivienda-circular/" data-paginas='[[1400,990],[1400,990],[1400,990],[1400,990],[1400,990],[1400,990],[1400,990]]' data-titulo="Modelo 3D de una vivienda unifamiliar circular" data-soft="SketchUp">
-            <span class="obra__portada" data-m="/v2/img/informes/sketchup-vivienda-circular/portada.webp"><span class="obra__pags">7 págs.</span><span class="obra__abrir">Ver completo</span></span>
-            <span class="obra__txt"><span class="obra__area">Construcción</span><b>Modelo 3D de una vivienda unifamiliar circular</b><span class="obra__soft"><span>SketchUp</span></span></span>
-          </button>
-          <button class="obra" type="button" data-doc="/v2/img/informes/sql-billetera-digital/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Base de datos relacional de una billetera digital" data-soft="SQL · SQLite">
-            <span class="obra__portada" data-m="/v2/img/informes/sql-billetera-digital/portada.webp"><span class="obra__pags">16 págs.</span><span class="obra__abrir">Ver completo</span></span>
-            <span class="obra__txt"><span class="obra__area">Redes e informática</span><b>Base de datos relacional de una billetera digital</b><span class="obra__soft"><span>SQL</span><span>SQLite</span></span></span>
-          </button>
-          <button class="obra" type="button" data-doc="/v2/img/informes/stata-etiquetado-energetico/" data-paginas='[[1100,1556],[1100,1556],[1100,1556],[1100,1556],[1100,1556],[1100,1556],[1100,1556],[1100,1556],[1100,1556],[1100,1556],[1100,1556]]' data-titulo="Etiquetado energético y consumo eléctrico de los hogares" data-soft="Stata">
-            <span class="obra__portada" data-m="/v2/img/informes/stata-etiquetado-energetico/portada.webp"><span class="obra__pags">11 págs.</span><span class="obra__abrir">Ver completo</span></span>
-            <span class="obra__txt"><span class="obra__area">Datos y finanzas</span><b>Etiquetado energético y consumo eléctrico de los hogares</b><span class="obra__soft"><span>Stata</span></span></span>
-          </button>
-          <button class="obra" type="button" data-doc="/v2/img/informes/visio-despachos-atrasados/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Mejoras para los despachos atrasados de una empresa logística" data-soft="Visio · PowerPoint">
-            <span class="obra__portada" data-m="/v2/img/informes/visio-despachos-atrasados/portada.webp"><span class="obra__pags">4 págs.</span><span class="obra__abrir">Ver completo</span></span>
-            <span class="obra__txt"><span class="obra__area">Gestión</span><b>Mejoras para los despachos atrasados de una empresa logística</b><span class="obra__soft"><span>Visio</span><span>PowerPoint</span></span></span>
-          </button>
-          <button class="obra" type="button" data-doc="/v2/img/informes/xlpro3-fabrica-metalmecanica/" data-paginas='[[1100,1556],[1100,1556],[1100,1556],[1100,1556],[1100,1556],[1100,1556],[1100,1556],[1100,1556],[1100,1556],[1100,1556],[1100,1556],[1100,1556],[1100,1556],[1100,1556],[1100,1556],[1100,1556],[1100,1556],[1100,1556]]' data-titulo="Proyecto eléctrico de una fábrica metalmecánica" data-soft="XL PRO3 · Excel">
-            <span class="obra__portada" data-m="/v2/img/informes/xlpro3-fabrica-metalmecanica/portada.webp"><span class="obra__pags">18 págs.</span><span class="obra__abrir">Ver completo</span></span>
-            <span class="obra__txt"><span class="obra__area">Eléctrica</span><b>Proyecto eléctrico de una fábrica metalmecánica</b><span class="obra__soft"><span>XL PRO3</span><span>Excel</span></span></span>
-          </button>
+        <div class="ev-esps">
+          <details class="ev-esp">
+            <summary><span class="ev-esp__cab"><span class="ev-esp__n">7 trabajos</span><b>Eléctrica</b><span class="ev-esp__progs"><span>Automation Studio</span> · <span>CADe SIMU</span> · <span>DIALux evo</span> · <span>IPI2WIN</span> · <span>PowerFactory</span> · <span>PowerWorld</span> · <span>XL PRO3</span></span></span></summary>
+            <div class="obras obras--prog">
+            <button class="obra" type="button" data-doc="/v2/img/informes/automation-studio-circuito-rl/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Circuito RL serie en corriente alterna" data-soft="Automation Studio">
+              <span class="obra__portada" data-m="/v2/img/informes/automation-studio-circuito-rl/portada.webp"><span class="obra__pags">9 págs.</span><span class="obra__abrir">Ver completo</span></span>
+              <span class="obra__txt"><span class="obra__area">Eléctrica</span><b>Circuito RL serie en corriente alterna</b><span class="obra__soft"><span>Automation Studio</span></span></span>
+            </button>
+            <button class="obra" type="button" data-doc="/v2/img/informes/cadesimu-estrella-triangulo/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Partida estrella triángulo con paso manual y automático" data-soft="CADe SIMU">
+              <span class="obra__portada" data-m="/v2/img/informes/cadesimu-estrella-triangulo/portada.webp"><span class="obra__pags">9 págs.</span><span class="obra__abrir">Ver completo</span></span>
+              <span class="obra__txt"><span class="obra__area">Eléctrica</span><b>Partida estrella triángulo con paso manual y automático</b><span class="obra__soft"><span>CADe SIMU</span></span></span>
+            </button>
+            <button class="obra" type="button" data-doc="/v2/img/informes/dialux-sala-reuniones/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Diseño de iluminación de una sala de reuniones" data-soft="DIALux evo">
+              <span class="obra__portada" data-m="/v2/img/informes/dialux-sala-reuniones/portada.webp"><span class="obra__pags">24 págs.</span><span class="obra__abrir">Ver completo</span></span>
+              <span class="obra__txt"><span class="obra__area">Eléctrica</span><b>Diseño de iluminación de una sala de reuniones</b><span class="obra__soft"><span>DIALux evo</span></span></span>
+            </button>
+            <button class="obra" type="button" data-doc="/v2/img/informes/ipi2win-malla-tierra/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Malla a tierra con sondeo eléctrico vertical" data-soft="IPI2WIN">
+              <span class="obra__portada" data-m="/v2/img/informes/ipi2win-malla-tierra/portada.webp"><span class="obra__pags">8 págs.</span><span class="obra__abrir">Ver completo</span></span>
+              <span class="obra__txt"><span class="obra__area">Eléctrica</span><b>Malla a tierra con sondeo eléctrico vertical</b><span class="obra__soft"><span>IPI2WIN</span></span></span>
+            </button>
+            <button class="obra" type="button" data-doc="/v2/img/informes/powerfactory-respaldo-fotovoltaico/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Vivienda con respaldo fotovoltaico y barras AC y DC" data-soft="PowerFactory">
+              <span class="obra__portada" data-m="/v2/img/informes/powerfactory-respaldo-fotovoltaico/portada.webp"><span class="obra__pags">18 págs.</span><span class="obra__abrir">Ver completo</span></span>
+              <span class="obra__txt"><span class="obra__area">Eléctrica</span><b>Vivienda con respaldo fotovoltaico y barras AC y DC</b><span class="obra__soft"><span>PowerFactory</span></span></span>
+            </button>
+            <button class="obra" type="button" data-doc="/v2/img/informes/powerworld-cinco-barras/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Flujo de potencia en un sistema de cinco barras" data-soft="PowerWorld">
+              <span class="obra__portada" data-m="/v2/img/informes/powerworld-cinco-barras/portada.webp"><span class="obra__pags">9 págs.</span><span class="obra__abrir">Ver completo</span></span>
+              <span class="obra__txt"><span class="obra__area">Eléctrica</span><b>Flujo de potencia en un sistema de cinco barras</b><span class="obra__soft"><span>PowerWorld</span></span></span>
+            </button>
+            <button class="obra" type="button" data-doc="/v2/img/informes/xlpro3-fabrica-metalmecanica/" data-paginas='[[1100,1556],[1100,1556],[1100,1556],[1100,1556],[1100,1556],[1100,1556],[1100,1556],[1100,1556],[1100,1556],[1100,1556],[1100,1556],[1100,1556],[1100,1556],[1100,1556],[1100,1556],[1100,1556],[1100,1556],[1100,1556]]' data-titulo="Proyecto eléctrico de una fábrica metalmecánica" data-soft="XL PRO3 · Excel">
+              <span class="obra__portada" data-m="/v2/img/informes/xlpro3-fabrica-metalmecanica/portada.webp"><span class="obra__pags">18 págs.</span><span class="obra__abrir">Ver completo</span></span>
+              <span class="obra__txt"><span class="obra__area">Eléctrica</span><b>Proyecto eléctrico de una fábrica metalmecánica</b><span class="obra__soft"><span>XL PRO3</span><span>Excel</span></span></span>
+            </button>
+            </div>
+          </details>
+          <details class="ev-esp">
+            <summary><span class="ev-esp__cab"><span class="ev-esp__n">4 trabajos</span><b>Electrónica</b><span class="ev-esp__progs"><span>Arduino</span> · <span>Multisim</span> · <span>Proteus</span> · <span>SimulIDE</span></span></span></summary>
+            <div class="obras obras--prog">
+            <button class="obra" type="button" data-doc="/v2/img/informes/arduino-sensores/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Sensores de fuerza y temperatura con Arduino" data-soft="Arduino · Tinkercad">
+              <span class="obra__portada" data-m="/v2/img/informes/arduino-sensores/portada.webp"><span class="obra__pags">9 págs.</span><span class="obra__abrir">Ver completo</span></span>
+              <span class="obra__txt"><span class="obra__area">Electrónica</span><b>Sensores de fuerza y temperatura con Arduino</b><span class="obra__soft"><span>Arduino</span><span>Tinkercad</span></span></span>
+            </button>
+            <button class="obra" type="button" data-doc="/v2/img/informes/multisim-circuitos-rc-rl/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Circuitos RC y RL en corriente alterna y motores trifásicos" data-soft="Multisim">
+              <span class="obra__portada" data-m="/v2/img/informes/multisim-circuitos-rc-rl/portada.webp"><span class="obra__pags">17 págs.</span><span class="obra__abrir">Ver completo</span></span>
+              <span class="obra__txt"><span class="obra__area">Electrónica</span><b>Circuitos RC y RL en corriente alterna y motores trifásicos</b><span class="obra__soft"><span>Multisim</span></span></span>
+            </button>
+            <button class="obra" type="button" data-doc="/v2/img/informes/proteus-red-kirchhoff/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Red de corriente continua con las leyes de Kirchhoff" data-soft="Proteus">
+              <span class="obra__portada" data-m="/v2/img/informes/proteus-red-kirchhoff/portada.webp"><span class="obra__pags">6 págs.</span><span class="obra__abrir">Ver completo</span></span>
+              <span class="obra__txt"><span class="obra__area">Electrónica</span><b>Red de corriente continua con las leyes de Kirchhoff</b><span class="obra__soft"><span>Proteus</span></span></span>
+            </button>
+            <button class="obra" type="button" data-doc="/v2/img/informes/simulide-corriente-continua/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Circuito de corriente continua resuelto y simulado" data-soft="SimulIDE">
+              <span class="obra__portada" data-m="/v2/img/informes/simulide-corriente-continua/portada.webp"><span class="obra__pags">8 págs.</span><span class="obra__abrir">Ver completo</span></span>
+              <span class="obra__txt"><span class="obra__area">Electrónica</span><b>Circuito de corriente continua resuelto y simulado</b><span class="obra__soft"><span>SimulIDE</span></span></span>
+            </button>
+            </div>
+          </details>
+          <details class="ev-esp">
+            <summary><span class="ev-esp__cab"><span class="ev-esp__n">6 trabajos</span><b>Automatización y control</b><span class="ev-esp__progs"><span>Autosim 200</span> · <span>CODESYS</span> · <span>FluidSIM</span> · <span>Octave</span> · <span>RoboDK</span> · <span>Scilab Xcos</span></span></span></summary>
+            <div class="obras obras--prog">
+            <button class="obra" type="button" data-doc="/v2/img/informes/autosim-expendedor-neumatico/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Expendedor de premios con dos cilindros neumáticos" data-soft="Autosim 200">
+              <span class="obra__portada" data-m="/v2/img/informes/autosim-expendedor-neumatico/portada.webp"><span class="obra__pags">5 págs.</span><span class="obra__abrir">Ver completo</span></span>
+              <span class="obra__txt"><span class="obra__area">Automatización y control</span><b>Expendedor de premios con dos cilindros neumáticos</b><span class="obra__soft"><span>Autosim 200</span></span></span>
+            </button>
+            <button class="obra" type="button" data-doc="/v2/img/informes/codesys-linea-bebidas/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Secuencia de una línea de bebidas con un PLC" data-soft="CODESYS">
+              <span class="obra__portada" data-m="/v2/img/informes/codesys-linea-bebidas/portada.webp"><span class="obra__pags">5 págs.</span><span class="obra__abrir">Ver completo</span></span>
+              <span class="obra__txt"><span class="obra__area">Automatización y control</span><b>Secuencia de una línea de bebidas con un PLC</b><span class="obra__soft"><span>CODESYS</span></span></span>
+            </button>
+            <button class="obra" type="button" data-doc="/v2/img/informes/fluidsim-prensa-plc/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Prensa electroneumática controlada por PLC" data-soft="FluidSIM">
+              <span class="obra__portada" data-m="/v2/img/informes/fluidsim-prensa-plc/portada.webp"><span class="obra__pags">14 págs.</span><span class="obra__abrir">Ver completo</span></span>
+              <span class="obra__txt"><span class="obra__area">Automatización y control</span><b>Prensa electroneumática controlada por PLC</b><span class="obra__soft"><span>FluidSIM</span></span></span>
+            </button>
+            <button class="obra" type="button" data-doc="/v2/img/informes/octave-motor-cc/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Regulación de velocidad de un motor de corriente continua" data-soft="Octave">
+              <span class="obra__portada" data-m="/v2/img/informes/octave-motor-cc/portada.webp"><span class="obra__pags">19 págs.</span><span class="obra__abrir">Ver completo</span></span>
+              <span class="obra__txt"><span class="obra__area">Automatización y control</span><b>Regulación de velocidad de un motor de corriente continua</b><span class="obra__soft"><span>Octave</span></span></span>
+            </button>
+            <button class="obra" type="button" data-doc="/v2/img/informes/robodk-estacion-kuka/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Estación robotizada con dos robots KUKA" data-soft="RoboDK">
+              <span class="obra__portada" data-m="/v2/img/informes/robodk-estacion-kuka/portada.webp"><span class="obra__pags">7 págs.</span><span class="obra__abrir">Ver completo</span></span>
+              <span class="obra__txt"><span class="obra__area">Automatización y control</span><b>Estación robotizada con dos robots KUKA</b><span class="obra__soft"><span>RoboDK</span></span></span>
+            </button>
+            <button class="obra" type="button" data-doc="/v2/img/informes/xcos-camara-refrigerada/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Control de temperatura de una cámara refrigerada" data-soft="Scilab Xcos">
+              <span class="obra__portada" data-m="/v2/img/informes/xcos-camara-refrigerada/portada.webp"><span class="obra__pags">9 págs.</span><span class="obra__abrir">Ver completo</span></span>
+              <span class="obra__txt"><span class="obra__area">Automatización y control</span><b>Control de temperatura de una cámara refrigerada</b><span class="obra__soft"><span>Scilab Xcos</span></span></span>
+            </button>
+            </div>
+          </details>
+          <details class="ev-esp">
+            <summary><span class="ev-esp__cab"><span class="ev-esp__n">5 trabajos</span><b>Construcción y minería</b><span class="ev-esp__progs"><span>Archicad</span> · <span>EPANET</span> · <span>QGIS</span> · <span>Revit</span> · <span>SketchUp</span></span></span></summary>
+            <div class="obras obras--prog">
+            <button class="obra" type="button" data-doc="/v2/img/informes/archicad-vivienda-estructural/" data-paginas='[[1400,990],[1400,990],[1400,990],[1400,990],[1400,990]]' data-titulo="Proyecto estructural de una vivienda" data-soft="Archicad">
+              <span class="obra__portada" data-m="/v2/img/informes/archicad-vivienda-estructural/portada.webp"><span class="obra__pags">5 págs.</span><span class="obra__abrir">Ver completo</span></span>
+              <span class="obra__txt"><span class="obra__area">Construcción</span><b>Proyecto estructural de una vivienda</b><span class="obra__soft"><span>Archicad</span></span></span>
+            </button>
+            <button class="obra" type="button" data-doc="/v2/img/informes/epanet-bombeo-minera/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Sistema de bombeo de agua potable para una minera" data-soft="EPANET">
+              <span class="obra__portada" data-m="/v2/img/informes/epanet-bombeo-minera/portada.webp"><span class="obra__pags">25 págs.</span><span class="obra__abrir">Ver completo</span></span>
+              <span class="obra__txt"><span class="obra__area">Construcción</span><b>Sistema de bombeo de agua potable para una minera</b><span class="obra__soft"><span>EPANET</span></span></span>
+            </button>
+            <button class="obra" type="button" data-doc="/v2/img/informes/qgis-geologia-minera/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Estructuras geológicas de una zona minera" data-soft="QGIS">
+              <span class="obra__portada" data-m="/v2/img/informes/qgis-geologia-minera/portada.webp"><span class="obra__pags">7 págs.</span><span class="obra__abrir">Ver completo</span></span>
+              <span class="obra__txt"><span class="obra__area">Geología y minería</span><b>Estructuras geológicas de una zona minera</b><span class="obra__soft"><span>QGIS</span></span></span>
+            </button>
+            <button class="obra" type="button" data-doc="/v2/img/informes/revit-coordinacion-bim/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Coordinación BIM de una vivienda de un piso" data-soft="Revit · Navisworks">
+              <span class="obra__portada" data-m="/v2/img/informes/revit-coordinacion-bim/portada.webp"><span class="obra__pags">12 págs.</span><span class="obra__abrir">Ver completo</span></span>
+              <span class="obra__txt"><span class="obra__area">Construcción</span><b>Coordinación BIM de una vivienda de un piso</b><span class="obra__soft"><span>Revit</span><span>Navisworks</span></span></span>
+            </button>
+            <button class="obra" type="button" data-doc="/v2/img/informes/sketchup-vivienda-circular/" data-paginas='[[1400,990],[1400,990],[1400,990],[1400,990],[1400,990],[1400,990],[1400,990]]' data-titulo="Modelo 3D de una vivienda unifamiliar circular" data-soft="SketchUp">
+              <span class="obra__portada" data-m="/v2/img/informes/sketchup-vivienda-circular/portada.webp"><span class="obra__pags">7 págs.</span><span class="obra__abrir">Ver completo</span></span>
+              <span class="obra__txt"><span class="obra__area">Construcción</span><b>Modelo 3D de una vivienda unifamiliar circular</b><span class="obra__soft"><span>SketchUp</span></span></span>
+            </button>
+            </div>
+          </details>
+          <details class="ev-esp">
+            <summary><span class="ev-esp__cab"><span class="ev-esp__n">5 trabajos</span><b>Industrial y gestión</b><span class="ev-esp__progs"><span>Bizagi</span> · <span>FlexSim</span> · <span>MS Project</span> · <span>Simio</span> · <span>Visio</span></span></span></summary>
+            <div class="obras obras--prog">
+            <button class="obra" type="button" data-doc="/v2/img/informes/bizagi-servicio-urgencias/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Modelamiento y simulación de un servicio de urgencias" data-soft="Bizagi">
+              <span class="obra__portada" data-m="/v2/img/informes/bizagi-servicio-urgencias/portada.webp"><span class="obra__pags">9 págs.</span><span class="obra__abrir">Ver completo</span></span>
+              <span class="obra__txt"><span class="obra__area">Gestión</span><b>Modelamiento y simulación de un servicio de urgencias</b><span class="obra__soft"><span>Bizagi</span></span></span>
+            </button>
+            <button class="obra" type="button" data-doc="/v2/img/informes/flexsim-recepcion-proveedores/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Agendamiento de proveedores en un centro de distribución" data-soft="FlexSim">
+              <span class="obra__portada" data-m="/v2/img/informes/flexsim-recepcion-proveedores/portada.webp"><span class="obra__pags">26 págs.</span><span class="obra__abrir">Ver completo</span></span>
+              <span class="obra__txt"><span class="obra__area">Industrial y logística</span><b>Agendamiento de proveedores en un centro de distribución</b><span class="obra__soft"><span>FlexSim</span></span></span>
+            </button>
+            <button class="obra" type="button" data-doc="/v2/img/informes/msproject-mantencion-planta/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1400,1082],[1400,1082],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Programación y control de la mantención de una planta" data-soft="MS Project · Excel">
+              <span class="obra__portada" data-m="/v2/img/informes/msproject-mantencion-planta/portada.webp"><span class="obra__pags">15 págs.</span><span class="obra__abrir">Ver completo</span></span>
+              <span class="obra__txt"><span class="obra__area">Gestión</span><b>Programación y control de la mantención de una planta</b><span class="obra__soft"><span>MS Project</span><span>Excel</span></span></span>
+            </button>
+            <button class="obra" type="button" data-doc="/v2/img/informes/simio-taller-sillas/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Simulación de un taller de sillas de madera" data-soft="Simio">
+              <span class="obra__portada" data-m="/v2/img/informes/simio-taller-sillas/portada.webp"><span class="obra__pags">7 págs.</span><span class="obra__abrir">Ver completo</span></span>
+              <span class="obra__txt"><span class="obra__area">Industrial y logística</span><b>Simulación de un taller de sillas de madera</b><span class="obra__soft"><span>Simio</span></span></span>
+            </button>
+            <button class="obra" type="button" data-doc="/v2/img/informes/visio-despachos-atrasados/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Mejoras para los despachos atrasados de una empresa logística" data-soft="Visio · PowerPoint">
+              <span class="obra__portada" data-m="/v2/img/informes/visio-despachos-atrasados/portada.webp"><span class="obra__pags">4 págs.</span><span class="obra__abrir">Ver completo</span></span>
+              <span class="obra__txt"><span class="obra__area">Gestión</span><b>Mejoras para los despachos atrasados de una empresa logística</b><span class="obra__soft"><span>Visio</span><span>PowerPoint</span></span></span>
+            </button>
+            </div>
+          </details>
+          <details class="ev-esp">
+            <summary><span class="ev-esp__cab"><span class="ev-esp__n">4 trabajos</span><b>Informática y redes</b><span class="ev-esp__progs"><span>Android Studio</span> · <span>Packet Tracer</span> · <span>PSeInt</span> · <span>SQL</span></span></span></summary>
+            <div class="obras obras--prog">
+            <button class="obra" type="button" data-doc="/v2/img/informes/android-app-vendedores/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Aplicación Android para los vendedores de una tienda" data-soft="Android Studio · Kotlin">
+              <span class="obra__portada" data-m="/v2/img/informes/android-app-vendedores/portada.webp"><span class="obra__pags">7 págs.</span><span class="obra__abrir">Ver completo</span></span>
+              <span class="obra__txt"><span class="obra__area">Redes e informática</span><b>Aplicación Android para los vendedores de una tienda</b><span class="obra__soft"><span>Android Studio</span><span>Kotlin</span></span></span>
+            </button>
+            <button class="obra" type="button" data-doc="/v2/img/informes/packet-tracer-bodegas/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Red de datos entre bodegas automatizadas" data-soft="Packet Tracer">
+              <span class="obra__portada" data-m="/v2/img/informes/packet-tracer-bodegas/portada.webp"><span class="obra__pags">9 págs.</span><span class="obra__abrir">Ver completo</span></span>
+              <span class="obra__txt"><span class="obra__area">Redes e informática</span><b>Red de datos entre bodegas automatizadas</b><span class="obra__soft"><span>Packet Tracer</span></span></span>
+            </button>
+            <button class="obra" type="button" data-doc="/v2/img/informes/pseint-app-transporte/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Algoritmos de una aplicación de transporte" data-soft="PSeInt">
+              <span class="obra__portada" data-m="/v2/img/informes/pseint-app-transporte/portada.webp"><span class="obra__pags">5 págs.</span><span class="obra__abrir">Ver completo</span></span>
+              <span class="obra__txt"><span class="obra__area">Redes e informática</span><b>Algoritmos de una aplicación de transporte</b><span class="obra__soft"><span>PSeInt</span></span></span>
+            </button>
+            <button class="obra" type="button" data-doc="/v2/img/informes/sql-billetera-digital/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Base de datos relacional de una billetera digital" data-soft="SQL · SQLite">
+              <span class="obra__portada" data-m="/v2/img/informes/sql-billetera-digital/portada.webp"><span class="obra__pags">16 págs.</span><span class="obra__abrir">Ver completo</span></span>
+              <span class="obra__txt"><span class="obra__area">Redes e informática</span><b>Base de datos relacional de una billetera digital</b><span class="obra__soft"><span>SQL</span><span>SQLite</span></span></span>
+            </button>
+            </div>
+          </details>
+          <details class="ev-esp">
+            <summary><span class="ev-esp__cab"><span class="ev-esp__n">3 trabajos</span><b>Economía y datos</b><span class="ev-esp__progs"><span>InfoStat</span> · <span>Power BI</span> · <span>Stata</span></span></span></summary>
+            <div class="obras obras--prog">
+            <button class="obra" type="button" data-doc="/v2/img/informes/infostat-ventas-diarias/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Estadística descriptiva de las ventas diarias de una empresa" data-soft="InfoStat">
+              <span class="obra__portada" data-m="/v2/img/informes/infostat-ventas-diarias/portada.webp"><span class="obra__pags">7 págs.</span><span class="obra__abrir">Ver completo</span></span>
+              <span class="obra__txt"><span class="obra__area">Datos y finanzas</span><b>Estadística descriptiva de las ventas diarias de una empresa</b><span class="obra__soft"><span>InfoStat</span></span></span>
+            </button>
+            <button class="obra" type="button" data-doc="/v2/img/informes/powerbi-eficiencia-personal/" data-paginas='[[1400,1082],[1400,1082],[1400,1082],[1400,1082],[1400,1082],[1400,1082],[1400,1082],[1400,1082]]' data-titulo="Tablero de eficiencia del personal" data-soft="Power BI">
+              <span class="obra__portada" data-m="/v2/img/informes/powerbi-eficiencia-personal/portada.webp"><span class="obra__pags">8 págs.</span><span class="obra__abrir">Ver completo</span></span>
+              <span class="obra__txt"><span class="obra__area">Datos y finanzas</span><b>Tablero de eficiencia del personal</b><span class="obra__soft"><span>Power BI</span></span></span>
+            </button>
+            <button class="obra" type="button" data-doc="/v2/img/informes/stata-etiquetado-energetico/" data-paginas='[[1100,1556],[1100,1556],[1100,1556],[1100,1556],[1100,1556],[1100,1556],[1100,1556],[1100,1556],[1100,1556],[1100,1556],[1100,1556]]' data-titulo="Etiquetado energético y consumo eléctrico de los hogares" data-soft="Stata">
+              <span class="obra__portada" data-m="/v2/img/informes/stata-etiquetado-energetico/portada.webp"><span class="obra__pags">11 págs.</span><span class="obra__abrir">Ver completo</span></span>
+              <span class="obra__txt"><span class="obra__area">Datos y finanzas</span><b>Etiquetado energético y consumo eléctrico de los hogares</b><span class="obra__soft"><span>Stata</span></span></span>
+            </button>
+            </div>
+          </details>
+          <details class="ev-esp">
+            <summary><span class="ev-esp__cab"><span class="ev-esp__n">2 trabajos</span><b>Matemática e investigación</b><span class="ev-esp__progs"><span>ATLAS.ti</span> · <span>GeoGebra</span></span></span></summary>
+            <div class="obras obras--prog">
+            <button class="obra" type="button" data-doc="/v2/img/informes/atlasti-teletrabajo/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Análisis temático del teletrabajo" data-soft="ATLAS.ti">
+              <span class="obra__portada" data-m="/v2/img/informes/atlasti-teletrabajo/portada.webp"><span class="obra__pags">6 págs.</span><span class="obra__abrir">Ver completo</span></span>
+              <span class="obra__txt"><span class="obra__area">Investigación</span><b>Análisis temático del teletrabajo</b><span class="obra__soft"><span>ATLAS.ti</span></span></span>
+            </button>
+            <button class="obra" type="button" data-doc="/v2/img/informes/geogebra-problemas-calculo/" data-paginas='[[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424],[1100,1424]]' data-titulo="Problemas geométricos de cálculo" data-soft="GeoGebra · WolframAlpha">
+              <span class="obra__portada" data-m="/v2/img/informes/geogebra-problemas-calculo/portada.webp"><span class="obra__pags">11 págs.</span><span class="obra__abrir">Ver completo</span></span>
+              <span class="obra__txt"><span class="obra__area">Matemática</span><b>Problemas geométricos de cálculo</b><span class="obra__soft"><span>GeoGebra</span><span>WolframAlpha</span></span></span>
+            </button>
+            </div>
+          </details>
         </div>
         <!-- EVIDENCIAS-PROGRAMAS:FIN -->
       </section>
