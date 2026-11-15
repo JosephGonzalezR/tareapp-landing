@@ -2,8 +2,8 @@
   "use strict";
 
   const CONFIG = {
-    whatsappNumero: "56971478131",
-    whatsappVisible: "+56 9 7147 8131",
+    whatsappNumero: "56233990000",
+    whatsappVisible: "+56 2 3399 0000",
   };
 
   const $ = (s, c) => (c || document).querySelector(s);

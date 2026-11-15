@@ -69,8 +69,8 @@ window.AGS_ORIGEN = window.AGS_ORIGEN || (function () {
  */
 const CONFIG = {
   brand: "Tareapp",
-  whatsappNumber: "56971478131",
-  whatsappDisplay: "+56 9 7147 8131",
+  whatsappNumber: "56233990000",
+  whatsappDisplay: "+56 2 3399 0000",
   location: "Santiago, Chile",
   facebookUrl: "https://www.facebook.com/profile.php?id=61558060587570",
   tiktokUrl: "https://www.tiktok.com/@tareapp_",

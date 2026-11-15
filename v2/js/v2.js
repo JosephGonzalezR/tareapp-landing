@@ -69,8 +69,8 @@ window.AGS_ORIGEN = window.AGS_ORIGEN || (function () {
   // El pais lo pone su portada en window.AGS_V2 (12-oct-2026, la web nueva en todos los Tareapp); sin eso, Chile.
   const PAIS_V2 = window.AGS_V2 || {};
   const CONFIG = {
-    whatsappNumero: PAIS_V2.wa || "56971478131",
-    whatsappVisible: PAIS_V2.waVisible || "+56 9 7147 8131",
+    whatsappNumero: PAIS_V2.wa || "56233990000",
+    whatsappVisible: PAIS_V2.waVisible || "+56 2 3399 0000",
     nota: PAIS_V2.nota || "7,0",
   };
 
