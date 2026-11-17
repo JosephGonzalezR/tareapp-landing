@@ -72,7 +72,7 @@ const CONFIG = {
   whatsappNumber: "56233990000",
   whatsappDisplay: "+56 2 3399 0000",
   location: "Santiago, Chile",
-  facebookUrl: "https://www.facebook.com/profile.php?id=61558060587570",
+  facebookUrl: "https://www.facebook.com/profile.php?id=61594015747924",
   tiktokUrl: "https://www.tiktok.com/@tareapp_",
   instagramUrl: "https://www.instagram.com/tareappchile/",
 
