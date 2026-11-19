@@ -7,6 +7,9 @@
  * Que NO guarda: nada personal. Sin cookies, sin nombres, sin telefonos,
  *            sin IP completa (el servidor solo guarda un hash del dia).
  * A donde va: https://central.ags-ed.com/w/e  (base aparte de la operativa).
+ * Codigo del chat (19-nov-2026): si el enlace trae ?r= (lo pone la bienvenida de WhatsApp), la visita
+ *            queda unida a esa conversacion, para saber que partes del sitio sirven antes de contratar.
+ *            No es el numero ni el nombre.
  *
  * Dev Central — 2026-08-02.
  */
@@ -63,6 +66,14 @@
     var q = new URLSearchParams(location.search);
     utm = [q.get('utm_source'), q.get('utm_campaign')].filter(Boolean).join('/').slice(0, 60);
   } catch (e) { utm = ''; }
+  // Codigo del chat (19-nov-2026): el enlace que mandamos por WhatsApp trae ?r=<codigo de la conversacion>.
+  // Queda en esta pestana para que las paginas que siga mirando tambien lo lleven.
+  try {
+    var rq = new URLSearchParams(location.search).get('r');
+    if (rq && /^[0-9a-z]{2,9}$/i.test(rq)) sessionStorage.setItem('ags_r', rq.toLowerCase());
+    var rr = sessionStorage.getItem('ags_r');
+    if (rr && !utm) utm = ('wa/' + rr).slice(0, 60);
+  } catch (e) { /* nada */ }
 
   var path = location.pathname.replace(/\/index\.html$/, '/') || '/';
 
